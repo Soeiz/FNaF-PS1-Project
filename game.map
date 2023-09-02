@@ -1,0 +1,1445 @@
+Archive member included to satisfy reference by file (symbol)
+
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c57.o)
+                              game.o (InitHeap)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c43.o)
+                              game.o (memset)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c47.o)
+                              game.o (rand)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c48.o)
+                              game.o (srand)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c51.o)
+                              game.o (malloc)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c52.o)
+                              game.o (free)
+C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o)
+                              game.o (ResetCallback)
+C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_dma.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (startIntrDMA)
+C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_vb.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (startIntrVSync)
+C:/nolibgs_hello_worlds/psyq/lib\libetc.a(pad.o)
+                              game.o (PadRead)
+C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vsync.o)
+                              game.o (VSync)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e03.o)
+                              game.o (SetDefDrawEnv)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e04.o)
+                              game.o (SetDefDispEnv)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o)
+                              game.o (FntFlush)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p06.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (AddPrim)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p09.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (TermPrim)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p10.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (SetSemiTrans)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p20.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (SetSprt8)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p26.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (SetTile)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p41.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (SetDrawMode)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o)
+                              game.o (ClearImage2)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(t00.o)
+                              game.o (ReadTIM)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e00.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (LoadTPage)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e02.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (LoadClut2)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p00.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e00.o) (GetTPage)
+C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p01.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e02.o) (GetClut)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(cmb_00.o)
+                              game.o (RotTransPers4)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(fgo_01.o)
+                              game.o (RotMatrix)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(msc00.o)
+                              game.o (InitGeom)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_07.o)
+                              game.o (TransMatrix)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_08.o)
+                              game.o (ScaleMatrix)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_09.o)
+                              game.o (SetRotMatrix)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_12.o)
+                              game.o (SetTransMatrix)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(patchgte.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgte.a(msc00.o) (_patch_gte)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(reg12.o)
+                              game.o (SetGeomOffset)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(reg13.o)
+                              game.o (SetGeomScreen)
+C:/nolibgs_hello_worlds/psyq/lib\libgte.a(cstbl.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgte.a(fgo_01.o) (rcossin_tbl)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_i.o)
+                              game.o (SpuInit)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_i.o) (_SpuInit)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_itc.o)
+                              game.o (SpuIsTransferCompleted)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o) (_spu_memList)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_init.o)
+                              game.o (SpuInitMalloc)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_m.o)
+                              game.o (SpuMalloc)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_rmp0.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o) (_spu_rev_startaddr)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sca.o)
+                              game.o (SpuSetCommonAttr)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_si.o)
+                              game.o (SpuSetIRQ)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sk.o)
+                              game.o (SpuSetKey)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_stm.o)
+                              game.o (SpuSetTransferMode)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_stsa.o)
+                              game.o (SpuSetTransferStartAddr)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sva.o)
+                              game.o (SpuSetVoiceAttr)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_svv.o)
+                              game.o (SpuSetVoiceVolume)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_w.o)
+                              game.o (SpuWrite)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(spu.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_stsa.o) (_spu_FsetRXXa)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_dcb.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o) (_SpuDataCallback)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_int.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_m.o) (_spu_gcSPU)
+C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_n2p.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sva.o) (_spu_note2pitch)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o)
+                              game.o (CdReadSync)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(event.o)
+                              game.o (CdInit)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o)
+                              game.o (CdSearchFile)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_002.o)
+                              game.o (CdIntToPos)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_003.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdStatus)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_004.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdMode)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_006.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdLastPos)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_008.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdFlush)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_013.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdReady)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_014.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdSyncCallback)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_015.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdReadyCallback)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_016.o)
+                              game.o (CdControl)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_021.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdGetSector)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_022.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdGetSector2)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_023.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdDataCallback)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_024.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o) (CdDataSync)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(sys.o)
+                              game.o (CdPosToInt)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_1.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(event.o) (CD_cbready)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_2.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_021.o) (CD_getsector)
+C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_3.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_022.o) (CD_getsector2)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a07.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(spu.o) (DeliverEvent)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a08.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o) (OpenEvent)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a11.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_itc.o) (TestEvent)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a12.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o) (EnableEvent)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a22.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(pad.o) (PAD_dr)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a23.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (ReturnFromException)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a24.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (ResetEntryInt)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a25.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (HookEntryInt)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a36.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (EnterCriticalSection)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a37.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (ExitCriticalSection)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a91.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (ChangeClearPAD)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c114.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (_96_remove)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c68.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgte.a(patchgte.o) (FlushCache)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c73.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o) (GPU_cw)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l10.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (ChangeClearRCnt)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(pad.o) (PAD_init)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(patch.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o) (_patch_pad)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a18.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o) (InitPAD2)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a19.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o) (StartPAD2)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a21.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o) (PAD_init2)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(chclrpad.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o) (_remove_ChgclrPAD)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l02.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o) (SysEnqIntRP)
+C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l03.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o) (SysDeqIntRP)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(a63.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vsync.o) (puts)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c19.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (setjmp)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c23.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o) (strcmp)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c24.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o) (strncmp)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c27.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o) (strlen)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c42.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o) (memcpy)
+C:/nolibgs_hello_worlds/psyq/lib\libc.a(c63.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o) (printf)
+C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vmode.o)
+                              C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e03.o) (GetVideoMode)
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 game.o
+ .MIPS.abiflags
+                0x0000000000000000       0x18 game.o
+ .pdr           0x0000000000000000      0x3a0 game.o
+ .text.read_controller
+                0x0000000000000000       0x34 game.o
+ .text.doorFunc
+                0x0000000000000000        0xc game.o
+ .rodata        0x0000000000000000     0xb24e tim/CAMERAMONITOR.o
+ .rodata        0x0000000000000000      0x840 tim/fnt.o
+ .text          0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+ .data          0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+ .bss           0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+ .reginfo       0x0000000000000000       0x18 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+ .MIPS.abiflags
+                0x0000000000000000       0x18 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+ .text          0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .data          0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .bss           0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .reginfo       0x0000000000000000       0x18 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .MIPS.abiflags
+                0x0000000000000000       0x18 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .pdr           0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .ramtext       0x0000000000000000        0xc C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .debug_line    0x0000000000000000       0x4b C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .debug_line_str
+                0x0000000000000000       0x86 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .debug_info    0x0000000000000000       0x24 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .debug_abbrev  0x0000000000000000       0x14 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .debug_aranges
+                0x0000000000000000       0x20 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .debug_str     0x0000000000000000       0x52 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+ .gnu.attributes
+                0x0000000000000000       0x10 C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+loader           0x000000008000f800 0x0000000000000800
+ram              0x0000000080010000 0x00000000001f0000 xrw
+dcache           0x000000001f800000 0x0000000000000400
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD game.o
+LOAD tim/officeLEFT.o
+LOAD tim/officeLEFTlight.o
+LOAD tim/officeLEFTnolight.o
+LOAD tim/officeLEFTlightbonnie.o
+LOAD tim/officeMIDDLE.o
+LOAD tim/officeMIDDLEnolight.o
+LOAD tim/officeRIGHT.o
+LOAD tim/officeRIGHTlight.o
+LOAD tim/officeRIGHTlightchica.o
+LOAD tim/officeRIGHTnolight.o
+LOAD tim/CAMERAMONITOR.o
+LOAD tim/freddysneak.o
+LOAD tim/gameover.o
+LOAD tim/FAM.o
+LOAD tim/SAM.o
+LOAD tim/fnt.o
+LOAD vag/Door.o
+LOAD vag/light.o
+LOAD vag/Monitor.o
+LOAD vag/officesound.o
+LOAD vag/click.o
+LOAD vag/noisedoor.o
+LOAD vag/screamer.o
+LOAD vag/honk.o
+LOAD vag/Footstep.o
+LOAD vag/knock.o
+LOAD vag/footstepfoxy.o
+LOAD vag/lightout.o
+LOAD vag/jamlight.o
+LOAD vag/footstep2.o
+LOAD C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+LOAD C:/nolibgs_hello_worlds/thirdparty/nugget/common/syscalls/printf.o
+START GROUP
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libapi.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libc.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libc2.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libcard.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libcomb.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libds.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libetc.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libgpu.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libgs.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libgte.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libgun.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libhmd.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libmath.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libmcrd.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libmcx.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libpad.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libpress.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libsio.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libsnd.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libspu.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libtap.a
+LOAD C:/nolibgs_hello_worlds/psyq/lib\libcd.a
+END GROUP
+                0x00000000801f50f0                __heap_base = __bss_end
+                0x0000000080010000                TLOAD_ADDR = DEFINED (TLOAD_ADDR)?TLOAD_ADDR:0x80010000
+                0x0000000080200000                __ram_top = (ORIGIN (ram) + LENGTH (ram))
+                0x00000000801fff00                __sp = (__ram_top - 0x100)
+                0x000000001f800000                __dcache = ORIGIN (dcache)
+                0x000000001f800400                __dcache_top = (ORIGIN (dcache) + LENGTH (dcache))
+                0x00000000000588f0                __bss_len = (__bss_end - __bss_start)
+                0x0000000000016cb0                __ftext_len = (__ftext_end - __ftext_start)
+                0x0000000000175b50                __fdata_len = (__fdata_end - __fdata_start)
+                0x0000000080200000                __stack_start = (ORIGIN (ram) + LENGTH (ram))
+
+.PSX_EXE_Header
+                0x000000008000f800      0x800
+                0x000000008000f800        0x1 BYTE 0x50
+                0x000000008000f801        0x1 BYTE 0x53
+                0x000000008000f802        0x1 BYTE 0x2d
+                0x000000008000f803        0x1 BYTE 0x58
+                0x000000008000f804        0x1 BYTE 0x20
+                0x000000008000f805        0x1 BYTE 0x45
+                0x000000008000f806        0x1 BYTE 0x58
+                0x000000008000f807        0x1 BYTE 0x45
+                0x000000008000f808        0x4 LONG 0x0
+                0x000000008000f80c        0x4 LONG 0x0
+                0x000000008000f810        0x4 LONG 0x80010000 ABSOLUTE (_start)
+                0x000000008000f814        0x4 LONG 0x0
+                0x000000008000f818        0x4 LONG 0x80010000 TLOAD_ADDR
+                0x000000008000f81c        0x4 LONG 0x18c800 (__ftext_len + __fdata_len)
+                0x000000008000f820        0x4 LONG 0x0
+                0x000000008000f824        0x4 LONG 0x0
+                0x000000008000f828        0x4 LONG 0x0
+                0x000000008000f82c        0x4 LONG 0x0
+                0x000000008000f830        0x4 LONG 0x801fff00 DEFINED (_sp)?ABSOLUTE (_sp):0x801fff00
+                0x000000008000f834        0x4 LONG 0x0
+                0x0000000080010000                . = (. + 0x7c8)
+ *fill*         0x000000008000f838      0x7c8 
+                0x0000000080010000                __ftext_start = ABSOLUTE (.)
+
+.text           0x0000000080010000    0x16cb0
+ *(.start)
+ .start         0x0000000080010000       0x64 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+                0x0000000080010000                _start
+ *(.init)
+ *(SORT_NONE(.fini))
+ *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+ *(.text.exit .text.exit.*)
+ *(.text.startup .text.startup.*)
+ .text.startup.main
+                0x0000000080010064     0x7d28 game.o
+                0x0000000080010064                main
+ *(.text.hot .text.hot.*)
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text.Ran      0x0000000080017d8c       0x50 game.o
+                0x0000000080017d8c                Ran
+ .text.clearVRAM
+                0x0000000080017ddc       0x6c game.o
+                0x0000000080017ddc                clearVRAM
+ .text.LoadTexture
+                0x0000000080017e48       0x7c game.o
+                0x0000000080017e48                LoadTexture
+ .text.init     0x0000000080017ec4      0x140 game.o
+                0x0000000080017ec4                init
+ .text.display  0x0000000080018004       0xb0 game.o
+                0x0000000080018004                display
+ .text.initSnd  0x00000000800180b4       0x64 game.o
+                0x00000000800180b4                initSnd
+ .text.spuSetup
+                0x0000000080018118       0x50 game.o
+                0x0000000080018118                spuSetup
+ .text.XAsetup  0x0000000080018168       0x3c game.o
+                0x0000000080018168                XAsetup
+ .text.sendVAGtoSPU
+                0x00000000800181a4       0x50 game.o
+                0x00000000800181a4                sendVAGtoSPU
+ .text.setVoiceAttr
+                0x00000000800181f4      0x13c game.o
+                0x00000000800181f4                setVoiceAttr
+ .text.setSPUtransfer
+                0x0000000080018330      0x100 game.o
+                0x0000000080018330                setSPUtransfer
+ .text.chargeNtimeFunc
+                0x0000000080018430      0x14c game.o
+                0x0000000080018430                chargeNtimeFunc
+ .text.resetgame
+                0x000000008001857c      0x2c0 game.o
+                0x000000008001857c                resetgame
+ .text.print    0x000000008001883c      0x30c game.o
+                0x000000008001883c                print
+ .text.printNightInfo
+                0x0000000080018b48      0x194 game.o
+                0x0000000080018b48                printNightInfo
+ .text.menuselectionfunc
+                0x0000000080018cdc     0x130c game.o
+                0x0000000080018cdc                menuselectionfunc
+ .text.menuPrint
+                0x0000000080019fe8      0x9bc game.o
+                0x0000000080019fe8                menuPrint
+ .text.gameoverprint
+                0x000000008001a9a4       0x50 game.o
+                0x000000008001a9a4                gameoverprint
+ .text.LightFunc
+                0x000000008001a9f4      0x20c game.o
+                0x000000008001a9f4                LightFunc
+ .text.animatronicFunc
+                0x000000008001ac00      0xa64 game.o
+                0x000000008001ac00                animatronicFunc
+ .text.doorFuncX
+                0x000000008001b664      0x104 game.o
+                0x000000008001b664                doorFuncX
+ .text.CameraFunc
+                0x000000008001b768      0x144 game.o
+                0x000000008001b768                CameraFunc
+ .text.controllerinput
+                0x000000008001b8ac      0x360 game.o
+                0x000000008001b8ac                controllerinput
+ .text.screamer
+                0x000000008001bc0c       0x80 game.o
+                0x000000008001bc0c                screamer
+ .text.lightsout
+                0x000000008001bc8c       0xb0 game.o
+                0x000000008001bc8c                lightsout
+ .text.gamevictory
+                0x000000008001bd3c       0x94 game.o
+                0x000000008001bd3c                gamevictory
+ .text          0x000000008001bdd0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c57.o)
+                0x000000008001bdd0                InitHeap
+ .text          0x000000008001bde0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c43.o)
+                0x000000008001bde0                memset
+ .text          0x000000008001bdf0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c47.o)
+                0x000000008001bdf0                rand
+ .text          0x000000008001be00       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c48.o)
+                0x000000008001be00                srand
+ .text          0x000000008001be10       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c51.o)
+                0x000000008001be10                malloc
+ .text          0x000000008001be20       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c52.o)
+                0x000000008001be20                free
+ .text          0x000000008001be30      0x6c0 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o)
+                0x000000008001be30                ResetCallback
+                0x000000008001be60                InterruptCallback
+                0x000000008001be90                DMACallback
+                0x000000008001bec0                VSyncCallback
+                0x000000008001bef4                VSyncCallbacks
+                0x000000008001bf24                StopCallback
+                0x000000008001bf54                RestartCallback
+                0x000000008001bf84                CheckCallback
+                0x000000008001bf94                GetIntrMask
+                0x000000008001bfac                SetIntrMask
+ .text          0x000000008001c4f0      0x2a0 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_dma.o)
+                0x000000008001c4f0                startIntrDMA
+ .text          0x000000008001c790      0x120 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_vb.o)
+                0x000000008001c790                startIntrVSync
+ .text          0x000000008001c8b0       0x80 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(pad.o)
+                0x000000008001c8b0                PadInit
+                0x000000008001c8fc                PadRead
+ .text          0x000000008001c930      0x210 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vsync.o)
+                0x000000008001c930                VSync
+ .text          0x000000008001cb40       0xc0 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e03.o)
+                0x000000008001cb40                SetDefDrawEnv
+ .text          0x000000008001cc00       0x40 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e04.o)
+                0x000000008001cc00                SetDefDispEnv
+ .text          0x000000008001cc40      0xa80 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o)
+                0x000000008001cc40                SetDumpFnt
+                0x000000008001cc80                FntLoad
+                0x000000008001cd20                FntOpen
+                0x000000008001cfdc                FntFlush
+                0x000000008001d2f8                FntPrint
+ .text          0x000000008001d6c0       0x40 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p06.o)
+                0x000000008001d6c0                AddPrim
+ .text          0x000000008001d700       0x20 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p09.o)
+                0x000000008001d700                TermPrim
+ .text          0x000000008001d720       0x30 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p10.o)
+                0x000000008001d720                SetSemiTrans
+ .text          0x000000008001d750       0x20 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p20.o)
+                0x000000008001d750                SetSprt8
+ .text          0x000000008001d770       0x20 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p26.o)
+                0x000000008001d770                SetTile
+ .text          0x000000008001d790       0xa0 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p41.o)
+                0x000000008001d790                SetDrawMode
+ .text          0x000000008001d830     0x2f00 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o)
+                0x000000008001d830                ResetGraph
+                0x000000008001d9a4                SetGraphDebug
+                0x000000008001da00                SetGraphQueue
+                0x000000008001daa4                GetGraphDebug
+                0x000000008001dab4                DrawSyncCallback
+                0x000000008001db14                SetDispMask
+                0x000000008001dbac                DrawSync
+                0x000000008001dd30                ClearImage
+                0x000000008001ddc0                ClearImage2
+                0x000000008001de58                LoadImage
+                0x000000008001deb8                StoreImage
+                0x000000008001df18                MoveImage
+                0x000000008001dfd0                ClearOTag
+                0x000000008001e098                ClearOTagR
+                0x000000008001e144                DrawPrim
+                0x000000008001e1a0                DrawOTag
+                0x000000008001e210                PutDrawEnv
+                0x000000008001e2d0                DrawOTagEnv
+                0x000000008001e3a8                GetDrawEnv
+                0x000000008001e3dc                PutDispEnv
+                0x000000008001e8d4                GetDispEnv
+                0x000000008001e908                GetODE
+                0x000000008001e938                SetDrawArea
+                0x000000008001e9b8                SetDrawOffset
+                0x000000008001e9f8                SetDrawEnv
+                0x00000000800202c8                LoadImage2
+                0x00000000800203b4                StoreImage2
+                0x00000000800204a0                MoveImage2
+                0x00000000800205e4                DrawOTag2
+                0x00000000800206e0                _GPU_ResetCallback
+ .text          0x0000000080020730      0x190 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(t00.o)
+                0x0000000080020730                OpenTIM
+                0x0000000080020740                ReadTIM
+ .text          0x00000000800208c0       0xf0 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e00.o)
+                0x00000000800208c0                LoadTPage
+ .text          0x00000000800209b0       0x70 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e02.o)
+                0x00000000800209b0                LoadClut2
+ .text          0x0000000080020a20       0x40 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p00.o)
+                0x0000000080020a20                GetTPage
+ .text          0x0000000080020a60       0x20 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p01.o)
+                0x0000000080020a60                GetClut
+ .text          0x0000000080020a80       0x80 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(cmb_00.o)
+                0x0000000080020a80                RotTransPers4
+ .text          0x0000000080020b00      0x290 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(fgo_01.o)
+                0x0000000080020b00                RotMatrix
+ .text          0x0000000080020d90       0x90 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(msc00.o)
+                0x0000000080020d98                InitGeom
+ .text          0x0000000080020e20       0x30 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_07.o)
+                0x0000000080020e20                TransMatrix
+ .text          0x0000000080020e50      0x140 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_08.o)
+                0x0000000080020e50                ScaleMatrix
+ .text          0x0000000080020f90       0x30 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_09.o)
+                0x0000000080020f90                SetRotMatrix
+ .text          0x0000000080020fc0       0x20 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_12.o)
+                0x0000000080020fc0                SetTransMatrix
+ .text          0x0000000080020fe0       0xe0 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(patchgte.o)
+                0x0000000080020fe0                _patch_gte
+ .text          0x00000000800210c0       0x20 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(reg12.o)
+                0x00000000800210c0                SetGeomOffset
+ .text          0x00000000800210e0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(reg13.o)
+                0x00000000800210e0                SetGeomScreen
+ .text          0x00000000800210f0       0x20 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_i.o)
+                0x00000000800210f0                SpuInit
+ .text          0x0000000080021110      0x160 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o)
+                0x0000000080021110                _SpuInit
+                0x00000000800211f8                SpuStart
+ .text          0x0000000080021270       0xb0 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_itc.o)
+                0x0000000080021270                SpuIsTransferCompleted
+ .text          0x0000000080021320       0x60 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_init.o)
+                0x0000000080021320                SpuInitMalloc
+ .text          0x0000000080021380      0x2d0 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_m.o)
+                0x0000000080021380                SpuMalloc
+ .text          0x0000000080021650      0x380 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sca.o)
+                0x0000000080021650                SpuSetCommonAttr
+ .text          0x00000000800219d0      0x140 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_si.o)
+                0x00000000800219d0                SpuSetIRQ
+ .text          0x0000000080021b10      0x1c0 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sk.o)
+                0x0000000080021b10                SpuSetKey
+ .text          0x0000000080021cd0       0x30 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_stm.o)
+                0x0000000080021cd0                SpuSetTransferMode
+ .text          0x0000000080021d00       0x60 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_stsa.o)
+                0x0000000080021d00                SpuSetTransferStartAddr
+ .text          0x0000000080021d60      0x600 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sva.o)
+                0x0000000080021d60                SpuSetVoiceAttr
+ .text          0x0000000080022360       0x80 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_svv.o)
+                0x0000000080022360                SpuSetVoiceVolume
+ .text          0x00000000800223e0       0x60 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_w.o)
+                0x00000000800223e0                SpuWrite
+ .text          0x0000000080022440      0xb40 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(spu.o)
+                0x0000000080022440                _spu_init
+                0x0000000080022880                _spu_FiDMA
+                0x000000008002293c                _spu_Fr_
+                0x00000000800229e4                _spu_t
+                0x0000000080022c64                _spu_Fw
+                0x0000000080022ce8                _spu_Fr
+                0x0000000080022d4c                _spu_FsetRXX
+                0x0000000080022d90                _spu_FsetRXXa
+                0x0000000080022e34                _spu_FgetRXXa
+                0x0000000080022e70                _spu_FsetPCR
+                0x0000000080022f18                _spu_Fw1ts
+ .text          0x0000000080022f80       0x30 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_dcb.o)
+                0x0000000080022f80                _SpuDataCallback
+ .text          0x0000000080022fb0      0x300 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_int.o)
+                0x0000000080022fb0                _spu_gcSPU
+ .text          0x00000000800232b0      0x200 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_n2p.o)
+                0x00000000800232b0                _spu_note2pitch
+                0x0000000080023380                _spu_pitch2note
+ .text          0x00000000800234b0      0x9a0 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o)
+                0x0000000080023a10                CdReadBreak
+                0x0000000080023bb0                CdRead
+                0x0000000080023d4c                CdReadSync
+ .text          0x0000000080023e50      0x150 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(event.o)
+                0x0000000080023e50                CdInit
+ .text          0x0000000080023fa0      0x970 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o)
+                0x0000000080023fa0                CdSearchFile
+ .text          0x0000000080024910      0x110 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_002.o)
+                0x0000000080024910                CdIntToPos
+ .text          0x0000000080024a20       0x10 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_003.o)
+                0x0000000080024a20                CdStatus
+ .text          0x0000000080024a30       0x10 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_004.o)
+                0x0000000080024a30                CdMode
+ .text          0x0000000080024a40       0x10 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_006.o)
+                0x0000000080024a40                CdLastPos
+ .text          0x0000000080024a50       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_008.o)
+                0x0000000080024a50                CdFlush
+ .text          0x0000000080024a70       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_013.o)
+                0x0000000080024a70                CdReady
+ .text          0x0000000080024a90       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_014.o)
+                0x0000000080024a90                CdSyncCallback
+ .text          0x0000000080024ab0       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_015.o)
+                0x0000000080024ab0                CdReadyCallback
+ .text          0x0000000080024ad0      0x3c0 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_016.o)
+                0x0000000080024ad0                CdControl
+                0x0000000080024c0c                CdControlF
+                0x0000000080024d40                CdControlB
+ .text          0x0000000080024e90       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_021.o)
+                0x0000000080024e90                CdGetSector
+ .text          0x0000000080024eb0       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_022.o)
+                0x0000000080024eb0                CdGetSector2
+ .text          0x0000000080024ed0       0x30 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_023.o)
+                0x0000000080024ed0                CdDataCallback
+ .text          0x0000000080024f00       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_024.o)
+                0x0000000080024f00                CdDataSync
+ .text          0x0000000080024f20       0x80 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(sys.o)
+                0x0000000080024f20                CdPosToInt
+ .text          0x0000000080024fa0     0x1580 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_1.o)
+                0x0000000080025504                CD_sync
+                0x0000000080025784                CD_ready
+                0x0000000080025a4c                CD_cw
+                0x0000000080025e58                CD_vol
+                0x0000000080025ee0                CD_flush
+                0x0000000080025fb4                CD_initvol
+                0x00000000800260a4                CD_initintr
+                0x00000000800260f0                CD_init
+                0x00000000800262d0                CD_datasync
+                0x0000000080026438                CD_set_test_parmnum
+ .text          0x0000000080026520      0x100 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_2.o)
+                0x0000000080026520                CD_getsector
+ .text          0x0000000080026620       0xf0 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_3.o)
+                0x0000000080026620                CD_getsector2
+ .text          0x0000000080026710       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a07.o)
+                0x0000000080026710                DeliverEvent
+ .text          0x0000000080026720       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a08.o)
+                0x0000000080026720                OpenEvent
+ .text          0x0000000080026730       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a11.o)
+                0x0000000080026730                TestEvent
+ .text          0x0000000080026740       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a12.o)
+                0x0000000080026740                EnableEvent
+ .text          0x0000000080026750       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a22.o)
+                0x0000000080026750                PAD_dr
+ .text          0x0000000080026760       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a23.o)
+                0x0000000080026760                ReturnFromException
+ .text          0x0000000080026770       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a24.o)
+                0x0000000080026770                ResetEntryInt
+ .text          0x0000000080026780       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a25.o)
+                0x0000000080026780                HookEntryInt
+ .text          0x0000000080026790       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a36.o)
+                0x0000000080026790                EnterCriticalSection
+ .text          0x00000000800267a0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a37.o)
+                0x00000000800267a0                ExitCriticalSection
+ .text          0x00000000800267b0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a91.o)
+                0x00000000800267b0                ChangeClearPAD
+ .text          0x00000000800267c0       0x20 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c114.o)
+                0x00000000800267c8                _96_remove
+ .text          0x00000000800267e0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c68.o)
+                0x00000000800267e0                FlushCache
+ .text          0x00000000800267f0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c73.o)
+                0x00000000800267f0                GPU_cw
+ .text          0x0000000080026800       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l10.o)
+                0x0000000080026800                ChangeClearRCnt
+ .text          0x0000000080026810      0x290 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o)
+                0x0000000080026810                SetInitPadFlag
+                0x000000008002681c                ReadInitPadFlag
+                0x000000008002682c                PAD_init
+                0x00000000800268bc                InitPAD
+                0x000000008002694c                StartPAD
+ .text          0x0000000080026aa0       0xa0 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(patch.o)
+                0x0000000080026aa0                EnablePAD
+                0x0000000080026ab4                DisablePAD
+                0x0000000080026ac8                _patch_pad
+ .text          0x0000000080026b40       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a18.o)
+                0x0000000080026b40                InitPAD2
+ .text          0x0000000080026b50       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a19.o)
+                0x0000000080026b50                StartPAD2
+ .text          0x0000000080026b60       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a21.o)
+                0x0000000080026b60                PAD_init2
+ .text          0x0000000080026b70       0x70 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(chclrpad.o)
+                0x0000000080026b70                _remove_ChgclrPAD
+ .text          0x0000000080026be0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l02.o)
+                0x0000000080026be0                SysEnqIntRP
+ .text          0x0000000080026bf0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l03.o)
+                0x0000000080026bf0                SysDeqIntRP
+ .text          0x0000000080026c00       0x20 C:/nolibgs_hello_worlds/psyq/lib\libc.a(a63.o)
+                0x0000000080026c08                puts
+ .text          0x0000000080026c20       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c19.o)
+                0x0000000080026c20                setjmp
+ .text          0x0000000080026c30       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c23.o)
+                0x0000000080026c30                strcmp
+ .text          0x0000000080026c40       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c24.o)
+                0x0000000080026c40                strncmp
+ .text          0x0000000080026c50       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c27.o)
+                0x0000000080026c50                strlen
+ .text          0x0000000080026c60       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c42.o)
+                0x0000000080026c60                memcpy
+ .text          0x0000000080026c70       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c63.o)
+                0x0000000080026c70                printf
+ .text          0x0000000080026c80       0x30 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vmode.o)
+                0x0000000080026c80                SetVideoMode
+                0x0000000080026c94                GetVideoMode
+                0x0000000080026cb0                . = ALIGN (0x10)
+ *(.init)
+                0x0000000080026cb0                . = ALIGN (0x10)
+ *(.fini)
+                0x0000000080026cb0                . = ALIGN (0x10)
+                0x0000000080026cb0                __text_end = .
+                0x0000000080026cb0                __ftext_end = ABSOLUTE (.)
+                0x0000000080026cb0                __fdata_start = ABSOLUTE (.)
+
+.rodata         0x0000000080026cb0   0x16efa0
+ *(.rodata .rodata.* .rdata .rdata.* .gnu.linkonce.r.*)
+ .rodata.str1.4
+                0x0000000080026cb0     0x10e8 game.o
+                                       0x10ec (size before relaxing)
+ .rodata        0x0000000080027d98    0x1b330 tim/officeLEFT.o
+                0x0000000080027d98                _binary_tim_officeLEFT_tim_start
+                0x00000000800430c8                _binary_tim_officeLEFT_tim_end
+ .rodata        0x00000000800430c8    0x1b330 tim/officeLEFTlight.o
+                0x00000000800430c8                _binary_tim_officeLEFTlight_tim_start
+                0x000000008005e3f8                _binary_tim_officeLEFTlight_tim_end
+ .rodata        0x000000008005e3f8    0x1b330 tim/officeLEFTnolight.o
+                0x000000008005e3f8                _binary_tim_officeLEFTnolight_tim_start
+                0x0000000080079728                _binary_tim_officeLEFTnolight_tim_end
+ .rodata        0x0000000080079728    0x1b330 tim/officeLEFTlightbonnie.o
+                0x0000000080079728                _binary_tim_officeLEFTlightbonnie_tim_start
+                0x0000000080094a58                _binary_tim_officeLEFTlightbonnie_tim_end
+ .rodata        0x0000000080094a58    0x1b528 tim/officeMIDDLE.o
+                0x0000000080094a58                _binary_tim_officeMIDDLE_tim_start
+                0x00000000800aff80                _binary_tim_officeMIDDLE_tim_end
+ .rodata        0x00000000800aff80    0x1b528 tim/officeMIDDLEnolight.o
+                0x00000000800aff80                _binary_tim_officeMIDDLEnolight_tim_start
+                0x00000000800cb4a8                _binary_tim_officeMIDDLEnolight_tim_end
+ .rodata        0x00000000800cb4a8    0x1b138 tim/officeRIGHT.o
+                0x00000000800cb4a8                _binary_tim_officeRIGHT_tim_start
+                0x00000000800e65e0                _binary_tim_officeRIGHT_tim_end
+ .rodata        0x00000000800e65e0    0x1b138 tim/officeRIGHTlight.o
+                0x00000000800e65e0                _binary_tim_officeRIGHTlight_tim_start
+                0x0000000080101718                _binary_tim_officeRIGHTlight_tim_end
+ .rodata        0x0000000080101718    0x1b138 tim/officeRIGHTlightchica.o
+                0x0000000080101718                _binary_tim_officeRIGHTlightchica_tim_start
+                0x000000008011c850                _binary_tim_officeRIGHTlightchica_tim_end
+ .rodata        0x000000008011c850    0x1b138 tim/officeRIGHTnolight.o
+                0x000000008011c850                _binary_tim_officeRIGHTnolight_tim_start
+                0x0000000080137988                _binary_tim_officeRIGHTnolight_tim_end
+ .rodata        0x0000000080137988      0x7b0 tim/freddysneak.o
+                0x0000000080137988                _binary_tim_freddysneak_tim_start
+                0x0000000080138138                _binary_tim_freddysneak_tim_end
+ .rodata        0x0000000080138138    0x18f00 tim/gameover.o
+                0x0000000080138138                _binary_tim_gameover_tim_start
+                0x0000000080151038                _binary_tim_gameover_tim_end
+ .rodata        0x0000000080151038      0xae6 tim/FAM.o
+                0x0000000080151038                _binary_tim_FAM_tim_start
+                0x0000000080151b1e                _binary_tim_FAM_tim_end
+ *fill*         0x0000000080151b1e        0x2 
+ .rodata        0x0000000080151b20      0xae6 tim/SAM.o
+                0x0000000080151b20                _binary_tim_SAM_tim_start
+                0x0000000080152606                _binary_tim_SAM_tim_end
+ *fill*         0x0000000080152606        0x2 
+ .rodata        0x0000000080152608     0x5cf0 vag/Door.o
+                0x0000000080152608                _binary_vag_Door_vag_start
+                0x00000000801582f8                _binary_vag_Door_vag_end
+ .rodata        0x00000000801582f8      0x9a0 vag/light.o
+                0x00000000801582f8                _binary_vag_light_vag_start
+                0x0000000080158c98                _binary_vag_light_vag_end
+ .rodata        0x0000000080158c98     0x1d60 vag/Monitor.o
+                0x0000000080158c98                _binary_vag_Monitor_vag_start
+                0x000000008015a9f8                _binary_vag_Monitor_vag_end
+ .rodata        0x000000008015a9f8     0xeb60 vag/officesound.o
+                0x000000008015a9f8                _binary_vag_officesound_vag_start
+                0x0000000080169558                _binary_vag_officesound_vag_end
+ .rodata        0x0000000080169558     0x1db0 vag/click.o
+                0x0000000080169558                _binary_vag_click_vag_start
+                0x000000008016b308                _binary_vag_click_vag_end
+ .rodata        0x000000008016b308     0x8f00 vag/noisedoor.o
+                0x000000008016b308                _binary_vag_noisedoor_vag_start
+                0x0000000080174208                _binary_vag_noisedoor_vag_end
+ .rodata        0x0000000080174208     0x37c0 vag/screamer.o
+                0x0000000080174208                _binary_vag_screamer_vag_start
+                0x00000000801779c8                _binary_vag_screamer_vag_end
+ .rodata        0x00000000801779c8     0x2410 vag/honk.o
+                0x00000000801779c8                _binary_vag_honk_vag_start
+                0x0000000080179dd8                _binary_vag_honk_vag_end
+ .rodata        0x0000000080179dd8     0x2080 vag/Footstep.o
+                0x0000000080179dd8                _binary_vag_Footstep_vag_start
+                0x000000008017be58                _binary_vag_Footstep_vag_end
+ .rodata        0x000000008017be58     0x3dd0 vag/knock.o
+                0x000000008017be58                _binary_vag_knock_vag_start
+                0x000000008017fc28                _binary_vag_knock_vag_end
+ .rodata        0x000000008017fc28     0xceb0 vag/footstepfoxy.o
+                0x000000008017fc28                _binary_vag_footstepfoxy_vag_start
+                0x000000008018cad8                _binary_vag_footstepfoxy_vag_end
+ .rodata        0x000000008018cad8     0x1db0 vag/lightout.o
+                0x000000008018cad8                _binary_vag_lightout_vag_start
+                0x000000008018e888                _binary_vag_lightout_vag_end
+ .rodata        0x000000008018e888      0x7b0 vag/jamlight.o
+                0x000000008018e888                _binary_vag_jamlight_vag_start
+                0x000000008018f038                _binary_vag_jamlight_vag_end
+ .rodata        0x000000008018f038     0x62a0 vag/footstep2.o
+                0x000000008018f038                _binary_vag_footstep2_vag_start
+                0x00000000801952d8                _binary_vag_footstep2_vag_end
+ .rodata        0x00000000801952d8       0x10 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+ .rdata         0x00000000801952e8       0x70 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o)
+ .rdata         0x0000000080195358       0x30 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_dma.o)
+ .rdata         0x0000000080195388       0x10 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vsync.o)
+ .rdata         0x0000000080195398       0xa0 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o)
+ .rdata         0x0000000080195438      0x220 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o)
+ .rdata         0x0000000080195658       0x30 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(t00.o)
+ .rdata         0x0000000080195688       0x40 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sca.o)
+ .rdata         0x00000000801956c8       0x30 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_si.o)
+ .rdata         0x00000000801956f8       0x40 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sva.o)
+ .rdata         0x0000000080195738       0x50 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(spu.o)
+ .rdata         0x0000000080195788       0x50 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o)
+ .rdata         0x00000000801957d8       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(event.o)
+ .rdata         0x00000000801957f8      0x1f0 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o)
+ .rdata         0x00000000801959e8      0x260 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_1.o)
+                0x0000000080195c50                . = ALIGN (0x10)
+ *fill*         0x0000000080195c48        0x8 
+                0x0000000080195c50                __preinit_array_start = .
+ *(.preinit_array)
+                0x0000000080195c50                __preinit_array_end = .
+                0x0000000080195c50                . = ALIGN (0x10)
+                0x0000000080195c50                __init_array_start = .
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                0x0000000080195c50                . = ALIGN (0x10)
+ *crtbegin.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *crtend.o(.ctors)
+                0x0000000080195c50                __init_array_end = .
+                0x0000000080195c50                . = ALIGN (0x10)
+                0x0000000080195c50                __fini_array_start = .
+ *(.fini_array)
+ *(SORT_BY_NAME(.fini_array.*))
+ *crtbegin.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *crtend.o(.dtors)
+                0x0000000080195c50                __fini_array_end = .
+                0x0000000080195c50                __build_id = .
+ *(.note.gnu.build-id)
+                0x0000000080195c50                __build_id_end = .
+
+.rel.dyn        0x0000000080195c50        0x0
+ .rel.dyn       0x0000000080195c50        0x0 game.o
+
+.rodata1
+ *(.rodata1)
+                0x0000000080195c50                __data_start = .
+
+.data           0x0000000080195c50     0x6bb0
+ *(.a0table)
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x0000000080195c50       0xb8 game.o
+                0x0000000080195c50                vagsoundBank
+                0x0000000080195cf8                curcamname
+ .data          0x0000000080195d08     0x1100 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o)
+ .data          0x0000000080196e08       0x30 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_dma.o)
+ .data          0x0000000080196e38       0x30 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_vb.o)
+                0x0000000080196e58                Vcount
+ .data          0x0000000080196e68       0x20 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vsync.o)
+                0x0000000080196e78                Hcount
+ .data          0x0000000080196e88      0xb90 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o)
+                0x0000000080196e88                Font
+ .data          0x0000000080197a18      0x1a0 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o)
+                0x0000000080197a64                GPU_printf
+                0x0000000080197a68                GEnv
+                0x0000000080197b90                _qin
+                0x0000000080197b94                _qout
+ .data          0x0000000080197bb8       0x10 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(msc00.o)
+ .data          0x0000000080197bc8     0x4000 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(cstbl.o)
+                0x0000000080197bc8                rcossin_tbl
+ .data          0x000000008019bbc8       0x80 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o)
+                0x000000008019bbd0                _spu_EVdma
+                0x000000008019bbd4                _spu_keystat
+                0x000000008019bbd8                _spu_trans_mode
+                0x000000008019bbdc                _spu_rev_flag
+                0x000000008019bbe0                _spu_rev_reserve_wa
+                0x000000008019bbe4                _spu_rev_offsetaddr
+                0x000000008019bbe8                _spu_rev_attr
+                0x000000008019bbfc                _spu_RQvoice
+                0x000000008019bc00                _spu_RQmask
+                0x000000008019bc04                _spu_voice_centerNote
+                0x000000008019bc34                _spu_env
+                0x000000008019bc38                _spu_isCalled
+ .data          0x000000008019bc48       0x10 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m.o)
+                0x000000008019bc48                _spu_AllocBlockNum
+                0x000000008019bc4c                _spu_AllocLastNum
+                0x000000008019bc50                _spu_memList
+ .data          0x000000008019bc58       0x30 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_rmp0.o)
+                0x000000008019bc58                _spu_rev_startaddr
+ .data          0x000000008019bc88       0x60 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(spu.o)
+                0x000000008019bc88                _spu_RXX
+                0x000000008019bca0                _spu_tsa
+                0x000000008019bca4                _spu_transMode
+                0x000000008019bca8                _spu_addrMode
+                0x000000008019bcac                _spu_mem_mode
+                0x000000008019bcb0                _spu_mem_mode_plus
+                0x000000008019bcb4                _spu_mem_mode_unit
+                0x000000008019bcb8                _spu_mem_mode_unitM
+                0x000000008019bcbc                _spu_inTransfer
+                0x000000008019bcc0                _spu_transferCallback
+                0x000000008019bcc4                _spu_IRQCallback
+ .data          0x000000008019bce8      0x120 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_n2p.o)
+ .data          0x000000008019be08       0x40 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o)
+ .data          0x000000008019be48       0x10 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(event.o)
+                0x000000008019be48                CD_cbread
+                0x000000008019be4c                CD_read_dma_mode
+ .data          0x000000008019be58       0x10 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o)
+ .data          0x000000008019be68       0x80 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_016.o)
+ .data          0x000000008019bee8      0x310 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_1.o)
+                0x000000008019bef0                CD_cbsync
+                0x000000008019bef4                CD_cbready
+                0x000000008019bef8                CD_debug
+                0x000000008019befc                CD_status
+                0x000000008019bf00                CD_status1
+                0x000000008019bf04                CD_nopen
+                0x000000008019bf08                CD_pos
+                0x000000008019bf0c                CD_mode
+                0x000000008019bf0d                CD_com
+                0x000000008019bf10                DS_active
+                0x000000008019bf14                CD_comstr
+                0x000000008019bf94                CD_intstr
+ .data          0x000000008019c1f8       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_2.o)
+ .data          0x000000008019c218       0x20 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_3.o)
+ .data          0x000000008019c238       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o)
+ .data          0x000000008019c248       0x10 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vmode.o)
+ *(.data1)
+ *(.sdata .sdata.* .gnu.linkonce.s.*)
+ .sdata         0x000000008019c258      0x2d0 game.o
+                0x000000008019c258                soundBank
+                0x000000008019c428                debug
+                0x000000008019c42c                night
+                0x000000008019c430                customcharge
+                0x000000008019c434                charge
+                0x000000008019c438                usage
+                0x000000008019c43c                ChargeCounter
+                0x000000008019c440                AM
+                0x000000008019c444                customAM
+                0x000000008019c448                nextpri
+                0x000000008019c44c                staticframes
+                0x000000008019c450                rgbblue
+                0x000000008019c454                rgbgreen
+                0x000000008019c458                rgbred
+                0x000000008019c45c                screamerframes
+                0x000000008019c460                lastsecondsframes
+                0x000000008019c464                framedeadpossi
+                0x000000008019c468                blackoutscreamerappearancechance
+                0x000000008019c46c                blackoutappearancechance
+                0x000000008019c470                glowvar
+                0x000000008019c474                musicboxappearancechance
+                0x000000008019c478                enablephoneguystr
+                0x000000008019c47c                enablephoneguy
+                0x000000008019c480                musicmascottune
+                0x000000008019c484                ambiancenum
+                0x000000008019c488                ambiancechance
+                0x000000008019c48c                ambiancesound
+                0x000000008019c490                tensecondframe
+                0x000000008019c494                returnbasevolume
+                0x000000008019c498                foxymusicframe
+                0x000000008019c49c                curcam
+                0x000000008019c4a0                rightdoorgoodbye2
+                0x000000008019c4a4                rightdoorgoodbye
+                0x000000008019c4a8                leftdoorgoodbye2
+                0x000000008019c4ac                leftdoorgoodbye
+                0x000000008019c4b0                goldenfreddychancescrash
+                0x000000008019c4b4                goldenfreddychances
+                0x000000008019c4b8                foxydrainpower
+                0x000000008019c4bc                foxylockeduration
+                0x000000008019c4c0                foxywaiting
+                0x000000008019c4c4                foxylocationframe
+                0x000000008019c4c8                chicalocationframe
+                0x000000008019c4cc                bonnielocationframe
+                0x000000008019c4d0                freddycountdown
+                0x000000008019c4d4                freddylocationframe
+                0x000000008019c4d8                twoplayermodestr
+                0x000000008019c4dc                fastnightsstr
+                0x000000008019c4e0                radarstr
+                0x000000008019c4e4                unlimitedpowerstr
+                0x000000008019c4e8                convertion
+                0x000000008019c4ec                printnumber
+                0x000000008019c4f0                musicframes
+                0x000000008019c4f4                menuselectionmax
+                0x000000008019c4f8                menuselection
+                0x000000008019c4fc                presetselectorstr
+                0x000000008019c504                presetselector
+                0x000000008019c508                foxylocationframelock
+                0x000000008019c50c                chicalocationframelock
+                0x000000008019c510                bonnielocationframelock
+                0x000000008019c514                freddylocationframelock
+                0x000000008019c518                freddyfacechangedchances
+                0x000000008019c51c                defaultusage
+                0x000000008019c520                frames
+                0x000000008019c524                fntColor
+ *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+ *(.got.plt)
+ *(.got)
+                0x000000008019c800                . = ALIGN (0x800)
+ *fill*         0x000000008019c528      0x2d8 
+                0x000000008019c800                __data_end = .
+                0x000000008019c800                __fdata_end = .
+                0x000000008019c800                __bss_start = .
+
+.sbss           0x000000008019c800    0x588f0
+ *(.dynsbss)
+ *(.sbss .sbss.* .gnu.linkonce.sb.*)
+ .sbss          0x000000008019c800      0x270 game.o
+                0x000000008019c800                loc
+                0x000000008019c804                filter
+                0x000000008019c808                FrameCounter
+                0x000000008019c80c                rgbindicator
+                0x000000008019c810                customnextnightactivation
+                0x000000008019c814                nextnightframes
+                0x000000008019c818                fivetosixamframes
+                0x000000008019c81c                deadfrom
+                0x000000008019c820                dead
+                0x000000008019c824                screamersetsound
+                0x000000008019c828                isalreadydeadlow
+                0x000000008019c82c                isalreadydead
+                0x000000008019c830                blackoutscreamerappearanceframe
+                0x000000008019c834                blackoutinit
+                0x000000008019c838                blackoutappearanceframe
+                0x000000008019c83c                blackoutactivated
+                0x000000008019c840                freddyglowing
+                0x000000008019c844                musicboxinit
+                0x000000008019c848                musicboxappearanceframe
+                0x000000008019c84c                musicboxactivated
+                0x000000008019c850                lightsoutinit
+                0x000000008019c854                islightsout
+                0x000000008019c858                phoneguytalking
+                0x000000008019c85c                limiterphoneguy
+                0x000000008019c860                mascottune
+                0x000000008019c864                framenoisefootstepF
+                0x000000008019c868                noisefootstepF
+                0x000000008019c86c                noisefootstepanimatronic
+                0x000000008019c870                framenoisefootstep
+                0x000000008019c874                noisefootstep
+                0x000000008019c878                returnframes
+                0x000000008019c87c                foxymusic
+                0x000000008019c880                blinkicon
+                0x000000008019c884                itsmeehallcooldown
+                0x000000008019c888                itsmeehall
+                0x000000008019c88c                itsmeehallcornercooldown
+                0x000000008019c890                itsmeehallcorner
+                0x000000008019c894                itsmepiratecovecooldown
+                0x000000008019c898                itsmepiratecove
+                0x000000008019c89c                puppetmusic
+                0x000000008019c8a0                limitercameraL
+                0x000000008019c8a4                limitercameraR
+                0x000000008019c8a8                limitercameraU
+                0x000000008019c8ac                limitercameraD
+                0x000000008019c8b0                cooldowncamera
+                0x000000008019c8b4                camera
+                0x000000008019c8b8                limiterbop
+                0x000000008019c8bc                limiter3
+                0x000000008019c8c0                limiter2
+                0x000000008019c8c4                camlimiter
+                0x000000008019c8c8                lightframe
+                0x000000008019c8cc                light2
+                0x000000008019c8d0                light1
+                0x000000008019c8d4                jamlightframes
+                0x000000008019c8d8                jamlight
+                0x000000008019c8dc                doorclosedR
+                0x000000008019c8e0                doorclosedL
+                0x000000008019c8e4                door
+                0x000000008019c8e8                sparkyframes
+                0x000000008019c8ec                sparkylocation
+                0x000000008019c8f0                nolongerincam
+                0x000000008019c8f4                goldenfreddyactivated
+                0x000000008019c8f8                goldenfreddyframes
+                0x000000008019c8fc                goldenfreddylocation
+                0x000000008019c900                surusage
+                0x000000008019c904                cantdoorL
+                0x000000008019c908                cantlightL
+                0x000000008019c90c                cantdoorR
+                0x000000008019c910                cantlightR
+                0x000000008019c914                cantdoor
+                0x000000008019c918                cantlight
+                0x000000008019c91c                noisedoorchica
+                0x000000008019c920                noisedoorbonnie
+                0x000000008019c924                chicaDoorinit
+                0x000000008019c928                bonnieDoorinit
+                0x000000008019c92c                chicaDoor
+                0x000000008019c930                bonnieDoor
+                0x000000008019c934                foxyknockframe
+                0x000000008019c938                foxysknock
+                0x000000008019c93c                ranfoxy
+                0x000000008019c940                foxylocked
+                0x000000008019c944                foxydifficulty
+                0x000000008019c948                foxyrunningframes
+                0x000000008019c94c                foxylocation
+                0x000000008019c950                chicaonetimeskip
+                0x000000008019c954                chicadifficulty
+                0x000000008019c958                chicalocation
+                0x000000008019c95c                bonnieonetimeskip
+                0x000000008019c960                bonniedifficulty
+                0x000000008019c964                bonnieliljumpscarecooldown
+                0x000000008019c968                bonnieliljumpscare
+                0x000000008019c96c                bonnielocation
+                0x000000008019c970                freddyliljumpscarecooldown
+                0x000000008019c974                freddyliljumpscare
+                0x000000008019c978                freddydifficulty
+                0x000000008019c97c                freddycountdownactivation
+                0x000000008019c980                freddyanticipation
+                0x000000008019c984                freddylocation
+                0x000000008019c988                limiterstart
+                0x000000008019c98c                limiterbuttondown
+                0x000000008019c990                limiterpadup
+                0x000000008019c994                limiterpaddown
+                0x000000008019c998                limiterpadleft
+                0x000000008019c99c                limiterpadright
+                0x000000008019c9a0                Glitch
+                0x000000008019c9a4                impossiblenight
+                0x000000008019c9a8                hellnight
+                0x000000008019c9ac                weirdnight
+                0x000000008019c9b0                goldenfreddiedframes
+                0x000000008019c9b4                goldenfreddied
+                0x000000008019c9b8                loadingframe
+                0x000000008019c9bc                twoplayermodelimiter
+                0x000000008019c9c0                twoplayermode
+                0x000000008019c9c4                savemenu
+                0x000000008019c9c8                cheating
+                0x000000008019c9cc                fastnights
+                0x000000008019c9d0                limiterradar
+                0x000000008019c9d4                limiterfastnights
+                0x000000008019c9d8                limiterunlimitedpower
+                0x000000008019c9dc                unlockssubmenu
+                0x000000008019c9e0                radar
+                0x000000008019c9e4                unlimitedpower
+                0x000000008019c9e8                seedtitle
+                0x000000008019c9ec                bonniestared
+                0x000000008019c9f0                infoscreen
+                0x000000008019c9f4                extramenu
+                0x000000008019c9f8                FrameCounterlimit
+                0x000000008019c9fc                FrameCounterlimiterdown
+                0x000000008019ca00                FrameCounterlimiterup
+                0x000000008019ca04                activatedmenudebug
+                0x000000008019ca08                freddylightframe
+                0x000000008019ca0c                limitermenuR
+                0x000000008019ca10                limitermenuL
+                0x000000008019ca14                presetselectorlimiterleft
+                0x000000008019ca18                presetselectorlimiterright
+                0x000000008019ca1c                freddyfacechanged
+                0x000000008019ca20                limiterdefaultusager
+                0x000000008019ca24                limiterdefaultusagel
+                0x000000008019ca28                advancedmenu
+                0x000000008019ca2c                chargemenu
+                0x000000008019ca30                AISetmenu
+                0x000000008019ca34                maincustomnightmenu
+                0x000000008019ca38                menu
+                0x000000008019ca3c                menuscreeninit
+                0x000000008019ca40                pad2
+                0x000000008019ca44                pad
+                0x000000008019ca48                controllerhere
+                0x000000008019ca4c                RAN
+                0x000000008019ca50                db
+                0x000000008019ca54                fntColorBG
+                0x000000008019ca58                CDreadResult
+                0x000000008019ca5c                CDreadOK
+                0x000000008019ca60                CtrlResult
+                0x000000008019ca68                dataBuffer
+ *(.scommon)
+ *(.dynbss)
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x000000008019ca70    0x50564 game.o
+                0x000000008019ca70                bonniestare
+                0x000000008019ca84                officegoldenfreddy
+                0x000000008019ca98                goldenfreddy
+                0x000000008019caac                sixam
+                0x000000008019cac0                fiveam
+                0x000000008019cad4                goodjob
+                0x000000008019cae8                gameover
+                0x000000008019cafc                layout
+                0x000000008019cb10                CAMERAMONITOR
+                0x000000008019cb24                doors
+                0x000000008019cb38                officeLEFTlightbonnie
+                0x000000008019cb4c                officeLEFTnolight
+                0x000000008019cb60                officeLEFTlight
+                0x000000008019cb74                officeLEFT
+                0x000000008019cb88                officeRIGHTlightchica
+                0x000000008019cb9c                officeRIGHTnolight
+                0x000000008019cbb0                officeRIGHTlight
+                0x000000008019cbc4                officeRIGHT
+                0x000000008019cbd8                officeMIDDLEnolight
+                0x000000008019cbec                officeMIDDLE
+                0x000000008019cc00                freddysneak
+                0x000000008019cc14                helpwanted
+                0x000000008019cc28                freddy4
+                0x000000008019cc3c                freddy3
+                0x000000008019cc50                freddy2
+                0x000000008019cc64                freddy
+                0x000000008019cc78                XAPos
+                0x000000008019cc90                spuSettings
+                0x000000008019ccb8                primbuff
+                0x00000000801accb8                ot
+                0x00000000801accf8                theControllers
+                0x00000000801acdb8                controllers
+                0x00000000801acdfc                voiceAttributes
+                0x00000000801ace3c                commonAttributes
+                0x00000000801ace64                spu_malloc_rec
+                0x00000000801acedc                draw
+                0x00000000801acf94                disp
+                0x00000000801acfbc                filePos
+ *fill*         0x00000000801ecfd4        0x4 
+ .bss           0x00000000801ecfd8       0x14 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(pad.o)
+                0x00000000801ecfe8                PadIdentifier
+ *fill*         0x00000000801ecfec        0x4 
+ .bss           0x00000000801ecff0     0x4410 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o)
+ .bss           0x00000000801f1400     0x1850 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o)
+                0x00000000801f1450                _que
+ .bss           0x00000000801f2c50       0x10 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(t00.o)
+ .bss           0x00000000801f2c60       0x10 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(patchgte.o)
+ .bss           0x00000000801f2c70       0x14 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(spu.o)
+                0x00000000801f2c70                _spu_RQ
+ *fill*         0x00000000801f2c84        0x4 
+ .bss           0x00000000801f2c88     0x2400 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o)
+ .bss           0x00000000801f5088       0x34 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_1.o)
+                0x00000000801f50b8                StMode
+ *fill*         0x00000000801f50bc        0x4 
+ .bss           0x00000000801f50c0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o)
+                0x00000000801f50c0                _apiPadPatch
+ .bss           0x00000000801f50d0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(patch.o)
+ .bss           0x00000000801f50e0       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(chclrpad.o)
+ *(COMMON)
+                0x00000000801f50f0                . = ALIGN (0x4)
+                0x00000000801f50f0                __bss_end = .
+                0x00000000801f50f0                __heap_start = __heap_base
+                0x000000008000f800                . = (ADDR (.text) - 0x800)
+                0x000000008000f800                __end = .
+
+/DISCARD/
+ *(.MIPS.abiflags)
+
+/DISCARD/
+ *(.rel.iplt)
+ *(.rela.iplt)
+ *(.rel.plt)
+ *(.rela.plt)
+ *(.plt)
+ *(.iplt)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(game.elf elf32-littlemips)
+
+.reginfo        0x0000000000000000       0x18
+ .reginfo       0x0000000000000000       0x18 game.o
+
+.mdebug.abi32   0x0000000000000000        0x0
+ .mdebug.abi32  0x0000000000000000        0x0 game.o
+
+.comment        0x0000000000000000       0x12
+ .comment       0x0000000000000000       0x12 game.o
+                                         0x13 (size before relaxing)
+
+.gnu.attributes
+                0x0000000000000000       0x10
+ .gnu.attributes
+                0x0000000000000000       0x10 game.o
+ .gnu.attributes
+                0x0000000000000010       0x10 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+
+.pdr            0x0000000000000000        0x0
+ .pdr           0x0000000000000000        0x0 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+
+.note           0x0000000000000000     0x307c
+ .note          0x0000000000000000       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c57.o)
+ .note          0x0000000000000074       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c43.o)
+ .note          0x00000000000000e8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c47.o)
+ .note          0x000000000000015c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c48.o)
+ .note          0x00000000000001d0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c51.o)
+ .note          0x0000000000000244       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c52.o)
+ .note          0x00000000000002b8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr.o)
+ .note          0x000000000000032c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_dma.o)
+ .note          0x00000000000003a0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(intr_vb.o)
+ .note          0x0000000000000414       0x74 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(pad.o)
+ .note          0x0000000000000488       0x74 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vsync.o)
+ .note          0x00000000000004fc       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e03.o)
+ .note          0x0000000000000570       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e04.o)
+ .note          0x00000000000005e4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(font.o)
+ .note          0x0000000000000658       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p06.o)
+ .note          0x00000000000006cc       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p09.o)
+ .note          0x0000000000000740       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p10.o)
+ .note          0x00000000000007b4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p20.o)
+ .note          0x0000000000000828       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p26.o)
+ .note          0x000000000000089c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p41.o)
+ .note          0x0000000000000910       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(sys.o)
+ .note          0x0000000000000984       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(t00.o)
+ .note          0x00000000000009f8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e00.o)
+ .note          0x0000000000000a6c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(e02.o)
+ .note          0x0000000000000ae0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p00.o)
+ .note          0x0000000000000b54       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgpu.a(p01.o)
+ .note          0x0000000000000bc8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(cmb_00.o)
+ .note          0x0000000000000c3c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(fgo_01.o)
+ .note          0x0000000000000cb0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(msc00.o)
+ .note          0x0000000000000d24       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_07.o)
+ .note          0x0000000000000d98       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_08.o)
+ .note          0x0000000000000e0c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_09.o)
+ .note          0x0000000000000e80       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(mtx_12.o)
+ .note          0x0000000000000ef4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(patchgte.o)
+ .note          0x0000000000000f68       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(reg12.o)
+ .note          0x0000000000000fdc       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(reg13.o)
+ .note          0x0000000000001050       0x74 C:/nolibgs_hello_worlds/psyq/lib\libgte.a(cstbl.o)
+ .note          0x00000000000010c4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_i.o)
+ .note          0x0000000000001138       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_ini.o)
+ .note          0x00000000000011ac       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_itc.o)
+ .note          0x0000000000001220       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m.o)
+ .note          0x0000000000001294       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_init.o)
+ .note          0x0000000000001308       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_m.o)
+ .note          0x000000000000137c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_rmp0.o)
+ .note          0x00000000000013f0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sca.o)
+ .note          0x0000000000001464       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_si.o)
+ .note          0x00000000000014d8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sk.o)
+ .note          0x000000000000154c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_stm.o)
+ .note          0x00000000000015c0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_stsa.o)
+ .note          0x0000000000001634       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_sva.o)
+ .note          0x00000000000016a8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_svv.o)
+ .note          0x000000000000171c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_w.o)
+ .note          0x0000000000001790       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(spu.o)
+ .note          0x0000000000001804       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_dcb.o)
+ .note          0x0000000000001878       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_m_int.o)
+ .note          0x00000000000018ec       0x74 C:/nolibgs_hello_worlds/psyq/lib\libspu.a(s_n2p.o)
+ .note          0x0000000000001960       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(cdr_1.o)
+ .note          0x00000000000019d4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(event.o)
+ .note          0x0000000000001a48       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(iso9660.o)
+ .note          0x0000000000001abc       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_002.o)
+ .note          0x0000000000001b30       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_003.o)
+ .note          0x0000000000001ba4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_004.o)
+ .note          0x0000000000001c18       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_006.o)
+ .note          0x0000000000001c8c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_008.o)
+ .note          0x0000000000001d00       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_013.o)
+ .note          0x0000000000001d74       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_014.o)
+ .note          0x0000000000001de8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_015.o)
+ .note          0x0000000000001e5c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_016.o)
+ .note          0x0000000000001ed0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_021.o)
+ .note          0x0000000000001f44       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_022.o)
+ .note          0x0000000000001fb8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_023.o)
+ .note          0x000000000000202c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(s_024.o)
+ .note          0x00000000000020a0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(sys.o)
+ .note          0x0000000000002114       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_1.o)
+ .note          0x0000000000002188       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_2.o)
+ .note          0x00000000000021fc       0x74 C:/nolibgs_hello_worlds/psyq/lib\libcd.a(bios_3.o)
+ .note          0x0000000000002270       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a07.o)
+ .note          0x00000000000022e4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a08.o)
+ .note          0x0000000000002358       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a11.o)
+ .note          0x00000000000023cc       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a12.o)
+ .note          0x0000000000002440       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a22.o)
+ .note          0x00000000000024b4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a23.o)
+ .note          0x0000000000002528       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a24.o)
+ .note          0x000000000000259c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a25.o)
+ .note          0x0000000000002610       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a36.o)
+ .note          0x0000000000002684       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a37.o)
+ .note          0x00000000000026f8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a91.o)
+ .note          0x000000000000276c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c114.o)
+ .note          0x00000000000027e0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c68.o)
+ .note          0x0000000000002854       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c73.o)
+ .note          0x00000000000028c8       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l10.o)
+ .note          0x000000000000293c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(pad.o)
+ .note          0x00000000000029b0       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(patch.o)
+ .note          0x0000000000002a24       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a18.o)
+ .note          0x0000000000002a98       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a19.o)
+ .note          0x0000000000002b0c       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(a21.o)
+ .note          0x0000000000002b80       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(chclrpad.o)
+ .note          0x0000000000002bf4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l02.o)
+ .note          0x0000000000002c68       0x74 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(l03.o)
+ .note          0x0000000000002cdc       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(a63.o)
+ .note          0x0000000000002d50       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c19.o)
+ .note          0x0000000000002dc4       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c23.o)
+ .note          0x0000000000002e38       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c24.o)
+ .note          0x0000000000002eac       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c27.o)
+ .note          0x0000000000002f20       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c42.o)
+ .note          0x0000000000002f94       0x74 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c63.o)
+ .note          0x0000000000003008       0x74 C:/nolibgs_hello_worlds/psyq/lib\libetc.a(vmode.o)
+
+.debug_info     0x0000000000000000     0x7a7b
+ .debug_info    0x0000000000000000     0x7a57 game.o
+ .debug_info    0x0000000000007a57       0x24 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+
+.debug_abbrev   0x0000000000000000      0x518
+ .debug_abbrev  0x0000000000000000      0x504 game.o
+ .debug_abbrev  0x0000000000000504       0x14 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+
+.debug_loclists
+                0x0000000000000000     0x1024
+ .debug_loclists
+                0x0000000000000000     0x1024 game.o
+
+.debug_aranges  0x0000000000000000      0x120
+ .debug_aranges
+                0x0000000000000000      0x100 game.o
+ .debug_aranges
+                0x0000000000000100       0x20 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+
+.debug_rnglists
+                0x0000000000000000      0x148
+ .debug_rnglists
+                0x0000000000000000      0x148 game.o
+
+.debug_line     0x0000000000000000     0x6fc3
+ .debug_line    0x0000000000000000     0x6f68 game.o
+ .debug_line    0x0000000000006f68       0x5b C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+
+.debug_str      0x0000000000000000     0x25e6
+ .debug_str     0x0000000000000000     0x2596 game.o
+                                       0x2821 (size before relaxing)
+ .debug_str     0x0000000000002596       0x50 C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+
+.debug_frame    0x0000000000000000      0x42c
+ .debug_frame   0x0000000000000000      0x42c game.o
+
+.debug_line_str
+                0x0000000000000000       0x3d
+ .debug_line_str
+                0x0000000000000000       0x3d C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+                                         0x7a (size before relaxing)

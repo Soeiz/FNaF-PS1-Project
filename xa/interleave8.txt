@@ -1,0 +1,8 @@
+1 xa channel5.xa 1 5
+1 xa channel6.xa 1 6
+1 xa channel7.xa 1 7
+1 xa channel8.xa 1 8
+1 xa channel9.xa 1 9
+1 null
+1 null
+1 null

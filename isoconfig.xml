@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- MKPSXISO example XML script -->
+
+<!-- <iso_project>
+        Starts an ISO image project to build. Multiple <iso_project> elements may be
+        specified within the same xml script which useful for multi-disc projects.
+    
+        <iso_project> elements must contain at least one <track> element.
+    
+    Attributes:
+        image_name  - File name of the ISO image file to generate.
+        cue_sheet   - Optional, file name of the cue sheet for the image file
+                      (required if more than one track is specified).
+-->
+<iso_project image_name="game.bin" cue_sheet="game.cue">
+
+    <!-- <track>
+            Specifies a track to the ISO project. This example element creates a data
+            track for storing data files and CD-XA/STR streams.
+        
+            Only one data track is allowed and data tracks must only be specified as the
+            first track in the ISO image and cannot be specified after an audio track.
+        
+        Attributes:
+            type        - Track type (either data or audio).
+            source      - For audio tracks only, specifies the file name of a wav audio
+                          file to use for the audio track.
+            
+    -->
+    <track type="data">
+    
+        <!-- <identifiers>
+                Optional, Specifies the identifier strings to use for the data track.
+                
+            Attributes:
+                system          - Optional, specifies the system identifier (PLAYSTATION if unspecified).
+                application     - Optional, specifies the application identifier (PLAYSTATION if unspecified).
+                volume          - Optional, specifies the volume identifier.
+                volume_set      - Optional, specifies the volume set identifier.
+                publisher       - Optional, specifies the publisher identifier.
+                data_preparer   - Optional, specifies the data preparer identifier. If unspecified, MKPSXISO
+                                  will fill it with lengthy text telling that the image file was generated
+                                  using MKPSXISO.
+        -->
+        <identifiers
+            system          ="PLAYSTATION"
+            application     ="PLAYSTATION"
+            volume          ="game"
+            volume_set      ="game"
+            publisher       ="Soeiz"
+            data_preparer       ="MKPSXISO"
+        />
+        
+        <!-- <license>
+                Optional, specifies the license file to use, the format of the license file must be in
+                raw 2336 byte sector format, like the ones included with the PsyQ SDK in psyq\cdgen\LCNSFILE.
+                
+                License data is not included within the MKPSXISO program to avoid possible legal problems
+                in the open source environment... Better be safe than sorry.
+                
+            Attributes:
+                file    - Specifies the license file to inject into the ISO image.
+        -->
+        <license file="LICENSEE.DAT"/>
+        
+        <!-- <directory_tree>
+                Specifies and contains the directory structure for the data track.
+            
+            Attributes:
+                None.
+        -->
+        <directory_tree>
+        
+            <!-- <file>
+                    Specifies a file in the directory tree.
+                    
+                Attributes:
+                    name    - File name to use in the directory tree (can be used for renaming).
+                    type    - Optional, type of file (data for regular files and is the default, xa for
+                              XA audio and str for MDEC video).
+                    source  - File name of the source file.
+            -->
+            <!-- Stores system.txt as system.cnf -->
+            <file name="system.cnf" type="data" source="system.cnf"/>
+            <file name="SCES_313.37"   type="data" source="game.ps-exe"/>
+            <file name="INTER8.XA" type="xa" source="xa/inter8.xa"/>
+            <!--Put all of the tim shit we need -->
+            <file name="FREDDY.TIM"   type="data" source="tim/FREDDY.TIM"/>
+            <file name="FREDDY2.TIM"   type="data" source="tim/FREDDY2.TIM"/>
+            <file name="FREDDY3.TIM"   type="data" source="tim/FREDDY3.TIM"/>
+            <file name="FREDDY4.TIM"   type="data" source="tim/FREDDY4.TIM"/>
+            <file name="ICONS.TIM"   type="data" source="tim/ICONS.TIM"/>
+            <file name="HWANTED.TIM"   type="data" source="tim/HWANTED.TIM"/>
+            <file name="LOAD.TIM"   type="data" source="tim/LOAD.TIM"/>
+            <file name="LAYOUT.TIM"   type="data" source="tim/LAYOUT.TIM"/>
+            <file name="OMID.TIM"   type="data" source="tim/OMID.TIM"/>
+            <file name="GOL.TIM"   type="data" source="tim/GOL.TIM"/>
+            <file name="GOLF.TIM"   type="data" source="tim/GOLF.TIM"/>
+            <file name="E.DAT"   type="data" source="E.DAT"/>
+            <file name="BONST.TIM"   type="data" source="tim/BONST.TIM"/>
+            <file name="FREDDZ.TIM"   type="data" source="tim/FREDDZ.TIM"/>
+            <!-- <file name="TRAIL.STR"   type="data" source="STR/TRAILER.STR"/> -->
+            <file name="DOORR.TIM"   type="data" source="tim/DOORR.TIM"/>
+            <file name="DOORL.TIM"   type="data" source="tim/DOORL.TIM"/>
+            <file name="DOORS.TIM"   type="data" source="tim/DOORS.TIM"/>
+            <file name="GJSIX.TIM"   type="data" source="tim/GJSIX.TIM"/>
+            <file name="GJFIV.TIM"   type="data" source="tim/GJFIV.TIM"/>
+            <file name="GJSEV.TIM"   type="data" source="tim/GJSEV.TIM"/>
+
+            <dummy sectors="1024"/>
+            
+            <!-- <dir>
+                    Specifies a directory in the directory tree. <file> and <dir> elements inside the element
+                    will be inside the specified directory.
+            -->
+        </directory_tree>
+        
+    </track>
+    
+</iso_project>

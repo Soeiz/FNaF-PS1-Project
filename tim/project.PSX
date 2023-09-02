@@ -1,0 +1,25 @@
+[TIM Files]
+File_0=C:\nolibgs_hello_worlds\game\tim\DOORS.TIM
+File_1=C:\nolibgs_hello_worlds\game\tim\FAM.tim
+File_2=C:\nolibgs_hello_worlds\game\tim\FREDDY.TIM
+File_3=C:\nolibgs_hello_worlds\game\tim\FREDDY2.TIM
+File_4=C:\nolibgs_hello_worlds\game\tim\FREDDY3.TIM
+File_5=C:\nolibgs_hello_worlds\game\tim\FREDDY4.TIM
+File_6=C:\nolibgs_hello_worlds\game\tim\freddysneak.tim
+File_7=C:\nolibgs_hello_worlds\game\tim\gameover.tim
+File_8=C:\nolibgs_hello_worlds\game\tim\GJFIV.TIM
+File_9=C:\nolibgs_hello_worlds\game\tim\GJSEV.TIM
+File_10=C:\nolibgs_hello_worlds\game\tim\GJSIX.TIM
+File_11=C:\nolibgs_hello_worlds\game\tim\GOL.TIM
+File_12=C:\nolibgs_hello_worlds\game\tim\GOLF.TIM
+File_13=C:\nolibgs_hello_worlds\game\tim\HWANTED.TIM
+File_14=C:\nolibgs_hello_worlds\game\tim\officeLEFT.tim
+File_15=C:\nolibgs_hello_worlds\game\tim\officeLEFTnolight.tim
+File_16=C:\nolibgs_hello_worlds\game\tim\officeMIDDLE.tim
+File_17=C:\nolibgs_hello_worlds\game\tim\officeMIDDLEnolight.tim
+File_18=C:\nolibgs_hello_worlds\game\tim\officeRIGHT.tim
+File_19=C:\nolibgs_hello_worlds\game\tim\SAM.tim
+File_20=D:\autre\Code Projects\FNaF PS1\assets\layout-little.TIM
+[Graphics Mode]
+Width=320
+Height=256
