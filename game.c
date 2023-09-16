@@ -2036,8 +2036,8 @@ int main(void) {
             gamevictory();
             if (fivetosixamframes < 720) {
                 if (fivetosixamframes == 1) {
-                    if (night != 7) {Ran(1);}
-                    else {Ran(1);} //For more fun 
+                    if (night != 7) {Ran(250);}
+                    else {Ran(50);} //For more fun 
                     if (RAN == 1) {
                         customnextnightactivation = 1;
                     }
