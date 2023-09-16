@@ -433,6 +433,7 @@ int main(void) {
     }
     int sample = -1;
     //LoadTexture(_binary_tim_fnt_tim_start, &fontface);
+    clearVRAM();
     while (1)
     {   
         ClearOTagR(ot[db], OTLEN);

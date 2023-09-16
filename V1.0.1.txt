@@ -1,5 +1,0 @@
-- Added help wanted scene
-- Cleaned the code
-- Change a lot of images (to make them smaller) and added some images
-- Changed the menus & remapped them to be able to press start instead of cross in certain menu
-- Small changes, additions and bug fixes
