@@ -88,8 +88,6 @@
             <!--Put all of the tim shit we need -->
             <file name="FREDDY.TIM"   type="data" source="tim/FREDDY.TIM"/>
             <file name="FREDDY2.TIM"   type="data" source="tim/FREDDY2.TIM"/>
-            <file name="FREDDY3.TIM"   type="data" source="tim/FREDDY3.TIM"/>
-            <file name="FREDDY4.TIM"   type="data" source="tim/FREDDY4.TIM"/>
             <file name="ICONS.TIM"   type="data" source="tim/ICONS.TIM"/>
             <file name="HWANTED.TIM"   type="data" source="tim/HWANTED.TIM"/>
             <file name="LOAD.TIM"   type="data" source="tim/LOAD.TIM"/>
@@ -98,11 +96,9 @@
             <file name="GOL.TIM"   type="data" source="tim/GOL.TIM"/>
             <file name="GOLF.TIM"   type="data" source="tim/GOLF.TIM"/>
             <file name="E.DAT"   type="data" source="E.DAT"/>
-            <file name="BONST.TIM"   type="data" source="tim/BONST.TIM"/>
+            <!--<file name="BONST.TIM"   type="data" source="tim/BONST.TIM"/>
             <file name="FREDDZ.TIM"   type="data" source="tim/FREDDZ.TIM"/>
-            <!-- <file name="TRAIL.STR"   type="data" source="STR/TRAILER.STR"/> -->
-            <file name="DOORR.TIM"   type="data" source="tim/DOORR.TIM"/>
-            <file name="DOORL.TIM"   type="data" source="tim/DOORL.TIM"/>
+             <file name="TRAIL.STR"   type="data" source="STR/TRAILER.STR"/> -->
             <file name="DOORS.TIM"   type="data" source="tim/DOORS.TIM"/>
             <file name="GJSIX.TIM"   type="data" source="tim/GJSIX.TIM"/>
             <file name="GJFIV.TIM"   type="data" source="tim/GJFIV.TIM"/>

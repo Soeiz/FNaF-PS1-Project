@@ -1,6 +1,7 @@
 /*
     TO FIX :
 - Return thing crash second time because of too much thing he has loaded (got bored ??!!)
+- same problem with images stocked in ram directly
   ON THE PS1 :
 
     TO MAKE : 
@@ -10,6 +11,8 @@
 
 
 #include "constant.h"
+#include "objects/objects.h"
+#include "objects/camera.h"
 
 int FrameCounter = 0;
 int customAM = 12;
@@ -141,100 +144,6 @@ CdlFILE XAPos = {0};
 CdlFILTER filter;
 // File position in m/s/f
 CdlLOC  loc;
-
-//TIM
-extern unsigned long _binary_tim_officeMIDDLEnolight_tim_start[];
-extern unsigned long _binary_tim_officeMIDDLEnolight_tim_end[];
-extern unsigned long _binary_tim_officeMIDDLEnolight_tim_length;
-
-extern unsigned long _binary_tim_officeRIGHT_tim_start[];
-extern unsigned long _binary_tim_officeRIGHT_tim_end[];
-extern unsigned long _binary_tim_officeRIGHT_tim_length;
-
-extern unsigned long _binary_tim_officeRIGHTlight_tim_start[];
-extern unsigned long _binary_tim_officeRIGHTlight_tim_end[];
-extern unsigned long _binary_tim_officeRIGHTlight_tim_length;
-
-extern unsigned long _binary_tim_officeRIGHTnolight_tim_start[];
-extern unsigned long _binary_tim_officeRIGHTnolight_tim_end[];
-extern unsigned long _binary_tim_officeRIGHTnolight_tim_length;
-
-extern unsigned long _binary_tim_officeRIGHTlightchica_tim_start[];
-extern unsigned long _binary_tim_officeRIGHTlightchica_tim_end[];
-extern unsigned long _binary_tim_officeRIGHTlightchica_tim_length;
-
-extern unsigned long _binary_tim_officeLEFT_tim_start[];
-extern unsigned long _binary_tim_officeLEFT_tim_end[];
-extern unsigned long _binary_tim_officeLEFT_tim_length;
-
-extern unsigned long _binary_tim_officeLEFTlight_tim_start[];
-extern unsigned long _binary_tim_officeLEFTlight_tim_end[];
-extern unsigned long _binary_tim_officeLEFTlight_tim_length;
-
-extern unsigned long _binary_tim_officeLEFTnolight_tim_start[];
-extern unsigned long _binary_tim_officeLEFTnolight_tim_end[];
-extern unsigned long _binary_tim_officeLEFTnolight_tim_length;
-
-extern unsigned long _binary_tim_officeLEFTlightbonnie_tim_start[];
-extern unsigned long _binary_tim_officeLEFTlightbonnie_tim_end[];
-extern unsigned long _binary_tim_officeLEFTlightbonnie_tim_length;
-
-extern unsigned long _binary_tim_CAMERAMONITOR_tim_start[];
-extern unsigned long _binary_tim_CAMERAMONITOR_tim_end[];
-extern unsigned long _binary_tim_CAMERAMONITOR_tim_length;
-
-extern unsigned long _binary_tim_gameover_tim_start[];
-extern unsigned long _binary_tim_gameover_tim_end[];
-extern unsigned long _binary_tim_gameover_tim_length;
-
-extern unsigned long _binary_tim_freddysneak_tim_start[];
-extern unsigned long _binary_tim_freddysneak_tim_end[];
-extern unsigned long _binary_tim_freddysneak_tim_length;
-
-extern unsigned long _binary_tim_FAM_tim_start[];
-extern unsigned long _binary_tim_FAM_tim_end[];
-extern unsigned long _binary_tim_FAM_tim_length;
-
-extern unsigned long _binary_tim_SAM_tim_start[];
-extern unsigned long _binary_tim_SAM_tim_end[];
-extern unsigned long _binary_tim_SAM_tim_length;
-
-extern unsigned long _binary_tim_officeMIDDLE_tim_start[];
-extern unsigned long _binary_tim_officeMIDDLE_tim_end[];
-extern unsigned long _binary_tim_officeMIDDLE_tim_length;
-
-/*
-extern unsigned long _binary_tim_fnt_tim_start[];
-extern unsigned long _binary_tim_fnt_tim_end[];
-extern unsigned long _binary_tim_fnt_tim_length;
-*/
-TIM_IMAGE freddy;
-TIM_IMAGE freddy2;
-TIM_IMAGE freddy3;
-TIM_IMAGE freddy4;
-TIM_IMAGE helpwanted;
-TIM_IMAGE freddysneak;
-TIM_IMAGE officeMIDDLE;
-TIM_IMAGE officeMIDDLEnolight;
-TIM_IMAGE officeRIGHT;
-TIM_IMAGE officeRIGHTlight;
-TIM_IMAGE officeRIGHTnolight;
-TIM_IMAGE officeRIGHTlightchica;
-TIM_IMAGE officeLEFT;
-TIM_IMAGE officeLEFTlight;
-TIM_IMAGE officeLEFTnolight;
-TIM_IMAGE officeLEFTlightbonnie;
-TIM_IMAGE doors;
-TIM_IMAGE CAMERAMONITOR;
-TIM_IMAGE layout;
-TIM_IMAGE gameover;
-TIM_IMAGE goodjob;
-TIM_IMAGE fiveam;
-TIM_IMAGE sixam;
-TIM_IMAGE goldenfreddy;
-TIM_IMAGE officegoldenfreddy;
-TIM_IMAGE bonniestare;
-//TIM_IMAGE fontface;
 
 // Prototypes
 void display(void);
@@ -452,432 +361,6 @@ u_long setSPUtransfer(VAGsound * sound){
 }
 
 int main(void) {
-
-    long polydepth;
-    long polyflag;
-    long OTz;
-
-    //freddy bg
-    POLY_FT4 *polyf = {0};                        
-
-    SVECTOR RotVectorf = {0, 0, 0};               
-    VECTOR  MovVectorf = {10, 2, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorf = {ONE, ONE, ONE};       
-
-    SVECTOR VertPosf[4] = {                       
-            {-45, -68, 1 },                       
-            {-45,  68, 1 },                       
-            { 67, -68, 1 },                       
-            { 67,  68, 1  }                        
-        };        
-
-    MATRIX PolyMatrixf = {0};  
-
-    //Freddy's Icon 
-    POLY_FT4 *polyficon = {0};                        
-
-    SVECTOR RotVectorficon = {0, 0, 0};               
-    VECTOR  MovVectorficon = {-70, -50, CENTERX/2-10, 0}; 
-    VECTOR  ScaleVectorficon = {2048, 2048, 2048}; 
-
-    SVECTOR VertPosficon[4] = {                    
-            {-0, -0, 1 },                      
-            {-0,  75, 1 },                         
-            { 75, -0, 1 },                         
-            { 75,  75, 1  }                        
-        };        
-
-    MATRIX PolyMatrixficon = {0};    
-
-    //Bonnie's Icon 
-    POLY_FT4 *polybicon = {0};                           
-
-    SVECTOR RotVectorbicon = {0, 0, 0};                  
-    VECTOR  MovVectorbicon = {-40, -50, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorbicon = {2048, 2048, 2048};       
-
-    SVECTOR VertPosbicon[4] = {                          
-            {-0, -0, 1 },                         
-            {-0,  75, 1 },                        
-            { 75, -0, 1 },                        
-            { 75,  75, 1  }                       
-        };        
-
-    MATRIX PolyMatrixbicon = {0};    
-
-    //Chica's Icon 
-    POLY_FT4 *polycicon = {0};                           
-
-    SVECTOR RotVectorcicon = {0, 0, 0};                  
-    VECTOR  MovVectorcicon = {0, 0, CENTERX/2-10, 0};    
-    VECTOR  ScaleVectorcicon = {2048, 2048, 2048};       
-
-    SVECTOR VertPoscicon[4] = {                    
-            {-60, -25, 1 },                        
-            {-60,  26, 1 },                        
-            { 61, -25, 1 },                        
-            { 61,  26, 1  }                        
-        };        
-
-    MATRIX PolyMatrixcicon = {0};    
-
-    //Foxy's Icon 
-    POLY_FT4 *polyfoicon = {0};                       
-
-    SVECTOR RotVectorfoicon = {0, 0, 0};              
-    VECTOR  MovVectorfoicon = {0, 0, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorfoicon = {2048, 2048, 2048};   
-
-    SVECTOR VertPosfoicon[4] = {                      
-            {-60, -25, 1 },                      
-            {-60,  26, 1 },                      
-            { 61, -25, 1 },                      
-            { 61,  26, 1  }                      
-        };        
-
-    MATRIX PolyMatrixfoicon = {0};    
-
-    //help wanted bg
-    POLY_FT4 *polyhelpwanted = {0};                           
-
-    SVECTOR RotVectorhelpwanted = {0, 0, 0};                  
-    VECTOR  MovVectorhelpwanted = {10, -6, CENTERX/2-10, 0};  
-    VECTOR  ScaleVectorhelpwanted = {ONE, ONE, ONE};          
-
-    SVECTOR VertPoshelpwanted[4] = {               
-            {-90, -68, 1 },                        
-            {-90,  68, 1 },                        
-            { 90, -68, 1 },                        
-            { 90,  68, 1  }                        
-        };        
-
-    MATRIX PolyMatrixhelpwanted = {0};     
-
-    //TIM
-    POLY_FT4 *polyofficemiddle = {0};                         
-    POLY_FT4 *polyofficeright = {0};                          
-    POLY_FT4 *polyofficeleft = {0};                           
-    POLY_FT4 *poly4 = {0};                        
-    SVECTOR RotVectorofficemiddle = {0, 0, 0};                
-    VECTOR  MovVectorofficemiddle = {10, 2, CENTERX/2-10, 0}; 
-    VECTOR  ScaleVectorofficemiddle = {ONE, ONE, ONE};        
-
-    SVECTOR RotVectorofficeright = {0, 0, 0};                 
-    VECTOR  MovVectorofficeright = {10, 2, CENTERX/2-10, 0};  
-    VECTOR  ScaleVectorofficeright = {ONE, ONE, ONE};         
-
-    SVECTOR RotVectorofficeleft = {0, 0, 0};                  
-    VECTOR  MovVectorofficeleft = {10, 2, CENTERX/2-10, 0};   
-    VECTOR  ScaleVectorofficeleft = {ONE, ONE, ONE};          
-    
-    SVECTOR RotVector4 = {0, 0, 0};                
-    VECTOR  MovVector4 = {10, 2, CENTERX/2-10, 0}; 
-    VECTOR  ScaleVector4 = {ONE, ONE, ONE};        
-    
-    SVECTOR VertPosofficemiddle[4] = {             
-            {-67, -68, 1 },                        
-            {-67,  68, 1 },                        
-            { 67, -68, 1 },                        
-            { 67,  68, 1  }                        
-        };                                         
-
-    SVECTOR VertPosofficeright[4] = {              
-            {45, -68, 1 },                         
-            {45,  68, 1 },                         
-            { 195, -68, 1 },                       
-            { 195,  68, 1  }                       
-        };
-
-    SVECTOR VertPosofficeleft[4] = {               
-            {-154, -68, 1 },                       
-            {-154,  68, 1 },                       
-            { -38, -68, 1 },                       
-            { -38,  68, 1  }                       
-        };                      
-
-    SVECTOR VertPos4[4] = {                        
-            {-170, -68, 1 },                       
-            {-170,  68, 1 },                       
-            { -54,-68, 1 },                        
-            { -54,  68, 1  }                       
-        };                                   
-                   
-    MATRIX PolyMatrixofficemiddle = {0};                   
-    MATRIX PolyMatrixofficeright = {0};                   
-    MATRIX PolyMatrixofficeleft = {0};                   
-    MATRIX PolyMatrix4 = {0};                   
-        
-    //Doors
-    //left
-    POLY_FT4 *leftdoor = {0};                          
-
-    SVECTOR RotVectorleftdoor = {0, 0, 0};             
-    VECTOR  MovVectorleftdoor = {-125, -60, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorleftdoor = {ONE, ONE, ONE};
-
-
-    SVECTOR VertPosleftdoor[4] = {                
-            {0, 0, 1 },                        
-            {0,  118, 1 },                     
-            { 42,0, 1 },                       
-            { 41,  118, 1  }                   
-        };                                        
-
-    MATRIX PolyMatrixleftdoor = {0};  
-
-    //right
-    POLY_FT4 *rightdoor = {0};                           
-
-    SVECTOR RotVectorrightdoor = {0, 0, 0};                  
-    VECTOR  MovVectorrightdoor = {130, -180, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorrightdoor = {ONE, ONE, ONE};          
-
-
-    SVECTOR VertPosrightdoor[4] = {              
-            {-0, -0, 1 },                        
-            {-0,  122, 1 },                      
-            { 44, -0, 1 },                       
-            { 44,  122, 1  }                     
-        };                                          
-
-    MATRIX PolyMatrixrightdoor = {0};                   
-
-    //Freddy during lightsout
-    POLY_FT4 *polyfreddylightsout = {0};                           
-
-    SVECTOR RotVectorfreddylightsout = {0, 0, 0};                  
-    VECTOR  MovVectorfreddylightsout = {-105, 0, CENTERX/2-10, 0}; 
-    VECTOR  ScaleVectorfreddylightsout = {1024, 1024, 1024};       
-
-    SVECTOR VertPosfreddylightsout[4] = {                          
-            {-60, -60, 1 },                        
-            {-60,  60, 1 },                        
-            { 60,-60, 1 },                         
-            { 60,  60, 1  }                        
-        };                
-    MATRIX PolyMatrixfreddylightsout = {0};    
-
-    //icons of the animatronics
-    POLY_F4 *polyfreddy = {0};                        
-    POLY_F4 *polybonnie = {0};                        
-    POLY_F4 *polychica = {0};                         
-    POLY_F4 *polyfoxy = {0};                          
-    POLY_F4 *polygoldenf = {0};                           
-
-    SVECTOR RotVectorfreddy = {0, 0, 0};                  
-    VECTOR  MovVectorfreddy = {5, -37, CENTERX/2-10, 0};  
-    VECTOR  ScaleVectorfreddy = {1024, 1024, 1024};       
-
-    SVECTOR RotVectorbonnie = {0, 0, 0};                  
-    VECTOR  MovVectorbonnie = {-10, -44, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorbonnie = {1024, 1024, 1024};       
-
-    SVECTOR RotVectorchica = {0, 0, 0};                 
-    VECTOR  MovVectorchica = {10, -44, CENTERX/2-10, 0};  
-    VECTOR  ScaleVectorchica = {1024, 1024, 1024};        
-
-    SVECTOR RotVectorfoxy = {0, 0, 0};                  
-    VECTOR  MovVectorfoxy = {-45, -6, CENTERX/2-10, 0};   
-    VECTOR  ScaleVectorfoxy = {1024, 1024, 1024};         
-
-    SVECTOR RotVectorgoldenf = {0, 0, 0};                 
-    VECTOR  MovVectorgoldenf = {999, 999, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorgoldenf = {1024, 1024, 1024};      
-
-    SVECTOR VertPosfreddy[4] = {               
-            {-10, -10, 1 },                    
-            {-10,  10, 1 },                    
-            {10, -10, 1 },                     
-            {10,  10, 1  }                     
-        };            
-    SVECTOR VertPosbonnie[4] = {               
-            {-10, -10, 1 },                    
-            {-10,  10, 1 },                    
-            {10, -10, 1 },                     
-            {10,  10, 1  }                     
-        };            
-    SVECTOR VertPoschica[4] = {                
-            {-10, -10, 1 },                    
-            {-10,  10, 1 },                    
-            {10, -10, 1 },                     
-            {10,  10, 1  }                     
-        };            
-    SVECTOR VertPosfoxy[4] = {                 
-            {-10, -10, 1 },                    
-            {-10,  10, 1 },                    
-            {10, -10, 1 },                     
-            {10,  10, 1  }                     
-        };                
-    SVECTOR VertPosgoldenf[4] = {              
-            {-10, -10, 1 },                    
-            {-10,  10, 1 },                    
-            {10, -10, 1 },                     
-            {10,  10, 1  }                     
-        };                                     
-    MATRIX PolyMatrixfreddy = {0};    
-    MATRIX PolyMatrixbonnie = {0};    
-    MATRIX PolyMatrixchica = {0};    
-    MATRIX PolyMatrixfoxy = {0};     
-    MATRIX PolyMatrixgoldenf = {0};    
-
-    POLY_F4 *polysparky = {0};                           
-
-    SVECTOR RotVectorsparky = {0, 0, 0};                  
-    VECTOR  MovVectorsparky = {999, 999, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorsparky = {1024, 1024, 1024};       
-
-
-    SVECTOR VertPossparky[4] = {                          
-            {-10, -10, 1 },                        
-            {-10,  10, 1 },                        
-            {10, -10, 1 },                         
-            {10,  10, 1  }                         
-        };                                         
-  
-    MATRIX PolyMatrixsparky = {0};    
-
-    //Cam layout
-    POLY_FT4 *polylayout = {0};                           
-
-    SVECTOR RotVectorlayout = {0, 0, 0};                  
-    VECTOR  MovVectorlayout = {4, -5, CENTERX/2-10, 0};   
-    VECTOR  ScaleVectorlayout = {ONE, ONE, ONE};          
-
-    SVECTOR VertPoslayout[4] = {                     
-            {-57, -66, 1 },                     
-            {-57,  48, 1 },                     
-            { 58,-66, 1 },                      
-            { 58,  48, 1  }                     
-        };                
-    MATRIX PolyMatrixlayout = {0};    
-
-    //gameover bg
-    POLY_FT4 *polygameover = {0};                       
-
-    SVECTOR RotVectorgameover = {0, 0, 0};              
-    VECTOR  MovVectorgameover = {0, 0, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorgameover = {ONE, ONE, ONE};      
-
-    SVECTOR VertPosgameover[4] = {                      
-            {-80, -58, 1 },                        
-            {-80,  58, 1 },                        
-            { 80, -58, 1 },                        
-            { 80,  58, 1  }                        
-        };        
-
-    MATRIX PolyMatrixgameover = {0};     
-
-    //good job bg
-    POLY_FT4 *polygoodjob = {0};                          
-
-    SVECTOR RotVectorgoodjob = {0, 0, 0};                 
-    VECTOR  MovVectorgoodjob = {0, 0, CENTERX/2-10, 0};   
-    VECTOR  ScaleVectorgoodjob = {ONE, ONE, ONE};         
-
-    SVECTOR VertPosgoodjob[4] = {                         
-            {-79, -56, 1 },                        
-            {-80,  56, 1 },                        
-            { 79, -56, 1 },                        
-            { 80,  56, 1  }                        
-        };        
-
-    MATRIX PolyMatrixgoodjob = {0};    
-
-    //5AM bg
-    POLY_FT4 *polyfiveam = {0};                       
-
-    SVECTOR RotVectorfiveam = {0, 0, 0};              
-    VECTOR  MovVectorfiveam = {0, 0, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorfiveam = {2048, 2048, 2048};   
-
-    SVECTOR VertPosfiveam[4] = {                      
-            {-60, -25, 1 },                         
-            {-60,  26, 1 },                         
-            { 61, -25, 1 },                         
-            { 61,  26, 1  }                         
-        };        
-
-    MATRIX PolyMatrixfiveam = {0};    
-
-    //Icons for camera 
-    POLY_F4 *polycamWoutline = {0};                            
-
-    VECTOR  ScaleVectorpolycamWoutline ={ONE, ONE, ONE};       
-
-    POLY_F4 *polycamgreyogreen1A = {0};                        
-    POLY_F4 *polycamgreyogreen1B = {0};                        
-    POLY_F4 *polycamgreyogreen1C = {0};                        
-    POLY_F4 *polycamgreyogreen5 = {0};                         
-    POLY_F4 *polycamgreyogreen3 = {0};                         
-    POLY_F4 *polycamgreyogreen2A = {0};                        
-    POLY_F4 *polycamgreyogreen2B = {0};                        
-    POLY_F4 *polycamgreyogreen4A = {0};                        
-    POLY_F4 *polycamgreyogreen4B = {0};                        
-    POLY_F4 *polycamgreyogreen6 = {0};                         
-    POLY_F4 *polycamgreyogreen7 = {0};                         
-    SVECTOR RotVectorpolycamgreyogreen = {0, 0, 0};            
-
-    VECTOR  MovVectorpolycamgreyogreen1A = {0, 0, CENTERX, 0}; 
-    VECTOR  MovVectorpolycamgreyogreen1B = {0, 0, CENTERX, 0}; 
-    VECTOR  MovVectorpolycamgreyogreen1C = {0, 0, CENTERX, 0}; 
-    VECTOR  MovVectorpolycamgreyogreen5 = {0, 0, CENTERX, 0};  
-    VECTOR  MovVectorpolycamgreyogreen3 = {0, 0, CENTERX, 0};  
-    VECTOR  MovVectorpolycamgreyogreen2A = {0, 0, CENTERX, 0}; 
-    VECTOR  MovVectorpolycamgreyogreen2B = {0, 0, CENTERX, 0}; 
-    VECTOR  MovVectorpolycamgreyogreen4A = {0, 0, CENTERX, 0}; 
-    VECTOR  MovVectorpolycamgreyogreen4B = {0, 0, CENTERX, 0}; 
-    VECTOR  MovVectorpolycamgreyogreen6 = {0, 0, CENTERX, 0};  
-    VECTOR  MovVectorpolycamgreyogreen7 = {0, 0, CENTERX, 0};  
-
-    VECTOR  ScaleVectorpolycamgreyogreen ={ONE, ONE, ONE};     
-    SVECTOR VertPospolycamgreyogreen[4] = {                    
-            {-11, -6, 1 },                        
-            {-11,  6, 1 },                        
-            { 6, -6, 1 },                         
-            { 6,  6, 1  }                         
-        };                                          
-    MATRIX PolyMatrixpolycamgreyogreen1A = {0};           
-    MATRIX PolyMatrixpolycamgreyogreen1B = {0};              
-    MATRIX PolyMatrixpolycamgreyogreen1C = {0};           
-    MATRIX PolyMatrixpolycamgreyogreen5 = {0};              
-    MATRIX PolyMatrixpolycamgreyogreen3 = {0};           
-    MATRIX PolyMatrixpolycamgreyogreen2A = {0};              
-    MATRIX PolyMatrixpolycamgreyogreen2B = {0};           
-    MATRIX PolyMatrixpolycamgreyogreen4A = {0};             
-    MATRIX PolyMatrixpolycamgreyogreen4B = {0};             
-    MATRIX PolyMatrixpolycamgreyogreen6 = {0};              
-    MATRIX PolyMatrixpolycamgreyogreen7 = {0};    //Nothing we can do about all of these lines, huh ?
-
-    POLY_FT4 *polygolden = {0};                           
-
-    SVECTOR RotVectorgolden = {0, 0, 0};                  
-    VECTOR  MovVectorgolden = {-132, -60, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorgolden = {3570, 3570, 3570};       
-
-    SVECTOR VertPosgolden[4] = {                          
-            {0, 0, 1 },                        
-            {0,  114, 1 },                     
-            { 258, 0, 1 },                     
-            { 258,  114, 1  }                  
-        };                                          
-
-    MATRIX PolyMatrixgolden = {0};    
-
-    POLY_FT4 *polyofficegolden = {0}; 
-
-    SVECTOR RotVectorofficegolden = {0, 0, 0};                  
-    VECTOR  MovVectorofficegolden = {-20, -30, CENTERX/2-10, 0};
-    VECTOR  ScaleVectorofficegolden = {2048, 2048, 2048};       
-
-    SVECTOR VertPosofficegolden[4] = {                          
-            {0, 0, 1 },                     
-            {0,  210, 1 },                  
-            { 218, 0, 1 },                  
-            { 218,  210, 1  }               
-        };                                          
-
-    MATRIX PolyMatrixofficegolden = {0};    
-
     //controller
     TILE * PADL;                    // Tile primitives
     TILE * TRIGGERL;
@@ -1015,31 +498,27 @@ int main(void) {
                 CDreadResult = CdReadSync(0, 0);
                 LoadTexture(dataBuffer, &freddy2); 
                 free(dataBuffer);
-                loadFile = "\\FREDDY3.TIM;1";
+                loadFile = "\\HWANTED.TIM;1";
                 CdSearchFile( &filePos, loadFile);
                 dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
                 CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                // Read data and load it to dataBuffer
                 CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
                 CDreadResult = CdReadSync(0, 0);
-                LoadTexture(dataBuffer, &freddy3); 
+                LoadTexture(dataBuffer, &helpwanted); 
                 free(dataBuffer);
-                loadFile = "\\FREDDY4.TIM;1";
-                CdSearchFile( &filePos, loadFile);
-                dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                // Wait for operation to complete
-                CDreadResult = CdReadSync(0, 0);
-                LoadTexture(dataBuffer, &freddy4); 
-                free(dataBuffer);
-                loadFile = "\\GOL.TIM;1";
-                CdSearchFile( &filePos, loadFile);
-                dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                CDreadResult = CdReadSync(0, 0);
-                LoadTexture(dataBuffer, &officegoldenfreddy); 
-                free(dataBuffer);
+                if (initstuff == 0) {
+                    loadFile = "\\GOL.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &officegoldenfreddy); 
+                    free(dataBuffer);
+                    initstuff++;
+                }
                 CdControlF(CdlPause,0);
                           
                 // Load XA file from cd
@@ -1051,6 +530,7 @@ int main(void) {
                 XAsetup();
                 // Keep track of XA Sample currently playing
 
+                LoadTexture(_binary_tim_load_tim_start, &load);
                 menuscreeninit = 1;
                 musicframes = 3778;
             }
@@ -1058,163 +538,19 @@ int main(void) {
 
                 seedtitle++;
                 //TIM freddy
-                    freddylightframe++;
-                    //Kinda long 
-                    if (freddylightframe < 10) {
-                        setRGB0(polyf, 128, 128, 128);            
-                    }
-                    if (freddylightframe > 20) {
-                        setRGB0(polyf, 100, 100, 100);        
-                    }
-                    if (freddylightframe > 40) {
-                        setRGB0(polyf, 80, 80, 80);          
-                    }
-                    if (freddylightframe > 60) {
-                        setRGB0(polyf, 128, 128, 128);          
-                    }
-                    if (freddylightframe > 140) {
-                        setRGB0(polyf, 80, 80, 80);            
-                    }
-                    if (freddylightframe > 150) {
-                        setRGB0(polyf, 70, 70, 70);               
-                    }
-                    if (freddylightframe > 170) {
-                        setRGB0(polyf, 110, 110, 110);          
-                    }
-                    if (freddylightframe > 181) {
-                        setRGB0(polyf, 85, 85, 85);          
-                    }
-                    if (freddylightframe > 195) {
-                        setRGB0(polyf, 100, 100, 100);            
-                    }
-                    if (freddylightframe > 210) {
-                        setRGB0(polyf, 70, 70, 70);               
-                    }
-                    if (freddylightframe > 215) {
-                        setRGB0(polyf, 110, 110, 110);              
-                    }
-                    if (freddylightframe > 225) {
-                        setRGB0(polyf, 50, 50, 50);               
-                    }
-                    if (freddylightframe > 240) {
-                        setRGB0(polyf, 70, 70, 70);                
-                    }
-                    if (freddylightframe > 248) {
-                        setRGB0(polyf, 105, 105, 105);             
-                    }
-                    if (freddylightframe > 256) {
-                        setRGB0(polyf, 128, 128, 128);                 
-                    }
-                    if (freddylightframe > 262) {
-                        setRGB0(polyf, 75, 75, 75);           
-                    }
-                    if (freddylightframe > 268) {
-                        setRGB0(polyf, 60, 60, 60);              
-                    }
-                    if (freddylightframe > 272) {
-                        setRGB0(polyf, 128, 128, 128);             
-                    }
-                    if (freddylightframe > 277) {
-                        setRGB0(polyf, 120, 120, 120);           
-                    }
-                    if (freddylightframe > 285) {
-                        setRGB0(polyf, 70, 70, 70);              
-                    }
-                    if (freddylightframe > 290) {
-                        setRGB0(polyf, 105, 105, 105);               
-                    }
-                    if (freddylightframe > 295) {
-                        setRGB0(polyf, 128, 128, 128);
-                    }     
-                    if (freddylightframe > 298) {
-                        setRGB0(polyf, 80, 80, 80);              
-                    }
-                    if (freddylightframe > 309) {
-                        setRGB0(polyf, 70, 70, 70);               
-                    }
-                    if (freddylightframe > 315) {
-                        setRGB0(polyf, 100, 100, 100);
-                    }     
-                    if (freddylightframe > 322) {
-                        setRGB0(polyf, 128, 128, 128);
-                    }     
-
-                    polyf = (POLY_FT4 *)nextpri;          
-                            
-                    RotMatrix(&RotVectorf, &PolyMatrixf);     
-                    TransMatrix(&PolyMatrixf, &MovVectorf);   
-                    ScaleMatrix(&PolyMatrixf, &ScaleVectorf); 
-                    
-                    SetRotMatrix(&PolyMatrixf);    
-                    SetTransMatrix(&PolyMatrixf);  
-                    
-                    setPolyFT4(polyf);  
-                    if (freddylightframe%3 == 0) {
-                        Ran(freddyfacechangedchances);
-                    }
-                    if (RAN < 4) {
-                        if (RAN == 1) {
-                            polyf->tpage = getTPage(freddy.mode&0x3, 0, 704, 0); 
-                        }
-                        if (RAN == 2) {
-                            polyf->tpage = getTPage(freddy.mode&0x3, 0, 448, 0); 
-                        } 
-                        if (RAN == 3) {
-                            polyf->tpage = getTPage(freddy.mode&0x3, 0, 512, 256);
-                        } 
-                        freddyfacechangedchances = 75; //For having more chance of freddy FREAKING out
-                    } else {
-                        polyf->tpage = getTPage(freddy.mode&0x3, 0, 768, 256); 
-                        freddyfacechangedchances = 400;
-                    }
-                    
-                    RotTransPers4(
-                                &VertPosf[0],      &VertPosf[1],      &VertPosf[2],      &VertPosf[3],
-                                (long*)&polyf->x0, (long*)&polyf->x1, (long*)&polyf->x2, (long*)&polyf->x3,
-                                &polydepth,
-                                &polyflag
-                                );                                 
-                    
-                    setUV4(polyf, 46, 0, 46, 255, 252, 0, 255, 252);
-                        
-                    addPrim(ot[db], polyf);                         
-                    nextpri += sizeof(POLY_FT4);                    
-                    //I can leave it like that
+                makepoly(1);
             }
         }
         if (menu == 1) { //Help wanted screen
             loadingframe++;
             if (loadingframe == 1) {
-                setRGB0(polyf, 128, 128, 128);
                 musicframes = 3787;
                 if (ambiancenum > 3) {ambiancenum = 1;}
             }
             if (loadingframe < 360) {
-                //help wanted bg
-                polyhelpwanted = (POLY_FT4 *)nextpri;          
 
-                RotMatrix(&RotVectorhelpwanted, &PolyMatrixhelpwanted);    
-                TransMatrix(&PolyMatrixhelpwanted, &MovVectorhelpwanted);  
-                ScaleMatrix(&PolyMatrixhelpwanted, &ScaleVectorhelpwanted);
-                
-                SetRotMatrix(&PolyMatrixhelpwanted);                 
-                SetTransMatrix(&PolyMatrixhelpwanted);               
-                
-                setPolyFT4(polyhelpwanted);                          
-                
-                polyhelpwanted->tpage = getTPage(helpwanted.mode&0x3, 0, 320, 0); 
-                
-                RotTransPers4(
-                            &VertPoshelpwanted[0],      &VertPoshelpwanted[1],      &VertPoshelpwanted[2],      &VertPoshelpwanted[3],
-                            (long*)&polyhelpwanted->x0, (long*)&polyhelpwanted->x1, (long*)&polyhelpwanted->x2, (long*)&polyhelpwanted->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                
-                
-                setUV4(polyhelpwanted, 0, 0, 0, 222, 255, 0, 255, 222);
-                    
-                addPrim(ot[db], polyhelpwanted);                       
-                nextpri += sizeof(POLY_FT4);      
+                //Help wanted bg
+                makepoly(2);
 
                 if (loadingframe > 100) {
                     if (pad & PADstart) {
@@ -1225,7 +561,6 @@ int main(void) {
             if (loadingframe > 360) {
                 menu = 5;
             }
-             //No one calling it, I have enough of this shit for the moment. It doesn't stop blinking !!!!!!!!!!!! STOP IT, I BEG OF YOU 
         }
         if (menu == 5) { //Loading/Starting night screen
             loadingframe++;
@@ -1235,9 +570,11 @@ int main(void) {
 
                 AM = customAM;
                 charge = customcharge;
+            } else {
+                makepoly(13);
             }
             if (loadingframe == 361) {
-                clearVRAM();
+
                 musicframes = 0;
                 if (enablephoneguystr[1] == 'N') { // Й
                     enablephoneguy = 1;
@@ -1267,6 +604,8 @@ int main(void) {
                 SpuSetKey(SPU_ON, SPU_04CH);
                 CdControlF(CdlPause,0);
                 animatronicFunc(1);
+            }
+            if (loadingframe == 500) {
                 Ran(10000);
                 if (freddydifficulty == 1 && bonniedifficulty == 9 && chicadifficulty == 8 && foxydifficulty == 7 || RAN == 1) {
                     goldenfreddied = 1;
@@ -1280,6 +619,18 @@ int main(void) {
                     LoadTexture(dataBuffer, &goldenfreddy); 
                     free(dataBuffer);
                     CdControlF(CdlPause,0);
+                } else {
+                    if (night > 4 && goldenfreddied == 0) {
+                        if (night == 5) {
+                            LoadTexture(_binary_tim_GJFIV_tim_start, &goodjob); 
+                        }
+                        if (night == 6) {
+                            LoadTexture(_binary_tim_GJSIX_tim_start, &goodjob); 
+                        }
+                        if (night == 7) {
+                            LoadTexture(_binary_tim_GJSEV_tim_start, &goodjob); 
+                        }
+                    }
                 }
             }
             if (loadingframe == 560) {
@@ -1289,57 +640,34 @@ int main(void) {
                     LoadTexture(_binary_tim_officeRIGHT_tim_start, &officeRIGHT);
                     LoadTexture(_binary_tim_officeMIDDLE_tim_start, &officeMIDDLE);
                     LoadTexture(_binary_tim_FAM_tim_start, &fiveam); 
-
-                    loadFile = "\\LAYOUT.TIM;1";
-                    CdSearchFile( &filePos, loadFile);
-                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                    CDreadResult = CdReadSync(0, 0);
-                    LoadTexture(dataBuffer, &layout);
-                    free(dataBuffer);    
-                    loadFile = "\\DOORS.TIM;1";
-                    CdSearchFile( &filePos, loadFile);
-                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                    CDreadResult = CdReadSync(0, 0);
-                    LoadTexture(dataBuffer, &doors); 
-                    free(dataBuffer);
-                    CdControlF(CdlPause,0); 
+                    LoadTexture(_binary_tim_doors_tim_start, &doors); 
                 }
             }
             if (loadingframe == 600) {
                 usage = defaultusage;
-                if (night > 4 && goldenfreddied == 0) {
-                    if (night == 5) {
-                        loadFile = "\\GJFIV.TIM;1";
-                    }
-                    if (night == 6) {
-                        loadFile = "\\GJSIX.TIM;1";
-                    }
-                    if (night == 7) {
-                        loadFile = "\\GJSEV.TIM;1";
-                    }
-                    CdSearchFile( &filePos, loadFile);
-                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                    CDreadResult = CdReadSync(0, 0);
-                    LoadTexture(dataBuffer, &goodjob); 
-                    free(dataBuffer);
-                    CdControlF(CdlPause,0); 
-                }
-                CdSearchFile( &XAPos, loadXA);
-                soundBank.offset = CdPosToInt(&XAPos.pos);
-                XAsetup();  
                 if (goldenfreddied == 1) { 
                     sample = 15;
                     filter.chan = soundBank.samples[sample].channel;
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
                     soundBank.samples[sample].cursor = 0;
+                } else {
+                    if (initstuff == 1) {
+                        loadFile = "\\LAYOUT.TIM;1";
+                        CdSearchFile( &filePos, loadFile);
+                        dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                        CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                        // Read data and load it to dataBuffer
+                        CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                        CDreadResult = CdReadSync(0, 0);
+                        LoadTexture(dataBuffer, &layout); 
+                        free(dataBuffer);
+                        initstuff++;
+                    }
                 }
+                CdSearchFile( &XAPos, loadXA);
+                soundBank.offset = CdPosToInt(&XAPos.pos);
+                XAsetup();  
            } 
             if (loadingframe > 660) {
                 menu = 2;
@@ -1393,480 +721,10 @@ int main(void) {
                 FrameCounter = FrameCounterlimit - 80;
             }
             if (camera == 1) { //Cam things
-                //Gosh, This is gonna be long
-                if (curcam[0] == '1' && curcam[1] == 'A') {
-                    setRGB0(polycamgreyogreen1A, 157, 184, 3);            
-                    curcamname[0] = 'S';
-                    curcamname[1] = 'h';
-                    curcamname[2] = 'o';
-                    curcamname[3] = 'w';
-                    curcamname[4] = ' ';
-                    curcamname[5] = 'S';
-                    curcamname[6] = 't';
-                    curcamname[7] = 'a';
-                    curcamname[8] = 'g';
-                    curcamname[9] = 'e';
-                    curcamname[10] = ' '; //Need to put little spaces like that in case the old name is longer
-                    curcamname[11] = ' ';
-                    curcamname[12] = ' ';
-                    curcamname[13] = ' ';
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '1';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                }
-                if (curcam[0] == '1' && curcam[1] == 'B') {
-                    setRGB0(polycamgreyogreen1B, 157, 184, 3);     
-                    curcamname[0] = 'D';
-                    curcamname[1] = 'i';
-                    curcamname[2] = 'n';
-                    curcamname[3] = 'i';
-                    curcamname[4] = 'n';
-                    curcamname[5] = 'g';
-                    curcamname[6] = ' ';
-                    curcamname[7] = 'a';
-                    curcamname[8] = 'r';
-                    curcamname[9] = 'e';
-                    curcamname[10] = 'a';
-                    curcamname[11] = ' ';
-                    curcamname[12] = ' ';
-                    curcamname[13] = ' ';
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) {
-                        curcam[0] = '1';
-                        curcam[1] = 'A';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '1';
-                        curcam[1] = 'C';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                    if (limitercameraL == 0 && pad & PADLleft || limitercameraL == 0 && pad >> 16 & PADLleft && twoplayermode == 1) { 
-                        curcam[0] = '5';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraL = 1;
-                    }
-                    if (limitercameraR == 0 && pad & PADLright || limitercameraR == 0 && pad >> 16 & PADLright && twoplayermode == 1) { 
-                        curcam[0] = '7';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraR = 1;
-                    }
-                    itsmepiratecove = 0;
-                }
-                if (curcam[0] == '1' && curcam[1] == 'C') {
-                    setRGB0(polycamgreyogreen3, 83, 83, 83);     
-                    setRGB0(polycamgreyogreen1B, 83, 83, 83);    
-                    setRGB0(polycamgreyogreen5, 83, 83, 83);     
-                    setRGB0(polycamgreyogreen1C, 157, 184, 3);   
-                    if (itsmepiratecove == 0) {
-                        curcamname[0] = 'P';
-                        curcamname[1] = 'i';
-                        curcamname[2] = 'r';
-                        curcamname[3] = 'a';
-                        curcamname[4] = 't';
-                        curcamname[5] = 'e';
-                        curcamname[6] = ' ';
-                        curcamname[7] = 'C';
-                        curcamname[8] = 'o';
-                        curcamname[9] = 'v';
-                        curcamname[10] = 'e';
-                        curcamname[11] = ' ';
-                        curcamname[12] = ' ';
-                        curcamname[13] = ' ';   
-                    } else {
-                        curcamname[0] = 'I';
-                        curcamname[1] = 'T';
-                        curcamname[2] = 'S';
-                        curcamname[3] = ' ';
-                        curcamname[4] = 'M';
-                        curcamname[5] = 'E';
-                        curcamname[6] = ' ';
-                        curcamname[7] = ' ';
-                        curcamname[8] = ' ';
-                        curcamname[9] = ' ';
-                        curcamname[10] = ' ';
-                        curcamname[11] = ' ';
-                        curcamname[12] = ' ';   
-                    }
-                    if (camera == 1) {
-                        if (itsmepiratecovecooldown == 0) {
-                            if (foxylocation == 3) {
-                                Ran(100);
-                                if (RAN == 1 && itsmepiratecove == 0) {itsmepiratecove = 1;} else {itsmepiratecove = 0;}   
-                                itsmepiratecovecooldown = 1;
-                            } else {itsmepiratecove = 0;}
-                        }
-                    }
 
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) { 
-                        curcam[0] = '1';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '3';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                    if (limitercameraL == 0 && pad & PADLleft || limitercameraL == 0 && pad >> 16 & PADLleft && twoplayermode == 1) { 
-                        curcam[0] = '5';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraL = 1;
-                    }
-                }
-                if (curcam[0] == '3' && curcam[1] == ' ') {
-                    setRGB0(polycamgreyogreen3, 157, 184, 3);      
-                    setRGB0(polycamgreyogreen1C, 83, 83, 83);      
-                    setRGB0(polycamgreyogreen2A, 83, 83, 83);      
-                    curcamname[0] = 'S';
-                    curcamname[1] = 'u';
-                    curcamname[2] = 'p';
-                    curcamname[3] = 'p';
-                    curcamname[4] = 'l';
-                    curcamname[5] = 'y';
-                    curcamname[6] = ' ';
-                    curcamname[7] = 'C';
-                    curcamname[8] = 'l';
-                    curcamname[9] = 'o';
-                    curcamname[10] = 's';
-                    curcamname[11] = 'e';
-                    curcamname[12] = 't';
-                    curcamname[13] = ' ';
-                    curcamname[14] = ' ';
-                    curcamname[15] = ' ';
-                    curcamname[16] = ' ';
-                    curcamname[17] = ' ';
-                    curcamname[18] = ' ';
-                    curcamname[19] = ' ';
-                    curcamname[20] = ' ';
-                    curcamname[20] = ' ';
-                    curcamname[21] = ' ';
-                    curcamname[22] = ' ';
-                    curcamname[23] = ' ';
-                    curcamname[24] = ' ';
-                    curcamname[25] = ' ';
-                    curcamname[26] = ' ';
-                    curcamname[27] = ' ';
-                    curcamname[28] = ' ';
-                    curcamname[29] = ' ';
-                    curcamname[30] = ' ';
-                    curcamname[31] = ' ';
-                    curcamname[32] = ' ';
-                    curcamname[33] = ' ';
-                    curcamname[34] = ' ';
-                    curcamname[35] = ' ';
-                    curcamname[36] = ' ';
-                    curcamname[37] = ' ';
-                    curcamname[38] = ' ';
-                    curcamname[39] = ' ';
-                    curcamname[40] = ' ';
-                    curcamname[41] = ' ';
-                    curcamname[42] = ' ';
-                    curcamname[43] = ' ';
-                    curcamname[44] = ' ';
-                    curcamname[45] = ' ';
-                    curcamname[46] = ' ';
-                    curcamname[47] = ' ';
-                    curcamname[48] = ' ';
-                    curcamname[49] = ' ';
-                    curcamname[50] = ' ';
-                    curcamname[51] = ' '; // LE TRUC SONY QUI ME CASSE LES COUILLES LA PUTAIN
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) { 
-                        curcam[0] = '1';
-                        curcam[1] = 'C';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '2';
-                        curcam[1] = 'A';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                    if (limitercameraR == 0 && pad & PADLright || limitercameraR == 0 && pad >> 16 & PADLright && twoplayermode == 1) { 
-                        curcam[0] = '6';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraR = 1;
-                    }
-                    itsmepiratecove = 0;
-                }
-                if (curcam[0] == '2' && curcam[1] == 'A') {
-                    setRGB0(polycamgreyogreen2A, 157, 184, 3);        
-                    curcamname[0] = 'W';
-                    curcamname[1] = 'e';
-                    curcamname[2] = 's';
-                    curcamname[3] = 't';
-                    curcamname[4] = ' ';
-                    curcamname[5] = 'H';
-                    curcamname[6] = 'a';
-                    curcamname[7] = 'l';
-                    curcamname[8] = 'l';
-                    curcamname[9] = ' ';
-                    curcamname[10] = ' ';
-                    curcamname[11] = ' ';
-                    curcamname[12] = ' ';
-                    curcamname[13] = ' ';
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) { 
-                        curcam[0] = '3';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '2';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                    if (limitercameraR == 0 && pad & PADLright || limitercameraR == 0 && pad >> 16 & PADLright && twoplayermode == 1) { 
-                        curcam[0] = '4';
-                        curcam[1] = 'A';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraR = 1;
-                    }
-                    itsmeehallcorner = 0;
-                    itsmeehallcooldown = 0;
-                }
-
-                if (curcam[0] == '2' && curcam[1] == 'B') {
-                    setRGB0(polycamgreyogreen2B, 157, 184, 3);             
-                    if (itsmeehallcorner == 0) {
-                        curcamname[0] = 'W';
-                        curcamname[1] = '.';
-                        curcamname[2] = ' ';
-                        curcamname[3] = 'H';
-                        curcamname[4] = 'a';
-                        curcamname[5] = 'l';
-                        curcamname[6] = 'l';
-                        curcamname[7] = ' ';
-                        curcamname[8] = 'C';
-                        curcamname[9] = 'o';
-                        curcamname[10] = 'r';
-                        curcamname[11] = 'n';
-                        curcamname[12] = 'e';
-                        curcamname[13] = 'r'; 
-                    } else {
-                        curcamname[0] = 'I';
-                        curcamname[1] = 'T';
-                        curcamname[2] = 'S';
-                        curcamname[3] = ' ';
-                        curcamname[4] = 'M';
-                        curcamname[5] = 'E';
-                        curcamname[6] = ' ';
-                        curcamname[7] = ' ';
-                        curcamname[8] = ' ';
-                        curcamname[9] = ' ';
-                        curcamname[10] = ' ';
-                        curcamname[11] = ' ';
-                        curcamname[12] = ' ';   
-                        curcamname[13] = ' ';
-                    }
-                    if (camera == 1) {
-                        if (itsmeehallcornercooldown == 0) {
-                            Ran(100);
-                            if (RAN == 1 && itsmeehallcorner == 0) {
-                                itsmeehallcorner = 1;
-                            } else {
-                                itsmeehallcorner = 0;
-                            }   
-                            itsmeehallcornercooldown = 1;
-                        }
-                    }
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) { 
-                        curcam[0] = '2';
-                        curcam[1] = 'A';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                    if (limitercameraR == 0 && pad & PADLright || limitercameraR == 0 && pad >> 16 & PADLright && twoplayermode == 1) { 
-                        curcam[0] = '4';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraR = 1;
-                    }
-                }
-
-                if (curcam[0] == '5' && curcam[1] == ' ') {
-                    setRGB0(polycamgreyogreen5, 157, 184, 3);               
-                    curcamname[0] = 'B';
-                    curcamname[1] = 'a';
-                    curcamname[2] = 'c';
-                    curcamname[3] = 'k';
-                    curcamname[4] = ' ';
-                    curcamname[5] = 'S';
-                    curcamname[6] = 't';
-                    curcamname[7] = 'a';
-                    curcamname[8] = 'g';
-                    curcamname[9] = 'e';
-                    curcamname[10] = ' ';
-                    curcamname[11] = ' ';
-                    curcamname[12] = ' ';
-                    curcamname[13] = ' ';
-                    if (limitercameraR == 0 && pad & PADLright || limitercameraR == 0 && pad >> 16 & PADLright && twoplayermode == 1) { 
-                        curcam[0] = '1';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraR = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '1';
-                        curcam[1] = 'C';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                    itsmepiratecove = 0;
-                }
-
-                if (curcam[0] == '4' && curcam[1] == 'A') {
-                    setRGB0(polycamgreyogreen4A, 157, 184, 3);       
-                    if (itsmeehall == 0) {
-                        curcamname[0] = 'E';
-                        curcamname[1] = 'a';
-                        curcamname[2] = 's';
-                        curcamname[3] = 't';
-                        curcamname[4] = ' ';
-                        curcamname[5] = 'H';
-                        curcamname[6] = 'a';
-                        curcamname[7] = 'l';
-                        curcamname[8] = 'l';
-                        curcamname[9] = ' ';
-                        curcamname[10] = ' ';
-                        curcamname[11] = ' ';
-                        curcamname[12] = ' ';
-                        curcamname[13] = ' ';
-                        curcamname[14] = ' ';
-                        curcamname[15] = ' ';
-                        curcamname[16] = ' ';
-                        curcamname[17] = ' ';
-                    } else {
-                        curcamname[0] = 'I';
-                        curcamname[1] = 'T';
-                        curcamname[2] = 'S';
-                        curcamname[3] = ' ';
-                        curcamname[4] = 'M';
-                        curcamname[5] = 'E';
-                        curcamname[6] = ' ';
-                        curcamname[7] = ' ';
-                        curcamname[8] = ' ';
-                        curcamname[9] = ' ';
-                        curcamname[10] = ' ';
-                        curcamname[11] = ' ';
-                        curcamname[12] = ' ';   
-                        curcamname[13] = ' ';
-                        curcamname[14] = ' ';
-                        curcamname[15] = ' ';
-                        curcamname[16] = ' ';
-                        curcamname[17] = ' ';
-                    }
-                    if (camera == 1) {
-                        if (itsmeehallcooldown == 0) {
-                            Ran(100);
-                            if (RAN == 1 && itsmeehall == 0) {
-                                itsmeehall = 1;
-                            } else {
-                                itsmeehall = 0;
-                            }   
-                            itsmeehallcooldown = 1;
-                        }
-                    }
-                    if (limitercameraL == 0 && pad & PADLleft || limitercameraL == 0 && pad >> 16 & PADLleft && twoplayermode == 1) { 
-                        curcam[0] = '2';
-                        curcam[1] = 'A';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraL = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '4';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) { 
-                        curcam[0] = '6';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                }
-
-                if (curcam[0] == '4' && curcam[1] == 'B') {
-                    setRGB0(polycamgreyogreen4B, 157, 184, 3);         
-                    curcamname[0] = 'E';
-                    curcamname[1] = '.';
-                    curcamname[2] = ' ';
-                    curcamname[3] = 'H';
-                    curcamname[4] = 'a';
-                    curcamname[5] = 'l';
-                    curcamname[6] = 'l';
-                    curcamname[7] = ' ';
-                    curcamname[8] = 'C';
-                    curcamname[9] = 'o';
-                    curcamname[10] = 'r';
-                    curcamname[11] = 'n';
-                    curcamname[12] = 'e';
-                    curcamname[13] = 'r';
-                    if (limitercameraL == 0 && pad & PADLleft || limitercameraL == 0 && pad >> 16 & PADLleft && twoplayermode == 1) { 
-                        curcam[0] = '2';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraL = 1;
-                    }
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) { 
-                        curcam[0] = '4';
-                        curcam[1] = 'A';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                    itsmeehallcorner = 0;
-                    itsmeehall = 0;
-                }
+                cameraloc();
 
                 if (curcam[0] == '6' && curcam[1] == ' ') {
-                    curcamname[0] = 'K';
-                    curcamname[1] = 'i';
-                    curcamname[2] = 't';
-                    curcamname[3] = 'c';
-                    curcamname[4] = 'h';
-                    curcamname[5] = 'e';
-                    curcamname[6] = 'n';
-                    curcamname[7] = ' ';
-                    curcamname[8] = '(';
-                    curcamname[9] = 'N';
-                    curcamname[10] = 'o';
-                    curcamname[11] = 'v';
-                    curcamname[12] = 'i';
-                    curcamname[13] = 'd';
-                    curcamname[14] = 'e';
-                    curcamname[15] = 'o';
-                    curcamname[16] = ')';
-                    if (limitercameraL == 0 && pad & PADLleft || limitercameraL == 0 && pad >> 16 & PADLleft && twoplayermode == 1) { 
-                        curcam[0] = '3';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraL = 1;
-                    }
-                    if (limitercameraU == 0 && pad & PADLup || limitercameraU == 0 && pad >> 16 & PADLup && twoplayermode == 1) { 
-                        curcam[0] = '7';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraU = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '4';
-                        curcam[1] = 'A';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
                     if (puppetmusic == 0) {
                         Ran(500);
                         if (RAN == 1) {
@@ -1878,92 +736,13 @@ int main(void) {
                                 filter.file = soundBank.samples[sample].file;
                                 // Set filter
                                 CdControlF(CdlSetfilter, (u_char *)&filter);
-            
+                
                                 soundBank.samples[sample].cursor = 0;
                             }
                         }
                         puppetmusic = 960;
                     }                        
-                    itsmeehallcooldown = 0;
                 }
-
-                if (curcam[0] == '7' && curcam[1] == ' ') {
-                    setRGB0(polycamgreyogreen7, 157, 184, 3);       
-                    curcamname[0] = 'R';
-                    curcamname[1] = 'e';
-                    curcamname[2] = 's';
-                    curcamname[3] = 't';
-                    curcamname[4] = 'r';
-                    curcamname[5] = 'o';
-                    curcamname[6] = 'o';
-                    curcamname[7] = 'm';
-                    curcamname[8] = 's';
-                    curcamname[9] = ' ';
-                    curcamname[10] = ' ';
-                    curcamname[11] = ' ';
-                    curcamname[12] = ' ';
-                    curcamname[13] = ' ';
-                    curcamname[14] = ' ';
-                    curcamname[15] = ' ';
-                    curcamname[16] = ' ';
-                    curcamname[17] = ' ';
-                    curcamname[13] = ' ';
-                    curcamname[14] = ' ';
-                    curcamname[15] = ' ';
-                    curcamname[16] = ' ';
-                    curcamname[17] = ' ';
-                    curcamname[18] = ' ';
-                    curcamname[19] = ' ';
-                    curcamname[20] = ' ';
-                    curcamname[21] = ' ';
-                    curcamname[22] = ' ';
-                    curcamname[23] = ' ';
-                    curcamname[24] = ' ';
-                    curcamname[25] = ' ';
-                    curcamname[26] = ' ';
-                    curcamname[27] = ' ';
-                    curcamname[28] = ' ';
-                    curcamname[29] = ' ';
-                    curcamname[30] = ' ';
-                    curcamname[31] = ' ';
-                    curcamname[32] = ' ';
-                    curcamname[33] = ' ';
-                    curcamname[34] = ' ';
-                    curcamname[35] = ' ';
-                    curcamname[36] = ' ';
-                    curcamname[37] = ' ';
-                    curcamname[38] = ' ';
-                    curcamname[39] = ' ';
-                    curcamname[40] = ' ';
-                    curcamname[41] = ' ';
-                    curcamname[42] = ' ';
-                    curcamname[43] = ' ';
-                    curcamname[44] = ' ';
-                    curcamname[45] = ' ';
-                    curcamname[46] = ' ';
-                    curcamname[47] = ' ';
-                    curcamname[48] = ' ';
-                    curcamname[49] = ' ';
-                    curcamname[50] = ' ';
-                    curcamname[51] = ' ';
-                    if (limitercameraL == 0 && pad & PADLleft || limitercameraL == 0 && pad >> 16 & PADLleft && twoplayermode == 1) { 
-                        curcam[0] = '1';
-                        curcam[1] = 'B';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraL = 1;
-                    }
-                    if (limitercameraD == 0 && pad & PADLdown || limitercameraD == 0 && pad >> 16 & PADLdown && twoplayermode == 1) { 
-                        curcam[0] = '6';
-                        curcam[1] = ' ';
-                        SpuSetKey(SPU_ON, SPU_04CH);
-                        limitercameraD = 1;
-                    }
-                }
-
-                if (!(pad & PADLdown || pad >> 16 & PADLdown) && limitercameraD == 1) {limitercameraD = 0;}
-                if (!(pad & PADLup || pad >> 16 & PADLup) && limitercameraU == 1) {limitercameraU = 0;}
-                if (!(pad & PADLright || pad >> 16 & PADLright) && limitercameraR == 1) {limitercameraR = 0;}
-                if (!(pad & PADLleft || pad >> 16 & PADLleft) && limitercameraL == 1) {limitercameraL = 0;}
             }
             if (tensecondframe == 0 ) {
                 if (mascottune == 0 && charge > 0 && puppetmusic == 0 && foxymusic == 0) {
@@ -2331,15 +1110,15 @@ int main(void) {
                 SpuSetKey(SPU_ON, SPU_04CH);
             }
             if (returnframes == 210) {
+                menuscreeninit = 0;
                 resetgame();
-                clearVRAM();
                 SpuSetKey(SPU_OFF, SPU_ALLCH);
                 returnbasevolume = 0x1800;
                 SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
                 menuselection = 3;
-                menuscreeninit = 0;
-                menu = 0;
                 returnframes = 0;
+                limiterstart = 1;
+                menu = 0;
             } 
                 
             if (cantlightL == 1) {
@@ -2469,273 +1248,41 @@ int main(void) {
             }
 
             if (goldenfreddied == 1) { //A beautiful representation of "It's not a bug, it's a feature !" (golden freddy is not shaped normally, but it'd me more terrifying if not (atleast for me (and we only see him a quarter of second so yeah (still too much ? (IDK)))))
-                polygolden = (POLY_FT4 *)nextpri;                   
-                
-                RotMatrix(&RotVectorgolden, &PolyMatrixgolden);           
-                TransMatrix(&PolyMatrixgolden, &MovVectorgolden);         
-                ScaleMatrix(&PolyMatrixgolden, &ScaleVectorgolden);       
-                
-                SetRotMatrix(&PolyMatrixgolden);                   
-                SetTransMatrix(&PolyMatrixgolden);                 
-                
-                setPolyFT4(polygolden);                            
-                
-                polygolden->tpage = getTPage(goldenfreddy.mode&0x3, 0, 320, 256);   
-                
-                setRGB0(polygolden, 128, 128, 128);            
-                
-                RotTransPers4(
-                            &VertPosgolden[0],      &VertPosgolden[1],      &VertPosgolden[2],      &VertPosgolden[3],
-                            (long*)&polygolden->x0, (long*)&polygolden->x1, (long*)&polygolden->x2, (long*)&polygolden->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                
-                setUV4(polygolden, 0, 0, 0, 255, 146, 0, 255, 146); 
-                    
-                addPrim(ot[db], polygolden);                        
-                
-                nextpri += sizeof(POLY_FT4);                  
+                makepoly(3);
             }
             if (camera == 0) {
                 if (musicboxactivated == 1) {
-                    polyfreddylightsout = (POLY_FT4 *)nextpri;      
-                    
-                            
-                    RotMatrix(&RotVectorfreddylightsout, &PolyMatrixfreddylightsout);    
-                    TransMatrix(&PolyMatrixfreddylightsout, &MovVectorfreddylightsout);  
-                    ScaleMatrix(&PolyMatrixfreddylightsout, &ScaleVectorfreddylightsout);
-                    
-                    SetRotMatrix(&PolyMatrixfreddylightsout);                   
-                    SetTransMatrix(&PolyMatrixfreddylightsout);                 
-                    
-                    setPolyFT4(polyfreddylightsout);                            
-                    
-                    setClut(polyfreddylightsout, freddysneak.crect->x, freddysneak.crect->y);
-
-                    polyfreddylightsout->tpage = getTPage(freddysneak.mode&0x3, 0, 576, 256);
-                    
-                    setRGB0(polyfreddylightsout, glowvar, glowvar, glowvar);                 
-                    
-                    RotTransPers4(
-                                &VertPosfreddylightsout[0],      &VertPosfreddylightsout[1],      &VertPosfreddylightsout[2],      &VertPosfreddylightsout[3],
-                                (long*)&polyfreddylightsout->x0, (long*)&polyfreddylightsout->x1, (long*)&polyfreddylightsout->x2, (long*)&polyfreddylightsout->x3,
-                                &polydepth,
-                                &polyflag
-                                );                                 
-                    
-                    setUV4(polyfreddylightsout, 0, 0, 0, 56, 67, 0, 67, 56);
-                        
-                    addPrim(ot[db], polyfreddylightsout);                  
-                    
-                    nextpri += sizeof(POLY_FT4);               
+                    makepoly(4);
                 }
 
                 if (blackoutactivated == 0 && goldenfreddied == 0 && camera == 0) {
                     blinkicon = 0;
 
                     if (goldenfreddyactivated == 1) {
-
-                        polyofficegolden = (POLY_FT4 *)nextpri;                    
-                        
-                        RotMatrix(&RotVectorofficegolden, &PolyMatrixofficegolden);    
-                        TransMatrix(&PolyMatrixofficegolden, &MovVectorofficegolden);  
-                        ScaleMatrix(&PolyMatrixofficegolden, &ScaleVectorofficegolden);
-                        
-                        SetRotMatrix(&PolyMatrixofficegolden);                  
-                        SetTransMatrix(&PolyMatrixofficegolden);    
-
-                        setRGB0(polyofficegolden, 128, 128, 128);
-                        setPolyFT4(polyofficegolden);                           
-                        
-                        polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
-                        
-                        RotTransPers4(
-                                    &VertPosofficegolden[0],      &VertPosofficegolden[1],      &VertPosofficegolden[2],      &VertPosofficegolden[3],
-                                    (long*)&polyofficegolden->x0, (long*)&polyofficegolden->x1, (long*)&polyofficegolden->x2, (long*)&polyofficegolden->x3,
-                                    &polydepth,
-                                    &polyflag
-                                    );                              
-
-                        setUV4(polyofficegolden, 0, 48, 0, 255, 218, 48, 218, 255);
-                            
-                        addPrim(ot[db], polyofficegolden);                        
-                        
-                        nextpri += sizeof(POLY_FT4);               
-
+                        makepoly(5);
                     }
-                    //Door left
-                    leftdoor = (POLY_FT4 *)nextpri;                  
-                    
-                    
-                            
-                    RotMatrix(&RotVectorleftdoor, &PolyMatrixleftdoor);    
-                    TransMatrix(&PolyMatrixleftdoor, &MovVectorleftdoor);  
-                    ScaleMatrix(&PolyMatrixleftdoor, &ScaleVectorleftdoor);
-                    
-                    SetRotMatrix(&PolyMatrixleftdoor);            
-                    SetTransMatrix(&PolyMatrixleftdoor);          
-                    
-                    setPolyFT4(leftdoor);                         
-                    
-                    setClut(leftdoor, doors.crect->x, doors.crect->y);    
-                    leftdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);
-                    
-                    if (doorclosedL == 1) {setRGB0(leftdoor, 76, 76, 76);} //For preventing things to blink fast asf
-                    
-                    RotTransPers4(
-                                &VertPosleftdoor[0],      &VertPosleftdoor[1],      &VertPosleftdoor[2],      &VertPosleftdoor[3],
-                                (long*)&leftdoor->x0, (long*)&leftdoor->x1, (long*)&leftdoor->x2, (long*)&leftdoor->x3,
-                                &polydepth,
-                                &polyflag
-                                );                                 
-                    
-                    setUV4(leftdoor, 0, 0, 0, 255, 76, 0, 76, 255);
-                        
-                    addPrim(ot[db], leftdoor);                     
-                    
-                    nextpri += sizeof(POLY_FT4);                   
-                    //Door right
-                    rightdoor = (POLY_FT4 *)nextpri;               
-                            
-                    RotMatrix(&RotVectorrightdoor, &PolyMatrixrightdoor);      
-                    TransMatrix(&PolyMatrixrightdoor, &MovVectorrightdoor);    
-                    ScaleMatrix(&PolyMatrixrightdoor, &ScaleVectorrightdoor);  
-                    
-                    SetRotMatrix(&PolyMatrixrightdoor);                 
-                    SetTransMatrix(&PolyMatrixrightdoor);               
-                    
-                    setPolyFT4(rightdoor);                             
-                    
-                    setClut(rightdoor, doors.crect->x, doors.crect->y); 
-                    rightdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);   
-                    
-                    if (doorclosedR == 1) {setRGB0(rightdoor, 76, 76, 76);} //For preventing things to blink fast asf again
-                    
-                    RotTransPers4(
-                                &VertPosrightdoor[0],      &VertPosrightdoor[1],      &VertPosrightdoor[2],      &VertPosrightdoor[3],
-                                (long*)&rightdoor->x0, (long*)&rightdoor->x1, (long*)&rightdoor->x2, (long*)&rightdoor->x3,
-                                &polydepth,
-                                &polyflag
-                                );                           
-                    
-                    setUV4(rightdoor, 79, 0, 79, 255, 147, 0, 147, 255); //+55X bcs of where the door is on VRAM
-                        
-                    addPrim(ot[db], rightdoor);                         
-                    
-                    nextpri += sizeof(POLY_FT4);          
-
-                    //first
-                    polyofficemiddle = (POLY_FT4 *)nextpri;                 
-                            
-                    RotMatrix(&RotVectorofficemiddle, &PolyMatrixofficemiddle);    
-                    TransMatrix(&PolyMatrixofficemiddle, &MovVectorofficemiddle);  
-                    ScaleMatrix(&PolyMatrixofficemiddle, &ScaleVectorofficemiddle);
-                    
-                    SetRotMatrix(&PolyMatrixofficemiddle);                  
-                    SetTransMatrix(&PolyMatrixofficemiddle);                
-                    
-                    setPolyFT4(polyofficemiddle);                           
-                    
-                    polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 736, 4); 
-                    
-                    setRGB0(polyofficemiddle, 128, 128, 128);      
-                    
-                    RotTransPers4(
-                                &VertPosofficemiddle[0],      &VertPosofficemiddle[1],      &VertPosofficemiddle[2],      &VertPosofficemiddle[3],
-                                (long*)&polyofficemiddle->x0, (long*)&polyofficemiddle->x1, (long*)&polyofficemiddle->x2, (long*)&polyofficemiddle->x3,
-                                &polydepth,
-                                &polyflag
-                                );                               
-                    
-                    setUV4(polyofficemiddle, 0, 0, 0, 255, 255, 0, 255, 255);
-                        
-
-                    addPrim(ot[db], polyofficemiddle);                       
-                    
-                    nextpri += sizeof(POLY_FT4);                
-                
-                    //second 
-                    polyofficeright = (POLY_FT4 *)nextpri;                   
-                
-                    RotMatrix(&RotVectorofficeright, &PolyMatrixofficeright);
-                    TransMatrix(&PolyMatrixofficeright, &MovVectorofficeright);  
-                    ScaleMatrix(&PolyMatrixofficeright, &ScaleVectorofficeright);
-                    
-                    SetRotMatrix(&PolyMatrixofficemiddle);                
-                    SetTransMatrix(&PolyMatrixofficemiddle);              
-                    
-                    setPolyFT4(polyofficeright);                          
-                    
-                    polyofficeright->tpage = getTPage(officeRIGHT.mode&0x3, 0, officeRIGHT.prect->x, officeRIGHT.prect->y);
-                    
-                    setRGB0(polyofficeright, 128, 128, 128);              
-                    
-                    RotTransPers4(
-                                &VertPosofficeright[0],      &VertPosofficeright[1],      &VertPosofficeright[2],      &VertPosofficeright[3],
-                                (long*)&polyofficeright->x0, (long*)&polyofficeright->x1, (long*)&polyofficeright->x2, (long*)&polyofficeright->x3,
-                                &polydepth,
-                                &polyflag
-                                );                                 
-                    
-                    setUV4(polyofficeright, 0, 0, 0, 255, 255, 0, 255, 255);
-                        
-
-                    addPrim(ot[db], polyofficeright);                       
-                    
-                    nextpri += sizeof(POLY_FT4);                
-
-                    //third 
-                    polyofficeleft = (POLY_FT4 *)nextpri;                 
-                
-                            
-                    RotMatrix(&RotVectorofficeleft, &PolyMatrixofficeleft); 
-                    TransMatrix(&PolyMatrixofficeleft, &MovVectorofficeleft);  
-                    ScaleMatrix(&PolyMatrixofficeleft, &ScaleVectorofficeleft);
-                    
-                    SetRotMatrix(&PolyMatrixofficemiddle);              
-                    SetTransMatrix(&PolyMatrixofficemiddle);            
-                    
-                    setPolyFT4(polyofficeleft);                         
-                    
-                    polyofficeleft->tpage = getTPage(officeLEFT.mode&0x3, 0, officeLEFT.prect->x, officeLEFT.prect->y);
-                    
-                    setRGB0(polyofficeleft, 128, 128, 128);            
-                    
-                    RotTransPers4(
-                                &VertPosofficeleft[0],      &VertPosofficeleft[1],      &VertPosofficeleft[2],      &VertPosofficeleft[3],
-                                (long*)&polyofficeleft->x0, (long*)&polyofficeleft->x1, (long*)&polyofficeleft->x2, (long*)&polyofficeleft->x3,
-                                &polydepth,
-                                &polyflag
-                                );                               
-                    
-                    setUV4(polyofficeleft, 0, 0, 0, 255, 255, 0, 255, 255); 
-                        
-
-                    addPrim(ot[db], polyofficeleft);                     
-                    
-                    nextpri += sizeof(POLY_FT4);              
+                    makepoly(6);
                 }
-                    if (dead == 0) {
-                        if(pad & PADLleft || pad >> 16 & PADLleft && twoplayermode == 1) {
-                            if (MovVectorofficemiddle.vx < 70) {
-                                MovVectorofficemiddle.vx = MovVectorofficemiddle.vx + 3;
-                                MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx + 3;
-                                MovVectorleftdoor.vx = MovVectorleftdoor.vx + 3;
-                                MovVectorrightdoor.vx = MovVectorrightdoor.vx + 3;
-                                MovVectorofficegolden.vx = MovVectorofficegolden.vx + 3;
-                            }
-                        } // left ;)
-                        if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {
-                            if (MovVectorofficemiddle.vx > -95) {
-                                MovVectorofficemiddle.vx = MovVectorofficemiddle.vx - 3;
-                                MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx - 3;
-                                MovVectorleftdoor.vx = MovVectorleftdoor.vx - 3;
-                                MovVectorrightdoor.vx = MovVectorrightdoor.vx - 3;
-                                MovVectorofficegolden.vx = MovVectorofficegolden.vx - 3;
-                            }
-                        } // right :) 
-                    }
+                if (dead == 0) {
+                    if(pad & PADLleft || pad >> 16 & PADLleft && twoplayermode == 1) {
+                        if (MovVectorofficemiddle.vx < 80) {
+                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx + 3;
+                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx + 3;
+                            MovVectorleftdoor.vx = MovVectorleftdoor.vx + 3;
+                            MovVectorrightdoor.vx = MovVectorrightdoor.vx + 3;
+                            MovVectorofficegolden.vx = MovVectorofficegolden.vx + 3;
+                        }
+                    } // left ;)
+                    if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {
+                        if (MovVectorofficemiddle.vx > -120) {
+                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx - 3;
+                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx - 3;
+                            MovVectorleftdoor.vx = MovVectorleftdoor.vx - 3;
+                            MovVectorrightdoor.vx = MovVectorrightdoor.vx - 3;
+                            MovVectorofficegolden.vx = MovVectorofficegolden.vx - 3;
+                        }
+                    } // right :) 
+                }
             }
             if (camera == 1) {       
 
@@ -2743,7 +1290,8 @@ int main(void) {
                     if (blinkicon < 61) {blinkicon++;}
                     if (blinkicon == 60) {blinkicon = 0;}
                 } else {blinkicon = 59;}
-            
+
+
                 //camera's 1A grey or green
                 polycamgreyogreen1A = (POLY_F4 *)nextpri;     
                         
@@ -3014,6 +1562,7 @@ int main(void) {
                 
                 nextpri += sizeof(POLY_F4);                    
 
+                makepoly(8);
                 //icon for camera
                 polyfreddy = (POLY_F4 *)nextpri;               
                 
@@ -3150,35 +1699,7 @@ int main(void) {
                 
                 nextpri += sizeof(POLY_F4);                    
 
-                //camera's layout
-                polylayout = (POLY_FT4 *)nextpri;              
-                        
-                RotMatrix(&RotVectorlayout, &PolyMatrixlayout);
-                TransMatrix(&PolyMatrixlayout, &MovVectorlayout);  
-                ScaleMatrix(&PolyMatrixlayout, &ScaleVectorlayout);
-                
-                SetRotMatrix(&PolyMatrixlayout);                   
-                SetTransMatrix(&PolyMatrixlayout);                 
-                
-                setPolyFT4(polylayout);                            
-                
-                polylayout->tpage = getTPage(layout.mode&0x3, 0, 576, 502); 
-                
-                setRGB0(polylayout, 128, 128, 128);         
-                
-                RotTransPers4(
-                            &VertPoslayout[0],      &VertPoslayout[1],      &VertPoslayout[2],      &VertPoslayout[3],
-                            (long*)&polylayout->x0, (long*)&polylayout->x1, (long*)&polylayout->x2, (long*)&polylayout->x3,
-                            &polydepth,
-                            &polyflag
-                            );                               
-                
-                setUV4(polylayout, 0, 26, 0, 255, 229, 26, 229, 255);  
-                    
-
-                addPrim(ot[db], polylayout);                  
-                
-                nextpri += sizeof(POLY_FT4);                  
+                makepoly(9);     
     
             }
                 //Don't know any other ways to store that piece of (shit) code
@@ -3514,46 +2035,18 @@ int main(void) {
             gamevictory();
             if (fivetosixamframes < 720) {
                 if (fivetosixamframes == 1) {
-                    if (night != 7) {Ran(250);}
-                    else {Ran(50);} //For more fun 
+                    if (night != 7) {Ran(1);}
+                    else {Ran(1);} //For more fun 
                     if (RAN == 1) {
                         customnextnightactivation = 1;
                     }
                 }
                 fivetosixamframes++;
-                //five am OR six am tim (it's marked five am but sixam.tim go into the fiveam.tim emplacement)
-                polyfiveam = (POLY_FT4 *)nextpri;     
-             
-             
-                        
-                RotMatrix(&RotVectorfiveam, &PolyMatrixfiveam);    
-                TransMatrix(&PolyMatrixfiveam, &MovVectorfiveam);  
-                ScaleMatrix(&PolyMatrixfiveam, &ScaleVectorfiveam);
-                
-                SetRotMatrix(&PolyMatrixfiveam);                   
-                SetTransMatrix(&PolyMatrixfiveam);                 
-                
-                setPolyFT4(polyfiveam);                            
-                setRGB0(polyfiveam, 128,128,128);
-                
-                setClut(polyfiveam, fiveam.crect->x, fiveam.crect->y);      
-                polyfiveam->tpage = getTPage(fiveam.mode&0x3, 0, 704, 256); 
-                
-                RotTransPers4(
-                            &VertPosfiveam[0],      &VertPosfiveam[1],      &VertPosfiveam[2],      &VertPosfiveam[3],
-                            (long*)&polyfiveam->x0, (long*)&polyfiveam->x1, (long*)&polyfiveam->x2, (long*)&polyfiveam->x3,
-                            &polydepth,
-                            &polyflag
-                            );                               
-                
-                setUV4(polyfiveam, 0, 0, 0, 48, 121, 0, 121, 48);
-                    
-                addPrim(ot[db], polyfiveam);                     
-                nextpri += sizeof(POLY_FT4);                    
 
-            }
-            if (fivetosixamframes == 400){
-                LoadTexture(_binary_tim_SAM_tim_start, &sixam);
+                makepoly(10);
+                if (fivetosixamframes == 400){
+                    LoadTexture(_binary_tim_SAM_tim_start, &sixam);
+                }
             }
 
             if (fivetosixamframes > 719) {
@@ -3561,7 +2054,7 @@ int main(void) {
                     nextnightframes++;
                     if (nextnightframes == 1) {
                         if (customnextnightactivation == 0) {
-                            sample = 13;
+                            sample = 13; //Sample is for the music playing, 13 normal, 18 funky
                         }
                         else {
                             sample = 18;
@@ -3575,68 +2068,7 @@ int main(void) {
 
                         soundBank.samples[sample].cursor = 0;
                     }
-                    if (nextnightframes > 400 && nextnightframes < 5766 && customnextnightactivation == 1)
-                    { //YIPEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-                        if (rgbindicator == 0) {
-                            rgbblue++; //
-                            if (rgbblue == 135) {rgbindicator = 1;} //WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                        }
-                        if (rgbindicator == 1){
-                            rgbred--;
-                            if (rgbred == 79) {rgbindicator = 2;} //EEEEEEEEEEEEE
-                        }
-                        if (rgbindicator == 2) {
-                            rgbgreen++;
-                            if (rgbgreen == 135) {rgbindicator = 3;} //YAHOUU OUUUUUUUUUUUUUUUUUU
-                        }
-                        if (rgbindicator == 3) {
-                            rgbblue--;
-                            if (rgbblue == 79) {rgbindicator = 4;} //YHGTJKRFEDZSOAQPBNGFVCJDX
-                        }
-                        if (rgbindicator == 4){
-                            rgbred++;
-                            if (rgbred == 135) {rgbindicator = 5;} //WAAAAAAAAAAAAOOOOOOOOOOOOO
-                        }
-                        if (rgbindicator == 5) {//NOnoOooOO already done :'c
-                            rgbgreen--;
-                            if (rgbgreen == 79) {rgbindicator = 0;} //WE'RE SO BACK
-                        }
-                    }
-                    if (nextnightframes == 5766) {
-                        rgbred = 128;
-                        rgbgreen = 128;
-                        rgbblue = 128;
-                    }
-                    //good job bg
-                    polygoodjob = (POLY_FT4 *)nextpri;             
-                            
-                    RotMatrix(&RotVectorgoodjob, &PolyMatrixgoodjob);    
-                    TransMatrix(&PolyMatrixgoodjob, &MovVectorgoodjob);  
-                    ScaleMatrix(&PolyMatrixgoodjob, &ScaleVectorgoodjob);
-                    
-                    SetRotMatrix(&PolyMatrixgoodjob);                    
-                    SetTransMatrix(&PolyMatrixgoodjob);                  
-                    
-                    setPolyFT4(polygoodjob);                             
-                    setRGB0(polygoodjob, rgbred,rgbgreen,rgbblue);
-                    
-                    
-                    
-                    setClut(polygoodjob, goodjob.crect->x, goodjob.crect->y);       
-
-                    polygoodjob->tpage = getTPage(goodjob.mode&0x3, 0, 384, goodjob.prect->y);
-                    
-                    RotTransPers4(
-                                &VertPosgoodjob[0],      &VertPosgoodjob[1],      &VertPosgoodjob[2],      &VertPosgoodjob[3],
-                                (long*)&polygoodjob->x0, (long*)&polygoodjob->x1, (long*)&polygoodjob->x2, (long*)&polygoodjob->x3,
-                                &polydepth,
-                                &polyflag
-                                );                                
-                    
-                    setUV4(polygoodjob, 0, 0, 0, 231, 254, 0, 254, 231);
-                        
-                    addPrim(ot[db], polygoodjob);                       
-                    nextpri += sizeof(POLY_FT4);                 
+                    makepoly(11);
 
                     if (night == 7) {
                         if (hellnight == 1) {
@@ -3645,9 +2077,6 @@ int main(void) {
                         if (impossiblenight == 1) {
                             FntPrint("  ...What ? How ? You wasn't supposed\n   To win this, it was impossible...?\n    Well, I dunno what to say..\n    Good job I guess ? And stop it\n Like Right now, stop the console or the       emulator because there's\n       Nothing left to see or do...");
                         }         
-                    }
-                    if (customnextnightactivation == 1) {
-                        FntPrint("        credits : Harvey Rothman");
                     }
 
                     if (pad & PADstart && night != 7 || nextnightframes == 3600 && night != 7 && customnextnightactivation == 0|| nextnightframes == 5940 && night != 7 && customnextnightactivation == 1) {
@@ -3720,33 +2149,8 @@ int main(void) {
             }
             if (staticframes < 1) {
                 gameoverprint();
-                //gameover freddy
-                polygameover = (POLY_FT4 *)nextpri;               
-                        
-                RotMatrix(&RotVectorgameover, &PolyMatrixgameover);    
-                TransMatrix(&PolyMatrixgameover, &MovVectorgameover);  
-                ScaleMatrix(&PolyMatrixgameover, &ScaleVectorgameover);
-                
-                SetRotMatrix(&PolyMatrixgameover);                 
-                SetTransMatrix(&PolyMatrixgameover);               
-                
-                setPolyFT4(polygameover);                          
-                
-                setRGB0(polygameover, 128, 128, 128);              
 
-                polygameover->tpage = getTPage(gameover.mode&0x3, 0, gameover.prect->x, gameover.prect->y); 
-                
-                RotTransPers4(
-                            &VertPosgameover[0],      &VertPosgameover[1],      &VertPosgameover[2],      &VertPosgameover[3],
-                            (long*)&polygameover->x0, (long*)&polygameover->x1, (long*)&polygameover->x2, (long*)&polygameover->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                
-                
-                setUV4(polygameover, 0, 0, 0, 222, 230, 0, 230, 222);
-                    
-                addPrim(ot[db], polygameover);                       
-                nextpri += sizeof(POLY_FT4);                 
+                makepoly(12);
 
                 if (pad & PADstart) {
                     Ran(10000);
@@ -4013,7 +2417,7 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         if (menuselection == 1) {//"Starting" night
             if (pad & PADstart) {
                 night = 1;
-                menu = 5;
+                menu = 1;
             } 
         }
 
@@ -4089,27 +2493,36 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         }
 
         if (menuselection == 2) { // AI SET MENU
-            if (pad & PADRdown) {
-                maincustomnightmenu = 0;
-                AISetmenu = 1;
-                menuselection = 6;
-                menuselectionmax = 6;
+            if (pad & PADstart) {
+                if (limiterstart == 0) {
+                    maincustomnightmenu = 0;
+                    AISetmenu = 1;
+                    menuselection = 6;
+                    menuselectionmax = 6;
+                    limiterstart = 1;
+                }
             }
         }
         if (menuselection == 3) { // CHARGE MENU
-            if (pad & PADRdown) {
-                maincustomnightmenu = 0;
-                chargemenu = 1;
-                menuselection = 4;
-                menuselectionmax = 4;
+            if (pad & PADstart) {
+                if (limiterstart == 0) {
+                    maincustomnightmenu = 0;
+                    chargemenu = 1;
+                    menuselection = 4;
+                    menuselectionmax = 4;
+                    limiterstart = 1;
+                }
             }
         }
         if (menuselection == 4) { // ADV MENU
-            if (pad & PADRdown) {
-                maincustomnightmenu = 0;
-                advancedmenu = 1;
-                menuselection = 4;
-                menuselectionmax = 4;
+            if (pad & PADstart) {
+                if (limiterstart == 0) {
+                    maincustomnightmenu = 0;
+                    advancedmenu = 1;
+                    menuselection = 4;
+                    menuselectionmax = 4;
+                    limiterstart = 1;
+                }
             }
         }
         if (menuselection == 5) { // RETURN TO MAIN MENU
@@ -4209,10 +2622,13 @@ void menuselectionfunc(void) { //LONG asf lmaoo
 
         if (menuselection == 6) {
             if (pad & PADstart) {
-                maincustomnightmenu = 1;
-                AISetmenu = 0;
-                menuselection = 2;
-                menuselectionmax = 5;
+                if (limiterstart == 0) {
+                    maincustomnightmenu = 1;
+                    AISetmenu = 0;
+                    menuselection = 2;
+                    menuselectionmax = 5;
+                    limiterstart++;
+                }
             }
         }
         if (presetselector == 1) {
@@ -4367,10 +2783,13 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         }
         if (menuselection == 4) {
             if (pad & PADstart) {
-                maincustomnightmenu = 1;
-                chargemenu = 0;
-                menuselection = 3;
-                menuselectionmax = 5;
+                if (limiterstart == 0) {
+                    maincustomnightmenu = 1;
+                    chargemenu = 0;
+                    menuselection = 3;
+                    menuselectionmax = 5;
+                    limiterstart++;
+                }
             }
         }
     }
@@ -4449,10 +2868,13 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         }
         if (menuselection == 4) {
             if (pad & PADstart) {
-                maincustomnightmenu = 1;
-                advancedmenu = 0;
-                menuselection = 4;
-                menuselectionmax = 5;
+                if (limiterstart == 0) {
+                    maincustomnightmenu = 1;
+                    advancedmenu = 0;
+                    menuselection = 4;
+                    menuselectionmax = 5;
+                    limiterstart++; 
+                }
             }
         }
     }
@@ -4476,18 +2898,24 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         }
         if (menuselection == 2) { //Unlocks menu
             if (pad & PADstart) {
-                extramenu = 0;
-                unlockssubmenu = 1;
-                menuselection = 1;
-                menuselectionmax = 4;
+                if (limiterstart == 0) {
+                    extramenu = 0;
+                    unlockssubmenu = 1;
+                    menuselection = 1;
+                    menuselectionmax = 4;
+                    limiterstart = 1;
+                }
             }
         }
         if (menuselection == 3) { //Informations on the game
             if (pad & PADstart) {
-                extramenu = 0;
-                infoscreen = 1;
-                menuselection = 1;
-                menuselectionmax = 1;
+                if (limiterstart == 0) {
+                    extramenu = 0;
+                    infoscreen = 1;
+                    menuselection = 1;
+                    menuselectionmax = 1;
+                    limiterstart = 1;
+                }
             }
         }
         if (menuselection == 4) {//Two players mode
@@ -4530,15 +2958,18 @@ void menuselectionfunc(void) { //LONG asf lmaoo
     }
     if (infoscreen == 1) {
         if (menuselection == 1) {
-            if (pad & PADRdown) {
-                extramenu = 1;
-                infoscreen = 0;
-                menuselection = 1;
-                if (activatedmenudebug == 0) {
-                    menuselectionmax = 5;
-                }
-                if (activatedmenudebug == 1) {
-                    menuselectionmax = 6;
+            if (pad & PADstart) {
+                if (limiterstart == 0) {
+                    extramenu = 1;
+                    infoscreen = 0;
+                    menuselection = 1;
+                    if (activatedmenudebug == 0) {
+                        menuselectionmax = 5;
+                    }
+                    if (activatedmenudebug == 1) {
+                        menuselectionmax = 6;
+                    }
+                    limiterstart = 1;
                 }
             }
         }
@@ -4600,14 +3031,17 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         }
         if (menuselection == 4) {
             if (pad & PADstart) {
-                extramenu = 1;
-                unlockssubmenu = 0;
-                menuselection = 1;
-                if (activatedmenudebug == 0) {
-                    menuselectionmax = 5;
-                }
-                if (activatedmenudebug == 1) {
-                    menuselectionmax = 6;
+                if (limiterstart == 0) {
+                    extramenu = 1;
+                    unlockssubmenu = 0;
+                    menuselection = 1;
+                    if (activatedmenudebug == 0) {
+                        menuselectionmax = 5;
+                    }
+                    if (activatedmenudebug == 1) {
+                        menuselectionmax = 6;
+                    }
+                    limiterstart = 1;
                 }
             }
         }
@@ -4737,9 +3171,12 @@ void menuPrint(void) {
     if (infoscreen == 1) {
         FntPrint("            Information Screen\n\n");
 
-        FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n\n            Thank you, Scott, \n For making our childhood a lot better.\n\n\n\n");
+        FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n            Thank you, Scott, \n For making our childhood a lot better.\n\n");
 
-        FntPrint(">> Back"); //Don't even need to do condition, there's only one
+        FntPrint(">> Back                       V1.0.1 \n"); //Don't even need to do condition, there's only one
+        /*
+        FntPrint("                 What's New ?\n"); 
+        FntPrint("V1.0.1 :\n   - added the help wanted screen\n   - changed a lot of images\n   - cleaned code\n   "); */
     }
     if (unlockssubmenu == 1) {
         FntPrint("   Unlocks\n\n   Menu\n\n\n");  // print time
@@ -5181,4 +3618,4 @@ void gamevictory(void) {
     }
     usage = 0;
     FrameCounter++;
-}
+} //old 5205 new 3585 BAAHAHA

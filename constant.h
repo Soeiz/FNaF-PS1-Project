@@ -146,6 +146,8 @@ void read_controller( Controller_Data *c, unsigned char *buf, int port )  // get
 
 int controllerhere = 0;
 
+int initstuff = 0;
+
 int pad = 0;    
 int pad2 = 0;    
 

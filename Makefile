@@ -22,8 +22,13 @@ tim/CAMERAMONITOR.tim \
 tim/freddysneak.tim \
 tim/gameover.tim \
 tim/FAM.tim \
+tim/load.tim \
 tim/SAM.tim \
 tim/fnt.tim \
+tim/GJFIV.tim \
+tim/GJSEV.tim \
+tim/GJSIX.tim \
+tim/doors.tim \
 vag/Door.vag \
 vag/light.vag \
 vag/Monitor.vag \

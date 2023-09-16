@@ -12,4 +12,5 @@ game.o: game.c constant.h \
  C:/nolibgs_hello_worlds/psyq/include/r3000.h \
  C:/nolibgs_hello_worlds/psyq/include/asm.h \
  C:/nolibgs_hello_worlds/psyq/include/libcd.h \
- C:/nolibgs_hello_worlds/psyq/include/malloc.h
+ C:/nolibgs_hello_worlds/psyq/include/malloc.h objects/objects.h \
+ objects/camera.h
