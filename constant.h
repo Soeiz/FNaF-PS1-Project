@@ -101,9 +101,9 @@ int Ran(int max)
 void clearVRAM(void)
 {
     RECT rectTL;
-    setRECT(&rectTL, 0, 0, 960, 256); //Clear all but the font and... The Thing.
+    setRECT(&rectTL, 0, 0, 960, 256); //Clear all but the font
     ClearImage2(&rectTL, 0, 0, 0);
-    setRECT(&rectTL, 535, 256, 512, 256);
+    setRECT(&rectTL, 0, 256, 1048, 256);
     ClearImage2(&rectTL, 0, 0, 0);
     DrawSync(0);
 }

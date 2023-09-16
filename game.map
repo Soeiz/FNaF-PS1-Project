@@ -378,81 +378,82 @@ END GROUP
  .text.Ran      0x0000000080014e24       0x50 game.o
                 0x0000000080014e24                Ran
  .text.clearVRAM
-                0x0000000080014e74       0x6c game.o
+                0x0000000080014e74       0x68 game.o
                 0x0000000080014e74                clearVRAM
  .text.makepoly
-                0x0000000080014ee0     0x1c10 game.o
-                0x0000000080014ee0                makepoly
+                0x0000000080014edc     0x1c10 game.o
+                0x0000000080014edc                makepoly
  .text.cameraloc
-                0x0000000080016af0     0x1328 game.o
-                0x0000000080016af0                cameraloc
+                0x0000000080016aec     0x1328 game.o
+                0x0000000080016aec                cameraloc
  .text.LoadTexture
-                0x0000000080017e18       0x7c game.o
-                0x0000000080017e18                LoadTexture
- .text.init     0x0000000080017e94      0x140 game.o
-                0x0000000080017e94                init
- .text.display  0x0000000080017fd4       0xb0 game.o
-                0x0000000080017fd4                display
- .text.initSnd  0x0000000080018084       0x64 game.o
-                0x0000000080018084                initSnd
+                0x0000000080017e14       0x7c game.o
+                0x0000000080017e14                LoadTexture
+ .text.init     0x0000000080017e90      0x140 game.o
+                0x0000000080017e90                init
+ .text.display  0x0000000080017fd0       0xb0 game.o
+                0x0000000080017fd0                display
+ .text.initSnd  0x0000000080018080       0x64 game.o
+                0x0000000080018080                initSnd
  .text.spuSetup
-                0x00000000800180e8       0x50 game.o
-                0x00000000800180e8                spuSetup
- .text.XAsetup  0x0000000080018138       0x3c game.o
-                0x0000000080018138                XAsetup
+                0x00000000800180e4       0x50 game.o
+                0x00000000800180e4                spuSetup
+ .text.XAsetup  0x0000000080018134       0x3c game.o
+                0x0000000080018134                XAsetup
  .text.sendVAGtoSPU
-                0x0000000080018174       0x50 game.o
-                0x0000000080018174                sendVAGtoSPU
+                0x0000000080018170       0x50 game.o
+                0x0000000080018170                sendVAGtoSPU
  .text.setVoiceAttr
-                0x00000000800181c4      0x13c game.o
-                0x00000000800181c4                setVoiceAttr
+                0x00000000800181c0      0x13c game.o
+                0x00000000800181c0                setVoiceAttr
  .text.setSPUtransfer
-                0x0000000080018300      0x100 game.o
-                0x0000000080018300                setSPUtransfer
+                0x00000000800182fc      0x100 game.o
+                0x00000000800182fc                setSPUtransfer
  .text.chargeNtimeFunc
-                0x0000000080018400      0x14c game.o
-                0x0000000080018400                chargeNtimeFunc
+                0x00000000800183fc      0x14c game.o
+                0x00000000800183fc                chargeNtimeFunc
  .text.resetgame
-                0x000000008001854c      0x2c0 game.o
-                0x000000008001854c                resetgame
- .text.print    0x000000008001880c      0x30c game.o
-                0x000000008001880c                print
+                0x0000000080018548      0x2c0 game.o
+                0x0000000080018548                resetgame
+ .text.print    0x0000000080018808      0x30c game.o
+                0x0000000080018808                print
  .text.printNightInfo
-                0x0000000080018b18      0x194 game.o
-                0x0000000080018b18                printNightInfo
+                0x0000000080018b14      0x194 game.o
+                0x0000000080018b14                printNightInfo
  .text.menuselectionfunc
-                0x0000000080018cac     0x13cc game.o
-                0x0000000080018cac                menuselectionfunc
+                0x0000000080018ca8     0x13cc game.o
+                0x0000000080018ca8                menuselectionfunc
  .text.menuPrint
-                0x000000008001a078      0x9bc game.o
-                0x000000008001a078                menuPrint
+                0x000000008001a074      0x9bc game.o
+                0x000000008001a074                menuPrint
  .text.gameoverprint
-                0x000000008001aa34       0x50 game.o
-                0x000000008001aa34                gameoverprint
+                0x000000008001aa30       0x50 game.o
+                0x000000008001aa30                gameoverprint
  .text.LightFunc
-                0x000000008001aa84      0x20c game.o
-                0x000000008001aa84                LightFunc
+                0x000000008001aa80      0x20c game.o
+                0x000000008001aa80                LightFunc
  .text.animatronicFunc
-                0x000000008001ac90      0xa64 game.o
-                0x000000008001ac90                animatronicFunc
+                0x000000008001ac8c      0xa64 game.o
+                0x000000008001ac8c                animatronicFunc
  .text.doorFuncX
-                0x000000008001b6f4      0x104 game.o
-                0x000000008001b6f4                doorFuncX
+                0x000000008001b6f0      0x104 game.o
+                0x000000008001b6f0                doorFuncX
  .text.CameraFunc
-                0x000000008001b7f8      0x144 game.o
-                0x000000008001b7f8                CameraFunc
+                0x000000008001b7f4      0x144 game.o
+                0x000000008001b7f4                CameraFunc
  .text.controllerinput
-                0x000000008001b93c      0x360 game.o
-                0x000000008001b93c                controllerinput
+                0x000000008001b938      0x360 game.o
+                0x000000008001b938                controllerinput
  .text.screamer
-                0x000000008001bc9c       0x80 game.o
-                0x000000008001bc9c                screamer
+                0x000000008001bc98       0x80 game.o
+                0x000000008001bc98                screamer
  .text.lightsout
-                0x000000008001bd1c       0xb0 game.o
-                0x000000008001bd1c                lightsout
+                0x000000008001bd18       0xb0 game.o
+                0x000000008001bd18                lightsout
  .text.gamevictory
-                0x000000008001bdcc       0x94 game.o
-                0x000000008001bdcc                gamevictory
+                0x000000008001bdc8       0x94 game.o
+                0x000000008001bdc8                gamevictory
+ *fill*         0x000000008001be5c        0x4 
  .text          0x000000008001be60       0x10 C:/nolibgs_hello_worlds/psyq/lib\libapi.a(c57.o)
                 0x000000008001be60                InitHeap
  .text          0x000000008001be70       0x10 C:/nolibgs_hello_worlds/psyq/lib\libc.a(c47.o)
@@ -1656,9 +1657,9 @@ OUTPUT(game.elf elf32-littlemips)
  .debug_rnglists
                 0x0000000000000000      0x156 game.o
 
-.debug_line     0x0000000000000000     0x6de6
- .debug_line    0x0000000000000000     0x6d8b game.o
- .debug_line    0x0000000000006d8b       0x5b C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
+.debug_line     0x0000000000000000     0x6de5
+ .debug_line    0x0000000000000000     0x6d8a game.o
+ .debug_line    0x0000000000006d8a       0x5b C:/nolibgs_hello_worlds/thirdparty/nugget/common/crt0/crt0.o
 
 .debug_str      0x0000000000000000     0x26d2
  .debug_str     0x0000000000000000     0x2682 game.o
