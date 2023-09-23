@@ -39,10 +39,6 @@ extern unsigned long _binary_tim_CAMERAMONITOR_tim_start[];
 extern unsigned long _binary_tim_CAMERAMONITOR_tim_end[];
 extern unsigned long _binary_tim_CAMERAMONITOR_tim_length;
 
-extern unsigned long _binary_tim_gameover_tim_start[];
-extern unsigned long _binary_tim_gameover_tim_end[];
-extern unsigned long _binary_tim_gameover_tim_length;
-
 extern unsigned long _binary_tim_freddysneak_tim_start[];
 extern unsigned long _binary_tim_freddysneak_tim_end[];
 extern unsigned long _binary_tim_freddysneak_tim_length;
@@ -78,6 +74,102 @@ extern unsigned long _binary_tim_GJSIX_tim_length;
 extern unsigned long _binary_tim_load_tim_start[];
 extern unsigned long _binary_tim_load_tim_end[];
 extern unsigned long _binary_tim_load_tim_length;
+
+extern unsigned long _binary_tim_jumpC_tim_start[];
+extern unsigned long _binary_tim_jumpC_tim_end[];
+extern unsigned long _binary_tim_jumpC_tim_length;
+
+extern unsigned long _binary_tim_jumpC2_tim_start[];
+extern unsigned long _binary_tim_jumpC2_tim_end[];
+extern unsigned long _binary_tim_jumpC2_tim_length;
+
+extern unsigned long _binary_tim_jumpC3_tim_start[];
+extern unsigned long _binary_tim_jumpC3_tim_end[];
+extern unsigned long _binary_tim_jumpC3_tim_length;
+
+extern unsigned long _binary_tim_jumpB_tim_start[];
+extern unsigned long _binary_tim_jumpB_tim_end[];
+extern unsigned long _binary_tim_jumpB_tim_length;
+
+extern unsigned long _binary_tim_jumpB2_tim_start[];
+extern unsigned long _binary_tim_jumpB2_tim_end[];
+extern unsigned long _binary_tim_jumpB2_tim_length;
+
+extern unsigned long _binary_tim_jumpB3_tim_start[];
+extern unsigned long _binary_tim_jumpB3_tim_end[];
+extern unsigned long _binary_tim_jumpB3_tim_length;
+
+extern unsigned long _binary_tim_jumpF_tim_start[];
+extern unsigned long _binary_tim_jumpF_tim_end[];
+extern unsigned long _binary_tim_jumpF_tim_length;
+
+extern unsigned long _binary_tim_jumpF2_tim_start[];
+extern unsigned long _binary_tim_jumpF2_tim_end[];
+extern unsigned long _binary_tim_jumpF2_tim_length;
+
+extern unsigned long _binary_tim_jumpF3_tim_start[];
+extern unsigned long _binary_tim_jumpF3_tim_end[];
+extern unsigned long _binary_tim_jumpF3_tim_length;
+
+extern unsigned long _binary_tim_jumpF20_tim_start[];
+extern unsigned long _binary_tim_jumpF20_tim_end[];
+extern unsigned long _binary_tim_jumpF20_tim_length;
+
+extern unsigned long _binary_tim_jumpF21_tim_start[];
+extern unsigned long _binary_tim_jumpF21_tim_end[];
+extern unsigned long _binary_tim_jumpF21_tim_length;
+
+extern unsigned long _binary_tim_jumpF22_tim_start[];
+extern unsigned long _binary_tim_jumpF22_tim_end[];
+extern unsigned long _binary_tim_jumpF22_tim_length;
+
+extern unsigned long _binary_tim_jumpF23_tim_start[];
+extern unsigned long _binary_tim_jumpF23_tim_end[];
+extern unsigned long _binary_tim_jumpF23_tim_length;
+
+extern unsigned long _binary_tim_jumpF24_tim_start[];
+extern unsigned long _binary_tim_jumpF24_tim_end[];
+extern unsigned long _binary_tim_jumpF24_tim_length;
+
+extern unsigned long _binary_tim_jumpF25_tim_start[];
+extern unsigned long _binary_tim_jumpF25_tim_end[];
+extern unsigned long _binary_tim_jumpF25_tim_length;
+
+extern unsigned long _binary_tim_jumpF26_tim_start[];
+extern unsigned long _binary_tim_jumpF26_tim_end[];
+extern unsigned long _binary_tim_jumpF26_tim_length;
+
+extern unsigned long _binary_tim_jumpFO_tim_start[];
+extern unsigned long _binary_tim_jumpFO_tim_end[];
+extern unsigned long _binary_tim_jumpFO_tim_length;
+
+extern unsigned long _binary_tim_jumpFO2_tim_start[];
+extern unsigned long _binary_tim_jumpFO2_tim_end[];
+extern unsigned long _binary_tim_jumpFO2_tim_length;
+
+extern unsigned long _binary_tim_jumpFO3_tim_start[];
+extern unsigned long _binary_tim_jumpFO3_tim_end[];
+extern unsigned long _binary_tim_jumpFO3_tim_length;
+
+extern unsigned long _binary_tim_static1_tim_start[];
+extern unsigned long _binary_tim_static1_tim_end[];
+extern unsigned long _binary_tim_static1_tim_length;
+
+extern unsigned long _binary_tim_static2_tim_start[];
+extern unsigned long _binary_tim_static2_tim_end[];
+extern unsigned long _binary_tim_static2_tim_length;
+
+extern unsigned long _binary_tim_static3_tim_start[];
+extern unsigned long _binary_tim_static3_tim_end[];
+extern unsigned long _binary_tim_static3_tim_length;
+
+extern unsigned long _binary_tim_static4_tim_start[];
+extern unsigned long _binary_tim_static4_tim_end[];
+extern unsigned long _binary_tim_static4_tim_length;
+
+extern unsigned long _binary_tim_itsme_tim_start[];
+extern unsigned long _binary_tim_itsme_tim_end[];
+extern unsigned long _binary_tim_itsme_tim_length;
 /*
 extern unsigned long _binary_tim_fnt_tim_start[];
 extern unsigned long _binary_tim_fnt_tim_end[];
@@ -110,11 +202,62 @@ TIM_IMAGE goldenfreddy;
 TIM_IMAGE officegoldenfreddy;
 TIM_IMAGE bonniestare;
 TIM_IMAGE load;
+TIM_IMAGE jumpscare;
+TIM_IMAGE statics;
+TIM_IMAGE itsme;
 //TIM_IMAGE fontface;
 
 long polydepth;
 long polyflag;
 long OTz;
+
+//itsme bg
+POLY_FT4 *polyitsme = {0};                       
+
+SVECTOR RotVectoritsme = {0, 0, 0};              
+VECTOR  MovVectoritsme = {0, 0, CENTERX/2-10, 0};
+VECTOR  ScaleVectoritsme = {2048, 2048, 2048};   
+
+SVECTOR VertPositsme[4] = {                      
+        {-40, -25, 1 },                         
+        {-40,  26, 1 },                         
+        { 80, -25, 1 },                         
+        { 80,  26, 1  }                         
+    };        
+
+MATRIX PolyMatrixitsme = {0};    
+
+//Jumpscare
+POLY_FT4 *polyjump = {0};                        
+
+SVECTOR RotVectorjump = {0, 0, 0};               
+VECTOR  MovVectorjump = {-40, -4, CENTERX/2-10, 0};
+VECTOR  ScaleVectorjump = {ONE, ONE, ONE};       
+
+SVECTOR VertPosjump[4] = {                       
+        {-52, -55, 1 },                       
+        {-52,  65, 1 },                       
+        { 115, -55, 1 },                       
+        { 115,  65, 1  }                        
+    };        
+
+MATRIX PolyMatrixjump = {0};  
+
+//statics
+POLY_FT4 *polystatic = {0};                        
+
+SVECTOR RotVectorstatic = {0, 0, 0};               
+VECTOR  MovVectorstatic = {-40, -4, CENTERX/2-10, 0};
+VECTOR  ScaleVectorstatic = {ONE, ONE, ONE};       
+
+SVECTOR VertPosstatic[4] = {                       
+        {-52, -55, 1 },                       
+        {-52,  65, 1 },                       
+        { 115, -55, 1 },                       
+        { 115,  65, 1  }                        
+    };        
+
+MATRIX PolyMatrixstatic = {0};  
 
 //freddy bg
 POLY_FT4 *polyf = {0};                        
@@ -140,8 +283,8 @@ VECTOR  MovVectoricon = {40, 30, CENTERX/2-10, 0};
 VECTOR  ScaleVectoricon = {ONE, ONE, ONE};       
 
 SVECTOR VertPosicon[4] = {                       
-        {0, 0, 1 },                       
-        {0,  40, 1 },                       
+        {10, 0, 1 },                       
+        {10,  40, 1 },                       
         { 40, 0, 1 },                       
         { 40,  40, 1  }                        
     };        
@@ -522,7 +665,7 @@ MATRIX PolyMatrixgolden = {0};
 POLY_FT4 *polyofficegolden = {0}; 
 
 SVECTOR RotVectorofficegolden = {0, 0, 0};                  
-VECTOR  MovVectorofficegolden = {-20, -30, CENTERX/2-10, 0};
+VECTOR  MovVectorofficegolden = {-60, -30, CENTERX/2-10, 0};
 VECTOR  ScaleVectorofficegolden = {2048, 2048, 2048};       
 
 SVECTOR VertPosofficegolden[4] = {                          
@@ -698,33 +841,35 @@ void makepoly(int num) {
 	}//help wanted bg
 
 	if (num == 3) { 
-        polygolden = (POLY_FT4 *)nextpri;                   
+        polyofficegolden = (POLY_FT4 *)nextpri;                    
         
-        RotMatrix(&RotVectorgolden, &PolyMatrixgolden);           
-        TransMatrix(&PolyMatrixgolden, &MovVectorgolden);         
-        ScaleMatrix(&PolyMatrixgolden, &ScaleVectorgolden);       
+        RotMatrix(&RotVectorofficegolden, &PolyMatrixofficegolden);    
+        TransMatrix(&PolyMatrixofficegolden, &MovVectorofficegolden);  
+        ScaleMatrix(&PolyMatrixofficegolden, &ScaleVectorofficegolden);
         
-        SetRotMatrix(&PolyMatrixgolden);                   
-        SetTransMatrix(&PolyMatrixgolden);                 
+        SetRotMatrix(&PolyMatrixofficegolden);                  
+        SetTransMatrix(&PolyMatrixofficegolden);    
+ 
+        setRGB0(polyofficegolden, 128, 128, 128);
+        setPolyFT4(polyofficegolden);                           
         
-        setPolyFT4(polygolden);                            
-        
-        polygolden->tpage = getTPage(goldenfreddy.mode&0x3, 0, 320, 256);   
-        
-        setRGB0(polygolden, 128, 128, 128);            
+        setClut(polyofficegolden, 320, 509);
+ 
+        polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
         
         RotTransPers4(
-                    &VertPosgolden[0],      &VertPosgolden[1],      &VertPosgolden[2],      &VertPosgolden[3],
-                    (long*)&polygolden->x0, (long*)&polygolden->x1, (long*)&polygolden->x2, (long*)&polygolden->x3,
+                    &VertPosofficegolden[0],      &VertPosofficegolden[1],      &VertPosofficegolden[2],      &VertPosofficegolden[3],
+                    (long*)&polyofficegolden->x0, (long*)&polyofficegolden->x1, (long*)&polyofficegolden->x2, (long*)&polyofficegolden->x3,
                     &polydepth,
                     &polyflag
-                    );                                 
+                    );                              
+
+        setUV4(polyofficegolden, 0, 29, 0, 239, 218, 0, 218, 239);
+           
+        addPrim(ot[db], polyofficegolden);                        
         
-        setUV4(polygolden, 0, 0, 0, 255, 146, 0, 255, 146); 
-            
-        addPrim(ot[db], polygolden);                        
-        
-        nextpri += sizeof(POLY_FT4);                  
+        nextpri += sizeof(POLY_FT4);               
+
 	}//golden freddy's face (screamer)
 
 	if (num == 4) { 
@@ -782,8 +927,8 @@ void makepoly(int num) {
 	                &polydepth,
 	                &polyflag
 	                );                              
- 
-	    setUV4(polyofficegolden, 0, 8, 0, 218, 218, 0, 218, 218);
+
+	    setUV4(polyofficegolden, 0, 29, 0, 239, 218, 0, 218, 239);
 	       
 	    addPrim(ot[db], polyofficegolden);                        
 	    
@@ -968,7 +1113,7 @@ void makepoly(int num) {
 
         setClut(polylayout,960,196);       
         
-        polylayout->tpage = getTPage(layout.mode&0x3, 0, 448, 256); 
+        polylayout->tpage = getTPage(layout.mode&0x3, 0, 640, 0); 
         
         setRGB0(polylayout, 128, 128, 128);         
         
@@ -1101,7 +1246,7 @@ void makepoly(int num) {
         
         setRGB0(polygameover, 128, 128, 128);              
 
-        polygameover->tpage = getTPage(gameover.mode&0x3, 0, 832, 0); 
+        polygameover->tpage = getTPage(gameover.mode&0x3, 0, 448, 256); 
         
         RotTransPers4(
                     &VertPosgameover[0],      &VertPosgameover[1],      &VertPosgameover[2],      &VertPosgameover[3],
@@ -1110,7 +1255,7 @@ void makepoly(int num) {
                     &polyflag
                     );                                
         
-        setUV4(polygameover, 0, 0, 0, 222, 230, 0, 230, 222);
+        setUV4(polygameover, 13, 0, 13, 222, 244, 0, 244, 222);
             
         addPrim(ot[db], polygameover);                       
         nextpri += sizeof(POLY_FT4);                 
@@ -1130,7 +1275,7 @@ void makepoly(int num) {
         
         setRGB0(polyicon, 128, 128, 128);              
 
-        polyicon->tpage = getTPage(load.mode&0x3, 0, 640, 256); 
+        polyicon->tpage = getTPage(load.mode&0x3, 0, 832, 256); 
         
         RotTransPers4(
                     &VertPosicon[0],      &VertPosicon[1],      &VertPosicon[2],      &VertPosicon[3],
@@ -1139,9 +1284,70 @@ void makepoly(int num) {
                     &polyflag
                     );                                
         
-        setUV4(polyicon, 0, 0, 0, 80, 80, 0, 80, 80);
+        setUV4(polyicon, 0, 56, 0, 116, 50, 56, 50, 116);
             
         addPrim(ot[db], polyicon);                       
         nextpri += sizeof(POLY_FT4);         
 	} //Loading icon
+
+	if (num == 14) {
+        polyjump = (POLY_FT4 *)nextpri;             
+                
+        RotMatrix(&RotVectorjump, &PolyMatrixjump);    
+        TransMatrix(&PolyMatrixjump, &MovVectorjump);  
+        ScaleMatrix(&PolyMatrixjump, &ScaleVectorjump);
+        
+        SetRotMatrix(&PolyMatrixjump);                    
+        SetTransMatrix(&PolyMatrixjump);                  
+        
+        setPolyFT4(polyjump);                             
+        setRGB0(polyjump, rgbred,rgbgreen,rgbblue);
+        
+        setClut(polyjump, jumpscare.crect->x, jumpscare.crect->y);       
+
+        polyjump->tpage = getTPage(jumpscare.mode&0x3, 0, 576, 256);
+        
+        RotTransPers4(
+                    &VertPosjump[0],      &VertPosjump[1],      &VertPosjump[2],      &VertPosjump[3],
+                    (long*)&polyjump->x0, (long*)&polyjump->x1, (long*)&polyjump->x2, (long*)&polyjump->x3,
+                    &polydepth,
+                    &polyflag
+                    );                                
+        
+        setUV4(polyjump, 40, 0, 40, 125, 146, 0, 145, 126);
+            
+        addPrim(ot[db], polyjump);                       
+        nextpri += sizeof(POLY_FT4);                 
+	}//jumpscare
+        if (num == 15) {
+
+        polystatic = (POLY_FT4 *)nextpri;             
+                
+        RotMatrix(&RotVectorstatic, &PolyMatrixstatic);    
+        TransMatrix(&PolyMatrixstatic, &MovVectorstatic);  
+        ScaleMatrix(&PolyMatrixstatic, &ScaleVectorstatic);
+        
+        SetRotMatrix(&PolyMatrixstatic);                    
+        SetTransMatrix(&PolyMatrixstatic);                  
+        
+        setPolyFT4(polystatic);                             
+        setRGB0(polystatic, 128,128,128);
+        
+        setClut(polystatic, statics.crect->x, statics.crect->y);       
+
+        polystatic->tpage = getTPage(statics.mode&0x3, 0, 576, 256);
+        
+        RotTransPers4(
+                    &VertPosstatic[0],      &VertPosstatic[1],      &VertPosstatic[2],      &VertPosstatic[3],
+                    (long*)&polystatic->x0, (long*)&polystatic->x1, (long*)&polystatic->x2, (long*)&polystatic->x3,
+                    &polydepth,
+                    &polyflag
+                    );                                
+        
+        setUV4(polystatic, 0, 130, 53, 130, 0, 255, 53, 255);
+            
+        addPrim(ot[db], polystatic);                       
+        nextpri += sizeof(POLY_FT4);                 
+
+        }//Static
 }

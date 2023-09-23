@@ -91,6 +91,7 @@
             <file name="ICONS.TIM"   type="data" source="tim/ICONS.TIM"/>
             <file name="HWANTED.TIM"   type="data" source="tim/HWANTED.TIM"/>
             <file name="LOAD.TIM"   type="data" source="tim/LOAD.TIM"/>
+            <file name="GAMEOVER.TIM"   type="data" source="tim/GAMEOVER.TIM"/>
             <file name="LAYOUT.TIM"   type="data" source="tim/LAYOUT.TIM"/>
             <file name="OMID.TIM"   type="data" source="tim/OMID.TIM"/>
             <file name="GOL.TIM"   type="data" source="tim/GOL.TIM"/>

@@ -1,0 +1,18 @@
+[TIM Files]
+File_0=C:\nolibgs_hello_worlds\game\tim\doors.tim
+File_1=C:\nolibgs_hello_worlds\game\tim\FAM.tim
+File_2=C:\nolibgs_hello_worlds\game\tim\freddysneak.tim
+File_3=C:\nolibgs_hello_worlds\game\tim\GAMEOVER.TIM
+File_4=C:\nolibgs_hello_worlds\game\tim\GJFIV.tim
+File_5=C:\nolibgs_hello_worlds\game\tim\GOL.TIM
+File_6=C:\nolibgs_hello_worlds\game\tim\HWANTED.TIM
+File_7=C:\nolibgs_hello_worlds\game\tim\jumpB.tim
+File_8=C:\nolibgs_hello_worlds\game\tim\LAYOUT.TIM
+File_9=C:\nolibgs_hello_worlds\game\tim\load.tim
+File_10=C:\nolibgs_hello_worlds\game\tim\officeLEFT.tim
+File_11=C:\nolibgs_hello_worlds\game\tim\officeMIDDLE.tim
+File_12=C:\nolibgs_hello_worlds\game\tim\officeRIGHT.tim
+File_13=C:\nolibgs_hello_worlds\game\tim\SAM.tim
+[Graphics Mode]
+Width=320
+Height=256

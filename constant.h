@@ -362,10 +362,13 @@ int screamersetsound = 0;
 int screamerframes = 47;
 int dead = 0;
 int deadfrom = 0;
+int spriteframes = 3;
+int spritesheet = 0;
 
 int fivetosixamframes = 0;
 int nextnightframes = 0;
 int customnextnightactivation = 0;
+int staticframessheet = 0;
 
 int rgbred = 128;
 int rgbgreen = 128;
