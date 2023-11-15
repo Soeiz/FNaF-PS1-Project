@@ -2319,10 +2319,6 @@ void resetgame(void) {
 
     tensecondframe = 600;
 
-    returnframes = 0;
-    returnbasevolume = 0x1800;
-
-
     mascottune = 0;
     musicmascottune = 1248;
 
@@ -2900,6 +2896,10 @@ void menuselectionfunc(void) { //LONG asf lmaoo
                 bonnielocationframe = 298;
                 chicalocationframe = 299;
                 foxylocationframe = 301;
+                freddylocationframelock = 181;
+                bonnielocationframelock = 298;
+                chicalocationframelock = 299;
+                foxylocationframelock = 301;
             }
         }
         if (menuselection == 2) {
@@ -3198,8 +3198,8 @@ void menuPrint(void) {
         else {FntPrint("   Set charge (not infinite) %d\n\n", customcharge );}
         if (menuselection == 2) {FntPrint(">> Set beginning AM %d\n\n", customAM );}
         else {FntPrint("   Set beginning AM %d\n\n", customAM );}
-        if (menuselection == 3) {FntPrint(">> 1 Hour = %d seconds\n\n", convertion );}
-        else {FntPrint("   1 Hour = %d seconds\n\n", convertion );}
+        if (menuselection == 3) {FntPrint(">> 1 Hour = %d seconds in game\n\n", convertion );}
+        else {FntPrint("   1 Hour = %d seconds in game\n\n", convertion );}
         if (menuselection == 4) {FntPrint(">> Return to Custom night menu\n\n");}
         else {FntPrint("   Return to Custom night menu\n\n");}
         //Maybe put end AM
@@ -3208,7 +3208,7 @@ void menuPrint(void) {
         FntPrint("   Custom\n\n   Night\n\n\n");  // print time
         FntPrint("   Advanced Settings Menu\n\n\n");
 
-        if (menuselection == 1) {FntPrint(">> Cooldown : %d %d %d %d\n\n", freddylocationframelock, bonnielocationframelock, chicalocationframelock, foxylocationframelock );}
+        if (menuselection == 1) {FntPrint(">> Cooldown FBCFo : %d %d %d %d\n\n", freddylocationframelock, bonnielocationframelock, chicalocationframelock, foxylocationframelock );}
         else {FntPrint("   Cooldown of animatronics : ...\n\n" );}
         if (menuselection == 2) {FntPrint(">> Set default usage %d\n\n", defaultusage );}
         else {FntPrint("   Set default usage %d\n\n", defaultusage );}
@@ -3223,8 +3223,8 @@ void menuPrint(void) {
         if (menuselection == 1) {FntPrint(">> Enable phone guy ? %s\n\n", enablephoneguystr);}
         else {FntPrint("   Enable phone guy ? %s\n\n", enablephoneguystr);}
 
-        if (menuselection == 2) {FntPrint(">> Unlocks\n\n");}
-        else {FntPrint("   Unlocks\n\n");}
+        if (menuselection == 2) {FntPrint(">> Unlocks menu\n\n");}
+        else {FntPrint("   Unlocks menu\n\n");}
 
         if (menuselection == 3) {FntPrint(">> Info screen\n\n");}
         else {FntPrint("   Info screen\n\n");}
@@ -3245,8 +3245,8 @@ void menuPrint(void) {
 
         FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n            Thank you, Scott, \n For making our childhood a lot better.\n\n");
 
-        FntPrint(">> Back                       V1.0.5 \n"); //Don't even need to do condition, there's only one
-        /*
+        FntPrint(">> Back                       V1.0.6 \n"); //Don't even need to do condition, there's only one
+        /* It doesn't want :(
         FntPrint("                 What's New ?\n"); 
         FntPrint("V1.0.1 :\n   - added the help wanted screen\n   - changed a lot of images\n   - cleaned code\n   "); */
     }
@@ -3294,6 +3294,7 @@ void controllerinput(void) {
             }
             if(!(pad & PADRright || pad >> 16 & PADRright && twoplayermode == 1)) {limiter2 = 0;}
 
+            /*
             if (pad & PADstart || pad >> 16 & PADstart && twoplayermode == 1) {returnframes++;}
             if (!(pad & PADstart || pad >> 16 & PADstart && twoplayermode == 1)) {
                 if (returnframes != 0) {
@@ -3301,7 +3302,7 @@ void controllerinput(void) {
                     returnbasevolume = 0x1800;
                     SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
                 }
-            }
+            }*/
         }
 
         if(pad & PADR1 || pad >> 16 & PADR1 && twoplayermode == 1) { //R1

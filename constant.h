@@ -108,48 +108,9 @@ void clearVRAM(void)
     DrawSync(0);
 }
 
-
-typedef struct
-{
-    int             xpos, ypos;     // Stored position for sprite(s)
-    int             xpos2, ypos2;   // controlled by this controller.
-    unsigned char   status;         // These 8 values are obtained
-    unsigned char   type;           // directly from the controller
-    unsigned char   button1;        // buffer we installed with InitPAD.
-    unsigned char   button2;
-    unsigned char   analog0;
-    unsigned char   analog1;
-    unsigned char   analog2;
-    unsigned char   analog3;
-} Controller_Data;
-// All-purpose controller data buffer
-typedef struct
-{
-    unsigned char pad[34];          // 8-bytes w/o Multi-Tap, 34-bytes w/Multi-Tap
-} Controller_Buffer;
-Controller_Buffer controllers[2];   // Buffers for reading controllers
-Controller_Data theControllers[8];  // Processed controller data
-
-void read_controller( Controller_Data *c, unsigned char *buf, int port )  // get the raw values from controller
-{
-
-    c->status =  buf[0];    // Copy over raw controller data
-    c->type =    buf[1];
-
-    if( buf[0] == 0xff )    // If controller returns BAD status then bail on it.
-    {
-        c->type = 0;
-        return;
-    }
-
-} //This is an oversimplified version of the OG Func. I only need the status and type.
-
-int controllerhere = 0;
-
 int initstuff = 0;
 
 int pad = 0;    
-int pad2 = 0;    
 
 int frames = 500;
 
@@ -159,9 +120,6 @@ int maincustomnightmenu = 0;
 int AISetmenu = 0;
 int chargemenu = 0;
 int advancedmenu = 0;
-int defaultusage = 1;
-int limiterdefaultusagel = 0;
-int limiterdefaultusager = 0;
 int freddyfacechanged = 0;
 int freddyfacechangedchances = 400;
 
@@ -203,6 +161,7 @@ int limiterradar = 0;
 int fastnights = 0;
 int cheating = 0;
 int savemenu = 0;
+int defaultusage = 1;
 
 int twoplayermode = 0;
 char twoplayermodestr[] = "OFF";
@@ -258,12 +217,6 @@ int bonnieDoorinit = 0;
 int chicaDoorinit = 0;
 int noisedoorbonnie = 0;
 int noisedoorchica = 0;
-int cantlight = 0;
-int cantdoor = 0;
-int cantlightR = 0;
-int cantdoorR = 0;
-int cantlightL = 0;
-int cantdoorL = 0;
 int surusage = 0;
 int goldenfreddylocation = 0;
 int goldenfreddyframes = 0;
@@ -284,6 +237,12 @@ int rightdoorgoodbye = 1;
 int rightdoorgoodbye2 = -1;
 int jamlight = 0;
 int jamlightframes = 0;
+int cantlight = 0;
+int cantdoor = 0;
+int cantlightR = 0;
+int cantdoorR = 0;
+int cantlightL = 0;
+int cantdoorL = 0;
 
 int light1 = 0;
 int light2 = 0;
@@ -313,9 +272,11 @@ int blinkicon = 0;
 int foxymusic = 0;
 int foxymusicframe = 540;
 
+/*
+Rest of something I'd have liked to do, the "return" thing.
 int returnframes = 0;
 int returnbasevolume = 0x1800;
-
+*/ 
 int noisefootstep = 0;
 int framenoisefootstep = 0;
 int noisefootstepanimatronic = 0;
@@ -370,6 +331,7 @@ int nextnightframes = 0;
 int customnextnightactivation = 0;
 int staticframessheet = 0;
 
+//Specific for the special ending
 int rgbred = 128;
 int rgbgreen = 128;
 int rgbblue = 128;

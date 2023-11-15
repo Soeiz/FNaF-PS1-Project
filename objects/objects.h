@@ -678,7 +678,7 @@ SVECTOR VertPosofficegolden[4] = {
 MATRIX PolyMatrixofficegolden = {0};    
 
 //This function take in charge a specific polygon OR a set of polygon with related elements, depending on the var "num". (1 is for freddy on the menu for example)
-//Why ? It's Simple, because the game.c was LONG ASF. Longer than my lifetime I'd say. 
+//Why ? It's Simple, because the game.c was LONG ASF. Longer than my lifetime I'd say. (11 euros)
 //(and also because it was harder to look for a specific thing and having to scroll like 100000 times to pass by the thing we want. Here, you know you have to look at num 10 for ex.)
 void makepoly(int num) {
 	if (num == 1) { 
@@ -1284,7 +1284,7 @@ void makepoly(int num) {
                     &polyflag
                     );                                
         
-        setUV4(polyicon, 0, 56, 0, 116, 50, 56, 50, 116);
+        setUV4(polyicon, 0, 56, 0, 126, 50, 56, 50, 126);
             
         addPrim(ot[db], polyicon);                       
         nextpri += sizeof(POLY_FT4);         
