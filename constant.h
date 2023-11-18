@@ -98,6 +98,14 @@ int Ran(int max)
     return 0;
 } // MY SAVIOR !!!!!!!
 
+void clearVRAMMenu(void)
+{
+    RECT rectTL;
+    setRECT(&rectTL, 700, 0, 260, 511); //Clear all but the font
+    ClearImage2(&rectTL, 0, 0, 0);
+    DrawSync(0);
+}
+
 void clearVRAM(void)
 {
     RECT rectTL;

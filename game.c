@@ -590,6 +590,7 @@ int main(void) {
                 makepoly(13);
             }
             if (loadingframe == 361) {
+                clearVRAMMenu();
                 LoadTexture(_binary_tim_load_tim_start, &load);
 
                 musicframes = 0;
