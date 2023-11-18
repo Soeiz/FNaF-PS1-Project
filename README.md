@@ -1,9 +1,9 @@
 # FNaF-PS1-Project
-I attempt to port the legendary video game FNaF 1 into... The PlayStation 1 !
+I made the port of the legendary video game FNaF 1 into... The PlayStation 1 !
 
 If you want to make a video about it and post it on youtube (for example), I can add your video here ! (if I like it c:)
 
-By using ancient scrolls left by the ancestors (psyq + nugget sdk) I've made my way into playstation 1 programmation, and now I am developing this game, or this demake.
+By using ancient scrolls left by the ancestors (psyq + nugget sdk) I've made my way into playstation 1 programmation, and I developed this game, or this demake.
 
 Because this demake is not something you have to play on PC with a .exe, you'll have to play it with an ps1 emulator, or the actual console !
 
