@@ -130,6 +130,7 @@ int chargemenu = 0;
 int advancedmenu = 0;
 int freddyfacechanged = 0;
 int freddyfacechangedchances = 400;
+int helpwantedposter = 0;
 
 int freddylocationframelock = 181;
 int bonnielocationframelock = 298;
@@ -251,6 +252,7 @@ int cantlightR = 0;
 int cantdoorR = 0;
 int cantlightL = 0;
 int cantdoorL = 0;
+int speedoffice = 3;
 
 int light1 = 0;
 int light2 = 0;
@@ -261,6 +263,7 @@ int limiter2 = 0;
 int limiter3 = 0;
 int limiterbop = 0;
 
+int animatronicscamera[6] = {0,0,0,0,0,0}; //Freddy, Bonnie, Chica, foxy, GF, Sparky
 int camera = 0;
 int cooldowncamera = 0;
 char curcam[2] = "1A";
@@ -346,6 +349,16 @@ int rgbblue = 128;
 int rgbindicator = 0;
 
 int staticframes = 600;
+
+int nightwon = 0;
+
+int score = 0;
+int blockedanimatronic = 0;
+int timeoncam = 0;
+int powermanagementhour = 0;
+int powermanagementtotal = 0;
+
+int fadeoffice = 128;
 
 #define OTLEN 8                    // Ordering Table Length 
 

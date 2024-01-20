@@ -6,4 +6,3 @@ Content :
 - Cleaned source code
 - Made more precise some parameters
 - Changed the clock sprite's position to look better
-- On github, deleted some unnecessary files

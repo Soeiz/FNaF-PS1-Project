@@ -1,0 +1,16 @@
+game.o: game.c constant.h \
+ C:/nolibgs_hello_worlds/psyq/include/sys/types.h \
+ C:/nolibgs_hello_worlds/psyq/include/stdio.h \
+ C:/nolibgs_hello_worlds/psyq/include/libgte.h \
+ C:/nolibgs_hello_worlds/psyq/include/libetc.h \
+ C:/nolibgs_hello_worlds/psyq/include/libgpu.h \
+ C:/nolibgs_hello_worlds/psyq/include/libsnd.h \
+ C:/nolibgs_hello_worlds/psyq/include/libspu.h \
+ C:/nolibgs_hello_worlds/psyq/include/rand.h \
+ C:/nolibgs_hello_worlds/psyq/include/libapi.h \
+ C:/nolibgs_hello_worlds/psyq/include/kernel.h \
+ C:/nolibgs_hello_worlds/psyq/include/r3000.h \
+ C:/nolibgs_hello_worlds/psyq/include/asm.h \
+ C:/nolibgs_hello_worlds/psyq/include/libcd.h \
+ C:/nolibgs_hello_worlds/psyq/include/malloc.h objects/objects.h \
+ objects/camera.h

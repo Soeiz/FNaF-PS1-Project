@@ -464,8 +464,12 @@ int main(void) {
                 sample = -1;
             }
         }
+
+        if (blinkicon < 61) {blinkicon++;}
+        if (blinkicon == 60) {blinkicon = 0;}
+
         if (menu == 0) { //Menu Screen
-            if (bonniestared == 0) {
+            if (helpwantedposter == 0) {
                 menuPrint();
 
                 menuselectionfunc();
@@ -486,6 +490,38 @@ int main(void) {
                     freddylightframe = 0;
                 }
       
+            }
+            if (helpwantedposter == 1) {
+                loadingframe++;
+
+                if (loadingframe == 1) {
+                    musicframes = 3787;
+                    if (ambiancenum > 3) {ambiancenum = 1;}
+                }
+                if (loadingframe < 360) {
+
+                    //Help wanted bg
+                    makepoly(2);
+
+                    if (loadingframe > 100) {
+                        if (pad & PADstart) {
+                            loadingframe = 360;
+                        }
+                    }
+                }
+                if (loadingframe > 240) {
+                    if (fadeoffice < 128) {fadeoffice++;}
+
+                    setRGB0(polyhelpwanted, 128 - fadeoffice, 128 - fadeoffice, 128 - fadeoffice);   
+                } else {
+                    if (fadeoffice > 0) {fadeoffice--;}
+
+                    setRGB0(polyhelpwanted, 128 - fadeoffice, 128 - fadeoffice, 128 - fadeoffice);   
+                }
+                if (loadingframe > 360) {
+                    menu = 1;
+                    helpwantedposter = 0;
+                }
             }
             if (menuscreeninit == 0) {
                 loadFile = "\\FREDDY.TIM;1";
@@ -556,29 +592,8 @@ int main(void) {
                 //TIM freddy
                 makepoly(1);
             }
-        }
-        if (menu == 1) { //Help wanted screen
-            loadingframe++;
-            if (loadingframe == 1) {
-                musicframes = 3787;
-                if (ambiancenum > 3) {ambiancenum = 1;}
-            }
-            if (loadingframe < 360) {
-
-                //Help wanted bg
-                makepoly(2);
-
-                if (loadingframe > 100) {
-                    if (pad & PADstart) {
-                        menu = 5;
-                    }
-                }
-            }
-            if (loadingframe > 360) {
-                menu = 5;
-            }
-        }
-        if (menu == 5) { //Loading/Starting night screen
+        }//Menu Screen
+        if (menu == 1) { //Loading/Starting night screen
             loadingframe++;
             if (loadingframe < 360) {loadingframe = 360;}
             if (loadingframe < 560 && loadingframe > 360) {
@@ -589,9 +604,9 @@ int main(void) {
             } else {
                 makepoly(13);
             }
-            if (loadingframe == 361) {
+            if (loadingframe == 362) {
+                fadeoffice = 128;
                 clearVRAMMenu();
-                LoadTexture(_binary_tim_load_tim_start, &load);
 
                 musicframes = 0;
                 if (enablephoneguystr[1] == 'N') { // Й
@@ -624,6 +639,7 @@ int main(void) {
                 animatronicFunc(1);
             }
             if (loadingframe == 500) {
+                LoadTexture(_binary_tim_load_tim_start, &load);
                 Ran(10000);
                 if (freddydifficulty == 1 && bonniedifficulty == 9 && chicadifficulty == 8 && foxydifficulty == 7 || RAN == 1) {
                     goldenfreddied = 1;
@@ -648,6 +664,7 @@ int main(void) {
                     LoadTexture(_binary_tim_officeRIGHT_tim_start, &officeRIGHT);
                     LoadTexture(_binary_tim_officeMIDDLE_tim_start, &officeMIDDLE);
                     LoadTexture(_binary_tim_FAM_tim_start, &fiveam); 
+                    LoadTexture(_binary_tim_AM_tim_start, &fiveam); 
                     LoadTexture(_binary_tim_doors_tim_start, &doors); 
                 }
             }
@@ -681,11 +698,13 @@ int main(void) {
                 }
                 loadingframe = 0;
             }
-        }
+        }//Loading/Starting night screen
         if (menu == 2) { //Gameplay Screen
             if (goldenfreddied == 0) {
-                print(printnumber);
-                chargeNtimeFunc();   
+                if (nightwon == 0) {
+                    print(printnumber);
+                    chargeNtimeFunc();   
+                }
             } else {goldenfreddiedframes++;}
 
             if (goldenfreddiedframes > 90) {
@@ -728,8 +747,10 @@ int main(void) {
                 screamer();
             } else {
                 if (goldenfreddied == 0) {
-                    animatronicFunc(0);
-                    controllerinput();
+                    if (nightwon == 0) {
+                        animatronicFunc(0);
+                        controllerinput();
+                    }
                 }
             }
             if (activatedmenudebug == 1 && pad & PADR1 && pad & PADRup && pad & PADRright && pad & PADL2) {
@@ -737,6 +758,8 @@ int main(void) {
                 FrameCounter = FrameCounterlimit - 80;
             }
             if (camera == 1) { //Cam things
+
+                timeoncam++; //For score system
 
                 cameraloc();
 
@@ -887,24 +910,25 @@ int main(void) {
                 }
             }
 
-            if (doorclosedL == 1 && MovVectorleftdoor.vy < -61) {
-                leftdoorgoodbye++;
-                MovVectorleftdoor.vy = MovVectorleftdoor.vy + leftdoorgoodbye;
-            } else {leftdoorgoodbye = 1;}
-            if (doorclosedL == 0 && MovVectorleftdoor.vy > -190) {
-                leftdoorgoodbye2--;
-                MovVectorleftdoor.vy = MovVectorleftdoor.vy + leftdoorgoodbye2;
-            } else {leftdoorgoodbye2 = -1;}
+            if (nightwon == 0) {
+                if (doorclosedL == 1 && MovVectorleftdoor.vy < -61) {
+                    leftdoorgoodbye++;
+                    MovVectorleftdoor.vy = MovVectorleftdoor.vy + leftdoorgoodbye;
+                } else {leftdoorgoodbye = 1;}
+                if (doorclosedL == 0 && MovVectorleftdoor.vy > -190) {
+                    leftdoorgoodbye2--;
+                    MovVectorleftdoor.vy = MovVectorleftdoor.vy + leftdoorgoodbye2;
+                } else {leftdoorgoodbye2 = -1;}
 
-            if (doorclosedR == 1 && MovVectorrightdoor.vy < -61) {
-                rightdoorgoodbye++;
-                MovVectorrightdoor.vy = MovVectorrightdoor.vy + rightdoorgoodbye;
-            } else {rightdoorgoodbye = 1;}
-            if (doorclosedR == 0 && MovVectorrightdoor.vy > -190) {
-                rightdoorgoodbye2--;
-                MovVectorrightdoor.vy = MovVectorrightdoor.vy + rightdoorgoodbye2;
-            } else {rightdoorgoodbye2 = -1;}
-
+                if (doorclosedR == 1 && MovVectorrightdoor.vy < -61) {
+                    rightdoorgoodbye++;
+                    MovVectorrightdoor.vy = MovVectorrightdoor.vy + rightdoorgoodbye;
+                } else {rightdoorgoodbye = 1;}
+                if (doorclosedR == 0 && MovVectorrightdoor.vy > -190) {
+                    rightdoorgoodbye2--;
+                    MovVectorrightdoor.vy = MovVectorrightdoor.vy + rightdoorgoodbye2;
+                } else {rightdoorgoodbye2 = -1;}
+            }
             if (AM == 12 && FrameCounter == 1) { //Init Gameplay
                 CdControlF(CdlPause,0);
                 //Check if a stupidass mf put charge at 0%
@@ -1109,7 +1133,167 @@ int main(void) {
                 filter.file = soundBank.samples[sample].file;
                 CdControlF(CdlSetfilter, (u_char *)&filter);
                 soundBank.samples[sample].cursor = 0;
-                menu = 3;
+                nightwon = 1;
+            }
+
+            if (fivetosixamframes < 720 && AM == 6) {
+                if (fivetosixamframes == 1) {
+                    if (night != 7) {Ran(250);}
+                    else {Ran(50);} //For more fun 
+                    if (RAN == 1) {
+                        customnextnightactivation = 1;
+                    }
+                    gamevictory();
+                }
+                  if (fadeoffice > 0) {
+                    fadeoffice--;
+
+                    if (camera == 0) { 
+                      setRGB0(polyofficeright, fadeoffice, fadeoffice, fadeoffice); 
+                      setRGB0(polyofficemiddle, fadeoffice, fadeoffice, fadeoffice);               
+                      setRGB0(polyofficeleft, fadeoffice, fadeoffice, fadeoffice);        
+                    }
+
+                    setRGB0(polyfiveam, 128 - fadeoffice, 128 - fadeoffice, 128 - fadeoffice);    
+                    setRGB0(polyam, 128 - fadeoffice, 128 - fadeoffice, 128 - fadeoffice);    
+                  } else {
+                    setRGB0(polyfiveam, 128, 128, 128);   
+                    setRGB0(polyam, 128, 128, 128);   
+                    if (camera == 0) { 
+                      setRGB0(polyofficeright, 0, 0, 0); 
+                      setRGB0(polyofficemiddle, 0, 0, 0);               
+                      setRGB0(polyofficeleft, 0, 0, 0); 
+                    }
+
+                    if (camera == 1) {
+                      CameraFunc();
+                    }
+                }
+                fivetosixamframes++;
+
+                if (fivetosixamframes == 120) {LoadTexture(_binary_tim_rect_tim_start, &rect);}
+
+                makepoly(10);
+                if (fivetosixamframes < 240 && fivetosixamframes > 120) {
+                    if (fivetosixamframes %4 == 0) {
+                        MovVectorfiveam.vy--;
+                    }
+                }
+                if (fivetosixamframes == 240) {LoadTexture(_binary_tim_SAM_tim_start, &sixam); MovVectorfiveam.vy = 25;}
+                if (fivetosixamframes > 240 && fivetosixamframes < 400) {
+                    if (fivetosixamframes %7 == 0) {
+                        MovVectorfiveam.vy--;
+                    }
+                }
+                if (fivetosixamframes == 400){
+                    MovVectorfiveam.vy--;
+                }
+            }
+
+            if (fivetosixamframes > 500 && blinkicon > 30){
+                FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n             score : %d !", score);
+            }
+            if (fivetosixamframes > 600 && blinkicon > 30) {
+                if (score == 0) {FntPrint("\n                   ...");}
+                if (score > 0 && score <= 10000) {FntPrint("\n                 Ew...");}
+                if (score >= 15000 && score <= 18000) {FntPrint("\n               Good !");}
+                if (score > 18000 && score < 22000) {FntPrint("\n                Great !!");}
+                if (score >= 22000) {FntPrint("\n               AWESOME !!!");}
+                if (freddydifficulty > 10 && bonniedifficulty > 10 && chicadifficulty > 10 && foxydifficulty > 10) {
+                    FntPrint("\n            %d / %d / %d / %d", freddydifficulty, bonniedifficulty, chicadifficulty, foxydifficulty);
+                } else {
+                    FntPrint("\n             %d / %d / %d / %d", freddydifficulty, bonniedifficulty, chicadifficulty, foxydifficulty);
+                }
+            }
+            if (fivetosixamframes > 719) {
+                if (night == 5 || night == 6 || night == 7) {
+                    nextnightframes++;
+                    if (nextnightframes == 1) {
+                        if (customnextnightactivation == 0) {
+                            sample = 13; //Sample is for the music playing, 13 normal, 18 funky
+                        }
+                        else {
+                            sample = 18;
+                            rgbred = 135;
+                            rgbgreen = 79;
+                            rgbblue = 79;
+                        }
+                        filter.chan = soundBank.samples[sample].channel;
+                        filter.file = soundBank.samples[sample].file;
+                        CdControlF(CdlSetfilter, (u_char *)&filter);
+
+                        soundBank.samples[sample].cursor = 0;
+                    }
+                    makepoly(11);
+
+                    if (night == 7) {
+                        if (hellnight == 1) {
+                            FntPrint(" Whoa, I wouldn't know you'd do that !\n   That single hour was wild, huh ?\n    Anyways, Thanks for playing\n    this port that I loved making!\n If you have questions in regards of the       port, you can contact me !\n       See you on the flip side !");
+                        }           
+                        if (impossiblenight == 1) {
+                            FntPrint("  ...What ? How ? You wasn't supposed\n   To win this, it was impossible...?\n    Well, I dunno what to say..\n    Good job I guess ? And stop it\n Like Right now, stop the console or the       emulator because there's\n       Nothing left to see or do...");
+                        }         
+                    }
+
+                    if (pad & PADstart && night != 7 || nextnightframes == 3600 && night != 7 && customnextnightactivation == 0|| nextnightframes == 5940 && night != 7 && customnextnightactivation == 1) {
+                        if (night != 6) {
+                            night++;
+                        }
+                        if (customcharge == 99 && customAM == 5 && night == 6) {
+                            night++;
+                            hellnight = 1;
+                            activatedmenudebug = 0;
+                            enablephoneguy = 1;
+                            enablephoneguystr[1] = 'N';
+                            cheating = 0;
+                            fastnights = 0;
+                            printnumber = 3;
+                        } 
+                        fivetosixamframes = 0;
+                        nextnightframes = 0;
+                        weirdnight = 0;
+                        resetgame();
+                        menu = 1;
+                    } 
+                    
+                    if (night == 7 && nextnightframes > 4000 && impossiblenight == 1) {CdControlF(CdlPause, 0);} //Just for not having the rrrinngg thing
+                    if (night == 7 && nextnightframes > 8000 && impossiblenight == 1) {
+                        FntPrint("\n           ...Unless ?");
+                        if (pad & PADstart) {
+                            freddydifficulty = 1;
+                            bonniedifficulty = 9;
+                            chicadifficulty = 8;
+                            foxydifficulty = 7;
+                            menu = 1;
+                        }
+                    } //...Unless ?
+
+                    if (night == 7 && nextnightframes > 4500) {
+                        if (hellnight == 1) {
+                            FntPrint("\n           Ready for round 2 ?");
+                            if (pad & PADstart) {
+                                cheating = 0;
+                                fastnights = 0;
+                                printnumber = 3;
+                                fivetosixamframes = 0;
+                                nextnightframes = 0;
+                                weirdnight = 0;
+                                hellnight = 0;
+                                activatedmenudebug = 0;
+                                impossiblenight = 1;
+                                resetgame();
+                                menu = 1;
+                            }
+                        }
+                    }  
+                } else {
+                    night++;
+                    fivetosixamframes = 0;
+                    nextnightframes = 0;
+                    weirdnight = 0;
+                    resetgame();
+                    menu = 1; //Load into next night
+                }
             }
 
             if (weirdnight == 1 && AM >= 4 && AM <= 6) {
@@ -1309,44 +1493,43 @@ int main(void) {
                 }
 
                 if (blackoutactivated == 0 && goldenfreddied == 0 && camera == 0) {
-                    blinkicon = 0;
 
                     if (goldenfreddyactivated == 1) {
                         makepoly(5);
                     }
                     if (dead == 0) {
                         makepoly(6);
+                        setRGB0(polyofficeright, fadeoffice, fadeoffice, fadeoffice); 
+                        setRGB0(polyofficemiddle, fadeoffice, fadeoffice, fadeoffice);               
+                        setRGB0(polyofficeleft, fadeoffice, fadeoffice, fadeoffice);       
                     }
                 }
-                if (dead == 0) {
+                if (dead == 0 && nightwon == 0) {
+
+                    if (pad & PADRup || pad >> 16 & PADRup) {speedoffice = 6;} else {speedoffice = 3;}
+
                     if(pad & PADLleft || pad >> 16 & PADLleft && twoplayermode == 1) {
                         if (MovVectorofficemiddle.vx < 80) {
-                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx + 3;
-                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx + 3;
-                            MovVectorleftdoor.vx = MovVectorleftdoor.vx + 3;
-                            MovVectorrightdoor.vx = MovVectorrightdoor.vx + 3;
-                            MovVectorofficegolden.vx = MovVectorofficegolden.vx + 3;
+                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx + speedoffice;
+                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx + speedoffice;
+                            MovVectorleftdoor.vx = MovVectorleftdoor.vx + speedoffice;
+                            MovVectorrightdoor.vx = MovVectorrightdoor.vx + speedoffice;
+                            MovVectorofficegolden.vx = MovVectorofficegolden.vx + speedoffice;
                         }
                     } // left ;)
                     if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {
                         if (MovVectorofficemiddle.vx > -120) {
-                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx - 3;
-                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx - 3;
-                            MovVectorleftdoor.vx = MovVectorleftdoor.vx - 3;
-                            MovVectorrightdoor.vx = MovVectorrightdoor.vx - 3;
-                            MovVectorofficegolden.vx = MovVectorofficegolden.vx - 3;
+                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx - speedoffice;
+                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx - speedoffice;
+                            MovVectorleftdoor.vx = MovVectorleftdoor.vx - speedoffice;
+                            MovVectorrightdoor.vx = MovVectorrightdoor.vx - speedoffice;
+                            MovVectorofficegolden.vx = MovVectorofficegolden.vx - speedoffice;
                         }
                     } // right :) 
                 }
+
             }
             if (camera == 1) {       
-
-                if (charge > 0) {
-                    if (blinkicon < 61) {blinkicon++;}
-                    if (blinkicon == 60) {blinkicon = 0;}
-                } else {blinkicon = 59;}
-
-
                 //camera's 1A grey or green
                 polycamgreyogreen1A = (POLY_F4 *)nextpri;     
                         
@@ -1617,143 +1800,193 @@ int main(void) {
                 
                 nextpri += sizeof(POLY_F4);                    
 
+                polylayout = (POLY_FT4 *)nextpri;              
+                        
+                RotMatrix(&RotVectorlayout, &PolyMatrixlayout);
+                TransMatrix(&PolyMatrixlayout, &MovVectorlayout);  
+                ScaleMatrix(&PolyMatrixlayout, &ScaleVectorlayout);
+                
+                SetRotMatrix(&PolyMatrixlayout);                   
+                SetTransMatrix(&PolyMatrixlayout);                 
+                
+                setPolyFT4(polylayout);                     
+
+                setClut(polylayout,960,196);       
+                
+                polylayout->tpage = getTPage(layout.mode&0x3, 0, 640, 0); 
+                
+                setRGB0(polylayout, 128, 128, 128);         
+                
+                RotTransPers4(
+                            &VertPoslayout[0],      &VertPoslayout[1],      &VertPoslayout[2],      &VertPoslayout[3],
+                            (long*)&polylayout->x0, (long*)&polylayout->x1, (long*)&polylayout->x2, (long*)&polylayout->x3,
+                            &polydepth,
+                            &polyflag
+                            );                               
+                
+                setUV4(polylayout, 0, 0, 0, 229, 229, 0, 229, 229);  
+                    
+
+                addPrim(ot[db], polylayout);                  
+                
+                nextpri += sizeof(POLY_FT4);             
+
                 makepoly(8);
                 //icon for camera
-                polyfreddy = (POLY_F4 *)nextpri;               
-                
-                        
-                RotMatrix(&RotVectorfreddy, &PolyMatrixfreddy);
-                TransMatrix(&PolyMatrixfreddy, &MovVectorfreddy);  
-                ScaleMatrix(&PolyMatrixfreddy, &ScaleVectorfreddy);
-                
-                SetRotMatrix(&PolyMatrixfreddy);                   
-                SetTransMatrix(&PolyMatrixfreddy);                 
-                
-                setPolyF4(polyfreddy);                             
-                
-                RotTransPers4(
-                            &VertPosfreddy[0],      &VertPosfreddy[1],      &VertPosfreddy[2],      &VertPosfreddy[3],
-                            (long*)&polyfreddy->x0, (long*)&polyfreddy->x1, (long*)&polyfreddy->x2, (long*)&polyfreddy->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                addPrim(ot[db], polyfreddy);                   
-                
-                nextpri += sizeof(POLY_F4);                    
-                //BONNIE 
-                polybonnie = (POLY_F4 *)nextpri;           
-                        
-                RotMatrix(&RotVectorbonnie, &PolyMatrixbonnie);
-                TransMatrix(&PolyMatrixbonnie, &MovVectorbonnie);  
-                ScaleMatrix(&PolyMatrixbonnie, &ScaleVectorbonnie);
-                
-                SetRotMatrix(&PolyMatrixbonnie);                   
-                SetTransMatrix(&PolyMatrixbonnie);                 
-                
-                setPolyF4(polybonnie);                             
-                
-                RotTransPers4(
-                            &VertPosbonnie[0],      &VertPosbonnie[1],      &VertPosbonnie[2],      &VertPosbonnie[3],
-                            (long*)&polybonnie->x0, (long*)&polybonnie->x1, (long*)&polybonnie->x2, (long*)&polybonnie->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                
-                addPrim(ot[db], polybonnie);                   
-                
-                nextpri += sizeof(POLY_F4);                    
-                //CHICA
-                polychica = (POLY_F4 *)nextpri;                
-                
-                        
-                RotMatrix(&RotVectorchica, &PolyMatrixchica);  
-                TransMatrix(&PolyMatrixchica, &MovVectorchica);
-                ScaleMatrix(&PolyMatrixchica, &ScaleVectorchica);
-                
-                SetRotMatrix(&PolyMatrixchica);                  
-                SetTransMatrix(&PolyMatrixchica);                
-                
-                setPolyF4(polychica);                            
-                
-                RotTransPers4(
-                            &VertPoschica[0],      &VertPoschica[1],      &VertPoschica[2],      &VertPoschica[3],
-                            (long*)&polychica->x0, (long*)&polychica->x1, (long*)&polychica->x2, (long*)&polychica->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                
-                addPrim(ot[db], polychica);                    
-                
-                nextpri += sizeof(POLY_F4);                    
-                //FOXY
-                polyfoxy = (POLY_F4 *)nextpri;                
-                        
-                RotMatrix(&RotVectorfoxy, &PolyMatrixfoxy);    
-                TransMatrix(&PolyMatrixfoxy, &MovVectorfoxy);  
-                ScaleMatrix(&PolyMatrixfoxy, &ScaleVectorfoxy);
-                
-                SetRotMatrix(&PolyMatrixfoxy);                 
-                SetTransMatrix(&PolyMatrixfoxy);               
-                
-                setPolyF4(polyfoxy);                           
-                
-                OTz = RotTransPers4(
-                            &VertPosfoxy[0],      &VertPosfoxy[1],      &VertPosfoxy[2],      &VertPosfoxy[3],
-                            (long*)&polyfoxy->x0, (long*)&polyfoxy->x1, (long*)&polyfoxy->x2, (long*)&polyfoxy->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                
-                addPrim(ot[db], polyfoxy);                     
-                
-                nextpri += sizeof(POLY_F4);                    
+                if (animatronicscamera[0] == 2) {
+                    polyfreddy = (POLY_F4 *)nextpri;      
 
-                //Golden freddy
-                polygoldenf = (POLY_F4 *)nextpri;              
-                        
-                RotMatrix(&RotVectorgoldenf, &PolyMatrixgoldenf);    
-                TransMatrix(&PolyMatrixgoldenf, &MovVectorgoldenf);  
-                ScaleMatrix(&PolyMatrixgoldenf, &ScaleVectorgoldenf);
-                
-                SetRotMatrix(&PolyMatrixgoldenf);                    
-                SetTransMatrix(&PolyMatrixgoldenf);                  
-                
-                setPolyF4(polygoldenf);                          
-                setRGB0(polygoldenf,204,204,0);
-                OTz = RotTransPers4(
-                            &VertPosgoldenf[0],      &VertPosgoldenf[1],      &VertPosgoldenf[2],      &VertPosgoldenf[3],
-                            (long*)&polygoldenf->x0, (long*)&polygoldenf->x1, (long*)&polygoldenf->x2, (long*)&polygoldenf->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                
-                addPrim(ot[db], polygoldenf);                  
-                
-                nextpri += sizeof(POLY_F4);                    
+                    setRGB0(polyfreddy, 56, 34, 23);
+                            
+                    RotMatrix(&RotVectorfreddy, &PolyMatrixfreddy);
+                    TransMatrix(&PolyMatrixfreddy, &MovVectorfreddy);  
+                    ScaleMatrix(&PolyMatrixfreddy, &ScaleVectorfreddy);
+                    
+                    SetRotMatrix(&PolyMatrixfreddy);                   
+                    SetTransMatrix(&PolyMatrixfreddy);                 
+                    
+                    setPolyF4(polyfreddy);                             
+                    
+                    RotTransPers4(
+                                &VertPosfreddy[0],      &VertPosfreddy[1],      &VertPosfreddy[2],      &VertPosfreddy[3],
+                                (long*)&polyfreddy->x0, (long*)&polyfreddy->x1, (long*)&polyfreddy->x2, (long*)&polyfreddy->x3,
+                                &polydepth,
+                                &polyflag
+                                );                                 
+                    addPrim(ot[db], polyfreddy);                   
+                    
+                    nextpri += sizeof(POLY_F4);                    
+                }
+                if (animatronicscamera[1] == 2) {
+                    //BONNIE 
+                    polybonnie = (POLY_F4 *)nextpri;        
 
-                //sparky
-                polysparky = (POLY_F4 *)nextpri;               
-                        
-                RotMatrix(&RotVectorsparky, &PolyMatrixsparky);
-                TransMatrix(&PolyMatrixsparky, &MovVectorsparky);  
-                ScaleMatrix(&PolyMatrixsparky, &ScaleVectorsparky);
-                
-                SetRotMatrix(&PolyMatrixsparky);                   
-                SetTransMatrix(&PolyMatrixsparky);                 
-                
-                setPolyF4(polysparky);                             
-                setRGB0(polysparky,77,59,45);
-                OTz = RotTransPers4(
-                            &VertPossparky[0],      &VertPossparky[1],      &VertPossparky[2],      &VertPossparky[3],
-                            (long*)&polysparky->x0, (long*)&polysparky->x1, (long*)&polysparky->x2, (long*)&polysparky->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                
-                addPrim(ot[db], polysparky);                   
-                
-                nextpri += sizeof(POLY_F4);                    
+                    setRGB0(polybonnie, 0, 21, 90); 
 
+                    RotMatrix(&RotVectorbonnie, &PolyMatrixbonnie);
+                    TransMatrix(&PolyMatrixbonnie, &MovVectorbonnie);  
+                    ScaleMatrix(&PolyMatrixbonnie, &ScaleVectorbonnie);
+                    
+                    SetRotMatrix(&PolyMatrixbonnie);                   
+                    SetTransMatrix(&PolyMatrixbonnie);                 
+                    
+                    setPolyF4(polybonnie);                             
+                    
+                    RotTransPers4(
+                                &VertPosbonnie[0],      &VertPosbonnie[1],      &VertPosbonnie[2],      &VertPosbonnie[3],
+                                (long*)&polybonnie->x0, (long*)&polybonnie->x1, (long*)&polybonnie->x2, (long*)&polybonnie->x3,
+                                &polydepth,
+                                &polyflag
+                                );                                 
+                    
+                    addPrim(ot[db], polybonnie);                   
+                    
+                    nextpri += sizeof(POLY_F4);               
+                }
+
+                if (animatronicscamera[2] == 2) {     
+                    //CHICA
+                    polychica = (POLY_F4 *)nextpri;    
+
+                    setRGB0(polychica, 128, 115, 41);
+                            
+                    RotMatrix(&RotVectorchica, &PolyMatrixchica);  
+                    TransMatrix(&PolyMatrixchica, &MovVectorchica);
+                    ScaleMatrix(&PolyMatrixchica, &ScaleVectorchica);
+                    
+                    SetRotMatrix(&PolyMatrixchica);                  
+                    SetTransMatrix(&PolyMatrixchica);                
+                    
+                    setPolyF4(polychica);                            
+                    
+                    RotTransPers4(
+                                &VertPoschica[0],      &VertPoschica[1],      &VertPoschica[2],      &VertPoschica[3],
+                                (long*)&polychica->x0, (long*)&polychica->x1, (long*)&polychica->x2, (long*)&polychica->x3,
+                                &polydepth,
+                                &polyflag
+                                );                                 
+                    
+                    addPrim(ot[db], polychica);                    
+                    
+                    nextpri += sizeof(POLY_F4);                    
+                }
+
+                if (animatronicscamera[3] == 2) {
+                    //FOXY
+                    polyfoxy = (POLY_F4 *)nextpri;
+
+                    setRGB0(polyfoxy, 97, 20, 20);       
+
+                    RotMatrix(&RotVectorfoxy, &PolyMatrixfoxy);    
+                    TransMatrix(&PolyMatrixfoxy, &MovVectorfoxy);  
+                    ScaleMatrix(&PolyMatrixfoxy, &ScaleVectorfoxy);
+                    
+                    SetRotMatrix(&PolyMatrixfoxy);                 
+                    SetTransMatrix(&PolyMatrixfoxy);               
+                    
+                    setPolyF4(polyfoxy);                           
+                    
+                    OTz = RotTransPers4(
+                                &VertPosfoxy[0],      &VertPosfoxy[1],      &VertPosfoxy[2],      &VertPosfoxy[3],
+                                (long*)&polyfoxy->x0, (long*)&polyfoxy->x1, (long*)&polyfoxy->x2, (long*)&polyfoxy->x3,
+                                &polydepth,
+                                &polyflag
+                                );                                 
+                    
+                    addPrim(ot[db], polyfoxy);                     
+                    
+                    nextpri += sizeof(POLY_F4);                    
+                }
+
+                if (animatronicscamera[4] == 2) {
+                    //Golden freddy
+                    polygoldenf = (POLY_F4 *)nextpri;              
+                            
+                    RotMatrix(&RotVectorgoldenf, &PolyMatrixgoldenf);    
+                    TransMatrix(&PolyMatrixgoldenf, &MovVectorgoldenf);  
+                    ScaleMatrix(&PolyMatrixgoldenf, &ScaleVectorgoldenf);
+                    
+                    SetRotMatrix(&PolyMatrixgoldenf);                    
+                    SetTransMatrix(&PolyMatrixgoldenf);                  
+                    
+                    setPolyF4(polygoldenf);                          
+                    setRGB0(polygoldenf,204,204,0);
+                    OTz = RotTransPers4(
+                                &VertPosgoldenf[0],      &VertPosgoldenf[1],      &VertPosgoldenf[2],      &VertPosgoldenf[3],
+                                (long*)&polygoldenf->x0, (long*)&polygoldenf->x1, (long*)&polygoldenf->x2, (long*)&polygoldenf->x3,
+                                &polydepth,
+                                &polyflag
+                                );                                 
+                    
+                    addPrim(ot[db], polygoldenf);                  
+                    
+                    nextpri += sizeof(POLY_F4);                 
+                }   
+
+                if (animatronicscamera[5] == 2) {
+                    //sparky
+                    polysparky = (POLY_F4 *)nextpri;               
+                            
+                    RotMatrix(&RotVectorsparky, &PolyMatrixsparky);
+                    TransMatrix(&PolyMatrixsparky, &MovVectorsparky);  
+                    ScaleMatrix(&PolyMatrixsparky, &ScaleVectorsparky);
+                    
+                    SetRotMatrix(&PolyMatrixsparky);                   
+                    SetTransMatrix(&PolyMatrixsparky);                 
+                    
+                    setPolyF4(polysparky);                             
+                    setRGB0(polysparky,77,59,45);
+                    OTz = RotTransPers4(
+                                &VertPossparky[0],      &VertPossparky[1],      &VertPossparky[2],      &VertPossparky[3],
+                                (long*)&polysparky->x0, (long*)&polysparky->x1, (long*)&polysparky->x2, (long*)&polysparky->x3,
+                                &polydepth,
+                                &polyflag
+                                );                                 
+                    
+                    addPrim(ot[db], polysparky);                   
+                    
+                    nextpri += sizeof(POLY_F4);                    
+                }
                 makepoly(9);     
     
             }
@@ -1762,10 +1995,14 @@ int main(void) {
                 if (freddylocation == 0) { //Stage
                         MovVectorfreddy.vx = 0; 
                         MovVectorfreddy.vy = -48;
-                    if (curcam[0] == '1' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polyfreddy, 56, 34, 23); 
+                    if (curcam[0] == '1' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[0] = 2;
+                        } else {
+                            animatronicscamera[0] = 1;
+                        }
                     } else {
-                        setRGB0(polyfreddy, 0, 0, 0);
+                            animatronicscamera[0] = 0;
                     }
                     if (bonnielocation != 0 && chicalocation != 0) {
                         if (curcam[0] == '1' && curcam[1] == 'A' && freddyliljumpscare == 0 && freddyliljumpscarecooldown == 0) {
@@ -1783,52 +2020,69 @@ int main(void) {
                 if (freddylocation == 1) { //Dining area
                     MovVectorfreddy.vx = 10;
                     MovVectorfreddy.vy = -13;
-                    if (curcam[0] == '1' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        if (bonnielocation != 1 && chicalocation != 1 && bonnielocation != 3 && chicalocation != 3) {
-                            setRGB0(polyfreddy, 33, 11, 0);      
+                    if (curcam[0] == '1' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[0] = 2;
+                        } else {
+                            animatronicscamera[0] = 1;
                         }
                     } else {
-                        setRGB0(polyfreddy, 0, 0, 0);      
+                            animatronicscamera[0] = 0;
                     }
                 }
                 if (freddylocation == 2) { //Restrooms (girl)
                     MovVectorfreddy.vx = 57;
                     MovVectorfreddy.vy = -24;
-                    if (curcam[0] == '7' && curcam[1] == ' ' && blinkicon > 30 || radar == 1) {
-                        if (chicalocation != 2) {
-                            setRGB0(polyfreddy, 33, 11, 0);     
-                        }
-                    } else {
-                        setRGB0(polyfreddy, 0, 0, 0);    
+                    if (curcam[0] == '7' && curcam[1] == ' ') {
+                        if (blinkicon > 30 || radar == 1) {
+                            if (chicalocation != 2) {
+                                animatronicscamera[0] = 2;
+                            } else {
+                                animatronicscamera[0] = 1;
+                            }
+                        } else {
+                            animatronicscamera[0] = 1;
+                        } 
+                    }
+                    else {
+                        animatronicscamera[0] = 0;
                     }
                 }
                 if (freddylocation == 3) { //Kitchen 
                     MovVectorfreddy.vx = 44;
                     MovVectorfreddy.vy = 9;
-                    if (curcam[0] == '6' && curcam[1] == ' ' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polyfreddy, 0, 0, 0);                 // no
+                    if (curcam[0] == '6' && curcam[1] == ' ') {
+                        animatronicscamera[0] = 0;                // no
                     } else {
-                        setRGB0(polyfreddy, 0, 0, 0);    
+                        animatronicscamera[0] = 0;   
                     }
                 }
                 if (freddylocation == 4) { //East Hall
                     MovVectorfreddy.vx = 14;
                     MovVectorfreddy.vy = 7;
-                    if (curcam[0] == '4' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        if (chicalocation != 5 && chicalocation != 6) {
-                            setRGB0(polyfreddy, 33, 11, 0);    
+                    if (curcam[0] == '4' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            if (chicalocation != 5 && chicalocation != 6) {
+                                animatronicscamera[0] = 2;
+                            } else {
+                                animatronicscamera[0] = 1;
+                            }
+                        } else {
+                            animatronicscamera[0] = 0;      
                         }
-                    } else {
-                        setRGB0(polyfreddy, 0, 0, 0);      
                     }
                 }
                 if (freddylocation == 5) { //E. Hall corner
                     MovVectorfreddy.vx = 14;
                     MovVectorfreddy.vy = 40;
-                    if (curcam[0] == '4' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polyfreddy, 56, 34, 23);     
+                    if (curcam[0] == '4' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[0] = 2;
+                        } else {
+                            animatronicscamera[0] = 1;
+                        }
                     } else {
-                        setRGB0(polyfreddy, 0, 0, 0);       
+                        animatronicscamera[0] = 0;   
                     }
                 }
                 if (freddylocation == 6) { //'Door'
@@ -1848,26 +2102,38 @@ int main(void) {
                 if (bonnielocation == 0) { //Stage
                         MovVectorbonnie.vx = -10;
                         MovVectorbonnie.vy = -50;
-                    if (curcam[0] == '1' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polybonnie, 0, 21, 90);          
+                    if (curcam[0] == '1' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[1] = 2;
+                        } else {
+                            animatronicscamera[1] = 1;
+                        }
                     } else {
-                        setRGB0(polybonnie, 0, 0, 0);            
+                        animatronicscamera[1] = 0;   
                     }
                 }
                 if (bonnielocation == 1) { //Dining area
                     MovVectorbonnie.vx = -20;
                     MovVectorbonnie.vy = -21;
-                    if (curcam[0] == '1' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polybonnie, 0, 21, 90);            
+                    if (curcam[0] == '1' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[1] = 2;
+                        } else {
+                            animatronicscamera[1] = 1;
+                        }
                     } else {
-                        setRGB0(polybonnie, 0, 0, 0);             
+                        animatronicscamera[1] = 0;   
                     }
                 }
                 if (bonnielocation == 2) { //Backstage
-                    if (curcam[0] == '5' && curcam[1] == ' ' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polybonnie, 0, 21, 90);           
+                    if (curcam[0] == '5' && curcam[1] == ' ') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[1] = 2;
+                        } else {
+                            animatronicscamera[1] = 1;
+                        }
                     } else {
-                        setRGB0(polybonnie, 0, 0, 0);             
+                        animatronicscamera[1] = 0;   
                     }
                     if (camera == 1) {
                         if (curcam[0] == '5' && bonnieliljumpscare == 0 && bonnieliljumpscarecooldown == 0) {
@@ -1891,37 +2157,53 @@ int main(void) {
                 if (bonnielocation == 3) { //Dining area (closer to cam)
                     MovVectorbonnie.vx = -20;
                     MovVectorbonnie.vy = -31;
-                    if (curcam[0] == '1' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polybonnie, 0, 21, 90);          
+                    if (curcam[0] == '1' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[1] = 2;
+                        } else {
+                            animatronicscamera[1] = 1;
+                        }
                     } else {
-                        setRGB0(polybonnie, 0, 0, 0);            
+                        animatronicscamera[1] = 0;   
                     }
                 }
                 if (bonnielocation == 4) { //West Hall
                     MovVectorbonnie.vx = -17;
                     MovVectorbonnie.vy = 8;
-                    if (curcam[0] == '2' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polybonnie, 0, 21, 90);        
+                    if (curcam[0] == '2' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[1] = 2;
+                        } else {
+                            animatronicscamera[1] = 1;
+                        }
                     } else {
-                        setRGB0(polybonnie, 0, 0, 0);          
+                        animatronicscamera[1] = 0;   
                     }
                 }
                 if (bonnielocation == 5) { //Supply closet
                     MovVectorbonnie.vx = -35;
                     MovVectorbonnie.vy = 24;
-                    if (curcam[0] == '3' && curcam[1] == ' ' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polybonnie, 0, 21, 90);      
+                    if (curcam[0] == '3' && curcam[1] == ' ') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[1] = 2;
+                        } else {
+                            animatronicscamera[1] = 1;
+                        }
                     } else {
-                        setRGB0(polybonnie, 0, 0, 0);        
+                        animatronicscamera[1] = 0;   
                     }
                 }
                 if (bonnielocation == 6) { //W. Hall corner
                     MovVectorbonnie.vx = -19;
                     MovVectorbonnie.vy = 40;
-                    if (curcam[0] == '2' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polybonnie, 0, 21, 90);         
+                    if (curcam[0] == '2' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[1] = 2;
+                        } else {
+                            animatronicscamera[1] = 1;
+                        }
                     } else {
-                        setRGB0(polybonnie, 0, 0, 0);           
+                        animatronicscamera[1] = 0;   
                     }
                 }
                 if (bonnielocation == 7) { //Door
@@ -1933,75 +2215,101 @@ int main(void) {
                 if (chicalocation == 0) { //Stage
                         MovVectorchica.vx = 10;
                         MovVectorchica.vy = -50;
-                    if (curcam[0] == '1' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polychica, 128, 115, 41);     
+                    if (curcam[0] == '1' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[2] = 2;
+                        } else {
+                            animatronicscamera[2] = 1;
+                        }
                     } else {
-                        setRGB0(polychica, 0, 0, 0);          
+                        animatronicscamera[2] = 0;   
                     }
                 }
                 if (chicalocation == 1) { //Dining area
                     MovVectorchica.vx = 8;
                     MovVectorchica.vy = -28;
-                    if (curcam[0] == '1' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polychica, 128, 115, 41);         
+                    if (curcam[0] == '1' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[2] = 2;
+                        } else {
+                            animatronicscamera[2] = 1;
+                        }
                     } else {
-                        setRGB0(polychica, 0, 0, 0);              
+                        animatronicscamera[2] = 0;   
                     }
                 }
                 if (chicalocation == 2) { //Restrooms
                     MovVectorchica.vx = 45;
                     MovVectorchica.vy = -20;
-                    if (curcam[0] == '7' && curcam[1] == ' ' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polychica, 128, 115, 41);        
+                    if (curcam[0] == '7' && curcam[1] == ' ') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[2] = 2;
+                        } else {
+                            animatronicscamera[2] = 1;
+                        }
                     } else {
-                        setRGB0(polychica, 0, 0, 0);             
+                        animatronicscamera[2] = 0;   
                     }
                 }
                 if (chicalocation == 3) { //Dining area (closer to cam)
                     MovVectorchica.vx = -15;
                     MovVectorchica.vy = -31;
-                    if (curcam[0] == '1' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polychica, 128, 115, 41);         
+                    if (curcam[0] == '1' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[2] = 2;
+                        } else {
+                            animatronicscamera[2] = 1;
+                        }
                     } else {
-                        setRGB0(polychica, 0, 0, 0);              
+                        animatronicscamera[2] = 0;   
                     }
                 }
                 if (chicalocation == 4) { //Kitchen
                     MovVectorchica.vx = 35;
                     MovVectorchica.vy = 10;
-                    if (curcam[0] == '6' && curcam[1] == ' ' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polychica, 0, 0, 0);                 // You can't see her !
+                    if (curcam[0] == '6' && curcam[1] == ' ') {
+                        animatronicscamera[2] = 0;                  // You can't see her !
                     } else {
-                        setRGB0(polychica, 0, 0, 0);           
+                        animatronicscamera[2] = 0;            
                     }
                 }
                 if (chicalocation == 5){ //East Hall
                     MovVectorchica.vx = 16;
                     MovVectorchica.vy = 14;
-                    if (curcam[0] == '4' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polychica, 128, 115, 41);       
+                    if (curcam[0] == '4' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[2] = 2;
+                        } else {
+                            animatronicscamera[2] = 1;
+                        }
                     } else {
-                        setRGB0(polychica, 0, 0, 0);            
+                        animatronicscamera[2] = 0;   
                     }
                 }
                 if (chicalocation == 6){ //East Hall (closer)
                     MovVectorchica.vx = 16;
                     MovVectorchica.vy = 20;
-                    if (curcam[0] == '4' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polychica, 128, 115, 41);         
+                    if (curcam[0] == '4' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[2] = 2;
+                        } else {
+                            animatronicscamera[2] = 1;
+                        }
                     } else {
-                        setRGB0(polychica, 0, 0, 0);              
+                        animatronicscamera[2] = 0;   
                     }
                 }
                 if (chicalocation == 7) { //E. Hall corner
                     MovVectorchica.vx = 19;
                     MovVectorchica.vy = 40;
-                    if (curcam[0] == '4' && curcam[1] == 'B' && blinkicon > 30 || radar == 1) {
-                        if (freddylocation != 5 ) {
-                            setRGB0(polychica, 128, 115, 41);       
+                    if (curcam[0] == '4' && curcam[1] == 'B') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[2] = 2;
+                        } else {
+                            animatronicscamera[2] = 1;
                         }
                     } else {
-                        setRGB0(polychica, 0, 0, 0);                
+                        animatronicscamera[2] = 0;   
                     }
                 }
                 if (chicalocation == 8) { //Door
@@ -2013,35 +2321,51 @@ int main(void) {
                 if (foxylocation == 0) { //Pirate Cove
                     MovVectorfoxy.vx = -45;
                     MovVectorfoxy.vy = -9;
-                    if (curcam[0] == '1' && curcam[1] == 'C' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polyfoxy, 97, 20, 20);       
+                    if (curcam[0] == '1' && curcam[1] == 'C') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[3] = 2;
+                        } else {
+                            animatronicscamera[3] = 1;
+                        }
                     } else {
-                        setRGB0(polyfoxy, 0, 0, 0);          
+                        animatronicscamera[3] = 0;   
                     }
                 }
                 if (foxylocation == 1) { //Pirate Cove
                     MovVectorfoxy.vx = -40;
                     MovVectorfoxy.vy = -9;
-                    if (curcam[0] == '1' && curcam[1] == 'C' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polyfoxy, 97, 20, 20);          
+                    if (curcam[0] == '1' && curcam[1] == 'C') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[3] = 2;
+                        } else {
+                            animatronicscamera[3] = 1;
+                        }
                     } else {
-                        setRGB0(polyfoxy, 0, 0, 0);             
+                        animatronicscamera[3] = 0;   
                     }
                 }
                 if (foxylocation == 2) { //Pirate Cove (out)
                     MovVectorfoxy.vx = -30;
                     MovVectorfoxy.vy = -6;
-                    if (curcam[0] == '1' && curcam[1] == 'C' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polyfoxy, 97, 20, 20);          
+                    if (curcam[0] == '1' && curcam[1] == 'C') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[3] = 2;
+                        } else {
+                            animatronicscamera[3] = 1;
+                        }
                     } else {
-                        setRGB0(polyfoxy, 0, 0, 0);             
+                        animatronicscamera[3] = 0;   
                     }
                 }
                 if (foxylocation == 3) { //West Hall
-                    if (curcam[0] == '2' && curcam[1] == 'A' && blinkicon > 30 || radar == 1) {
-                        setRGB0(polyfoxy, 97, 20, 20);           
+                    if (curcam[0] == '2' && curcam[1] == 'A') {
+                        if (blinkicon > 30 || radar == 1) {
+                            animatronicscamera[3] = 2;
+                        } else {
+                            animatronicscamera[3] = 1;
+                        }
                     } else {
-                        setRGB0(polyfoxy, 0, 0, 0);              
+                        animatronicscamera[3] = 0;   
                     }
                     if (charge > 0) {
                         if (foxyrunningframes == 0) {
@@ -2063,6 +2387,7 @@ int main(void) {
                             } else {
                                 if (doorclosedL == 1) {
                                     foxylocation = 0;
+                                    blockedanimatronic++;
                                     foxywaiting = 500;
                                     foxyrunningframes = 0;
                                     foxysknock = 1;
@@ -2085,117 +2410,8 @@ int main(void) {
                 MovVectorsparky.vx = -42;
                 MovVectorsparky.vy = -39;
             }
-        }
-        if (menu == 3) { //Victory Screen
-            gamevictory();
-            if (fivetosixamframes < 720) {
-                if (fivetosixamframes == 1) {
-                    if (night != 7) {Ran(250);}
-                    else {Ran(50);} //For more fun 
-                    if (RAN == 1) {
-                        customnextnightactivation = 1;
-                    }
-                }
-                fivetosixamframes++;
-
-                makepoly(10);
-                if (fivetosixamframes == 400){
-                    LoadTexture(_binary_tim_SAM_tim_start, &sixam);
-                }
-            }
-
-            if (fivetosixamframes > 719) {
-                if (night == 5 || night == 6 || night == 7) {
-                    nextnightframes++;
-                    if (nextnightframes == 1) {
-                        if (customnextnightactivation == 0) {
-                            sample = 13; //Sample is for the music playing, 13 normal, 18 funky
-                        }
-                        else {
-                            sample = 18;
-                            rgbred = 135;
-                            rgbgreen = 79;
-                            rgbblue = 79;
-                        }
-                        filter.chan = soundBank.samples[sample].channel;
-                        filter.file = soundBank.samples[sample].file;
-                        CdControlF(CdlSetfilter, (u_char *)&filter);
-
-                        soundBank.samples[sample].cursor = 0;
-                    }
-                    makepoly(11);
-
-                    if (night == 7) {
-                        if (hellnight == 1) {
-                            FntPrint(" Whoa, I wouldn't know you'd do that !\n   That single hour was wild, huh ?\n    Anyways, Thanks for playing\n    this port that I loved making!\n If you have questions in regards of the       port, you can contact me !\n       See you on the flip side !");
-                        }           
-                        if (impossiblenight == 1) {
-                            FntPrint("  ...What ? How ? You wasn't supposed\n   To win this, it was impossible...?\n    Well, I dunno what to say..\n    Good job I guess ? And stop it\n Like Right now, stop the console or the       emulator because there's\n       Nothing left to see or do...");
-                        }         
-                    }
-
-                    if (pad & PADstart && night != 7 || nextnightframes == 3600 && night != 7 && customnextnightactivation == 0|| nextnightframes == 5940 && night != 7 && customnextnightactivation == 1) {
-                        if (night != 6) {
-                            night++;
-                        }
-                        if (customcharge == 99 && customAM == 5 && night == 6) {
-                            night++;
-                            hellnight = 1;
-                            activatedmenudebug = 0;
-                            enablephoneguy = 1;
-                            enablephoneguystr[1] = 'N';
-                            cheating = 0;
-                            fastnights = 0;
-                            printnumber = 3;
-                        } 
-                        fivetosixamframes = 0;
-                        nextnightframes = 0;
-                        weirdnight = 0;
-                        resetgame();
-                        menu = 5;
-                    } 
-                    
-                    if (night == 7 && nextnightframes > 4000 && impossiblenight == 1) {CdControlF(CdlPause, 0);} //Just for not having the rrrinngg thing
-                    if (night == 7 && nextnightframes > 8000 && impossiblenight == 1) {
-                        FntPrint("\n           ...Unless ?");
-                        if (pad & PADstart) {
-                            freddydifficulty = 1;
-                            bonniedifficulty = 9;
-                            chicadifficulty = 8;
-                            foxydifficulty = 7;
-                            menu = 5;
-                        }
-                    } //...Unless ?
-
-                    if (night == 7 && nextnightframes > 4500) {
-                        if (hellnight == 1) {
-                            FntPrint("\n           Ready for round 2 ?");
-                            if (pad & PADstart) {
-                                cheating = 0;
-                                fastnights = 0;
-                                printnumber = 3;
-                                fivetosixamframes = 0;
-                                nextnightframes = 0;
-                                weirdnight = 0;
-                                hellnight = 0;
-                                activatedmenudebug = 0;
-                                impossiblenight = 1;
-                                resetgame();
-                                menu = 5;
-                            }
-                        }
-                    }  
-                } else {
-                    night++;
-                    fivetosixamframes = 0;
-                    nextnightframes = 0;
-                    weirdnight = 0;
-                    resetgame();
-                    menu = 5; //Load into next night
-                }
-            }
-        }
-        if (menu == 4) { //Game over screen. ALWAYS BEGIN WITH THE STATIC
+        }//Gameplay Screen
+        if (menu == 3) { //Game over screen. ALWAYS BEGIN WITH THE STATIC
             if (staticframes > 1) {
                 makepoly(15);
                 if (staticframessheet == 8) {
@@ -2227,10 +2443,10 @@ int main(void) {
                     }
 
                     resetgame();
-                    menu = 5;
+                    menu = 1;
                 }
             } else{staticframes--;}
-        }
+        }//Game over screen. ALWAYS BEGIN WITH THE STATIC
         FntFlush(-1); //Draw
         display(); //Always here        
     }
@@ -2245,6 +2461,10 @@ void chargeNtimeFunc(void) {
 
     if (FrameCounter == FrameCounterlimit) {
         AM++;
+        if (powermanagementhour > 13) { // U should use ~10% per hour 
+            powermanagementtotal = powermanagementhour;
+        }
+        powermanagementhour = 0;
         if (AM == 13) {
             AM = 1;
         }
@@ -2257,6 +2477,7 @@ void chargeNtimeFunc(void) {
         if (ChargeCounter <= 0 && unlimitedpower == 0) {
             charge = charge - 1;
             ChargeCounter = 596;
+            powermanagementhour++;
         }
     if (weirdnight == 1 && AM == 3) {
         surusage = 1;
@@ -2356,12 +2577,20 @@ void resetgame(void) {
     dead = 0;
     deadfrom = 0;
 
+    nightwon = 0;
+
+    fadeoffice = 128;
+
     nextnightframes = 0;
     customnextnightactivation = 0;
     staticframessheet = 0;
     MovVectorstatic.vx = -40;
 
     staticframes = 600;
+
+    score = 0;
+    blockedanimatronic = 0;
+    powermanagementtotal = 0;
 
     #define OTLEN 8                    // Ordering Table Length 
 
@@ -2400,12 +2629,12 @@ void print(int number) {
             if (camera == 0) {
                 FntPrint("\n");
             }
-            FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n%d AM,", AM);  // print time
+            FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n%d AM, %d ", AM, powermanagementtotal);  // print time
             FntPrint("Night %d", night);
             if (night != 7) {
                 FntPrint("\nCharge : %d \nUsage: %d\n", charge, usage);
             } else {
-                FntPrint("\nCharge : %d \nUsage: %d\n", Glitch, usage);
+                FntPrint("\nCharge : %d \nUsage: %d \n", Glitch, usage);
             }
         }
         if (camera == 1 && number != 2) {
@@ -2486,14 +2715,14 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         if (menuselection == 1) {//"Starting" night
             if (pad & PADstart) {
                 night = 1;
-                menu = 1;
+                helpwantedposter = 1;
             } 
         }
 
         if (menuselection == 2) { //Continue nights
             if (pad & PADstart) {
                 loadingframe = 360;
-                menu = 5;
+                menu = 1;
             }//Or...
             if (pad & PADRup && pad & PADRright && pad & PADR1 && pad & PADL2 && activatedmenudebug == 0) //Activate debug !
             {
@@ -2529,7 +2758,7 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         }
 
         if (activatedmenudebug == 1) {
-            if (menuselection == 6) {
+            if (menuselection == 5) {
                 if (pad & PADLright) {
                     if (limiterpadright == 0) {
                         printnumber++;
@@ -3246,7 +3475,7 @@ void menuPrint(void) {
 
         FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n            Thank you, Scott, \n For making our childhood a lot better.\n\n");
 
-        FntPrint(">> Back                       V1.0.6 \n"); //Don't even need to do condition, there's only one
+        FntPrint(">> Back                       V1.1 \n"); //Don't even need to do condition, there's only one
         /* It doesn't want :(
         FntPrint("                 What's New ?\n"); 
         FntPrint("V1.0.1 :\n   - added the help wanted screen\n   - changed a lot of images\n   - cleaned code\n   "); */
@@ -3278,8 +3507,10 @@ void controllerinput(void) {
         if (camera == 0) {
             if(pad & PADLup || pad >> 16 & PADLup && twoplayermode == 1) { //Up
                 if (limiterbop == 1) {return;}
-                SpuSetKey(SPU_ON, SPU_07CH);
-                limiterbop = 1;
+                if (MovVectorofficemiddle.vx > -65) {
+                    SpuSetKey(SPU_ON, SPU_07CH);
+                    limiterbop = 1; 
+                }
             }
             if(!(pad & PADLup || pad >> 16 & PADLup && twoplayermode == 1)) {limiterbop = 0;}
 
@@ -3395,6 +3626,7 @@ void animatronicFunc(int init) {
                         if (light1 == 1) {LightFunc();}
                         bonnieDoor = 0;
                         bonnielocation = 1;
+                        blockedanimatronic++;
                         noisedoorbonnie = 0;
                     } else {
                         if (light1 == 1) {LightFunc();}
@@ -3418,6 +3650,7 @@ void animatronicFunc(int init) {
                         if (light2 == 1) {LightFunc();}
                         chicaDoor = 0;
                         chicalocation = 1;
+                        blockedanimatronic++;
                         noisedoorchica = 0;
                     } else {
                         if (light2 == 1) {LightFunc();}
@@ -3448,8 +3681,14 @@ void animatronicFunc(int init) {
                 }
             }
 
-            //Have to make other things, look https://www.youtube.com/watch?v=ujg0Y5IziiY very good at explaining how freddy works
             freddylocationframe--; 
+            bonnielocationframe--;
+            chicalocationframe--;
+            if (ranfoxy == 0) {
+                foxylocationframe--;
+            }
+
+            //Have to make other things, look https://www.youtube.com/watch?v=ujg0Y5IziiY very good at explaining how freddy works
             if (freddylocationframe < 0 && freddydifficulty != 0) {
                 Ran(20); //Roll time !!!!!!!
                 if (freddydifficulty > RAN && isalreadydeadlow == 0) { //If freddy's AI level is superior to the current RAN, ... (for camera == 1 it's same issue as foxy)
@@ -3465,10 +3704,10 @@ void animatronicFunc(int init) {
                 if (night == 7) {if(hellnight == 1) {freddylocationframe = 92;} else {freddylocationframe = 46;}} else {freddylocationframe = freddylocationframelock;}
                 if (freddylocation > 7) { //7 (final animatronic's pos) is when he's supposed to either kill you, or...
                     freddylocation = 4; //Return
+                    blockedanimatronic++;
                     noisefootstepF = 1;
                 }
             }
-            bonnielocationframe--;
             if (bonnielocationframe < 0 && bonniedifficulty != 0) {
                 Ran(20);
                 if (bonniedifficulty > RAN) {
@@ -3492,7 +3731,6 @@ void animatronicFunc(int init) {
                 }   
                 if (night == 7) {if(hellnight == 1) {bonnielocationframe = 149;} else {bonnielocationframe = 74;}} else {bonnielocationframe = bonnielocationframelock;}
             }
-            chicalocationframe--;
             if (chicalocationframe < 0 && chicadifficulty != 0) {
                 Ran(20);
                 if (chicadifficulty > RAN) {
@@ -3521,9 +3759,6 @@ void animatronicFunc(int init) {
                 }
             }
 
-            if (ranfoxy == 0) {
-                foxylocationframe--;
-            }
             if (camera == 1 && foxylocation < 3) { //"C" only and not "1C" bcs there's only one cam where the letter C is
                 foxylocked = 1;
                 if (night == 7) {if(hellnight == 1) {Ran(8);} else {Ran(4);}} else {Ran(foxylockeduration);} //Normally, this would be 16. Welp, now it is ! Old value : 8 (taken for the HELL NIGHT)
@@ -3607,7 +3842,7 @@ void screamer(void) {
                 }
                 if (spritesheet == 6) {
                     SpuSetKey(SPU_OFF, SPU_06CH);
-                    menu = 4;
+                    menu = 3;
                 }
             } else { //Really special, has 6 FRAMES AYO THAT'S TAKING SO MUCH RAM
                 if (spritesheet == 1) {
@@ -3627,7 +3862,7 @@ void screamer(void) {
                 }
                 if (spritesheet == 6) {
                     SpuSetKey(SPU_OFF, SPU_06CH);
-                    menu = 4;
+                    menu = 3;
                 }
             }
         }
@@ -3651,7 +3886,7 @@ void screamer(void) {
         SpuSetKey(SPU_ON, SPU_06CH);
     }
     if (screamerframes == 0) {
-        menu = 4;
+        menu = 3;
     }
 }
 void doorFunc(int number) {door = number;}
@@ -3796,5 +4031,16 @@ void gamevictory(void) {
         CameraFunc();
     }
     usage = 0;
+
+    timeoncam = timeoncam / 60; //Divide the var on seconds
+    if (timeoncam >= 0 && timeoncam < 60) {timeoncam == 1000;}
+    if (timeoncam >= 60 && timeoncam < 120) {timeoncam == 750;}
+    if (timeoncam >= 120 && timeoncam < 180) {timeoncam == 500;}
+    if (timeoncam >= 180) {timeoncam == 250;}
+
+    powermanagementtotal = powermanagementtotal * 30;
+
+    score = score + (50 * charge) + (200 * freddydifficulty) + (200 * bonniedifficulty) + (200 * chicadifficulty) + (200 * foxydifficulty) + (150 * blockedanimatronic) + timeoncam - powermanagementtotal;
+
     FrameCounter++;
 } //old 5205 new 3585 BAAHAHA

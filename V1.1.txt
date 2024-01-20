@@ -1,0 +1,18 @@
+Big update mostly because I've learn new things
+
+Content : 
+
+- Added a "hit zone" to Freddy's nose 
+- Added fade in and fade out to the help wanted poster and when hitting 6 am
+- Added an animation for the 5am to 6am
+- Modified the office so it looks better
+- Cleaned the code & fixed some bugs such as animatronics's icon being over the layout
+- Added a button (triangle) to go faster on the office
+
+## Added the score system using : 
+- Power left
+- Power management
+- AI difficulties (being displayed during 6 AM with the score)
+- Camera management
+- Number of time you block an animatronic
+- Added #score-display to display your score 

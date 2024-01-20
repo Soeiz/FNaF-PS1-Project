@@ -23,6 +23,7 @@ tim/freddysneak.tim \
 tim/FAM.tim \
 tim/load.tim \
 tim/SAM.tim \
+tim/AM.tim \
 tim/fnt.tim \
 tim/GJFIV.tim \
 tim/GJSEV.tim \
@@ -47,6 +48,7 @@ tim/jumpFO2.tim \
 tim/jumpFO3.tim \
 tim/static1.tim \
 tim/itsme.tim \
+tim/rect.tim \
 vag/Door.vag \
 vag/light.vag \
 vag/Monitor.vag \
