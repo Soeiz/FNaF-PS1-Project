@@ -1,6 +1,10 @@
 #include <sys/types.h>
+#include <sys/file.h>
 #include <stdio.h>
 
+#include <string.h>
+
+#include <kernel.h>
 #include <libgte.h>
 #include <libetc.h>
 #include <libgpu.h>
@@ -8,6 +12,7 @@
 #include <libspu.h>
 #include <rand.h>
 #include <libapi.h>
+#include <libmcrd.h>
 
 #include <libcd.h>
 #include <malloc.h>
@@ -353,6 +358,8 @@ int staticframes = 600;
 int nightwon = 0;
 
 int score = 0;
+int highscore = 0;
+int highscorehit = 0;
 int blockedanimatronic = 0;
 int timeoncam = 0;
 int powermanagementhour = 0;

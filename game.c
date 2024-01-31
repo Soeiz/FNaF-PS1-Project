@@ -1136,7 +1136,7 @@ int main(void) {
                 nightwon = 1;
             }
 
-            if (fivetosixamframes < 720 && AM == 6) {
+            if (fivetosixamframes < 820 && AM == 6) {
                 if (fivetosixamframes == 1) {
                     if (night != 7) {Ran(250);}
                     else {Ran(50);} //For more fun 
@@ -1194,18 +1194,30 @@ int main(void) {
                 FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n             score : %d !", score);
             }
             if (fivetosixamframes > 600 && blinkicon > 30) {
-                if (score == 0) {FntPrint("\n                   ...");}
-                if (score > 0 && score <= 10000) {FntPrint("\n                 Ew...");}
-                if (score >= 15000 && score <= 18000) {FntPrint("\n               Good !");}
-                if (score > 18000 && score < 22000) {FntPrint("\n                Great !!");}
-                if (score >= 22000) {FntPrint("\n               AWESOME !!!");}
+                    if (score > highscore) {
+
+                        highscore = score;
+
+                        highscorehit = 1;
+                        SpuSetKey(SPU_ON, SPU_05CH);
+                    } 
+                    if (highscorehit == 1) {
+                        FntPrint("\n              NEW HIGHSCORE");
+                    } else {
+                        if (score == 0) {FntPrint("\n                   ...");}
+                        if (score > 0 && score <= 10000) {FntPrint("\n                 Ew...");}
+                        if (score >= 15000 && score <= 18000) {FntPrint("\n               Good !");}
+                        if (score > 18000 && score < 22000) {FntPrint("\n                Great !!");}
+                        if (score >= 22000) {FntPrint("\n               AWESOME !!!");}
+                    }
+
                 if (freddydifficulty > 10 && bonniedifficulty > 10 && chicadifficulty > 10 && foxydifficulty > 10) {
                     FntPrint("\n            %d / %d / %d / %d", freddydifficulty, bonniedifficulty, chicadifficulty, foxydifficulty);
                 } else {
                     FntPrint("\n             %d / %d / %d / %d", freddydifficulty, bonniedifficulty, chicadifficulty, foxydifficulty);
                 }
             }
-            if (fivetosixamframes > 719) {
+            if (fivetosixamframes > 819) {
                 if (night == 5 || night == 6 || night == 7) {
                     nextnightframes++;
                     if (nextnightframes == 1) {
@@ -1235,7 +1247,7 @@ int main(void) {
                         }         
                     }
 
-                    if (pad & PADstart && night != 7 || nextnightframes == 3600 && night != 7 && customnextnightactivation == 0|| nextnightframes == 5940 && night != 7 && customnextnightactivation == 1) {
+                    if (pad & PADstart && night != 7 || nextnightframes == 3700 && night != 7 && customnextnightactivation == 0|| nextnightframes == 6040 && night != 7 && customnextnightactivation == 1) {
                         if (night != 6) {
                             night++;
                         }
@@ -1256,8 +1268,8 @@ int main(void) {
                         menu = 1;
                     } 
                     
-                    if (night == 7 && nextnightframes > 4000 && impossiblenight == 1) {CdControlF(CdlPause, 0);} //Just for not having the rrrinngg thing
-                    if (night == 7 && nextnightframes > 8000 && impossiblenight == 1) {
+                    if (night == 7 && nextnightframes > 4100 && impossiblenight == 1) {CdControlF(CdlPause, 0);} //Just for not having the rrrinngg thing
+                    if (night == 7 && nextnightframes > 8100 && impossiblenight == 1) {
                         FntPrint("\n           ...Unless ?");
                         if (pad & PADstart) {
                             freddydifficulty = 1;
@@ -1268,7 +1280,7 @@ int main(void) {
                         }
                     } //...Unless ?
 
-                    if (night == 7 && nextnightframes > 4500) {
+                    if (night == 7 && nextnightframes > 4600) {
                         if (hellnight == 1) {
                             FntPrint("\n           Ready for round 2 ?");
                             if (pad & PADstart) {
@@ -2493,14 +2505,18 @@ void chargeNtimeFunc(void) {
     } 
 }
 void resetgame(void) {
+    freddydifficulty = 0;
     freddylocation = 0;
     freddylocationframe = 181;
+    bonniedifficulty = 0;
     bonnielocation = 0;
     bonnielocationframe = 298;
     bonnieliljumpscare = 0;
     freddyliljumpscare = 0;
+    chicadifficulty = 0;
     chicalocation = 0;
     chicalocationframe = 299;
+    foxydifficulty = 0;
     foxylocation = 0;
     foxylocationframe = 301;
     foxywaiting = 500;
@@ -2589,6 +2605,7 @@ void resetgame(void) {
     staticframes = 600;
 
     score = 0;
+    highscorehit = 0;
     blockedanimatronic = 0;
     powermanagementtotal = 0;
 
@@ -2629,7 +2646,7 @@ void print(int number) {
             if (camera == 0) {
                 FntPrint("\n");
             }
-            FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n%d AM, %d ", AM, powermanagementtotal);  // print time
+            FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n%d AM, ", AM);  // print time
             FntPrint("Night %d", night);
             if (night != 7) {
                 FntPrint("\nCharge : %d \nUsage: %d\n", charge, usage);
