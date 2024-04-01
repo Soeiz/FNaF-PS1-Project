@@ -1,0 +1,17 @@
+Update following the release of FNaF 2 mostly because I've learnt new things
+
+# Five Night at Freddy's 1 Update time !
+
+Even after fnaf2's dev & release, I'd surely not abandon this port !
+
+## V 1.2.0 content :
+- Modified Golden Freddy's special scene to make it look better
+- Modified power outage scene (adding some little footstep when no lights)
+- Fixed a bug about the office having a weird sprite when no lights
+- Fixed and cleaned some bugs
+- Optimized the hell out of the port, to add more frames for the screamers !
+
+## MORE FRAMES !!
+- 1 More for Freddy when lights out
+
+Game page : https://gamejolt.com/games/FNAF-ps1/832993

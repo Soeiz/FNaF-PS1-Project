@@ -88,22 +88,16 @@
             <!--Put all of the tim shit we need -->
             <file name="FREDDY.TIM"   type="data" source="tim/FREDDY.TIM"/>
             <file name="FREDDY2.TIM"   type="data" source="tim/FREDDY2.TIM"/>
-            <file name="ICONS.TIM"   type="data" source="tim/ICONS.TIM"/>
             <file name="HWANTED.TIM"   type="data" source="tim/HWANTED.TIM"/>
-            <file name="LOAD.TIM"   type="data" source="tim/LOAD.TIM"/>
             <file name="GAMEOVER.TIM"   type="data" source="tim/GAMEOVER.TIM"/>
-            <file name="LAYOUT.TIM"   type="data" source="tim/LAYOUT.TIM"/>
-            <file name="OMID.TIM"   type="data" source="tim/OMID.TIM"/>
+            <file name="LAYOUT.TIM"   type="data" source="tim/office/LAYOUT.TIM"/>
             <file name="GOL.TIM"   type="data" source="tim/GOL.TIM"/>
             <file name="GOLF.TIM"   type="data" source="tim/GOLF.TIM"/>
-            <file name="E.DAT"   type="data" source="E.DAT"/>
-            <!--<file name="BONST.TIM"   type="data" source="tim/BONST.TIM"/>
-            <file name="FREDDZ.TIM"   type="data" source="tim/FREDDZ.TIM"/>
-             <file name="TRAIL.STR"   type="data" source="STR/TRAILER.STR"/> -->
-            <file name="DOORS.TIM"   type="data" source="tim/DOORS.TIM"/>
-            <file name="GJSIX.TIM"   type="data" source="tim/GJSIX.TIM"/>
+            <file name="DOORS.TIM"   type="data" source="tim/office/DOORS.TIM"/>
             <file name="GJFIV.TIM"   type="data" source="tim/GJFIV.TIM"/>
-            <file name="GJSEV.TIM"   type="data" source="tim/GJSEV.TIM"/>
+            <file name="FRSNEAK.TIM"   type="data" source="tim/office/FREDDYSNEAK.TIM"/>
+            <file name="OMID.TIM"   type="data" source="tim/office/officeMIDDLE.TIM"/>
+            <file name="OMIDNO.TIM"   type="data" source="tim/office/officeMIDDLEnolight.TIM"/>
 
             <dummy sectors="1024"/>
             

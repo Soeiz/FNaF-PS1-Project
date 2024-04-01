@@ -1,47 +1,47 @@
 //TIM
-extern unsigned long _binary_tim_officeMIDDLEnolight_tim_start[];
-extern unsigned long _binary_tim_officeMIDDLEnolight_tim_end[];
-extern unsigned long _binary_tim_officeMIDDLEnolight_tim_length;
+extern unsigned long _binary_tim_office_officeMIDDLEnolight_tim_start[];
+extern unsigned long _binary_tim_office_officeMIDDLEnolight_tim_end[];
+extern unsigned long _binary_tim_office_officeMIDDLEnolight_tim_length;
 
-extern unsigned long _binary_tim_officeRIGHT_tim_start[];
-extern unsigned long _binary_tim_officeRIGHT_tim_end[];
-extern unsigned long _binary_tim_officeRIGHT_tim_length;
+extern unsigned long _binary_tim_office_officeMIDDLE_tim_start[];
+extern unsigned long _binary_tim_office_officeMIDDLE_tim_end[];
+extern unsigned long _binary_tim_office_officeMIDDLE_tim_length;
 
-extern unsigned long _binary_tim_officeRIGHTlight_tim_start[];
-extern unsigned long _binary_tim_officeRIGHTlight_tim_end[];
-extern unsigned long _binary_tim_officeRIGHTlight_tim_length;
+extern unsigned long _binary_tim_office_officeRIGHT_tim_start[];
+extern unsigned long _binary_tim_office_officeRIGHT_tim_end[];
+extern unsigned long _binary_tim_office_officeRIGHT_tim_length;
 
-extern unsigned long _binary_tim_officeRIGHTnolight_tim_start[];
-extern unsigned long _binary_tim_officeRIGHTnolight_tim_end[];
-extern unsigned long _binary_tim_officeRIGHTnolight_tim_length;
+extern unsigned long _binary_tim_office_officeRIGHTlight_tim_start[];
+extern unsigned long _binary_tim_office_officeRIGHTlight_tim_end[];
+extern unsigned long _binary_tim_office_officeRIGHTlight_tim_length;
 
-extern unsigned long _binary_tim_officeRIGHTlightchica_tim_start[];
-extern unsigned long _binary_tim_officeRIGHTlightchica_tim_end[];
-extern unsigned long _binary_tim_officeRIGHTlightchica_tim_length;
+extern unsigned long _binary_tim_office_officeRIGHTnolight_tim_start[];
+extern unsigned long _binary_tim_office_officeRIGHTnolight_tim_end[];
+extern unsigned long _binary_tim_office_officeRIGHTnolight_tim_length;
 
-extern unsigned long _binary_tim_officeLEFT_tim_start[];
-extern unsigned long _binary_tim_officeLEFT_tim_end[];
-extern unsigned long _binary_tim_officeLEFT_tim_length;
+extern unsigned long _binary_tim_office_officeRIGHTlightchica_tim_start[];
+extern unsigned long _binary_tim_office_officeRIGHTlightchica_tim_end[];
+extern unsigned long _binary_tim_office_officeRIGHTlightchica_tim_length;
 
-extern unsigned long _binary_tim_officeLEFTlight_tim_start[];
-extern unsigned long _binary_tim_officeLEFTlight_tim_end[];
-extern unsigned long _binary_tim_officeLEFTlight_tim_length;
+extern unsigned long _binary_tim_office_officeLEFT_tim_start[];
+extern unsigned long _binary_tim_office_officeLEFT_tim_end[];
+extern unsigned long _binary_tim_office_officeLEFT_tim_length;
 
-extern unsigned long _binary_tim_officeLEFTnolight_tim_start[];
-extern unsigned long _binary_tim_officeLEFTnolight_tim_end[];
-extern unsigned long _binary_tim_officeLEFTnolight_tim_length;
+extern unsigned long _binary_tim_office_officeLEFTlight_tim_start[];
+extern unsigned long _binary_tim_office_officeLEFTlight_tim_end[];
+extern unsigned long _binary_tim_office_officeLEFTlight_tim_length;
 
-extern unsigned long _binary_tim_officeLEFTlightbonnie_tim_start[];
-extern unsigned long _binary_tim_officeLEFTlightbonnie_tim_end[];
-extern unsigned long _binary_tim_officeLEFTlightbonnie_tim_length;
+extern unsigned long _binary_tim_office_officeLEFTnolight_tim_start[];
+extern unsigned long _binary_tim_office_officeLEFTnolight_tim_end[];
+extern unsigned long _binary_tim_office_officeLEFTnolight_tim_length;
+
+extern unsigned long _binary_tim_office_officeLEFTlightbonnie_tim_start[];
+extern unsigned long _binary_tim_office_officeLEFTlightbonnie_tim_end[];
+extern unsigned long _binary_tim_office_officeLEFTlightbonnie_tim_length;
 
 extern unsigned long _binary_tim_CAMERAMONITOR_tim_start[];
 extern unsigned long _binary_tim_CAMERAMONITOR_tim_end[];
 extern unsigned long _binary_tim_CAMERAMONITOR_tim_length;
-
-extern unsigned long _binary_tim_freddysneak_tim_start[];
-extern unsigned long _binary_tim_freddysneak_tim_end[];
-extern unsigned long _binary_tim_freddysneak_tim_length;
 
 extern unsigned long _binary_tim_FAM_tim_start[];
 extern unsigned long _binary_tim_FAM_tim_end[];
@@ -55,18 +55,6 @@ extern unsigned long _binary_tim_SAM_tim_start[];
 extern unsigned long _binary_tim_SAM_tim_end[];
 extern unsigned long _binary_tim_SAM_tim_length;
 
-extern unsigned long _binary_tim_officeMIDDLE_tim_start[];
-extern unsigned long _binary_tim_officeMIDDLE_tim_end[];
-extern unsigned long _binary_tim_officeMIDDLE_tim_length;
-
-extern unsigned long _binary_tim_doors_tim_start[];
-extern unsigned long _binary_tim_doors_tim_end[];
-extern unsigned long _binary_tim_doors_tim_length;
-
-extern unsigned long _binary_tim_GJFIV_tim_start[];
-extern unsigned long _binary_tim_GJFIV_tim_end[];
-extern unsigned long _binary_tim_GJFIV_tim_length;
-
 extern unsigned long _binary_tim_GJSEV_tim_start[];
 extern unsigned long _binary_tim_GJSEV_tim_end[];
 extern unsigned long _binary_tim_GJSEV_tim_length;
@@ -79,81 +67,93 @@ extern unsigned long _binary_tim_load_tim_start[];
 extern unsigned long _binary_tim_load_tim_end[];
 extern unsigned long _binary_tim_load_tim_length;
 
-extern unsigned long _binary_tim_jumpC_tim_start[];
-extern unsigned long _binary_tim_jumpC_tim_end[];
-extern unsigned long _binary_tim_jumpC_tim_length;
+extern unsigned long _binary_tim_screamers_jumpC_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpC_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpC_tim_length;
 
-extern unsigned long _binary_tim_jumpC2_tim_start[];
-extern unsigned long _binary_tim_jumpC2_tim_end[];
-extern unsigned long _binary_tim_jumpC2_tim_length;
+extern unsigned long _binary_tim_screamers_jumpC2_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpC2_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpC2_tim_length;
 
-extern unsigned long _binary_tim_jumpC3_tim_start[];
-extern unsigned long _binary_tim_jumpC3_tim_end[];
-extern unsigned long _binary_tim_jumpC3_tim_length;
+extern unsigned long _binary_tim_screamers_jumpC3_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpC3_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpC3_tim_length;
 
-extern unsigned long _binary_tim_jumpB_tim_start[];
-extern unsigned long _binary_tim_jumpB_tim_end[];
-extern unsigned long _binary_tim_jumpB_tim_length;
+extern unsigned long _binary_tim_screamers_jumpC4_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpC4_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpC4_tim_length;
 
-extern unsigned long _binary_tim_jumpB2_tim_start[];
-extern unsigned long _binary_tim_jumpB2_tim_end[];
-extern unsigned long _binary_tim_jumpB2_tim_length;
+extern unsigned long _binary_tim_screamers_jumpB_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpB_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpB_tim_length;
 
-extern unsigned long _binary_tim_jumpB3_tim_start[];
-extern unsigned long _binary_tim_jumpB3_tim_end[];
-extern unsigned long _binary_tim_jumpB3_tim_length;
+extern unsigned long _binary_tim_screamers_jumpB2_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpB2_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpB2_tim_length;
 
-extern unsigned long _binary_tim_jumpF_tim_start[];
-extern unsigned long _binary_tim_jumpF_tim_end[];
-extern unsigned long _binary_tim_jumpF_tim_length;
+extern unsigned long _binary_tim_screamers_jumpB3_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpB3_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpB3_tim_length;
 
-extern unsigned long _binary_tim_jumpF2_tim_start[];
-extern unsigned long _binary_tim_jumpF2_tim_end[];
-extern unsigned long _binary_tim_jumpF2_tim_length;
+extern unsigned long _binary_tim_screamers_jumpB4_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpB4_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpB4_tim_length;
 
-extern unsigned long _binary_tim_jumpF3_tim_start[];
-extern unsigned long _binary_tim_jumpF3_tim_end[];
-extern unsigned long _binary_tim_jumpF3_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF_tim_length;
 
-extern unsigned long _binary_tim_jumpF20_tim_start[];
-extern unsigned long _binary_tim_jumpF20_tim_end[];
-extern unsigned long _binary_tim_jumpF20_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF2_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF2_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF2_tim_length;
 
-extern unsigned long _binary_tim_jumpF21_tim_start[];
-extern unsigned long _binary_tim_jumpF21_tim_end[];
-extern unsigned long _binary_tim_jumpF21_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF3_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF3_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF3_tim_length;
 
-extern unsigned long _binary_tim_jumpF22_tim_start[];
-extern unsigned long _binary_tim_jumpF22_tim_end[];
-extern unsigned long _binary_tim_jumpF22_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF20_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF20_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF20_tim_length;
 
-extern unsigned long _binary_tim_jumpF23_tim_start[];
-extern unsigned long _binary_tim_jumpF23_tim_end[];
-extern unsigned long _binary_tim_jumpF23_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF21_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF21_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF21_tim_length;
 
-extern unsigned long _binary_tim_jumpF24_tim_start[];
-extern unsigned long _binary_tim_jumpF24_tim_end[];
-extern unsigned long _binary_tim_jumpF24_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF22_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF22_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF22_tim_length;
 
-extern unsigned long _binary_tim_jumpF25_tim_start[];
-extern unsigned long _binary_tim_jumpF25_tim_end[];
-extern unsigned long _binary_tim_jumpF25_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF23_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF23_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF23_tim_length;
 
-extern unsigned long _binary_tim_jumpF26_tim_start[];
-extern unsigned long _binary_tim_jumpF26_tim_end[];
-extern unsigned long _binary_tim_jumpF26_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF24_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF24_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF24_tim_length;
 
-extern unsigned long _binary_tim_jumpFO_tim_start[];
-extern unsigned long _binary_tim_jumpFO_tim_end[];
-extern unsigned long _binary_tim_jumpFO_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF25_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF25_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF25_tim_length;
 
-extern unsigned long _binary_tim_jumpFO2_tim_start[];
-extern unsigned long _binary_tim_jumpFO2_tim_end[];
-extern unsigned long _binary_tim_jumpFO2_tim_length;
+extern unsigned long _binary_tim_screamers_jumpF26_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF26_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF26_tim_length;
 
-extern unsigned long _binary_tim_jumpFO3_tim_start[];
-extern unsigned long _binary_tim_jumpFO3_tim_end[];
-extern unsigned long _binary_tim_jumpFO3_tim_length;
+extern unsigned long _binary_tim_screamers_jumpFO_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpFO_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpFO_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpFO2_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpFO2_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpFO2_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpFO3_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpFO3_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpFO3_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpFO4_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpFO4_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpFO4_tim_length;
 
 extern unsigned long _binary_tim_static1_tim_start[];
 extern unsigned long _binary_tim_static1_tim_end[];
@@ -224,14 +224,14 @@ long OTz;
 POLY_FT4 *polyitsme = {0};                       
 
 SVECTOR RotVectoritsme = {0, 0, 0};              
-VECTOR  MovVectoritsme = {0, 0, CENTERX/2-10, 0};
+VECTOR  MovVectoritsme = {-35, -50, CENTERX/2-10, 0};
 VECTOR  ScaleVectoritsme = {2048, 2048, 2048};   
 
 SVECTOR VertPositsme[4] = {                      
-        {-40, -25, 1 },                         
-        {-40,  26, 1 },                         
-        { 80, -25, 1 },                         
-        { 80,  26, 1  }                         
+        {0, 0, 1 },                         
+        {0,  29, 1 },                         
+        { 120, 0, 1 },                         
+        { 120,  29, 1  }                         
     };        
 
 MATRIX PolyMatrixitsme = {0};    
@@ -641,36 +641,6 @@ SVECTOR VertPosam[4] = {
 
 MATRIX PolyMatrixam = {0};    
 
-//Icons for camera 
-POLY_F4 *polycamWoutline = {0};                            
-
-VECTOR  ScaleVectorpolycamWoutline ={ONE, ONE, ONE};       
-
-POLY_F4 *polycamgreyogreen1A,*polycamgreyogreen1B,*polycamgreyogreen1C,*polycamgreyogreen5,*polycamgreyogreen3,*polycamgreyogreen2A,*polycamgreyogreen2B,*polycamgreyogreen4A,*polycamgreyogreen4B,*polycamgreyogreen6,*polycamgreyogreen7 = {0};   
-SVECTOR RotVectorpolycamgreyogreen = {0, 0, 0};            
-
-VECTOR  MovVectorpolycamgreyogreen1A = {0, 0, CENTERX, 0}; 
-VECTOR  MovVectorpolycamgreyogreen1B = {0, 0, CENTERX, 0}; 
-VECTOR  MovVectorpolycamgreyogreen1C = {0, 0, CENTERX, 0}; 
-VECTOR  MovVectorpolycamgreyogreen5 = {0, 0, CENTERX, 0};  
-VECTOR  MovVectorpolycamgreyogreen3 = {0, 0, CENTERX, 0};  
-VECTOR  MovVectorpolycamgreyogreen2A = {0, 0, CENTERX, 0}; 
-VECTOR  MovVectorpolycamgreyogreen2B = {0, 0, CENTERX, 0}; 
-VECTOR  MovVectorpolycamgreyogreen4A = {0, 0, CENTERX, 0}; 
-VECTOR  MovVectorpolycamgreyogreen4B = {0, 0, CENTERX, 0}; 
-VECTOR  MovVectorpolycamgreyogreen6 = {0, 0, CENTERX, 0};  
-VECTOR  MovVectorpolycamgreyogreen7 = {0, 0, CENTERX, 0};  
-
-VECTOR  ScaleVectorpolycamgreyogreen ={ONE, ONE, ONE};     
-SVECTOR VertPospolycamgreyogreen[4] = {                    
-        {-11, -6, 1 },                        
-        {-11,  6, 1 },                        
-        { 6, -6, 1 },                         
-        { 6,  6, 1  }                         
-    };                                          
-MATRIX PolyMatrixpolycamgreyogreen1A,PolyMatrixpolycamgreyogreen1B,PolyMatrixpolycamgreyogreen1C,PolyMatrixpolycamgreyogreen5,PolyMatrixpolycamgreyogreen3,PolyMatrixpolycamgreyogreen2A,PolyMatrixpolycamgreyogreen2B,PolyMatrixpolycamgreyogreen4A,PolyMatrixpolycamgreyogreen4B,PolyMatrixpolycamgreyogreen6,PolyMatrixpolycamgreyogreen7 = {0};      
-//Longest line ever, takes 3 lines in terminal
-
 POLY_FT4 *polygolden = {0};                           
 
 SVECTOR RotVectorgolden = {0, 0, 0};                  
@@ -721,6 +691,20 @@ POLY_FT4 *polyrect2 = {0};
 VECTOR  MovVectorrect2 = {-18, 40, CENTERX/2-10, 0};
 
 MATRIX PolyMatrixrect2 = {0};  
+
+POLY_F4 *polycamgreyogreen = {0};   
+SVECTOR RotVectorpolycamgreyogreen = {0, 0, 0};            
+
+VECTOR  MovVectorpolycamgreyogreen = {0, 0, CENTERX, 0}; 
+
+VECTOR  ScaleVectorpolycamgreyogreen ={ONE, ONE, ONE};     
+SVECTOR VertPospolycamgreyogreen[4] = {                    
+        {-11, -6, 1 },                        
+        {-11,  6, 1 },                        
+        { 6, -6, 1 },                         
+        { 6,  6, 1  }                         
+    };                                          
+MATRIX PolyMatrixpolycamgreyogreen = {0};      
 
 //This function take in charge a specific polygon OR a set of polygon with related elements, depending on the var "num". (1 is for freddy on the menu for example)
 //Why ? It's Simple, because the game.c was LONG ASF. Longer than my lifetime I'd say. (11 euros)
@@ -868,8 +852,7 @@ void makepoly(int num) {
         ScaleMatrix(&PolyMatrixhelpwanted, &ScaleVectorhelpwanted);
         
         SetRotMatrix(&PolyMatrixhelpwanted);                 
-        SetTransMatrix(&PolyMatrixhelpwanted);          
-
+        SetTransMatrix(&PolyMatrixhelpwanted);   
         setClut(polyhelpwanted, 320, 507);     
         
         setPolyFT4(polyhelpwanted);                          
@@ -890,35 +873,75 @@ void makepoly(int num) {
 	}//help wanted bg
 
 	if (num == 3) { 
-        polyofficegolden = (POLY_FT4 *)nextpri;                    
-        
-        RotMatrix(&RotVectorofficegolden, &PolyMatrixofficegolden);    
-        TransMatrix(&PolyMatrixofficegolden, &MovVectorofficegolden);  
-        ScaleMatrix(&PolyMatrixofficegolden, &ScaleVectorofficegolden);
-        
-        SetRotMatrix(&PolyMatrixofficegolden);                  
-        SetTransMatrix(&PolyMatrixofficegolden);    
- 
-        setRGB0(polyofficegolden, 128, 128, 128);
-        setPolyFT4(polyofficegolden);                           
-        
-        setClut(polyofficegolden, 320, 509);
- 
-        polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
-        
-        RotTransPers4(
-                    &VertPosofficegolden[0],      &VertPosofficegolden[1],      &VertPosofficegolden[2],      &VertPosofficegolden[3],
-                    (long*)&polyofficegolden->x0, (long*)&polyofficegolden->x1, (long*)&polyofficegolden->x2, (long*)&polyofficegolden->x3,
-                    &polydepth,
-                    &polyflag
-                    );                              
+        if (goldenfreddiedframes > 90) {
+                polyitsme = (POLY_FT4 *)nextpri;                    
+                
+                RotMatrix(&RotVectoritsme, &PolyMatrixitsme);    
+                TransMatrix(&PolyMatrixitsme, &MovVectoritsme);  
+                ScaleMatrix(&PolyMatrixitsme, &ScaleVectoritsme);
+                
+                SetRotMatrix(&PolyMatrixitsme);                  
+                SetTransMatrix(&PolyMatrixitsme);    
+         
+                setRGB0(polyitsme, fadeoffice, fadeoffice, fadeoffice);
 
-        setUV4(polyofficegolden, 0, 29, 0, 239, 218, 0, 218, 239);
-           
-        addPrim(ot[db], polyofficegolden);                        
-        
-        nextpri += sizeof(POLY_FT4);               
+                setPolyFT4(polyitsme);                           
+                       
+                if (goldenfreddiedframes < 350) {
+                        setClut(polyitsme, 960, 192);
+                } else {
+                        setClut(polyitsme, 960, 196);
+                }
+         
+                polyitsme->tpage = getTPage(itsme.mode&0x3, 0, 832, 256);
+                
+                RotTransPers4(
+                            &VertPositsme[0],      &VertPositsme[1],      &VertPositsme[2],      &VertPositsme[3],
+                            (long*)&polyitsme->x0, (long*)&polyitsme->x1, (long*)&polyitsme->x2, (long*)&polyitsme->x3,
+                            &polydepth,
+                            &polyflag
+                            );                              
 
+                setUV4(polyitsme, 0, 96, 0, 125, 156, 96, 156, 125);
+                   
+                addPrim(ot[db], polyitsme);                        
+                
+                nextpri += sizeof(POLY_FT4);     
+        }          
+        if (goldenfreddiedframes < 770) {
+                polyofficegolden = (POLY_FT4 *)nextpri;                    
+                
+                RotMatrix(&RotVectorofficegolden, &PolyMatrixofficegolden);    
+                TransMatrix(&PolyMatrixofficegolden, &MovVectorofficegolden);  
+                ScaleMatrix(&PolyMatrixofficegolden, &ScaleVectorofficegolden);
+                
+                SetRotMatrix(&PolyMatrixofficegolden);                  
+                SetTransMatrix(&PolyMatrixofficegolden);    
+         
+                setRGB0(polyofficegolden, 128, 128, 128);
+                setPolyFT4(polyofficegolden);                           
+                
+                if (goldenfreddiedframes < 350) {
+                        setClut(polyofficegolden, 320, 509);
+                } else {
+                        setClut(polyofficegolden, 320, 505);
+                }
+         
+                polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
+                
+                RotTransPers4(
+                            &VertPosofficegolden[0],      &VertPosofficegolden[1],      &VertPosofficegolden[2],      &VertPosofficegolden[3],
+                            (long*)&polyofficegolden->x0, (long*)&polyofficegolden->x1, (long*)&polyofficegolden->x2, (long*)&polyofficegolden->x3,
+                            &polydepth,
+                            &polyflag
+                            );                              
+
+                setUV4(polyofficegolden, 0, 0, 0, 210, 218, 0, 218, 210);
+                   
+                addPrim(ot[db], polyofficegolden);                        
+                
+                nextpri += sizeof(POLY_FT4);     
+        }
 	}//golden freddy's face (screamer)
 
 	if (num == 4) { 
@@ -933,7 +956,7 @@ void makepoly(int num) {
         
         setPolyFT4(polyfreddylightsout);                            
         
-        setClut(polyfreddylightsout, freddysneak.crect->x, freddysneak.crect->y);
+        setClut(polyfreddylightsout, 320, 504);
 
         polyfreddylightsout->tpage = getTPage(freddysneak.mode&0x3, 0, 832, 256);
         
@@ -946,7 +969,7 @@ void makepoly(int num) {
                     &polyflag
                     );                                 
         
-        setUV4(polyfreddylightsout, 121, 0, 121, 56, 188, 0, 188, 56);
+        setUV4(polyfreddylightsout, 9, 125, 9, 181, 77, 125, 77, 181);
             
         addPrim(ot[db], polyfreddylightsout);                  
         
@@ -997,7 +1020,7 @@ void makepoly(int num) {
          
          setPolyFT4(leftdoor);                         
          
-         setClut(leftdoor, doors.crect->x, doors.crect->y);    
+         setClut(leftdoor, 960, 195);    
          leftdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);
          
          if (doorclosedL == 1) {setRGB0(leftdoor, 76, 76, 76);} //For preventing things to blink fast asf
@@ -1026,7 +1049,7 @@ void makepoly(int num) {
          
          setPolyFT4(rightdoor);                             
          
-         setClut(rightdoor, doors.crect->x, doors.crect->y); 
+         setClut(rightdoor, 960, 195); 
          rightdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);   
          
          if (doorclosedR == 1) {setRGB0(rightdoor, 76, 76, 76);} //For preventing things to blink fast asf again
@@ -1054,11 +1077,16 @@ void makepoly(int num) {
          SetRotMatrix(&PolyMatrixofficemiddle);                  
          SetTransMatrix(&PolyMatrixofficemiddle);                
          
-         setClut(polyofficemiddle, 320, 508);
+        if (charge > 0) {
+                setClut(polyofficemiddle, 320, 508);
+                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 832, 0);
+        } else {
+               setClut(polyofficemiddle, 320, 503);
+                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 704, 256);
+        }
 
          setPolyFT4(polyofficemiddle);                           
          
-         polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 832, 0);
          
          RotTransPers4(
                      &VertPosofficemiddle[0],      &VertPosofficemiddle[1],      &VertPosofficemiddle[2],      &VertPosofficemiddle[3],
@@ -1084,7 +1112,11 @@ void makepoly(int num) {
          SetRotMatrix(&PolyMatrixofficemiddle);                
          SetTransMatrix(&PolyMatrixofficemiddle);              
          
-         setClut(polyofficeright, 320, 506); 
+        if (goldenfreddiedframes < 375) {
+                setClut(polyofficeright, 320, 506); 
+        } else {
+                setClut(polyofficeright, 320, 505); 
+        }
 
          setPolyFT4(polyofficeright);                          
          
@@ -1114,7 +1146,11 @@ void makepoly(int num) {
          SetRotMatrix(&PolyMatrixofficemiddle);              
          SetTransMatrix(&PolyMatrixofficemiddle);            
          
-         setClut(polyofficeleft, 320, 507); 
+        if (goldenfreddiedframes < 375) {
+                setClut(polyofficeleft, 320, 507); 
+        } else {
+                setClut(polyofficeleft, 320, 505); 
+        }
 
          setPolyFT4(polyofficeleft);                         
          
@@ -1135,46 +1171,6 @@ void makepoly(int num) {
                      
 	}//Office with doors
 
-	if (num == 7) { 
-	} //Icon's grey or green rectangle
-
-	if (num == 8) {
-	}//icon for camera
-
-	if (num == 9) {
-
-        polylayout = (POLY_FT4 *)nextpri;              
-                
-        RotMatrix(&RotVectorlayout, &PolyMatrixlayout);
-        TransMatrix(&PolyMatrixlayout, &MovVectorlayout);  
-        ScaleMatrix(&PolyMatrixlayout, &ScaleVectorlayout);
-        
-        SetRotMatrix(&PolyMatrixlayout);                   
-        SetTransMatrix(&PolyMatrixlayout);                 
-        
-        setPolyFT4(polylayout);                     
-
-        setClut(polylayout,960,196);       
-        
-        polylayout->tpage = getTPage(layout.mode&0x3, 0, 640, 0); 
-        
-        setRGB0(polylayout, 128, 128, 128);         
-        
-        RotTransPers4(
-                    &VertPoslayout[0],      &VertPoslayout[1],      &VertPoslayout[2],      &VertPoslayout[3],
-                    (long*)&polylayout->x0, (long*)&polylayout->x1, (long*)&polylayout->x2, (long*)&polylayout->x3,
-                    &polydepth,
-                    &polyflag
-                    );                               
-        
-        setUV4(polylayout, 0, 0, 0, 229, 229, 0, 229, 229);  
-            
-
-        addPrim(ot[db], polylayout);                  
-        
-        nextpri += sizeof(POLY_FT4);             
-	}//camera's layout
-
 	if (num == 10) {
         //five am OR six am tim (it's marked five am but sixam.tim go into the fiveam.tim emplacement)
         if (fivetosixamframes > 120) {
@@ -1191,8 +1187,9 @@ void makepoly(int num) {
                 
                 setRGB0(polyrect, 0,0,0);
                 
-                setClut(polyrect, 960, 192);      
-                polyrect->tpage = getTPage(rect.mode&0x3, 0, 768, 256); 
+                setClut(polyrect, 960, 192);     
+
+                polyrect->tpage = getTPage(rect.mode&0x3, 0, 832, 256); 
                 
                 RotTransPers4(
                             &VertPosrect[0],      &VertPosrect[1],      &VertPosrect[2],      &VertPosrect[3],
@@ -1201,7 +1198,7 @@ void makepoly(int num) {
                             &polyflag
                             );                               
                 
-                setUV4(polyrect, 0, 0, 0, 47, 36, 0, 36, 47);
+                setUV4(polyrect, 0, 125, 0, 172, 36, 125, 36, 172);
                     
                 addPrim(ot[db], polyrect);                     
                 nextpri += sizeof(POLY_FT4);     
@@ -1405,7 +1402,11 @@ void makepoly(int num) {
 
         setPolyFT4(polyicon);                          
         
-        setRGB0(polyicon, 128, 128, 128);              
+        if (goldenfreddiedframes < 370) {
+                setRGB0(polyicon, 128, 128, 128); 
+        } else {
+                setRGB0(polyicon, 57, 68, 12); 
+        }           
 
         polyicon->tpage = getTPage(load.mode&0x3, 0, 832, 256); 
         

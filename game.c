@@ -6,20 +6,12 @@
     TO FIX ON THE PS1 :
 
     TO MAKE (doing ideas/partially implemented things) : 
-    Animatronics moaning when cam up ????§§ (don't have enough space on the SPU or the RAM)
 
     TO DO (only ideas) :
-- Random nights
-- Test the game on different hardware than PC and SCPH-9002 PS1
+    - Test the game on different hardware than PC and SCPH-9002 PS1
 
     OTHER (info) :
-    no longer Return (as of V1.0.5)
 */
-
-
-#include "constant.h"
-#include "objects/objects.h"
-#include "objects/camera.h"
 
 int FrameCounter = 0;
 int customAM = 12;
@@ -35,6 +27,10 @@ int customcharge = 100;
 int night = 1;
 
 int debug = 3; //1 is for debug without cam, 2 is animatronic debug, 3 is only little things -- vanilla
+
+#include "objects/constant.h"
+#include "objects/objects.h"
+#include "objects/camera.h"
 
 //Made all of the var declarations that I won't change alot into constant.h
 
@@ -159,7 +155,7 @@ u_long sendVAGtoSPU(unsigned int VAG_data_size, u_char *VAG_data);
 void setVoiceAttr(unsigned int pitch, long channel, unsigned long soundAddr );
 u_long setSPUtransfer(VAGsound * sound);
 
-void resetgame(void);
+void resetgame(int hardreset);
 void print(int number);
 int Ran(int max);
 void debugPrintVanilla(void);
@@ -367,6 +363,47 @@ u_long setSPUtransfer(VAGsound * sound){
     return spu_address;
 }
 
+void starting(void) {
+  resetgame(0);
+  SpuSetKey(SPU_ON, SPU_04CH);
+
+  if (customnightactivated == 0) {
+    freddylocationframe = 300;
+    bonnielocationframe = 300;
+    chicalocationframe = 300;
+    foxylocationframe = 300;
+    convertion = 60;
+    customAM = 12;
+  }
+  if (initstuff == 1) {
+    clearVRAMMenu();
+  }
+
+  LoadTexture(_binary_tim_load_tim_start, &load);
+  
+    if (night == 7) {
+        if (hellnight == 1) {foxylockeduration = 6;}
+        if (impossiblenight == 1) {foxylockeduration = 3;}
+    }
+
+  musicframes = 0;
+  if (enablephoneguystr[1] == 'N') { // Й
+      enablephoneguy = 1;
+  } else {enablephoneguy = 0;}//I dunno why but it keep resetting it 
+
+  if (fastnights == 1) {
+      FrameCounterlimit = FrameCounterlimit / 2;
+  }
+
+  AM = customAM;
+  charge = customcharge;
+  FrameCounterlimit = convertion;
+  FrameCounterlimit = FrameCounterlimit * 60; //60 seconds * 60 fps = 3600 frames, maybe it would cause issues with 30 fps ??
+  CdControlF(CdlPause,0);
+  if (weirdnight == 0 && customnightactivated == 0) {
+    animatronicFunc(1);
+  }
+}
 int main(void) {
     //controller
     TILE * PADL;                    // Tile primitives
@@ -398,49 +435,10 @@ int main(void) {
     // Init heap
     InitHeap((u_long *)ramAddr, sizeof(ramAddr));
 
-    Ran(1);
-        /* For the moment it just don't work because of not having proper seed when the game boot up
-    if (RAN == 1) {
-        bonniestared = 1;
-        loadFile = "\\BONST.TIM;1";
-        // Get file position from filename
-        CdSearchFile( &filePos, loadFile);
-        // Allocate memory
-        dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-        // Issue  CdlSetloc CDROM command : Set the seek target position
-        // Beware of a misnomed 'sector' member in the CdlLOC struct that should really be named 'frame'.
-        // https://discord.com/channels/642647820683444236/663664210525290507/864912470996942910
-        CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-        // Read data and load it to dataBuffer
-        CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-        // Wait for operation to complete
-        CDreadResult = CdReadSync(0, 0);
-        LoadTexture(dataBuffer, &freddy); 
-        free(dataBuffer);
-    } 
-    if (RAN < 5 && RAN > 2) {
-        bonniestared = 1;
-        loadFile = "\\FREDDZ.TIM;1";
-        // Get file position from filename
-        CdSearchFile( &filePos, loadFile);
-        // Allocate memory
-        dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-        // Issue  CdlSetloc CDROM command : Set the seek target position
-        // Beware of a misnomed 'sector' member in the CdlLOC struct that should really be named 'frame'.
-        // https://discord.com/channels/642647820683444236/663664210525290507/864912470996942910
-        CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-        // Read data and load it to dataBuffer
-        CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-        // Wait for operation to complete
-        CDreadResult = CdReadSync(0, 0);
-        LoadTexture(dataBuffer, &freddy); 
-        free(dataBuffer);
-    } */
-    if (RAN >= 1) {
-    }
     int sample = -1;
-    //LoadTexture(_binary_tim_fnt_tim_start, &fontface);
+
     clearVRAM();
+
     while (1)
     {   
         ClearOTagR(ot[db], OTLEN);
@@ -542,6 +540,15 @@ int main(void) {
                 CDreadResult = CdReadSync(0, 0);
                 LoadTexture(dataBuffer, &freddy2); 
                 free(dataBuffer);
+                loadFile = "\\GJFIV.TIM;1";
+                CdSearchFile( &filePos, loadFile);
+                dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                // Read data and load it to dataBuffer
+                CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                CDreadResult = CdReadSync(0, 0);
+                LoadTexture(dataBuffer, &goodjob); 
+                free(dataBuffer);
                 if (initstuff == 0) {
                     loadFile = "\\HWANTED.TIM;1";
                     CdSearchFile( &filePos, loadFile);
@@ -551,24 +558,6 @@ int main(void) {
                     CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
                     CDreadResult = CdReadSync(0, 0);
                     LoadTexture(dataBuffer, &helpwanted); 
-                    free(dataBuffer);
-                    loadFile = "\\GAMEOVER.TIM;1";
-                    CdSearchFile( &filePos, loadFile);
-                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                    // Read data and load it to dataBuffer
-                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                    CDreadResult = CdReadSync(0, 0);
-                    LoadTexture(dataBuffer, &gameover); 
-                    free(dataBuffer);
-                    loadFile = "\\GOL.TIM;1";
-                    CdSearchFile( &filePos, loadFile);
-                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                    // Read data and load it to dataBuffer
-                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                    CDreadResult = CdReadSync(0, 0);
-                    LoadTexture(dataBuffer, &officegoldenfreddy); 
                     free(dataBuffer);
                     initstuff++;
                 }
@@ -589,8 +578,10 @@ int main(void) {
             if (menuscreeninit == 1) {
 
                 seedtitle++;
-                //TIM freddy
-                makepoly(1);
+                if (nofreddy == 0) {
+                    //TIM freddy
+                    makepoly(1);
+                } 
             }
         }//Menu Screen
         if (menu == 1) { //Loading/Starting night screen
@@ -599,78 +590,74 @@ int main(void) {
             if (loadingframe < 560 && loadingframe > 360) {
                 printNightInfo();
 
-                AM = customAM;
-                charge = customcharge;
             } else {
                 makepoly(13);
             }
             if (loadingframe == 362) {
+                starting();
                 fadeoffice = 128;
-                clearVRAMMenu();
-
-                musicframes = 0;
-                if (enablephoneguystr[1] == 'N') { // Й
-                    enablephoneguy = 1;
-                } else {enablephoneguy = 0;}//I dunno why but it keep resetting it 
-
-                FrameCounterlimit = convertion;
-
-                if (fastnights == 1) {
-                    FrameCounterlimit = FrameCounterlimit / 2;
-                }
-
-                FrameCounterlimit = FrameCounterlimit * 60; //60 seconds * 60 fps = 3600 frames, maybe it would cause issues with 30 fps ??
-
-                srand(seedtitle); // "truly" "random"
-                Ran(10000);
-                if (RAN == 1) {
-                    weirdnight = 1;
-                    enablephoneguy = 1;
-                    enablephoneguystr[1] = 'N';
-                }
-                if (night == 7) {
-                    if (hellnight == 1) {foxylockeduration = 6;}
-                    if (impossiblenight == 1) {foxylockeduration = 3;}
-                }
-                if (ambiancenum == 4) {ambiancenum = 1;}
-
-                SpuSetKey(SPU_ON, SPU_04CH);
-                CdControlF(CdlPause,0);
-                animatronicFunc(1);
             }
             if (loadingframe == 500) {
-                LoadTexture(_binary_tim_load_tim_start, &load);
                 Ran(10000);
                 if (freddydifficulty == 1 && bonniedifficulty == 9 && chicadifficulty == 8 && foxydifficulty == 7 || RAN == 1) {
                     goldenfreddied = 1;
+                    fadeoffice = 0;
                 } else {
-                    if (night > 4) {
-                        if (night == 5) {
-                            LoadTexture(_binary_tim_GJFIV_tim_start, &goodjob); 
-                        }
-                        if (night == 6) {
-                            LoadTexture(_binary_tim_GJSIX_tim_start, &goodjob); 
-                        }
-                        if (night == 7) {
-                            LoadTexture(_binary_tim_GJSEV_tim_start, &goodjob); 
-                        }
+                    if (night == 6) {
+                        LoadTexture(_binary_tim_GJSIX_tim_start, &goodjob); 
+                    }
+                    if (night == 7) {
+                        LoadTexture(_binary_tim_GJSEV_tim_start, &goodjob); 
                     }
                 }
             }
             if (loadingframe == 560) {
-                if (goldenfreddied == 0) {
-                    LoadTexture(_binary_tim_officeLEFT_tim_start, &officeLEFT);//Loading rest of the things
-                    LoadTexture(_binary_tim_freddysneak_tim_start, &freddysneak);
-                    LoadTexture(_binary_tim_officeRIGHT_tim_start, &officeRIGHT);
-                    LoadTexture(_binary_tim_officeMIDDLE_tim_start, &officeMIDDLE);
+                if (goldenfreddied == 0 && initstuff == 1) {
+                    LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);//Loading rest of the things
+                    LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
                     LoadTexture(_binary_tim_FAM_tim_start, &fiveam); 
                     LoadTexture(_binary_tim_AM_tim_start, &fiveam); 
-                    LoadTexture(_binary_tim_doors_tim_start, &doors); 
                 }
-            }
-            if (loadingframe == 600) {
                 usage = defaultusage;
-                if (initstuff == 1 && goldenfreddied == 0) {
+            }
+            if (loadingframe == 562) {
+                if (initstuff == 1) {
+                    loadFile = "\\OMID.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &officeMIDDLE); 
+                    free(dataBuffer);
+                    loadFile = "\\OMIDNO.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &officeMIDDLEnolight); 
+                    free(dataBuffer);
+                    loadFile = "\\GAMEOVER.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &gameover); 
+                    free(dataBuffer);
+                    loadFile = "\\GOL.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &officegoldenfreddy); 
+                    free(dataBuffer);
                     loadFile = "\\LAYOUT.TIM;1";
                     CdSearchFile( &filePos, loadFile);
                     dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
@@ -680,12 +667,32 @@ int main(void) {
                     CDreadResult = CdReadSync(0, 0);
                     LoadTexture(dataBuffer, &layout); 
                     free(dataBuffer);
+                    loadFile = "\\DOORS.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &doors); 
+                    free(dataBuffer);
+                    loadFile = "\\FRSNEAK.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &freddysneak); 
+                    free(dataBuffer);
+
+                    CdControlF(CdlPause,0);
+                    CdSearchFile( &XAPos, loadXA);
+                    soundBank.offset = CdPosToInt(&XAPos.pos);
+                    XAsetup();
                     initstuff++;
                 }
-                CdSearchFile( &XAPos, loadXA);
-                soundBank.offset = CdPosToInt(&XAPos.pos);
-                XAsetup();  
-           } 
+            }
            if (loadingframe > 630) {
                 if (initstuff == 2) {
                     initstuff++;
@@ -708,32 +715,29 @@ int main(void) {
             } else {goldenfreddiedframes++;}
 
             if (goldenfreddiedframes > 90) {
-                FntPrint("\n\n\n\n\n\n\n\n              IT'S ME");
+                LoadTexture(_binary_tim_itsme_tim_start, &itsme);
+                if (fadeoffice != 128) {fadeoffice++;}
             }
-            if (goldenfreddiedframes == 150) {
+            if (goldenfreddiedframes == 220) {
                 sample = 15;
                 filter.chan = soundBank.samples[sample].channel;
                 filter.file = soundBank.samples[sample].file;
                 CdControlF(CdlSetfilter, (u_char *)&filter);
                 soundBank.samples[sample].cursor = 0;
-            } //Crash time ;3
-            if (goldenfreddiedframes == 260) {
-                loadFile = "\\E.DAT;1";
-                CdSearchFile( &filePos, loadFile);
-                dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                CDreadResult = CdReadSync(0, 0);
-                LoadTexture(dataBuffer, &goldenfreddy); 
-                loadFile = "\\INTER8.XA;1";
-                CdSearchFile( &filePos, loadFile);
-                dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
-                CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
-                CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
-                CDreadResult = CdReadSync(0, 0);
-                LoadTexture(dataBuffer, &goldenfreddy); 
             }
-
+            if (goldenfreddiedframes == 360) {
+                LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
+                LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
+                LoadTexture(_binary_tim_office_officeMIDDLE_tim_start, &officeMIDDLE);
+                LoadTexture(_binary_tim_FAM_tim_start, &fiveam); 
+                LoadTexture(_binary_tim_AM_tim_start, &fiveam); 
+            }
+            if (goldenfreddiedframes > 370) {
+                makepoly(13);
+            }
+            if (goldenfreddiedframes == 375) {
+                makepoly(6);
+            }
 
             if (dead == 1) {
                 if (screamersetsound == 0) {
@@ -879,6 +883,9 @@ int main(void) {
                     if (noisefootstepanimatronic == 2) { //Chica
                         noise = noise + chicalocation * 300; // chicalocation == 1 -> +300, == 7 -> +1400
                     }
+                    if (noisefootstepanimatronic == 3) { //Freddy (when in office)
+                        noise = noise + 8000;
+                    }
                     SpuSetVoiceVolume(8, noise, noise);
                     SpuSetKey(SPU_ON, SPU_08CH);
                 }
@@ -910,7 +917,8 @@ int main(void) {
                 }
             }
 
-            if (nightwon == 0) {
+            if (dead == 0 && nightwon == 0) {
+
                 if (doorclosedL == 1 && MovVectorleftdoor.vy < -61) {
                     leftdoorgoodbye++;
                     MovVectorleftdoor.vy = MovVectorleftdoor.vy + leftdoorgoodbye;
@@ -928,6 +936,27 @@ int main(void) {
                     rightdoorgoodbye2--;
                     MovVectorrightdoor.vy = MovVectorrightdoor.vy + rightdoorgoodbye2;
                 } else {rightdoorgoodbye2 = -1;}
+
+                if (pad & PADRup || pad >> 16 & PADRup) {speedoffice = 6;} else {speedoffice = 3;}
+
+                if(pad & PADLleft || pad >> 16 & PADLleft && twoplayermode == 1) {
+                    if (MovVectorofficemiddle.vx < 80) {
+                        MovVectorofficemiddle.vx = MovVectorofficemiddle.vx + speedoffice;
+                        MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx + speedoffice;
+                        MovVectorleftdoor.vx = MovVectorleftdoor.vx + speedoffice;
+                        MovVectorrightdoor.vx = MovVectorrightdoor.vx + speedoffice;
+                        MovVectorofficegolden.vx = MovVectorofficegolden.vx + speedoffice;
+                    }
+                } // left ;)
+                if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {
+                    if (MovVectorofficemiddle.vx > -120) {
+                        MovVectorofficemiddle.vx = MovVectorofficemiddle.vx - speedoffice;
+                        MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx - speedoffice;
+                        MovVectorleftdoor.vx = MovVectorleftdoor.vx - speedoffice;
+                        MovVectorrightdoor.vx = MovVectorrightdoor.vx - speedoffice;
+                        MovVectorofficegolden.vx = MovVectorofficegolden.vx - speedoffice;
+                    }
+                } // right :) 
             }
             if (AM == 12 && FrameCounter == 1) { //Init Gameplay
                 CdControlF(CdlPause,0);
@@ -1104,17 +1133,7 @@ int main(void) {
                     noisefootstepF = 1;
                 }
             }
-            /*
-            if (freddycountdownactivation == 1) {
-                if (freddycountdown == -1) { //Init
-                    if (freddydifficulty <= 10) {freddycountdown = 1000 - 100 * freddydifficulty;} else {freddycountdown = 0;}
-                } else { if (freddycountdown > 0) {freddycountdown--;}}
-                if (freddycountdown == 0 && camera == 0) {
-                    freddylocation++;
-                    freddycountdown = -1;
-                }
-            } //no
-            */ 
+
             if (charge > 0 || AM < 6) {usage = usage + camera + light1 + light2 + doorclosedR + doorclosedL;}
 
             if (charge < 1 && usage > 0) {
@@ -1264,7 +1283,7 @@ int main(void) {
                         fivetosixamframes = 0;
                         nextnightframes = 0;
                         weirdnight = 0;
-                        resetgame();
+                        resetgame(0);
                         menu = 1;
                     } 
                     
@@ -1293,7 +1312,7 @@ int main(void) {
                                 hellnight = 0;
                                 activatedmenudebug = 0;
                                 impossiblenight = 1;
-                                resetgame();
+                                resetgame(0);
                                 menu = 1;
                             }
                         }
@@ -1303,11 +1322,33 @@ int main(void) {
                     fivetosixamframes = 0;
                     nextnightframes = 0;
                     weirdnight = 0;
-                    resetgame();
+                    resetgame(0);
                     menu = 1; //Load into next night
                 }
             }
 
+            if (returnframes == 60 || returnframes == 120 || returnframes == 180) {
+                returnbasevolume  = returnbasevolume + 2000;
+                SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
+                SpuSetKey(SPU_ON, SPU_04CH);
+            }
+            if (returnframes == 210) {
+                isingame = 1;
+                menuscreeninit = 0;
+                SpuSetKey(SPU_OFF, SPU_ALLCH);
+                returnbasevolume = 0x1800;
+                SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
+                menuselection = 3;
+                menuselectionmax = 2;
+                returnframes = 0;
+                menu = 0;
+                nofreddy = 1;
+            }
+            if (returnedingame) {
+                CdControlF(CdlPause,0);
+                SpuSetKey(SPU_ON, SPU_03CH);
+                returnedingame = 0;
+            }
             if (weirdnight == 1 && AM >= 4 && AM <= 6) {
 
                 setRGB0(polyfreddy, 0, 0, 0);          
@@ -1315,25 +1356,6 @@ int main(void) {
                 setRGB0(polychica, 0, 0, 0);           
                 setRGB0(polyfoxy, 0, 0, 0);            
             }
-
-            /*
-            if (returnframes == 60 || returnframes == 120 || returnframes == 180) {
-                returnbasevolume  = returnbasevolume + 2000;
-                SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
-                SpuSetKey(SPU_ON, SPU_04CH);
-            }
-            if (returnframes == 210) {
-                menuscreeninit = 0;
-                resetgame();
-                SpuSetKey(SPU_OFF, SPU_ALLCH);
-                returnbasevolume = 0x1800;
-                SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
-                menuselection = 3;
-                returnframes = 0;
-                limiterstart = 1;
-                menu = 0;
-            } //Enough is enough
-            */ 
 
             if (cantlightL == 1) {
                 light1 = 0;
@@ -1346,9 +1368,9 @@ int main(void) {
             if (islightsout == 1) {
                 if (lightsoutinit == 0) {//Init phase 1 
                     //blablabla
-                    LoadTexture(_binary_tim_officeLEFTnolight_tim_start, &officeLEFTnolight);//Loading office
-                    LoadTexture(_binary_tim_officeMIDDLEnolight_tim_start, &officeMIDDLEnolight); 
-                    LoadTexture(_binary_tim_officeRIGHTnolight_tim_start, &officeRIGHTnolight);
+                    LoadTexture(_binary_tim_office_officeLEFTnolight_tim_start, &officeLEFTnolight);//Loading office
+                    LoadTexture(_binary_tim_office_officeMIDDLEnolight_tim_start, &officeMIDDLEnolight); 
+                    LoadTexture(_binary_tim_office_officeRIGHTnolight_tim_start, &officeRIGHTnolight);
                     lightsoutinit++;
                 }
                 if (musicboxappearanceframe == 300) {
@@ -1400,76 +1422,13 @@ int main(void) {
                 freddyglowing++;
                 if (freddyglowing > 53) {freddyglowing = 0;}
 
-                if (freddyglowing == 2) {
+                if (freddyglowing == 2 || freddyglowing == 4 || freddyglowing == 8 || freddyglowing == 12 || freddyglowing == 16 || freddyglowing == 20 || freddyglowing == 24 || freddyglowing == 30 || freddyglowing == 36 || freddyglowing == 41 || freddyglowing == 47 || freddyglowing == 51) {
                     glowvar = 64;
                 }
-                if (freddyglowing == 3) {
+                if (freddyglowing == 3 || freddyglowing == 9 || freddyglowing == 17 || freddyglowing == 25 || freddyglowing == 37 || freddyglowing == 48) {
                     glowvar = 0;
                 }
-                if (freddyglowing == 4) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 5) {
-                    glowvar = 128;
-                }
-                if (freddyglowing == 8) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 9) {
-                    glowvar = 0;
-                }
-                if (freddyglowing == 12) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 13) {
-                    glowvar = 128;
-                }
-                if (freddyglowing == 16) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 17) {
-                    glowvar = 0;
-                }
-                if (freddyglowing == 20) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 21) {
-                    glowvar = 128;
-                }
-                if (freddyglowing == 24) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 25) {
-                    glowvar = 0;
-                }
-                if (freddyglowing == 30) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 31) {
-                    glowvar = 128;
-                }
-                if (freddyglowing == 36) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 37) {
-                    glowvar = 0;
-                }
-                if (freddyglowing == 41) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 42) {
-                    glowvar = 128;
-                }
-                if (freddyglowing == 47) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 48) {
-                    glowvar = 0;
-                }
-                if (freddyglowing == 51) {
-                    glowvar = 64;
-                }
-                if (freddyglowing == 52) {
+                if (freddyglowing == 5 || freddyglowing == 13 || freddyglowing == 21 || freddyglowing == 31 || freddyglowing == 42 || freddyglowing == 52) {
                     glowvar = 128;
                 }
             }
@@ -1492,6 +1451,11 @@ int main(void) {
                         }
                     } else {
                         blackoutscreamerappearanceframe = 0;
+                        Ran(7);
+                        if (RAN == 1) {
+                            noisefootstep = 1;
+                            noisefootstepanimatronic = 3;
+                        } 
                     }
                 } else {blackoutscreamerappearanceframe++;}
             }
@@ -1516,301 +1480,32 @@ int main(void) {
                         setRGB0(polyofficeleft, fadeoffice, fadeoffice, fadeoffice);       
                     }
                 }
-                if (dead == 0 && nightwon == 0) {
-
-                    if (pad & PADRup || pad >> 16 & PADRup) {speedoffice = 6;} else {speedoffice = 3;}
-
-                    if(pad & PADLleft || pad >> 16 & PADLleft && twoplayermode == 1) {
-                        if (MovVectorofficemiddle.vx < 80) {
-                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx + speedoffice;
-                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx + speedoffice;
-                            MovVectorleftdoor.vx = MovVectorleftdoor.vx + speedoffice;
-                            MovVectorrightdoor.vx = MovVectorrightdoor.vx + speedoffice;
-                            MovVectorofficegolden.vx = MovVectorofficegolden.vx + speedoffice;
-                        }
-                    } // left ;)
-                    if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {
-                        if (MovVectorofficemiddle.vx > -120) {
-                            MovVectorofficemiddle.vx = MovVectorofficemiddle.vx - speedoffice;
-                            MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx - speedoffice;
-                            MovVectorleftdoor.vx = MovVectorleftdoor.vx - speedoffice;
-                            MovVectorrightdoor.vx = MovVectorrightdoor.vx - speedoffice;
-                            MovVectorofficegolden.vx = MovVectorofficegolden.vx - speedoffice;
-                        }
-                    } // right :) 
-                }
-
             }
             if (camera == 1) {       
-                //camera's 1A grey or green
-                polycamgreyogreen1A = (POLY_F4 *)nextpri;     
+                //camera's grey or green
+                polycamgreyogreen = (POLY_F4 *)nextpri;     
                         
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen1A);    
-                TransMatrix(&PolyMatrixpolycamgreyogreen1A, &MovVectorpolycamgreyogreen1A);
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen1A, &ScaleVectorpolycamWoutline);  
+                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen);    
+                TransMatrix(&PolyMatrixpolycamgreyogreen, &MovVectorpolycamgreyogreen);
+                ScaleMatrix(&PolyMatrixpolycamgreyogreen, &ScaleVectorpolycamgreyogreen);  
                 
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen1A);            
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen1A);          
+                SetRotMatrix(&PolyMatrixpolycamgreyogreen);            
+                SetTransMatrix(&PolyMatrixpolycamgreyogreen);          
                 
-                setPolyF4(polycamgreyogreen1A);                          
+                setPolyF4(polycamgreyogreen);                          
                 
                 RotTransPers4(
                             &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen1A->x0, (long*)&polycamgreyogreen1A->x1, (long*)&polycamgreyogreen1A->x2, (long*)&polycamgreyogreen1A->x3,
+                            (long*)&polycamgreyogreen->x0, (long*)&polycamgreyogreen->x1, (long*)&polycamgreyogreen->x2, (long*)&polycamgreyogreen->x3,
                             &polydepth,
                             &polyflag
                             );                               
 
-                addPrim(ot[db], polycamgreyogreen1A);        
+                addPrim(ot[db], polycamgreyogreen);        
 
-                MovVectorpolycamgreyogreen1A.vx = -35;
-                MovVectorpolycamgreyogreen1A.vy = -103;
-                setRGB0(polycamgreyogreen1A, 83, 83, 83);    
+                setRGB0(polycamgreyogreen, 157, 184, 3);    
                 
-                nextpri += sizeof(POLY_F4);                  
-
-                //camera's 1B grey or green
-                polycamgreyogreen1B = (POLY_F4 *)nextpri;    
-                        
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen1B);    
-                TransMatrix(&PolyMatrixpolycamgreyogreen1B, &MovVectorpolycamgreyogreen1B); 
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen1B, &ScaleVectorpolycamWoutline);  
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen1B);                
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen1B);              
-                
-                setPolyF4(polycamgreyogreen1B);                          
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen1B->x0, (long*)&polycamgreyogreen1B->x1, (long*)&polycamgreyogreen1B->x2, (long*)&polycamgreyogreen1B->x3,
-                            &polydepth,
-                            &polyflag
-                            );                               
-
-                addPrim(ot[db], polycamgreyogreen1B);        
-
-                MovVectorpolycamgreyogreen1B.vx = -40;
-                MovVectorpolycamgreyogreen1B.vy = -83;
-                setRGB0(polycamgreyogreen1B, 83, 83, 83);    
-                
-                nextpri += sizeof(POLY_F4);                  
-
-                //camera's 1C grey or green
-                polycamgreyogreen1C = (POLY_F4 *)nextpri;    
-               
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen1C);    
-                TransMatrix(&PolyMatrixpolycamgreyogreen1C, &MovVectorpolycamgreyogreen1C);
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen1C, &ScaleVectorpolycamWoutline);  
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen1C);            
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen1C);          
-                
-                setPolyF4(polycamgreyogreen1C);                          
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen1C->x0, (long*)&polycamgreyogreen1C->x1, (long*)&polycamgreyogreen1C->x2, (long*)&polycamgreyogreen1C->x3,
-                            &polydepth,
-                            &polyflag
-                            );                               
-
-                addPrim(ot[db], polycamgreyogreen1C);        
-
-                MovVectorpolycamgreyogreen1C.vx = -65;
-                MovVectorpolycamgreyogreen1C.vy = -35;
-                setRGB0(polycamgreyogreen1C, 83, 83, 83);    
-                
-                nextpri += sizeof(POLY_F4);                  
-
-                if (curcam[0] == '5' && curcam[1] == ' ') { // I need to do that because else the PS1 just can't handle too much rects and crash.
-                    //camera's 5 grey or green
-                    polycamgreyogreen5 = (POLY_F4 *)nextpri;             
-
-                    RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen5);   
-                    TransMatrix(&PolyMatrixpolycamgreyogreen5, &MovVectorpolycamgreyogreen5);
-                    ScaleMatrix(&PolyMatrixpolycamgreyogreen5, &ScaleVectorpolycamWoutline); 
-                    
-                    SetRotMatrix(&PolyMatrixpolycamgreyogreen5);               
-                    SetTransMatrix(&PolyMatrixpolycamgreyogreen5);             
-                    
-                    setPolyF4(polycamgreyogreen5);                             
-                    
-                    RotTransPers4(
-                                &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                                (long*)&polycamgreyogreen5->x0, (long*)&polycamgreyogreen5->x1, (long*)&polycamgreyogreen5->x2, (long*)&polycamgreyogreen5->x3,
-                                &polydepth,
-                                &polyflag
-                                );                                
-
-                    addPrim(ot[db], polycamgreyogreen5);          
-
-                    MovVectorpolycamgreyogreen5.vx = -89;
-                    MovVectorpolycamgreyogreen5.vy = -54;
-                    setRGB0(polycamgreyogreen5, 83, 83, 83);      
-                    
-                    nextpri += sizeof(POLY_F4);                   
-
-                }
-                //camera's 3 grey or green
-                polycamgreyogreen3 = (POLY_F4 *)nextpri; 
-                        
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen3);   
-                TransMatrix(&PolyMatrixpolycamgreyogreen3, &MovVectorpolycamgreyogreen3);
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen3, &ScaleVectorpolycamWoutline); 
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen3);            
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen3);          
-                
-                setPolyF4(polycamgreyogreen3);                          
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen3->x0, (long*)&polycamgreyogreen3->x1, (long*)&polycamgreyogreen3->x2, (long*)&polycamgreyogreen3->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-
-                addPrim(ot[db], polycamgreyogreen3);           
-
-                MovVectorpolycamgreyogreen3.vx = -70;
-                MovVectorpolycamgreyogreen3.vy = 20;
-                setRGB0(polycamgreyogreen3, 83, 83, 83);       
-                
-                nextpri += sizeof(POLY_F4);                    
-
-                //camera's 2A grey or green
-                polycamgreyogreen2A = (POLY_F4 *)nextpri;      
-                
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen2A);    
-                TransMatrix(&PolyMatrixpolycamgreyogreen2A, &MovVectorpolycamgreyogreen2A);
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen2A, &ScaleVectorpolycamWoutline);  
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen2A);               
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen2A);             
-                
-                setPolyF4(polycamgreyogreen2A);                             
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen2A->x0, (long*)&polycamgreyogreen2A->x1, (long*)&polycamgreyogreen2A->x2, (long*)&polycamgreyogreen2A->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                
-
-                addPrim(ot[db], polycamgreyogreen2A);         
-
-                MovVectorpolycamgreyogreen2A.vx = -35;
-                MovVectorpolycamgreyogreen2A.vy = 52;
-                setRGB0(polycamgreyogreen2A, 83, 83, 83);     
-                
-                nextpri += sizeof(POLY_F4);                   
-
-                //camera's 2B grey or green
-                polycamgreyogreen2B = (POLY_F4 *)nextpri;   
-                        
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen2B);    
-                TransMatrix(&PolyMatrixpolycamgreyogreen2B, &MovVectorpolycamgreyogreen2B);   
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen2B, &ScaleVectorpolycamWoutline);  
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen2B);             
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen2B);           
-                
-                setPolyF4(polycamgreyogreen2B);                           
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen2B->x0, (long*)&polycamgreyogreen2B->x1, (long*)&polycamgreyogreen2B->x2, (long*)&polycamgreyogreen2B->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                
-
-                addPrim(ot[db], polycamgreyogreen2B);         
-
-                MovVectorpolycamgreyogreen2B.vx = -35;
-                MovVectorpolycamgreyogreen2B.vy = 67;
-                setRGB0(polycamgreyogreen2B, 83, 83, 83);     
-                
-                nextpri += sizeof(POLY_F4);                   
-
-                //camera's 4B grey or green
-                polycamgreyogreen4B = (POLY_F4 *)nextpri;     
-                
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen4B);    
-                TransMatrix(&PolyMatrixpolycamgreyogreen4B, &MovVectorpolycamgreyogreen4B); 
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen4B, &ScaleVectorpolycamWoutline);  
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen4B);               
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen4B);             
-                
-                setPolyF4(polycamgreyogreen4B);                             
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen4B->x0, (long*)&polycamgreyogreen4B->x1, (long*)&polycamgreyogreen4B->x2, (long*)&polycamgreyogreen4B->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-
-                addPrim(ot[db], polycamgreyogreen4B);          
-
-                MovVectorpolycamgreyogreen4B.vx = 37;
-                MovVectorpolycamgreyogreen4B.vy = 67;
-                setRGB0(polycamgreyogreen4B, 83, 83, 83);      
-                
-                nextpri += sizeof(POLY_F4);                    
-
-                //camera's 4A grey or green
-                polycamgreyogreen4A = (POLY_F4 *)nextpri;  
-                        
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen4A);    
-                TransMatrix(&PolyMatrixpolycamgreyogreen4A, &MovVectorpolycamgreyogreen4A);
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen4A, &ScaleVectorpolycamWoutline);  
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen4A);           
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen4A);         
-                
-                setPolyF4(polycamgreyogreen4A);                         
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen4A->x0, (long*)&polycamgreyogreen4A->x1, (long*)&polycamgreyogreen4A->x2, (long*)&polycamgreyogreen4A->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-
-                addPrim(ot[db], polycamgreyogreen4A);          
-
-                MovVectorpolycamgreyogreen4A.vx = 37;
-                MovVectorpolycamgreyogreen4A.vy = 52;
-                setRGB0(polycamgreyogreen4A, 83, 83, 83);      
-                
-                nextpri += sizeof(POLY_F4);                    
-
-                //camera's 7 grey or green
-                polycamgreyogreen7 = (POLY_F4 *)nextpri;       
-                        
-                RotMatrix(&RotVectorpolycamgreyogreen, &PolyMatrixpolycamgreyogreen7);   
-                TransMatrix(&PolyMatrixpolycamgreyogreen7, &MovVectorpolycamgreyogreen7);
-                ScaleMatrix(&PolyMatrixpolycamgreyogreen7, &ScaleVectorpolycamWoutline); 
-                
-                SetRotMatrix(&PolyMatrixpolycamgreyogreen7);         
-                SetTransMatrix(&PolyMatrixpolycamgreyogreen7);       
-                
-                setPolyF4(polycamgreyogreen7);                       
-                
-                RotTransPers4(
-                            &VertPospolycamgreyogreen[0],      &VertPospolycamgreyogreen[1],      &VertPospolycamgreyogreen[2],      &VertPospolycamgreyogreen[3],
-                            (long*)&polycamgreyogreen7->x0, (long*)&polycamgreyogreen7->x1, (long*)&polycamgreyogreen7->x2, (long*)&polycamgreyogreen7->x3,
-                            &polydepth,
-                            &polyflag
-                            );                                 
-                addPrim(ot[db], polycamgreyogreen7);           
-                MovVectorpolycamgreyogreen7.vx = 100;
-                MovVectorpolycamgreyogreen7.vy = -60;
-                setRGB0(polycamgreyogreen7, 83, 83, 83);       
-                
-                nextpri += sizeof(POLY_F4);                    
+                nextpri += sizeof(POLY_F4);                
 
                 polylayout = (POLY_FT4 *)nextpri;              
                         
@@ -1843,7 +1538,6 @@ int main(void) {
                 
                 nextpri += sizeof(POLY_FT4);             
 
-                makepoly(8);
                 //icon for camera
                 if (animatronicscamera[0] == 2) {
                     polyfreddy = (POLY_F4 *)nextpri;      
@@ -1998,8 +1692,7 @@ int main(void) {
                     addPrim(ot[db], polysparky);                   
                     
                     nextpri += sizeof(POLY_F4);                    
-                }
-                makepoly(9);     
+                }   
     
             }
                 //Don't know any other ways to store that piece of (shit) code
@@ -2413,7 +2106,6 @@ int main(void) {
                         }
                     }
                 }
-
             if (sparkylocation == 0) {
                 MovVectorsparky.vx = 999;
                 MovVectorsparky.vy = 999;
@@ -2454,7 +2146,7 @@ int main(void) {
                         goldenfreddied = 1;
                     }
 
-                    resetgame();
+                    resetgame(0);
                     menu = 1;
                 }
             } else{staticframes--;}
@@ -2504,19 +2196,21 @@ void chargeNtimeFunc(void) {
         surusage = 3;
     } 
 }
-void resetgame(void) {
-    freddydifficulty = 0;
+void resetgame(int hardreset) {
+    if (hardreset == 1) {
+        freddydifficulty = 0;
+        bonniedifficulty = 0;
+        chicadifficulty = 0;
+        foxydifficulty = 0;
+    }
     freddylocation = 0;
     freddylocationframe = 181;
-    bonniedifficulty = 0;
     bonnielocation = 0;
     bonnielocationframe = 298;
     bonnieliljumpscare = 0;
     freddyliljumpscare = 0;
-    chicadifficulty = 0;
     chicalocation = 0;
     chicalocationframe = 299;
-    foxydifficulty = 0;
     foxylocation = 0;
     foxylocationframe = 301;
     foxywaiting = 500;
@@ -2537,7 +2231,6 @@ void resetgame(void) {
     cantdoorR = 0;
     cantlightL = 0;
     cantdoorL = 0;
-    surusage = 0;
 
     door = 0; //0 is left, 1 is right
     doorclosedL = 0; //0 is no, 1 is yes
@@ -2609,6 +2302,8 @@ void resetgame(void) {
     blockedanimatronic = 0;
     powermanagementtotal = 0;
 
+    isingame = 0;
+
     #define OTLEN 8                    // Ordering Table Length 
 
     u_long ot[2][OTLEN];               // double ordering table of length 8 * 32 = 256 bits / 32 bytes
@@ -2622,8 +2317,9 @@ void resetgame(void) {
     AM = 12;
     FrameCounter = 0;
     ChargeCounter = 596;
-    usage = defaultusage;
+    usage = 1;
     charge = 100;
+    defaultusage = 1;
 }
 void print(int number) {
     if (charge > 0) {
@@ -2693,6 +2389,7 @@ void printNightInfo(void) { //print night information (1st, 2nd, 3rd, etc)
             FntPrint("\n\n\n\n\n\n\n\n\n               %dLCPZOW\n\n           IUYeJZZD pOD APMCV\n\n     PPP OWM SA KJMEF KL VCNBWQD", AM);
         }
     }
+    if (customnightactivated == 1) {FntPrint("\n\n             Custom night");} 
     if (activatedmenudebug == 1) {FntPrint("\n\n              Debug Mode");}  // debug time
     if (cheating == 1) {FntPrint("\n\n            Cheat Activate");}  // cheat time
 }
@@ -2728,65 +2425,84 @@ void menuselectionfunc(void) { //LONG asf lmaoo
     if (!(pad & PADstart)) {limiterstart = 0;}
     if (!(pad & PADRdown)) {limiterbuttondown = 0;}
 
-    if (maincustomnightmenu == 0 && extramenu == 0 && infoscreen == 0 && unlockssubmenu == 0 && AISetmenu == 0 && chargemenu == 0 && advancedmenu == 0) {  
-        if (menuselection == 1) {//"Starting" night
-            if (pad & PADstart) {
-                night = 1;
-                helpwantedposter = 1;
-            } 
-        }
-
-        if (menuselection == 2) { //Continue nights
-            if (pad & PADstart) {
-                loadingframe = 360;
-                menu = 1;
-            }//Or...
-            if (pad & PADRup && pad & PADRright && pad & PADR1 && pad & PADL2 && activatedmenudebug == 0) //Activate debug !
-            {
-                activatedmenudebug = 1;
-                menuselectionmax = menuselectionmax + 1;
+    if (maincustomnightmenu == 0 && extramenu == 0 && infoscreen == 0 && unlockssubmenu == 0 && AISetmenu == 0 && chargemenu == 0 && advancedmenu == 0) { 
+        if (isingame) {
+            if (menuselection == 1) {//Continue night
+                if (pad & PADstart) {
+                    menu = 2;
+                    returnedingame = 1;
+                } 
             }
-        }
 
-        if (menuselection == 3) { //EXTRA MENU
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    extramenu = 1;
-                    menuselection = 1;
+            if (menuselection == 2) {//Abandon night
+                if (pad & PADstart && limiterstart == 0) {
+                    resetgame(0);
                     limiterstart++;
-                    if (activatedmenudebug == 0) {
-                        menuselectionmax = 5;
+                    menuselection = 3;
+                    if (activatedmenudebug == 0) {menuselectionmax = 4;} else {menuselectionmax = 5;}
+                    
+                } 
+            }
+        } else {
+            if (menuselection == 1) {//"Starting" night
+                if (pad & PADstart) {
+                    night = 1;
+                    helpwantedposter = 1;
+                } 
+            }
+
+            if (menuselection == 2) { //Continue nights
+                if (pad & PADstart) {
+                    loadingframe = 360;
+                    menu = 1;
+                }//Or...
+                if (pad & PADRup && pad & PADRright && pad & PADR1 && pad & PADL2 && activatedmenudebug == 0) //Activate debug !
+                {
+                    activatedmenudebug = 1;
+                    menuselectionmax = menuselectionmax + 1;
+                }
+            }
+
+            if (menuselection == 3) { //EXTRA MENU
+                if (pad & PADstart) {
+                    if (limiterstart == 0) {
+                        extramenu = 1;
+                        menuselection = 1;
+                        limiterstart++;
+                        if (activatedmenudebug == 0) {
+                            menuselectionmax = 5;
+                        }
+                        if (activatedmenudebug == 1) {
+                            menuselectionmax = 6;
+                        }
                     }
-                    if (activatedmenudebug == 1) {
+                }
+            }
+            if (menuselection == 4) { //CUSTOM NIGHT MENU
+                if (pad & PADstart) {
+                    if (limiterstart == 0) {
+                        maincustomnightmenu = 1;
+                        menuselection = 1;
                         menuselectionmax = 6;
+                        limiterstart++;
                     }
                 }
             }
-        }
-        if (menuselection == 4) { //CUSTOM NIGHT MENU
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    maincustomnightmenu = 1;
-                    menuselection = 1;
-                    menuselectionmax = 5;
-                    limiterstart++;
-                }
-            }
-        }
 
-        if (activatedmenudebug == 1) {
-            if (menuselection == 5) {
-                if (pad & PADLright) {
-                    if (limiterpadright == 0) {
-                        printnumber++;
-                        if (printnumber > 3) {printnumber = 1;}
-                        limiterpadright = 1;
+            if (activatedmenudebug == 1) {
+                if (menuselection == 5) {
+                    if (pad & PADLright) {
+                        if (limiterpadright == 0) {
+                            printnumber++;
+                            if (printnumber > 3) {printnumber = 1;}
+                            limiterpadright = 1;
+                        }
                     }
                 }
+                if (!(pad & PADLright)) {limiterpadright = 0;}
             }
-            if (!(pad & PADLright)) {limiterpadright = 0;}
+            if (!(pad & PADstart)) {limiterstart = 0;}
         }
-        if (!(pad & PADstart)) {limiterstart = 0;}
     }
 
     if (maincustomnightmenu == 1) {
@@ -2840,7 +2556,15 @@ void menuselectionfunc(void) { //LONG asf lmaoo
                 }
             }
         }
-        if (menuselection == 5) { // RETURN TO MAIN MENU
+        if (menuselection == 5) { // LAUNCH NIGHT
+            if (pad & PADstart) {
+              if (limiterstart == 0) {
+                menu = 1;
+                customnightactivated = 1;
+              }
+            }
+        }
+        if (menuselection == 6) { // RETURN TO MAIN MENU
             if (pad & PADstart) {
                 if (limiterstart == 0)  {
                     maincustomnightmenu = 0;
@@ -2917,7 +2641,6 @@ void menuselectionfunc(void) { //LONG asf lmaoo
                 }
             }
         }
-
         if (menuselection == 5) {
             if (pad & PADLleft) {
                 if (limiterpadleft == 0) {
@@ -2934,14 +2657,13 @@ void menuselectionfunc(void) { //LONG asf lmaoo
                 }
             }
         }
-
         if (menuselection == 6) {
             if (pad & PADstart) {
                 if (limiterstart == 0) {
                     maincustomnightmenu = 1;
                     AISetmenu = 0;
                     menuselection = 2;
-                    menuselectionmax = 5;
+                    menuselectionmax = 6;
                     limiterstart++;
                 }
             }
@@ -3102,7 +2824,7 @@ void menuselectionfunc(void) { //LONG asf lmaoo
                     maincustomnightmenu = 1;
                     chargemenu = 0;
                     menuselection = 3;
-                    menuselectionmax = 5;
+                    menuselectionmax = 6;
                     limiterstart++;
                 }
             }
@@ -3191,7 +2913,7 @@ void menuselectionfunc(void) { //LONG asf lmaoo
                     maincustomnightmenu = 1;
                     advancedmenu = 0;
                     menuselection = 4;
-                    menuselectionmax = 5;
+                    menuselectionmax = 6;
                     limiterstart++; 
                 }
             }
@@ -3368,28 +3090,34 @@ void menuselectionfunc(void) { //LONG asf lmaoo
 }
 void menuPrint(void) {
     if (maincustomnightmenu == 0 && extramenu == 0 && infoscreen == 0 && unlockssubmenu == 0 && AISetmenu == 0 && chargemenu == 0 && advancedmenu == 0) {
-        FntPrint("   Five\n\n   Nights\n\n   at\n\n   Freddy's\n\n\n");  // print time
+        if (isingame) {
+            FntPrint("   Five\n\n   Nights\n\n   at\n\n   Freddy's\n\n   Pause Menu\n\n\n");  // print time
 
-        if (menuselection == 1) {FntPrint(">> New Game\n\n");}
-        else {FntPrint("   New Game\n\n");}
+            if (menuselection == 1) {FntPrint(">> Continue Night %d\n\n", night);}
+            else {FntPrint("   Continue Night %d\n\n", night);}
 
-        if (activatedmenudebug == 0) {
+            if (menuselection == 2) {FntPrint(">> Abandon The Night \n\n");}
+            else {FntPrint("   Abandon The Night \n\n");}
+        } else {
+
+            FntPrint("   Five\n\n   Nights\n\n   at\n\n   Freddy's\n\n\n");  // print time
+
+            if (menuselection == 1) {FntPrint(">> New Game\n\n");}
+            else {FntPrint("   New Game\n\n");}
+
             if (menuselection == 2) {FntPrint(">> Continue Night %d\n\n", night);}
             else {FntPrint("   Continue Night %d\n\n", night);}
-        } else {
-            if (menuselection == 2) {FntPrint(">> Continue Night %d (AI level forceset)\n\n", night);}
-            else {FntPrint("   Continue Night %d\n\n", night);}
-        }
 
-        if (menuselection == 3) {FntPrint(">> Extra menu \n\n");}
-        else {FntPrint("   Extra menu \n\n");}
+            if (menuselection == 3) {FntPrint(">> Extra menu \n\n");}
+            else {FntPrint("   Extra menu \n\n");}
 
-        if (menuselection == 4) {FntPrint(">> Custom Night \n\n");}
-        else {FntPrint("   Custom Night \n\n");}
+            if (menuselection == 4) {FntPrint(">> Custom Night \n\n");}
+            else {FntPrint("   Custom Night \n\n");}
 
-        if (activatedmenudebug == 1) {
-            if (menuselection == 5) {FntPrint(">> Debugprint %d\n\n", printnumber);}
-            else {FntPrint("   Debugprint \n\n");}
+            if (activatedmenudebug == 1) {
+                if (menuselection == 5) {FntPrint(">> Debugprint %d\n\n", printnumber);}
+                else {FntPrint("   Debugprint \n\n");}
+            }
         }
     }
     if (maincustomnightmenu == 1) {
@@ -3405,7 +3133,9 @@ void menuPrint(void) {
         else {FntPrint("   Set Charge, Timer, ect.\n\n");}
         if (menuselection == 4) {FntPrint(">> Advanced settings\n\n");}
         else {FntPrint("   Advanced settings\n\n");}
-        if (menuselection == 5) {FntPrint(">> Return to main menu\n\n");}
+        if (menuselection == 5) {FntPrint(">> Launch custom night\n\n");}
+        else {FntPrint("   Launch custom night\n\n");}
+        if (menuselection == 6) {FntPrint(">> Return to main menu\n\n");}
         else {FntPrint("   Return to main menu\n\n");}
     }
     if (AISetmenu == 1) {
@@ -3543,7 +3273,6 @@ void controllerinput(void) {
             }
             if(!(pad & PADRright || pad >> 16 & PADRright && twoplayermode == 1)) {limiter2 = 0;}
 
-            /*
             if (pad & PADstart || pad >> 16 & PADstart && twoplayermode == 1) {returnframes++;}
             if (!(pad & PADstart || pad >> 16 & PADstart && twoplayermode == 1)) {
                 if (returnframes != 0) {
@@ -3551,7 +3280,7 @@ void controllerinput(void) {
                     returnbasevolume = 0x1800;
                     SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
                 }
-            }*/
+            }
         }
 
         if(pad & PADR1 || pad >> 16 & PADR1 && twoplayermode == 1) { //R1
@@ -3567,18 +3296,22 @@ void controllerinput(void) {
     if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {doorFunc(1);}        
 }
 void animatronicFunc(int init) {
-    if (init == 1 && bonniedifficulty == 0 && chicadifficulty == 0 && foxydifficulty == 0 && freddydifficulty == 0) {
+    if (init == 1) {
         if (night == 1 && FrameCounter == 0) { //Setting difficulties
+            freddydifficulty = 0;
             bonniedifficulty = 0;
             chicadifficulty = 0;
+            foxydifficulty = 0;
         }
         if (night == 2 && FrameCounter == 0) { 
+            freddydifficulty = 0;
             bonniedifficulty = 3;
             chicadifficulty = 1;
             foxydifficulty = 1;
         }
         if (night == 3 && FrameCounter == 0) { 
             freddydifficulty = 1;
+            bonniedifficulty = 0;
             chicadifficulty = 5;
             foxydifficulty = 2;
         }
@@ -3606,9 +3339,7 @@ void animatronicFunc(int init) {
             chicadifficulty = 0;
             foxydifficulty = 0;
         }
-
     } else {
-
         if (activatedmenudebug == 0 && weirdnight == 0) {
             if (AM == 2 && FrameCounter == 0) { //Apparently, their AI level increases at these hours 
                 bonniedifficulty++;
@@ -3618,18 +3349,17 @@ void animatronicFunc(int init) {
                 chicadifficulty++;
                 foxydifficulty++;
             }  
-        }
+    }
+    if (night == 7 && FrameCounter == 0) {
+        freddydifficulty = 20;
+        bonniedifficulty = 20;
+        chicadifficulty = 20;
+        foxydifficulty = 20;
+        FrameCounterlimit = 21600; //It basically do 6 minutes
+    }
 
-        if (night == 7 && FrameCounter == 0) {
-            freddydifficulty = 20;
-            bonniedifficulty = 20;
-            chicadifficulty = 20;
-            foxydifficulty = 20;
-            FrameCounterlimit = 21600; //It basically do 6 minutes
-        }
-
-        if (charge > 0) {
-            if (bonnieDoor == 1) {
+    if (charge > 0) {
+        if (bonnieDoor == 1) {
                 if (bonnieDoorinit == 0) {
                     if (light1 == 1) {LightFunc();}
                     bonnieDoorinit++;
@@ -3652,8 +3382,8 @@ void animatronicFunc(int init) {
                         deadfrom = 2;
                     }
                 }
-            } 
-            if (chicaDoor == 1) {
+        } 
+        if (chicaDoor == 1) {
                 if (chicaDoorinit == 0) {
                     if (light2 == 1) {LightFunc();}
                     chicaDoorinit++;
@@ -3676,9 +3406,9 @@ void animatronicFunc(int init) {
                         deadfrom = 3;
                     }
                 }
-            } 
+        } 
 
-            if (isalreadydead == 1) {
+        if (isalreadydead == 1) {
                 lastsecondsframes--;
                 if (camera == 0) {lastsecondsframes = 0;}
                 if (lastsecondsframes == 1001) {
@@ -3690,111 +3420,108 @@ void animatronicFunc(int init) {
                 if (lastsecondsframes == 0) {
                     dead = 1;
                 }
-            }
-            if (isalreadydeadlow == 1) { //Usually for freddy only
+        }
+        if (isalreadydeadlow == 1) { //Usually for freddy only
                 if (camera == 0) {
                     dead = 1;
                     deadfrom = 1;
                 }
-            }
+        }
 
-            freddylocationframe--; 
-            bonnielocationframe--;
-            chicalocationframe--;
-            if (ranfoxy == 0) {
-                foxylocationframe--;
-            }
+        freddylocationframe--; 
+        bonnielocationframe--;
+        chicalocationframe--;
+        if (ranfoxy == 0) {
+            foxylocationframe--;
+        }
 
-            //Have to make other things, look https://www.youtube.com/watch?v=ujg0Y5IziiY very good at explaining how freddy works
-            if (freddylocationframe < 0 && freddydifficulty != 0) {
-                Ran(20); //Roll time !!!!!!!
-                if (freddydifficulty > RAN && isalreadydeadlow == 0) { //If freddy's AI level is superior to the current RAN, ... (for camera == 1 it's same issue as foxy)
-                    if (freddylocation == 5) {
-                        freddyanticipation = 1;
-                    } else {
-                        if (camera == 0) {
-                            freddylocation++;
-                            noisefootstepF = 1;
-                        }
+        if (freddylocationframe < 0 && freddydifficulty != 0) {
+            Ran(20); //Roll time !!!!!!!
+            if (freddydifficulty > RAN && isalreadydeadlow == 0) { //If freddy's AI level is superior to the current RAN, ...
+                if (freddylocation == 5) {
+                    freddyanticipation = 1;
+                } else {
+                    if (camera == 0) {
+                        freddylocation++;
+                        noisefootstepF = 1;
                     }
                 }
-                if (night == 7) {if(hellnight == 1) {freddylocationframe = 92;} else {freddylocationframe = 46;}} else {freddylocationframe = freddylocationframelock;}
-                if (freddylocation > 7) { //7 (final animatronic's pos) is when he's supposed to either kill you, or...
-                    freddylocation = 4; //Return
-                    blockedanimatronic++;
-                    noisefootstepF = 1;
+            }
+            if (night == 7) {if(hellnight == 1) {freddylocationframe = 92;} else {freddylocationframe = 46;}} else {freddylocationframe = freddylocationframelock;}
+            if (freddylocation > 7) { //7 (final animatronic's pos) is when he's supposed to either kill you, or...
+                freddylocation = 4; //Return
+                blockedanimatronic++;
+                noisefootstepF = 1;
+            }
+        }
+        if (bonnielocationframe < 0 && bonniedifficulty != 0) {
+            Ran(20);
+            if (bonniedifficulty > RAN) {
+                if (bonnielocation < 8) {
+                    bonnieonetimeskip = 0;
+                    bonnielocation++;  
+                    if (bonnieonetimeskip == 0) {
+                        Ran(bonnielocation);
+                        if (bonnielocation == 1 && RAN%2 == 0) {bonnielocation++;}
+                        if (bonnielocation == 2 && RAN%2 != 0) {bonnielocation++;}
+                        if (bonnielocation == 3 && RAN%2 != 0) {bonnielocation++;}
+                        if (bonnielocation == 4 && RAN%2 == 0) {bonnielocation++;}
+                        if (bonnielocation == 5 && RAN%2 == 0) {bonnielocation++;}   
+                        bonnieonetimeskip = 1; //It's for making them skip certain locations, like in the OG Game. 
+                    } 
+                    noisefootstep = 1;
+                    noisefootstepanimatronic = 1;
+                }else {
+                    if (deadfrom != 2) {bonnielocation = 1;}
                 }
-            }
-            if (bonnielocationframe < 0 && bonniedifficulty != 0) {
-                Ran(20);
-                if (bonniedifficulty > RAN) {
-                    if (bonnielocation < 8) {
-                        bonnieonetimeskip = 0;
-                        bonnielocation++;  
-                        if (bonnieonetimeskip == 0) {
-                            Ran(bonnielocation);
-                            if (bonnielocation == 1 && RAN%2 == 0) {bonnielocation++;}
-                            if (bonnielocation == 2 && RAN%2 != 0) {bonnielocation++;}
-                            if (bonnielocation == 3 && RAN%2 != 0) {bonnielocation++;}
-                            if (bonnielocation == 4 && RAN%2 == 0) {bonnielocation++;}
-                            if (bonnielocation == 5 && RAN%2 == 0) {bonnielocation++;}   
-                            bonnieonetimeskip = 1; //It's for making them skip certain locations, like in the OG Game. 
-                        } 
-                        noisefootstep = 1;
-                        noisefootstepanimatronic = 1;
-                    }else {
-                        if (deadfrom != 2) {bonnielocation = 1;}
+            }   
+            if (night == 7) {if(hellnight == 1) {bonnielocationframe = 149;} else {bonnielocationframe = 74;}} else {bonnielocationframe = bonnielocationframelock;}
+        }
+        if (chicalocationframe < 0 && chicadifficulty != 0) {
+            Ran(20);
+            if (chicadifficulty > RAN) {
+                if (chicalocation < 9) {
+                    chicaonetimeskip = 0;
+                    chicalocation++;  
+                    if (chicaonetimeskip == 0) {
+                        Ran(chicalocation);
+                        if (chicalocation == 1 && RAN%2 != 0) {chicalocation++;}
+                        if (chicalocation == 2 && RAN%2 == 0) {chicalocation++;}
+                        if (chicalocation == 3 && RAN%2 != 0) {chicalocation++;}
+                        if (chicalocation == 4 && RAN%2 == 0) {chicalocation++;}
+                        if (chicalocation == 5 && RAN%2 == 0) {chicalocation++;} 
+                        chicaonetimeskip = 1; 
                     }
-                }   
-                if (night == 7) {if(hellnight == 1) {bonnielocationframe = 149;} else {bonnielocationframe = 74;}} else {bonnielocationframe = bonnielocationframelock;}
-            }
-            if (chicalocationframe < 0 && chicadifficulty != 0) {
-                Ran(20);
-                if (chicadifficulty > RAN) {
-                    if (chicalocation < 9) {
-                        chicaonetimeskip = 0;
-                        chicalocation++;  
-                        if (chicaonetimeskip == 0) {
-                            Ran(chicalocation);
-                            if (chicalocation == 1 && RAN%2 != 0) {chicalocation++;}
-                            if (chicalocation == 2 && RAN%2 == 0) {chicalocation++;}
-                            if (chicalocation == 3 && RAN%2 != 0) {chicalocation++;}
-                            if (chicalocation == 4 && RAN%2 == 0) {chicalocation++;}
-                            if (chicalocation == 5 && RAN%2 == 0) {chicalocation++;} 
-                            chicaonetimeskip = 1; 
-                        }
-                        noisefootstep = 1;
-                        noisefootstepanimatronic = 2;
-                    } else {
-                        if (deadfrom != 2) {chicalocation = 1;}
-                    }
-                }   
-                if (night == 7) {if(hellnight == 1) {chicalocationframe = 150;} else {chicalocationframe = 75;}} else {chicalocationframe = chicalocationframelock;}
-                
-                if (chicalocation > 9) {
-                    chicalocation = 1;
+                    noisefootstep = 1;
+                    noisefootstepanimatronic = 2;
+                } else {
+                    if (deadfrom != 2) {chicalocation = 1;}
                 }
-            }
-
-            if (camera == 1 && foxylocation < 3) { //"C" only and not "1C" bcs there's only one cam where the letter C is
-                foxylocked = 1;
-                if (night == 7) {if(hellnight == 1) {Ran(8);} else {Ran(4);}} else {Ran(foxylockeduration);} //Normally, this would be 16. Welp, now it is ! Old value : 8 (taken for the HELL NIGHT)
-                ranfoxy = RAN * 60; //FPS
-            }
-            if (foxylocked == 1) {
-                ranfoxy--;
-            }
-            if (ranfoxy == 0) {foxylocked = 0;}
-            //foxylocationframe--;
-            if (foxylocationframe < 0 && foxydifficulty != 0)  {
-                Ran(20);
-                if (foxydifficulty > RAN && foxylocation != 3) {foxylocation++;}   
-                if (night == 7) {if(hellnight == 1) {foxylocationframe = 151;} else {foxylocationframe = 76;}} else {foxylocationframe = foxylocationframelock;}
-                
-                if (foxylocation > 4) {return;}
+            }   
+            if (night == 7) {if(hellnight == 1) {chicalocationframe = 150;} else {chicalocationframe = 75;}} else {chicalocationframe = chicalocationframelock;}
+            
+            if (chicalocation > 9) {
+                chicalocation = 1;
             }
         }
 
+        if (camera == 1 && foxylocation < 3) { //"C" only and not "1C" bcs there's only one cam where the letter C is
+            foxylocked = 1;
+            if (night == 7) {if(hellnight == 1) {Ran(8);} else {Ran(4);}} else {Ran(foxylockeduration);} //Normally, this would be 16. Welp, now it is ! Old value : 8 (taken for the HELL NIGHT)
+            ranfoxy = RAN * 60; //FPS
+        }
+        if (foxylocked == 1) {
+            ranfoxy--;
+        }
+        if (ranfoxy == 0) {foxylocked = 0;}
+        if (foxylocationframe < 0 && foxydifficulty != 0) {
+            Ran(20);
+            if (foxydifficulty > RAN && foxylocation != 3) {foxylocation++;}   
+            if (night == 7) {if(hellnight == 1) {foxylocationframe = 151;} else {foxylocationframe = 76;}} else {foxylocationframe = foxylocationframelock;}
+            
+            if (foxylocation > 4) {return;}
+        }
+        }
     }
 }
 void screamer(void) {
@@ -3807,55 +3534,69 @@ void screamer(void) {
         spritesheet++;
         if (spritesheet > 4 && deadfrom == 2 || spritesheet > 4 && deadfrom == 3) {spritesheet = 0;}
         if (deadfrom == 3) {
+            if (spritesheet == 0) {
+                LoadTexture(_binary_tim_screamers_jumpC_tim_start, &jumpscare);
+            } 
             if (spritesheet == 1) {
-                LoadTexture(_binary_tim_jumpC2_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
             }
             if (spritesheet == 2) {
-                LoadTexture(_binary_tim_jumpC3_tim_start, &jumpscare);
-            }
+                LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
+            }/*
             if (spritesheet == 3) {
-                LoadTexture(_binary_tim_jumpC2_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpC4_tim_start, &jumpscare);
+            }*/
+            if (spritesheet == 3) {
+                LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
             }
             if (spritesheet == 4) {
-                LoadTexture(_binary_tim_jumpC_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
             }
-            if (spritesheet == 0) {
-                LoadTexture(_binary_tim_jumpC_tim_start, &jumpscare);
-            } 
+            if (spritesheet == 5) {
+                SpuSetKey(SPU_OFF, SPU_06CH);
+                menu = 3;
+            }
         }
         if (deadfrom == 2) {
+            if (spritesheet == 0) {
+                LoadTexture(_binary_tim_screamers_jumpB_tim_start, &jumpscare);
+            } 
             if (spritesheet == 1) {
-                LoadTexture(_binary_tim_jumpB2_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
             }
             if (spritesheet == 2) {
-                LoadTexture(_binary_tim_jumpB3_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
             }
             if (spritesheet == 3) {
-                LoadTexture(_binary_tim_jumpB2_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpB4_tim_start, &jumpscare);
             }
             if (spritesheet == 4) {
-                LoadTexture(_binary_tim_jumpB_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
             }
-            if (spritesheet == 0) {
-                LoadTexture(_binary_tim_jumpB_tim_start, &jumpscare);
-            } 
+            if (spritesheet == 5) {
+                LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
+            }
+            if (spritesheet == 6) {
+                SpuSetKey(SPU_OFF, SPU_06CH);
+                menu = 3;
+            }
         }
         if (deadfrom == 1) {
             if (blackoutinit == 0) { //Special, knock you out pretty quickly
                 if (spritesheet == 1) {
-                    LoadTexture(_binary_tim_jumpF_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF_tim_start, &jumpscare);
                 }
                 if (spritesheet == 2) {
-                    LoadTexture(_binary_tim_jumpF2_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF2_tim_start, &jumpscare);
                 }
                 if (spritesheet == 3) {
-                    LoadTexture(_binary_tim_jumpF3_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF3_tim_start, &jumpscare);
                 }
                 if (spritesheet == 4) {
-                    LoadTexture(_binary_tim_jumpF2_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF2_tim_start, &jumpscare);
                 }
                 if (spritesheet == 5) {
-                    LoadTexture(_binary_tim_jumpF3_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF3_tim_start, &jumpscare);
                 }
                 if (spritesheet == 6) {
                     SpuSetKey(SPU_OFF, SPU_06CH);
@@ -3863,21 +3604,24 @@ void screamer(void) {
                 }
             } else { //Really special, has 6 FRAMES AYO THAT'S TAKING SO MUCH RAM
                 if (spritesheet == 1) {
-                    LoadTexture(_binary_tim_jumpF20_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF20_tim_start, &jumpscare);
                 }
                 if (spritesheet == 2) {
-                    LoadTexture(_binary_tim_jumpF21_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF21_tim_start, &jumpscare);
                 }
                 if (spritesheet == 3) {
-                    LoadTexture(_binary_tim_jumpF22_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF22_tim_start, &jumpscare);
                 }
                 if (spritesheet == 4) {
-                    LoadTexture(_binary_tim_jumpF24_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF24_tim_start, &jumpscare);
                 }
                 if (spritesheet == 5) {
-                    LoadTexture(_binary_tim_jumpF25_tim_start, &jumpscare);
+                    LoadTexture(_binary_tim_screamers_jumpF25_tim_start, &jumpscare);
                 }
                 if (spritesheet == 6) {
+                    LoadTexture(_binary_tim_screamers_jumpF26_tim_start, &jumpscare);
+                }
+                if (spritesheet == 7) {
                     SpuSetKey(SPU_OFF, SPU_06CH);
                     menu = 3;
                 }
@@ -3885,16 +3629,23 @@ void screamer(void) {
         }
         if (deadfrom == 4) {
             if (spritesheet == 1) {
-                LoadTexture(_binary_tim_jumpFO_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpFO_tim_start, &jumpscare);
             }
             if (spritesheet == 2) {
-                LoadTexture(_binary_tim_jumpFO2_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpFO2_tim_start, &jumpscare);
             }
             if (spritesheet == 3) {
-                LoadTexture(_binary_tim_jumpFO3_tim_start, &jumpscare);
+                LoadTexture(_binary_tim_screamers_jumpFO3_tim_start, &jumpscare);
+            }
+            if (spritesheet == 4) {
+                LoadTexture(_binary_tim_screamers_jumpFO4_tim_start, &jumpscare);
+            }
+            if (spritesheet == 5) {
+                SpuSetKey(SPU_OFF, SPU_06CH);
+                menu = 3;
             }
         }
-        if (deadfrom == 2 || deadfrom == 3) {spriteframes = 2;} else {spriteframes = 4;}
+        if (deadfrom == 2 || deadfrom == 3) {spriteframes = 3;} else {spriteframes = 4;}
         
     } else {spriteframes--;}
     makepoly(14);
@@ -3916,18 +3667,18 @@ void LightFunc(void) {
                     light1++;
                     if (light1 == 1) {
                         light2 = 0;
-                        LoadTexture(_binary_tim_officeRIGHT_tim_start, &officeRIGHT);
+                        LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
                         SpuSetKey(SPU_ON, SPU_01CH);
                         if (bonnieDoor == 0) {
-                            LoadTexture(_binary_tim_officeLEFTlight_tim_start, &officeLEFTlight);
+                            LoadTexture(_binary_tim_office_officeLEFTlight_tim_start, &officeLEFTlight);
                         } else {
-                            LoadTexture(_binary_tim_officeLEFTlightbonnie_tim_start, &officeLEFTlightbonnie);
+                            LoadTexture(_binary_tim_office_officeLEFTlightbonnie_tim_start, &officeLEFTlightbonnie);
                         }
                     }
                     if (light1 >= 2) {
                         light1 = 0;
                         SpuSetKey(SPU_OFF, SPU_01CH);
-                        LoadTexture(_binary_tim_officeLEFT_tim_start, &officeLEFT);
+                        LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
                     }   
                 } else {jamlight = 1;}
             }
@@ -3936,18 +3687,18 @@ void LightFunc(void) {
                     light2++;
                     if (light2 == 1) {
                         light1 = 0;
-                        LoadTexture(_binary_tim_officeLEFT_tim_start, &officeLEFT);
+                        LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
                         SpuSetKey(SPU_ON, SPU_01CH);
                         if (chicaDoor == 0) {
-                            LoadTexture(_binary_tim_officeRIGHTlight_tim_start, &officeRIGHTlight);
+                            LoadTexture(_binary_tim_office_officeRIGHTlight_tim_start, &officeRIGHTlight);
                         } else {
-                            LoadTexture(_binary_tim_officeRIGHTlightchica_tim_start, &officeRIGHTlightchica);
+                            LoadTexture(_binary_tim_office_officeRIGHTlightchica_tim_start, &officeRIGHTlightchica);
                         }
                     }
                     if (light2 >= 2) {
                         light2 = 0;
                         SpuSetKey(SPU_OFF, SPU_01CH); 
-                        LoadTexture(_binary_tim_officeRIGHT_tim_start, &officeRIGHT);
+                        LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
                     } 
                 } else {jamlight = 1;}
             }
@@ -3994,8 +3745,8 @@ void CameraFunc(void) {
 
                 light1 = 0; //Disable lights
                 light2 = 0;
-                LoadTexture(_binary_tim_officeRIGHT_tim_start, &officeRIGHT);
-                LoadTexture(_binary_tim_officeLEFT_tim_start, &officeLEFT);
+                LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
+                LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
                 SpuSetKey(SPU_OFF, SPU_01CH);
 
                 if (cantdoorL == 1 || cantdoorR == 1) {isalreadydead = 1;}

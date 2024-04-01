@@ -5,7 +5,8 @@
 void cameraloc(void) {
     //Gosh, This is gonna be long
     if (curcam[0] == '1' && curcam[1] == 'A') {
-        setRGB0(polycamgreyogreen1A, 157, 184, 3);            
+        MovVectorpolycamgreyogreen.vx = -35;
+        MovVectorpolycamgreyogreen.vy = -103;  
         curcamname[0] = 'S';
         curcamname[1] = 'h';
         curcamname[2] = 'o';
@@ -28,7 +29,8 @@ void cameraloc(void) {
         }
     }
     if (curcam[0] == '1' && curcam[1] == 'B') {
-        setRGB0(polycamgreyogreen1B, 157, 184, 3);     
+        MovVectorpolycamgreyogreen.vx = -40;
+        MovVectorpolycamgreyogreen.vy = -83;  
         curcamname[0] = 'D';
         curcamname[1] = 'i';
         curcamname[2] = 'n';
@@ -70,10 +72,8 @@ void cameraloc(void) {
         itsmepiratecove = 0;
     }
     if (curcam[0] == '1' && curcam[1] == 'C') {
-        setRGB0(polycamgreyogreen3, 83, 83, 83);     
-        setRGB0(polycamgreyogreen1B, 83, 83, 83);    
-        setRGB0(polycamgreyogreen5, 83, 83, 83);     
-        setRGB0(polycamgreyogreen1C, 157, 184, 3);   
+        MovVectorpolycamgreyogreen.vx = -65;
+        MovVectorpolycamgreyogreen.vy = -35;  
         if (itsmepiratecove == 0) {
             curcamname[0] = 'P';
             curcamname[1] = 'i';
@@ -133,10 +133,9 @@ void cameraloc(void) {
             limitercameraL = 1;
         }
     }
-    if (curcam[0] == '3' && curcam[1] == ' ') {
-        setRGB0(polycamgreyogreen3, 157, 184, 3);      
-        setRGB0(polycamgreyogreen1C, 83, 83, 83);      
-        setRGB0(polycamgreyogreen2A, 83, 83, 83);      
+    if (curcam[0] == '3' && curcam[1] == ' ') {   
+        MovVectorpolycamgreyogreen.vx = -70;
+        MovVectorpolycamgreyogreen.vy = 20;  
         curcamname[0] = 'S';
         curcamname[1] = 'u';
         curcamname[2] = 'p';
@@ -210,8 +209,9 @@ void cameraloc(void) {
         }
         itsmepiratecove = 0;
     }
-    if (curcam[0] == '2' && curcam[1] == 'A') {
-        setRGB0(polycamgreyogreen2A, 157, 184, 3);        
+    if (curcam[0] == '2' && curcam[1] == 'A') {      
+        MovVectorpolycamgreyogreen.vx = -35;
+        MovVectorpolycamgreyogreen.vy = 52;   
         curcamname[0] = 'W';
         curcamname[1] = 'e';
         curcamname[2] = 's';
@@ -247,9 +247,9 @@ void cameraloc(void) {
         itsmeehallcorner = 0;
         itsmeehallcooldown = 0;
     }
-
-    if (curcam[0] == '2' && curcam[1] == 'B') {
-        setRGB0(polycamgreyogreen2B, 157, 184, 3);             
+    if (curcam[0] == '2' && curcam[1] == 'B') { 
+        MovVectorpolycamgreyogreen.vx = -35;
+        MovVectorpolycamgreyogreen.vy = 67;            
         if (itsmeehallcorner == 0) {
             curcamname[0] = 'W';
             curcamname[1] = '.';
@@ -305,9 +305,9 @@ void cameraloc(void) {
             limitercameraR = 1;
         }
     }
-
-    if (curcam[0] == '5' && curcam[1] == ' ') {
-        setRGB0(polycamgreyogreen5, 157, 184, 3);               
+    if (curcam[0] == '5' && curcam[1] == ' ') {  
+        MovVectorpolycamgreyogreen.vx = -89;
+        MovVectorpolycamgreyogreen.vy = -54;              
         curcamname[0] = 'B';
         curcamname[1] = 'a';
         curcamname[2] = 'c';
@@ -336,9 +336,9 @@ void cameraloc(void) {
         }
         itsmepiratecove = 0;
     }
-
-    if (curcam[0] == '4' && curcam[1] == 'A') {
-        setRGB0(polycamgreyogreen4A, 157, 184, 3);       
+    if (curcam[0] == '4' && curcam[1] == 'A') {    
+        MovVectorpolycamgreyogreen.vx = 37;
+        MovVectorpolycamgreyogreen.vy = 52;   
         if (itsmeehall == 0) {
             curcamname[0] = 'E';
             curcamname[1] = 'a';
@@ -408,9 +408,9 @@ void cameraloc(void) {
             limitercameraU = 1;
         }
     }
-
-    if (curcam[0] == '4' && curcam[1] == 'B') {
-        setRGB0(polycamgreyogreen4B, 157, 184, 3);         
+    if (curcam[0] == '4' && curcam[1] == 'B') {       
+        MovVectorpolycamgreyogreen.vx = 37;
+        MovVectorpolycamgreyogreen.vy = 67;  
         curcamname[0] = 'E';
         curcamname[1] = '.';
         curcamname[2] = ' ';
@@ -440,8 +440,9 @@ void cameraloc(void) {
         itsmeehallcorner = 0;
         itsmeehall = 0;
     }
-
     if (curcam[0] == '6' && curcam[1] == ' ') {
+        MovVectorpolycamgreyogreen.vx = 50520;
+        MovVectorpolycamgreyogreen.vy = -5028;  
         curcamname[0] = 'K';
         curcamname[1] = 'i';
         curcamname[2] = 't';
@@ -479,9 +480,9 @@ void cameraloc(void) {
         }
         itsmeehallcooldown = 0;
     }
-
     if (curcam[0] == '7' && curcam[1] == ' ') {
-        setRGB0(polycamgreyogreen7, 157, 184, 3);       
+        MovVectorpolycamgreyogreen.vx = 100;
+        MovVectorpolycamgreyogreen.vy = -60;  
         curcamname[0] = 'R';
         curcamname[1] = 'e';
         curcamname[2] = 's';
