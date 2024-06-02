@@ -111,6 +111,14 @@ void clearVRAMMenu(void)
     DrawSync(0);
 }
 
+void clearVRAMScreamer(void)
+{
+    RECT rectTL;
+    setRECT(&rectTL, 576, 256, 106, 126); 
+    ClearImage2(&rectTL, 0, 0, 0);
+    DrawSync(0);
+}
+
 void clearVRAM(void)
 {
     RECT rectTL;
@@ -285,8 +293,6 @@ int itsmeehallcornercooldown = 0;
 int itsmeehall = 0;
 int itsmeehallcooldown = 0;
 int blinkicon = 0;
-int foxymusic = 0;
-int foxymusicframe = 540;
 
 int isingame = 0;
 int returnedingame = 0;
@@ -301,18 +307,17 @@ int noisefootstepanimatronic = 0;
 int noisefootstepF = 0;
 int framenoisefootstepF = 0;
 
-int tensecondframe = 600;
+int fivesecondframe = 300;
 int ambiancesound = 1;
 int ambiancechance = 1;
 int ambiancenum = 3;
-
-int mascottune = 0;
-int musicmascottune = 1248;
 
 int enablephoneguy = 1;
 char enablephoneguystr[] = "ON";
 int limiterphoneguy = 0;
 int phoneguytalking = 0;
+int phoneguytalkingconst;
+int mutedcall = 0;
 
 int islightsout = 0;
 int lightsoutinit = 0;

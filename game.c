@@ -109,9 +109,9 @@ typedef struct XAbank {
 } XAbank;
 
 XAbank soundBank = {
-        19,
+        22,
         0,
-        {
+        {   //Static.xa = 3,216
             // channel 5
             // id   size   file  channel start end cursor
             {   0,  2747136,   1,     5,     0,   9400,  -1 }, //Intro.xa
@@ -136,7 +136,11 @@ XAbank soundBank = {
             {   15, 696128,   1,     9 ,   19856, 22232, -1  }, //golden freddy screamer.xa 
             {   16, 677440,   1,     9 ,   23728, 26040, -1  }, //puppet music.xa 
             {   17, 425152,   1,     9 ,   27536, 28984, -1  }, //piratesong.xa 
-            {   18, 4606592,   1,     9 ,   30480, 46248, -1  } //funny music box.xa 
+            {   18, 4606592,   1,     9 ,   30480, 46248, -1  }, //funny music box.xa 
+            //Channel 10
+            {   19, 3237696,   1,     10 ,   0, 11080, -1  }, //Mixed ambiance 1
+            {   20, 3078848,   1,     10 ,   14296, 24832, -1  }, //Mixed ambiance 2
+            {   21, 3602112,   1,     10 ,   28048, 40376, -1  } //Mixed ambiance 3
         }
 };
 // XA file to load
@@ -329,14 +333,14 @@ void setVoiceAttr(unsigned int pitch, long channel, unsigned long soundAddr ){
     voiceAttributes.sr           = 0x0;                     //~ Sustain rate
     voiceAttributes.sl           = 0xf;                     //~ Sustain level
     SpuSetVoiceAttr(&voiceAttributes);                      // set attributes
-    SpuSetVoiceVolume(0, 0x1800, 0x1800);
-    SpuSetVoiceVolume(1, 0x1800, 0x1800);
-    SpuSetVoiceVolume(2, 0x1800, 0x1800);
+    SpuSetVoiceVolume(0, 0x1800, 0x1800);//Door
+    SpuSetVoiceVolume(1, 0x1800, 0x1800);//light sound
+    SpuSetVoiceVolume(2, 0x1800, 0x1800);//Monitor
     SpuSetVoiceVolume(3, 0x1400, 0x1400); //Officesound
-    SpuSetVoiceVolume(4, 0x1800, 0x1800);
-    SpuSetVoiceVolume(5, 0x1800, 0x1800);
-    SpuSetVoiceVolume(6, 0x4000, 0x4000);
-    SpuSetVoiceVolume(7, 0x1800, 0x1800);
+    SpuSetVoiceVolume(4, 0x1800, 0x1800);//click
+    SpuSetVoiceVolume(5, 0x1800, 0x1800);//Door noise
+    SpuSetVoiceVolume(6, 0x4000, 0x4000);//Screamer
+    SpuSetVoiceVolume(7, 0x1800, 0x1800);//Honk
     SpuSetVoiceVolume(8, 0x1000, 0x1000); //Footstep
     SpuSetVoiceVolume(11, 0x1000, 0x1000); //Footstep2
     SpuSetVoiceVolume(9, 0x2000, 0x2000); //Foxy's knocks
@@ -375,9 +379,7 @@ void starting(void) {
     convertion = 60;
     customAM = 12;
   }
-  if (initstuff == 1) {
-    clearVRAMMenu();
-  }
+  if (initstuff == 1) {clearVRAMMenu();} else {clearVRAMScreamer();}
 
   LoadTexture(_binary_tim_load_tim_start, &load);
   
@@ -387,13 +389,9 @@ void starting(void) {
     }
 
   musicframes = 0;
-  if (enablephoneguystr[1] == 'N') { // Й
-      enablephoneguy = 1;
-  } else {enablephoneguy = 0;}//I dunno why but it keep resetting it 
+  if (enablephoneguystr[1] == 'N') {enablephoneguy = 1;} else {enablephoneguy = 0;}//I dunno why but it keep resetting it 
 
-  if (fastnights == 1) {
-      FrameCounterlimit = FrameCounterlimit / 2;
-  }
+  if (fastnights) {FrameCounterlimit = FrameCounterlimit / 2;}
 
   AM = customAM;
   charge = customcharge;
@@ -472,7 +470,7 @@ int main(void) {
 
                 menuselectionfunc();
 
-                if (ambiancenum > 3) {ambiancenum = 1;} else {ambiancenum++;} //For random ambiance sounds IG
+                if (ambiancenum > 8) {ambiancenum = 1;} else {ambiancenum++;} //For random ambiance sounds IG
 
                 if (musicframes == 3788){
                     sample = 0;
@@ -494,7 +492,7 @@ int main(void) {
 
                 if (loadingframe == 1) {
                     musicframes = 3787;
-                    if (ambiancenum > 3) {ambiancenum = 1;}
+                    if (ambiancenum > 8) {ambiancenum = 1;}
                 }
                 if (loadingframe < 360) {
 
@@ -587,12 +585,7 @@ int main(void) {
         if (menu == 1) { //Loading/Starting night screen
             loadingframe++;
             if (loadingframe < 360) {loadingframe = 360;}
-            if (loadingframe < 560 && loadingframe > 360) {
-                printNightInfo();
-
-            } else {
-                makepoly(13);
-            }
+            if (loadingframe < 560 && loadingframe > 360) {printNightInfo();} else {makepoly(13);}
             if (loadingframe == 362) {
                 starting();
                 fadeoffice = 128;
@@ -617,6 +610,7 @@ int main(void) {
                     LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
                     LoadTexture(_binary_tim_FAM_tim_start, &fiveam); 
                     LoadTexture(_binary_tim_AM_tim_start, &fiveam); 
+                    LoadTexture(_binary_tim_office_mutecall_tim_start, &mutecall);
                 }
                 usage = defaultusage;
             }
@@ -675,6 +669,15 @@ int main(void) {
                     CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
                     CDreadResult = CdReadSync(0, 0);
                     LoadTexture(dataBuffer, &doors); 
+                    free(dataBuffer);
+                    loadFile = "\\STATIC.TIM;1";
+                    CdSearchFile( &filePos, loadFile);
+                    dataBuffer = malloc( BtoS(filePos.size) * CD_SECTOR_SIZE );
+                    CdControl(CdlSetloc, (u_char *)&filePos.pos, CtrlResult);
+                    // Read data and load it to dataBuffer
+                    CDreadOK = CdRead( (int)BtoS(filePos.size), (u_long *)dataBuffer, CdlModeSpeed );
+                    CDreadResult = CdReadSync(0, 0);
+                    LoadTexture(dataBuffer, &statics); 
                     free(dataBuffer);
                     loadFile = "\\FRSNEAK.TIM;1";
                     CdSearchFile( &filePos, loadFile);
@@ -761,106 +764,90 @@ int main(void) {
                 AM = 5;
                 FrameCounter = FrameCounterlimit - 80;
             }
-            if (camera == 1) { //Cam things
 
-                timeoncam++; //For score system
-
-                cameraloc();
-
-                if (curcam[0] == '6' && curcam[1] == ' ') {
-                    if (puppetmusic == 0) {
-                        Ran(500);
-                        if (RAN == 1) {
-                            if (camera == 1 && phoneguytalking == 0 && ambiancesound == 0 && foxymusic == 0) {
-                                // Set sample ID for playback
-                                sample = 16;
-                                // Change file/channel in the filter struct
-                                filter.chan = soundBank.samples[sample].channel;
-                                filter.file = soundBank.samples[sample].file;
-                                // Set filter
-                                CdControlF(CdlSetfilter, (u_char *)&filter);
-                
-                                soundBank.samples[sample].cursor = 0;
-                            }
-                        }
-                        puppetmusic = 960;
-                    }                        
+            if (light1) {
+                Ran(100);
+                if (RAN <= 20) {
+                    LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
+                    SpuSetKey(SPU_OFF, SPU_01CH);
+                } else {
+                    if (SpuGetKeyStatus(SPU_01CH) == SPU_OFF) {SpuSetKey(SPU_ON, SPU_01CH);}
+                    if (!(bonnieDoor)) {LoadTexture(_binary_tim_office_officeLEFTlight_tim_start, &officeLEFTlight);} else {LoadTexture(_binary_tim_office_officeLEFTlightbonnie_tim_start, &officeLEFTlight);}
                 }
             }
-            if (tensecondframe == 0 ) {
-                if (mascottune == 0 && charge > 0 && puppetmusic == 0 && foxymusic == 0) {
+            if (light2) {
+                Ran(100);
+                if (RAN <= 20) {
+                    LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
+                    SpuSetKey(SPU_OFF, SPU_01CH);
+                } else {
+                    if (SpuGetKeyStatus(SPU_01CH) == SPU_OFF) {SpuSetKey(SPU_ON, SPU_01CH);}
+                    if (!(chicaDoor)) {LoadTexture(_binary_tim_office_officeRIGHTlight_tim_start, &officeLEFTlight);} else {LoadTexture(_binary_tim_office_officeRIGHTlightchica_tim_start, &officeLEFTlight);}
+                }
+            }
+
+            if (fivesecondframe == 0) {
+                if (charge > 0 && puppetmusic == 0) {
                     if (phoneguytalking == 0) {
                         Ran(15);
                         if (ambiancechance > RAN) {
                             ambiancechance = 1;
-                            if (ambiancenum == 1) {
-                                sample = 1;
-                                tensecondframe = 3402;
-                            } 
-                            if (ambiancenum == 2) {
-                                sample = 5;
-                                tensecondframe = 3912;
-                            }
-                            if (ambiancenum == 3) {
-                                sample = 7;
-                                tensecondframe = 3390;
+
+                            switch(ambiancenum) {
+                                case 1:
+                                    sample = 1;
+                                    fivesecondframe = 3402; //Ambiance 1
+                                break;
+                                case 2:
+                                    sample = 5;
+                                    fivesecondframe = 3912; //Ambiance 2
+                                break;
+                                case 3:
+                                    sample = 7;
+                                    fivesecondframe = 3390; //Ambiance 3
+                                break;
+                                case 4:
+                                    if (foxylocation < 2) {
+                                        sample = 17;
+                                        fivesecondframe = 510; //Foxy 
+
+                                    } else {
+                                        ambiancenum = Ran(5);
+                                    }
+                                break;
+                                case 5:
+                                    sample = 4;
+                                    fivesecondframe = 1290; //Circus 
+                                break;
+                                case 6:
+                                    sample = 19;
+                                    fivesecondframe = 4440; //Mixed ambiance 1
+                                break;
+                                case 7:
+                                    sample = 20;
+                                    fivesecondframe = 4200; //Mixed ambiance 2
+                                break;
+                                case 8:
+                                    sample = 21;
+                                    fivesecondframe = 4920; //Mixed ambiance 2
+                                break;
                             }
                             filter.chan = soundBank.samples[sample].channel;
                             filter.file = soundBank.samples[sample].file;
                             CdControlF(CdlSetfilter, (u_char *)&filter);
                             soundBank.samples[sample].cursor = 0;
-                        }else {
+                        } else {
                             ambiancesound = 0;
-                            tensecondframe = 600;
-                            ambiancechance++;
+                            fivesecondframe = 300;
+                            ambiancechance += 2;
                             ambiancenum++;
-                            if (ambiancenum > 3) {ambiancenum = 1;}
+                            if (ambiancenum > 8) {ambiancenum = 1;}
                         }   
                     }
                 } 
             }
-            if (tensecondframe == 360 || tensecondframe == 120 ) {
-                if (phoneguytalking == 0 && mascottune == 0 && puppetmusic == 0 && ambiancesound == 0 && foxylocation < 2) {
-                    Ran(100);
-                    if (RAN == 1) {
-                        foxymusic = 1;
-                        sample = 17;
-                        filter.chan = soundBank.samples[sample].channel;
-                        filter.file = soundBank.samples[sample].file;
-                        CdControlF(CdlSetfilter, (u_char *)&filter);
 
-                        soundBank.samples[sample].cursor = 0;
-                    } else {foxymusic = 0;}
-                }
-            }
-            if (foxymusic == 1) {
-                if (foxymusicframe == 0) {
-                    foxymusic = 0;
-                    foxymusicframe = 540;
-                } else {foxymusicframe--;}
-            }
-            if (tensecondframe == 300 && foxymusic == 0 && foxylocation < 1 && mascottune == 0 && ambiancesound == 0) {
-                if (phoneguytalking == 0) {
-                    Ran(100);
-                    if (RAN == 1) {
-                        mascottune = 1;
-                        sample = 4;
-                        filter.chan = soundBank.samples[sample].channel;
-                        filter.file = soundBank.samples[sample].file;
-                        CdControlF(CdlSetfilter, (u_char *)&filter);
-
-                        soundBank.samples[sample].cursor = 0;
-                    } else {mascottune = 0;}
-                }
-            }
-            if (mascottune == 1 ) {
-                if (musicmascottune == 0){
-                    mascottune = 0;
-                    musicmascottune = 1248;
-                }else {musicmascottune--;}
-            }
-
-            if (tensecondframe > 0) {tensecondframe--;}
+            if (fivesecondframe > 0) {fivesecondframe--;}
 
             if (foxysknock == 1) {
                 foxyknockframe++;
@@ -901,7 +888,7 @@ int main(void) {
             if (noisefootstepF == 1) {
                 int noisef;
                 noisef = 0x800;
-                noisef = noisef + freddylocation * 1000;
+                noisef = noisef + freddylocation * 1500;
                 SpuSetVoiceVolume(13, noisef, noisef);
                 SpuSetKey(SPU_ON, SPU_13CH);
                 noisefootstepF--;
@@ -949,7 +936,7 @@ int main(void) {
                     }
                 } // left ;)
                 if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {
-                    if (MovVectorofficemiddle.vx > -120) {
+                    if (MovVectorofficemiddle.vx > -115) {
                         MovVectorofficemiddle.vx = MovVectorofficemiddle.vx - speedoffice;
                         MovVectorfreddylightsout.vx = MovVectorfreddylightsout.vx - speedoffice;
                         MovVectorleftdoor.vx = MovVectorleftdoor.vx - speedoffice;
@@ -976,34 +963,40 @@ int main(void) {
                 Ran(1000); //It's only for the funny lOL 
                 if (RAN == 1 && hellnight == 0) { //It's basically 0.1%
                     phoneguytalking = 2880;
+                    phoneguytalkingconst = 2880;
                     sample = 14; //Why do you tryna rizz freddy ??
                     filter.chan = soundBank.samples[sample].channel;
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
                     soundBank.samples[sample].cursor = 0;
 
-                    freddydifficulty = 20; //LMAO
+                    enablephoneguy = 2; //Look at ~ animatronic function when AI rises at mid 12AM
                 }
             }
             if (enablephoneguy == 1 && charge > 0 && goldenfreddied == 0) {
                 if (night == 1) {
                     phoneguytalking = 12060;
+                    phoneguytalkingconst = 12060;
                     sample = 8;
                 }
                 if (night == 2) {
                     phoneguytalking = 5880;
+                    phoneguytalkingconst = 5880;
                     sample = 9;
                 }
                 if (night == 3) {
                     phoneguytalking = 4080;
+                    phoneguytalkingconst = 4080;
                     sample = 10;
                 }
                 if (night == 4) {
                     phoneguytalking = 3540;
+                    phoneguytalkingconst = 3540;
                     sample = 11;
                 }
                 if (night == 5) {
                     phoneguytalking = 2160;
+                    phoneguytalkingconst = 2160;
                     sample = 12;
                 }
                 if (night != 6) {
@@ -1071,6 +1064,32 @@ int main(void) {
             } else {
                 sparkylocation = 0;
             }
+            if (camera == 1) { //Cam things
+
+                timeoncam++; //For score system
+
+                cameraloc();
+
+                if (curcam[0] == '6' && curcam[1] == ' ') {
+                    if (puppetmusic == 0) {
+                        Ran(500);
+                        if (RAN == 1) {
+                            if (camera == 1 && phoneguytalking == 0 && ambiancesound == 0) {
+                                // Set sample ID for playback
+                                sample = 16;
+                                // Change file/channel in the filter struct
+                                filter.chan = soundBank.samples[sample].channel;
+                                filter.file = soundBank.samples[sample].file;
+                                // Set filter
+                                CdControlF(CdlSetfilter, (u_char *)&filter);
+                
+                                soundBank.samples[sample].cursor = 0;
+                            }
+                        }
+                        puppetmusic = 960;
+                    }                        
+                }
+            }
             if (camera == 0) {
                 itsmeehallcorner = 0;
                 itsmeehallcornercooldown = 0;
@@ -1105,6 +1124,44 @@ int main(void) {
             }
             if (cooldowncamera > 0) {cooldowncamera--;}
 
+            if (phoneguytalkingconst - 1620 < phoneguytalking && mutedcall == 0) {
+              polymutecall = (POLY_FT4 *)nextpri;                 
+                      
+              RotMatrix(&RotVectormutecall, &PolyMatrixmutecall);    
+              TransMatrix(&PolyMatrixmutecall, &MovVectormutecall);  
+              ScaleMatrix(&PolyMatrixmutecall, &ScaleVectormutecall);
+              
+              SetRotMatrix(&PolyMatrixmutecall);                  
+              SetTransMatrix(&PolyMatrixmutecall);                
+              
+              setClut(polymutecall, 960, 200);
+  
+                    setRGB0(polymutecall, 128, 128, 128); 
+
+              setPolyFT4(polymutecall);                           
+              
+              polymutecall->tpage = getTPage(mutecall.mode&0x3, 0, 832, 256); 
+              
+              
+              RotTransPers4(
+                          &VertPosmutecall[0],      &VertPosmutecall[1],      &VertPosmutecall[2],      &VertPosmutecall[3],
+                          (long*)&polymutecall->x0, (long*)&polymutecall->x1, (long*)&polymutecall->x2, (long*)&polymutecall->x3,
+                          &polydepth,
+                          &polyflag
+                          );                               
+              
+              setUV4(polymutecall, 120, 0, 120, 33, 254, 0, 254, 33);
+                  
+              addPrim(ot[db], polymutecall);                       
+              
+              nextpri += sizeof(POLY_FT4);    
+
+              if (pad & PADselect || pad >> 16 & PADselect) {
+                mutedcall = 1;
+                CdControlF(CdlPause,0);
+                phoneguytalking = 0;
+              }
+            }
             if (camera == 1 && goldenfreddyactivated == 1 && nolongerincam == 1) {
                 goldenfreddyactivated = 0;
                 goldenfreddychancescrash = 2000;
@@ -1544,9 +1601,9 @@ int main(void) {
 
                     setRGB0(polyfreddy, 56, 34, 23);
                             
-                    RotMatrix(&RotVectorfreddy, &PolyMatrixfreddy);
+                    RotMatrix(&RotVectoreveryone, &PolyMatrixfreddy);
                     TransMatrix(&PolyMatrixfreddy, &MovVectorfreddy);  
-                    ScaleMatrix(&PolyMatrixfreddy, &ScaleVectorfreddy);
+                    ScaleMatrix(&PolyMatrixfreddy, &ScaleVectoreveryone);
                     
                     SetRotMatrix(&PolyMatrixfreddy);                   
                     SetTransMatrix(&PolyMatrixfreddy);                 
@@ -1554,7 +1611,7 @@ int main(void) {
                     setPolyF4(polyfreddy);                             
                     
                     RotTransPers4(
-                                &VertPosfreddy[0],      &VertPosfreddy[1],      &VertPosfreddy[2],      &VertPosfreddy[3],
+                                &VertPoseveryone[0],      &VertPoseveryone[1],      &VertPoseveryone[2],      &VertPoseveryone[3],
                                 (long*)&polyfreddy->x0, (long*)&polyfreddy->x1, (long*)&polyfreddy->x2, (long*)&polyfreddy->x3,
                                 &polydepth,
                                 &polyflag
@@ -1569,9 +1626,9 @@ int main(void) {
 
                     setRGB0(polybonnie, 0, 21, 90); 
 
-                    RotMatrix(&RotVectorbonnie, &PolyMatrixbonnie);
+                    RotMatrix(&RotVectoreveryone, &PolyMatrixbonnie);
                     TransMatrix(&PolyMatrixbonnie, &MovVectorbonnie);  
-                    ScaleMatrix(&PolyMatrixbonnie, &ScaleVectorbonnie);
+                    ScaleMatrix(&PolyMatrixbonnie, &ScaleVectoreveryone);
                     
                     SetRotMatrix(&PolyMatrixbonnie);                   
                     SetTransMatrix(&PolyMatrixbonnie);                 
@@ -1579,7 +1636,7 @@ int main(void) {
                     setPolyF4(polybonnie);                             
                     
                     RotTransPers4(
-                                &VertPosbonnie[0],      &VertPosbonnie[1],      &VertPosbonnie[2],      &VertPosbonnie[3],
+                                &VertPoseveryone[0],      &VertPoseveryone[1],      &VertPoseveryone[2],      &VertPoseveryone[3],
                                 (long*)&polybonnie->x0, (long*)&polybonnie->x1, (long*)&polybonnie->x2, (long*)&polybonnie->x3,
                                 &polydepth,
                                 &polyflag
@@ -1596,9 +1653,9 @@ int main(void) {
 
                     setRGB0(polychica, 128, 115, 41);
                             
-                    RotMatrix(&RotVectorchica, &PolyMatrixchica);  
+                    RotMatrix(&RotVectoreveryone, &PolyMatrixchica);  
                     TransMatrix(&PolyMatrixchica, &MovVectorchica);
-                    ScaleMatrix(&PolyMatrixchica, &ScaleVectorchica);
+                    ScaleMatrix(&PolyMatrixchica, &ScaleVectoreveryone);
                     
                     SetRotMatrix(&PolyMatrixchica);                  
                     SetTransMatrix(&PolyMatrixchica);                
@@ -1606,7 +1663,7 @@ int main(void) {
                     setPolyF4(polychica);                            
                     
                     RotTransPers4(
-                                &VertPoschica[0],      &VertPoschica[1],      &VertPoschica[2],      &VertPoschica[3],
+                                &VertPoseveryone[0],      &VertPoseveryone[1],      &VertPoseveryone[2],      &VertPoseveryone[3],
                                 (long*)&polychica->x0, (long*)&polychica->x1, (long*)&polychica->x2, (long*)&polychica->x3,
                                 &polydepth,
                                 &polyflag
@@ -1623,9 +1680,9 @@ int main(void) {
 
                     setRGB0(polyfoxy, 97, 20, 20);       
 
-                    RotMatrix(&RotVectorfoxy, &PolyMatrixfoxy);    
+                    RotMatrix(&RotVectoreveryone, &PolyMatrixfoxy);    
                     TransMatrix(&PolyMatrixfoxy, &MovVectorfoxy);  
-                    ScaleMatrix(&PolyMatrixfoxy, &ScaleVectorfoxy);
+                    ScaleMatrix(&PolyMatrixfoxy, &ScaleVectoreveryone);
                     
                     SetRotMatrix(&PolyMatrixfoxy);                 
                     SetTransMatrix(&PolyMatrixfoxy);               
@@ -1633,7 +1690,7 @@ int main(void) {
                     setPolyF4(polyfoxy);                           
                     
                     OTz = RotTransPers4(
-                                &VertPosfoxy[0],      &VertPosfoxy[1],      &VertPosfoxy[2],      &VertPosfoxy[3],
+                                &VertPoseveryone[0],      &VertPoseveryone[1],      &VertPoseveryone[2],      &VertPoseveryone[3],
                                 (long*)&polyfoxy->x0, (long*)&polyfoxy->x1, (long*)&polyfoxy->x2, (long*)&polyfoxy->x3,
                                 &polydepth,
                                 &polyflag
@@ -1648,9 +1705,9 @@ int main(void) {
                     //Golden freddy
                     polygoldenf = (POLY_F4 *)nextpri;              
                             
-                    RotMatrix(&RotVectorgoldenf, &PolyMatrixgoldenf);    
+                    RotMatrix(&RotVectoreveryone, &PolyMatrixgoldenf);    
                     TransMatrix(&PolyMatrixgoldenf, &MovVectorgoldenf);  
-                    ScaleMatrix(&PolyMatrixgoldenf, &ScaleVectorgoldenf);
+                    ScaleMatrix(&PolyMatrixgoldenf, &ScaleVectoreveryone);
                     
                     SetRotMatrix(&PolyMatrixgoldenf);                    
                     SetTransMatrix(&PolyMatrixgoldenf);                  
@@ -1658,7 +1715,7 @@ int main(void) {
                     setPolyF4(polygoldenf);                          
                     setRGB0(polygoldenf,204,204,0);
                     OTz = RotTransPers4(
-                                &VertPosgoldenf[0],      &VertPosgoldenf[1],      &VertPosgoldenf[2],      &VertPosgoldenf[3],
+                                &VertPoseveryone[0],      &VertPoseveryone[1],      &VertPoseveryone[2],      &VertPoseveryone[3],
                                 (long*)&polygoldenf->x0, (long*)&polygoldenf->x1, (long*)&polygoldenf->x2, (long*)&polygoldenf->x3,
                                 &polydepth,
                                 &polyflag
@@ -1673,9 +1730,9 @@ int main(void) {
                     //sparky
                     polysparky = (POLY_F4 *)nextpri;               
                             
-                    RotMatrix(&RotVectorsparky, &PolyMatrixsparky);
+                    RotMatrix(&RotVectoreveryone, &PolyMatrixsparky);
                     TransMatrix(&PolyMatrixsparky, &MovVectorsparky);  
-                    ScaleMatrix(&PolyMatrixsparky, &ScaleVectorsparky);
+                    ScaleMatrix(&PolyMatrixsparky, &ScaleVectoreveryone);
                     
                     SetRotMatrix(&PolyMatrixsparky);                   
                     SetTransMatrix(&PolyMatrixsparky);                 
@@ -1683,7 +1740,7 @@ int main(void) {
                     setPolyF4(polysparky);                             
                     setRGB0(polysparky,77,59,45);
                     OTz = RotTransPers4(
-                                &VertPossparky[0],      &VertPossparky[1],      &VertPossparky[2],      &VertPossparky[3],
+                                &VertPoseveryone[0],      &VertPoseveryone[1],      &VertPoseveryone[2],      &VertPoseveryone[3],
                                 (long*)&polysparky->x0, (long*)&polysparky->x1, (long*)&polysparky->x2, (long*)&polysparky->x3,
                                 &polydepth,
                                 &polyflag
@@ -2090,14 +2147,19 @@ int main(void) {
                                 if (foxyrunningframes%2 == 0)
                                 MovVectorfoxy.vy++;
                             } else {
+                                if (!(doorclosedL == 1 && MovVectorleftdoor.vy < -61))  {
+
+                                }
                                 if (doorclosedL == 1) {
-                                    foxylocation = 0;
-                                    blockedanimatronic++;
-                                    foxywaiting = 500;
-                                    foxyrunningframes = 0;
-                                    foxysknock = 1;
-                                    charge = charge - foxydrainpower;
-                                    foxydrainpower = foxydrainpower + 5;
+                                    if (!(MovVectorleftdoor.vy < -61)) {
+                                        foxylocation = 0;
+                                        blockedanimatronic++;
+                                        foxywaiting = 500;
+                                        foxyrunningframes = 0;
+                                        foxysknock = 1;
+                                        charge = charge - foxydrainpower;
+                                        foxydrainpower = foxydrainpower + 5;   
+                                    }
                                 } else {
                                     dead = 1;
                                     deadfrom = 4;
@@ -2127,9 +2189,6 @@ int main(void) {
                 }
                 if (staticframessheet == 0) {
                 }
-            }
-            if (staticframes == 559) {
-                LoadTexture(_binary_tim_static1_tim_start, &statics); 
             }
             if (staticframes == 2) {
             }
@@ -2248,10 +2307,7 @@ void resetgame(int hardreset) {
     noisefootstep = 0;
     framenoisefootstep = 0;
 
-    tensecondframe = 600;
-
-    mascottune = 0;
-    musicmascottune = 1248;
+    fivesecondframe = 300;
 
     islightsout = 0;
     lightsoutinit = 0;
@@ -2320,6 +2376,8 @@ void resetgame(int hardreset) {
     usage = 1;
     charge = 100;
     defaultusage = 1;
+
+    mutedcall = 0;
 }
 void print(int number) {
     if (charge > 0) {
@@ -2334,7 +2392,7 @@ void print(int number) {
                 if (door == 1) {
                     FntPrint("\nRight Door: %d Right Light: %d", doorclosedR, light2);
                 }
-                FntPrint("\n\nphoneguytalking %d, ambiancechance %d, tensecondframe %d, foxymusic %d, ambiancenum %d", phoneguytalking, ambiancechance, tensecondframe, foxymusic, ambiancenum); //print cam     
+                FntPrint("\n\nphoneguytalking %d, ambiancechance %d, fivesecondframe %d, ambiancenum %d", phoneguytalking, ambiancechance, fivesecondframe, ambiancenum); //print cam     
 
             }
         }
@@ -3222,7 +3280,7 @@ void menuPrint(void) {
 
         FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n            Thank you, Scott, \n For making our childhood a lot better.\n\n");
 
-        FntPrint(">> Back                       V1.1 \n"); //Don't even need to do condition, there's only one
+        FntPrint(">> Back                       V1.2.5 \n"); //Don't even need to do condition, there's only one
         /* It doesn't want :(
         FntPrint("                 What's New ?\n"); 
         FntPrint("V1.0.1 :\n   - added the help wanted screen\n   - changed a lot of images\n   - cleaned code\n   "); */
@@ -3316,7 +3374,7 @@ void animatronicFunc(int init) {
             foxydifficulty = 2;
         }
         if (night == 4 && FrameCounter == 0) { 
-            freddydifficulty = 2;
+            freddydifficulty = 1 + (Ran(3) - 1); //Meaning that we can get from 0~2 with 1~3 - 1
             bonniedifficulty = 2;
             chicadifficulty = 4;
             foxydifficulty = 6;
@@ -3343,12 +3401,22 @@ void animatronicFunc(int init) {
         if (activatedmenudebug == 0 && weirdnight == 0) {
             if (AM == 2 && FrameCounter == 0) { //Apparently, their AI level increases at these hours 
                 bonniedifficulty++;
+                chicadifficulty++;
+                foxydifficulty++;
             }
             if (AM == 3 && FrameCounter == 0 || AM == 4 && FrameCounter == 0) {
                 bonniedifficulty++;
+                if (night != 5) {
+                    bonniedifficulty++;
+                }
                 chicadifficulty++;
                 foxydifficulty++;
             }  
+            if (AM == 12 && FrameCounter == 2820 && enablephoneguy == 2) {
+                freddydifficulty = 20;
+
+                enablephoneguy = 0;
+            }
     }
     if (night == 7 && FrameCounter == 0) {
         freddydifficulty = 20;
@@ -3532,77 +3600,103 @@ void screamer(void) {
     
     if (spriteframes == 0) {
         spritesheet++;
-        if (spritesheet > 4 && deadfrom == 2 || spritesheet > 4 && deadfrom == 3) {spritesheet = 0;}
         if (deadfrom == 3) {
-            if (spritesheet == 0) {
-                LoadTexture(_binary_tim_screamers_jumpC_tim_start, &jumpscare);
-            } 
-            if (spritesheet == 1) {
-                LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
-            }
-            if (spritesheet == 2) {
-                LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
-            }/*
-            if (spritesheet == 3) {
-                LoadTexture(_binary_tim_screamers_jumpC4_tim_start, &jumpscare);
-            }*/
-            if (spritesheet == 3) {
-                LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
-            }
-            if (spritesheet == 4) {
-                LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
-            }
-            if (spritesheet == 5) {
-                SpuSetKey(SPU_OFF, SPU_06CH);
-                menu = 3;
+            switch(spritesheet) {
+                case 1:
+                        LoadTexture(_binary_tim_screamers_jumpC_tim_start, &jumpscare);
+                break;
+                case 2:
+                        LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
+                break;
+                case 3:
+                        LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
+                break;
+                case 4:
+                        LoadTexture(_binary_tim_screamers_jumpC4_tim_start, &jumpscare);
+                break;
+                case 5:
+                        LoadTexture(_binary_tim_screamers_jumpC5_tim_start, &jumpscare);
+                break;
+                case 6:
+                        LoadTexture(_binary_tim_screamers_jumpC4_tim_start, &jumpscare);
+                break;
+                case 7:
+                        LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
+                break;
+                case 8:
+                        LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
+                break;
+                case 9:
+                        LoadTexture(_binary_tim_screamers_jumpC_tim_start, &jumpscare);
+                break;
+                case 10:
+                    SpuSetKey(SPU_OFF, SPU_06CH);
+                    menu = 3;
+                break;
             }
         }
         if (deadfrom == 2) {
-            if (spritesheet == 0) {
-                LoadTexture(_binary_tim_screamers_jumpB_tim_start, &jumpscare);
-            } 
-            if (spritesheet == 1) {
-                LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
-            }
-            if (spritesheet == 2) {
-                LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
-            }
-            if (spritesheet == 3) {
-                LoadTexture(_binary_tim_screamers_jumpB4_tim_start, &jumpscare);
-            }
-            if (spritesheet == 4) {
-                LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
-            }
-            if (spritesheet == 5) {
-                LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
-            }
-            if (spritesheet == 6) {
-                SpuSetKey(SPU_OFF, SPU_06CH);
-                menu = 3;
+            switch(spritesheet) {
+                case 1:
+                        LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
+                break;
+                case 2:
+                        LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
+                break;
+                case 3:
+                        LoadTexture(_binary_tim_screamers_jumpB4_tim_start, &jumpscare);
+                break;
+                case 4:
+                        LoadTexture(_binary_tim_screamers_jumpB5_tim_start, &jumpscare);
+                break;
+                case 5:
+                        LoadTexture(_binary_tim_screamers_jumpB6_tim_start, &jumpscare);
+                break;
+                case 6:
+                        LoadTexture(_binary_tim_screamers_jumpB7_tim_start, &jumpscare);
+                break;
+                case 7:
+                        LoadTexture(_binary_tim_screamers_jumpB4_tim_start, &jumpscare);
+                break;
+                case 8:
+                        LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
+                break;
+                case 9:
+                        LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
+                break;
+                case 10:
+                    SpuSetKey(SPU_OFF, SPU_06CH);
+                    menu = 3;
+                break;
             }
         }
         if (deadfrom == 1) {
             if (blackoutinit == 0) { //Special, knock you out pretty quickly
-                if (spritesheet == 1) {
-                    LoadTexture(_binary_tim_screamers_jumpF_tim_start, &jumpscare);
+                switch(spritesheet) {
+                    case 1:
+                            LoadTexture(_binary_tim_screamers_jumpF_tim_start, &jumpscare);
+                    break;
+                    case 2:
+                            LoadTexture(_binary_tim_screamers_jumpF2_tim_start, &jumpscare);
+                    break;
+                    case 3:
+                            LoadTexture(_binary_tim_screamers_jumpF3_tim_start, &jumpscare);
+                    break;
+                    case 4:
+                            LoadTexture(_binary_tim_screamers_jumpF4_tim_start, &jumpscare);
+                    break;
+                    case 5:
+                            LoadTexture(_binary_tim_screamers_jumpF5_tim_start, &jumpscare);
+                    break;
+                    case 6:
+                            LoadTexture(_binary_tim_screamers_jumpF6_tim_start, &jumpscare);
+                    break;
+                    case 7:
+                        SpuSetKey(SPU_OFF, SPU_06CH);
+                        menu = 3;
+                    break;
                 }
-                if (spritesheet == 2) {
-                    LoadTexture(_binary_tim_screamers_jumpF2_tim_start, &jumpscare);
-                }
-                if (spritesheet == 3) {
-                    LoadTexture(_binary_tim_screamers_jumpF3_tim_start, &jumpscare);
-                }
-                if (spritesheet == 4) {
-                    LoadTexture(_binary_tim_screamers_jumpF2_tim_start, &jumpscare);
-                }
-                if (spritesheet == 5) {
-                    LoadTexture(_binary_tim_screamers_jumpF3_tim_start, &jumpscare);
-                }
-                if (spritesheet == 6) {
-                    SpuSetKey(SPU_OFF, SPU_06CH);
-                    menu = 3;
-                }
-            } else { //Really special, has 6 FRAMES AYO THAT'S TAKING SO MUCH RAM
+            } else {
                 if (spritesheet == 1) {
                     LoadTexture(_binary_tim_screamers_jumpF20_tim_start, &jumpscare);
                 }
@@ -3641,6 +3735,9 @@ void screamer(void) {
                 LoadTexture(_binary_tim_screamers_jumpFO4_tim_start, &jumpscare);
             }
             if (spritesheet == 5) {
+                LoadTexture(_binary_tim_screamers_jumpFO5_tim_start, &jumpscare);
+            }
+            if (spritesheet == 6) {
                 SpuSetKey(SPU_OFF, SPU_06CH);
                 menu = 3;
             }

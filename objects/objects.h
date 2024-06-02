@@ -11,6 +11,10 @@ extern unsigned long _binary_tim_office_officeRIGHT_tim_start[];
 extern unsigned long _binary_tim_office_officeRIGHT_tim_end[];
 extern unsigned long _binary_tim_office_officeRIGHT_tim_length;
 
+extern unsigned long _binary_tim_office_mutecall_tim_start[];
+extern unsigned long _binary_tim_office_mutecall_tim_end[];
+extern unsigned long _binary_tim_office_mutecall_tim_length;
+
 extern unsigned long _binary_tim_office_officeRIGHTlight_tim_start[];
 extern unsigned long _binary_tim_office_officeRIGHTlight_tim_end[];
 extern unsigned long _binary_tim_office_officeRIGHTlight_tim_length;
@@ -83,9 +87,9 @@ extern unsigned long _binary_tim_screamers_jumpC4_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpC4_tim_end[];
 extern unsigned long _binary_tim_screamers_jumpC4_tim_length;
 
-extern unsigned long _binary_tim_screamers_jumpB_tim_start[];
-extern unsigned long _binary_tim_screamers_jumpB_tim_end[];
-extern unsigned long _binary_tim_screamers_jumpB_tim_length;
+extern unsigned long _binary_tim_screamers_jumpC5_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpC5_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpC5_tim_length;
 
 extern unsigned long _binary_tim_screamers_jumpB2_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpB2_tim_end[];
@@ -99,6 +103,18 @@ extern unsigned long _binary_tim_screamers_jumpB4_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpB4_tim_end[];
 extern unsigned long _binary_tim_screamers_jumpB4_tim_length;
 
+extern unsigned long _binary_tim_screamers_jumpB5_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpB5_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpB5_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpB6_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpB6_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpB6_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpB7_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpB7_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpB7_tim_length;
+
 extern unsigned long _binary_tim_screamers_jumpF_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpF_tim_end[];
 extern unsigned long _binary_tim_screamers_jumpF_tim_length;
@@ -110,6 +126,22 @@ extern unsigned long _binary_tim_screamers_jumpF2_tim_length;
 extern unsigned long _binary_tim_screamers_jumpF3_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpF3_tim_end[];
 extern unsigned long _binary_tim_screamers_jumpF3_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpF4_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF4_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF4_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpF5_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF5_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF5_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpF6_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF6_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF6_tim_length;
+
+extern unsigned long _binary_tim_screamers_jumpF7_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpF7_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpF7_tim_length;
 
 extern unsigned long _binary_tim_screamers_jumpF20_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpF20_tim_end[];
@@ -155,21 +187,9 @@ extern unsigned long _binary_tim_screamers_jumpFO4_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpFO4_tim_end[];
 extern unsigned long _binary_tim_screamers_jumpFO4_tim_length;
 
-extern unsigned long _binary_tim_static1_tim_start[];
-extern unsigned long _binary_tim_static1_tim_end[];
-extern unsigned long _binary_tim_static1_tim_length;
-
-extern unsigned long _binary_tim_static2_tim_start[];
-extern unsigned long _binary_tim_static2_tim_end[];
-extern unsigned long _binary_tim_static2_tim_length;
-
-extern unsigned long _binary_tim_static3_tim_start[];
-extern unsigned long _binary_tim_static3_tim_end[];
-extern unsigned long _binary_tim_static3_tim_length;
-
-extern unsigned long _binary_tim_static4_tim_start[];
-extern unsigned long _binary_tim_static4_tim_end[];
-extern unsigned long _binary_tim_static4_tim_length;
+extern unsigned long _binary_tim_screamers_jumpFO5_tim_start[];
+extern unsigned long _binary_tim_screamers_jumpFO5_tim_end[];
+extern unsigned long _binary_tim_screamers_jumpFO5_tim_length;
 
 extern unsigned long _binary_tim_itsme_tim_start[];
 extern unsigned long _binary_tim_itsme_tim_end[];
@@ -183,6 +203,7 @@ extern unsigned long _binary_tim_fnt_tim_start[];
 extern unsigned long _binary_tim_fnt_tim_end[];
 extern unsigned long _binary_tim_fnt_tim_length;
 */
+TIM_IMAGE mutecall;
 TIM_IMAGE freddy;
 TIM_IMAGE freddy2;
 TIM_IMAGE freddy3;
@@ -300,70 +321,6 @@ SVECTOR VertPosicon[4] = {
 
 MATRIX PolyMatrixicon = {0};  
 
-//Freddy's Icon 
-POLY_FT4 *polyficon = {0};                        
-
-SVECTOR RotVectorficon = {0, 0, 0};               
-VECTOR  MovVectorficon = {-70, -50, CENTERX/2-10, 0}; 
-VECTOR  ScaleVectorficon = {2048, 2048, 2048}; 
-
-SVECTOR VertPosficon[4] = {                    
-        {-0, -0, 1 },                      
-        {-0,  75, 1 },                         
-        { 75, -0, 1 },                         
-        { 75,  75, 1  }                        
-    };        
-
-MATRIX PolyMatrixficon = {0};    
-
-//Bonnie's Icon 
-POLY_FT4 *polybicon = {0};                           
-
-SVECTOR RotVectorbicon = {0, 0, 0};                  
-VECTOR  MovVectorbicon = {-40, -50, CENTERX/2-10, 0};
-VECTOR  ScaleVectorbicon = {2048, 2048, 2048};       
-
-SVECTOR VertPosbicon[4] = {                          
-        {-0, -0, 1 },                         
-        {-0,  75, 1 },                        
-        { 75, -0, 1 },                        
-        { 75,  75, 1  }                       
-    };        
-
-MATRIX PolyMatrixbicon = {0};    
-
-//Chica's Icon 
-POLY_FT4 *polycicon = {0};                           
-
-SVECTOR RotVectorcicon = {0, 0, 0};                  
-VECTOR  MovVectorcicon = {0, 0, CENTERX/2-10, 0};    
-VECTOR  ScaleVectorcicon = {2048, 2048, 2048};       
-
-SVECTOR VertPoscicon[4] = {                    
-        {-60, -25, 1 },                        
-        {-60,  26, 1 },                        
-        { 61, -25, 1 },                        
-        { 61,  26, 1  }                        
-    };        
-
-MATRIX PolyMatrixcicon = {0};    
-
-//Foxy's Icon 
-POLY_FT4 *polyfoicon = {0};                       
-
-SVECTOR RotVectorfoicon = {0, 0, 0};              
-VECTOR  MovVectorfoicon = {0, 0, CENTERX/2-10, 0};
-VECTOR  ScaleVectorfoicon = {2048, 2048, 2048};   
-
-SVECTOR VertPosfoicon[4] = {                      
-        {-60, -25, 1 },                      
-        {-60,  26, 1 },                      
-        { 61, -25, 1 },                      
-        { 61,  26, 1  }                      
-    };        
-
-MATRIX PolyMatrixfoicon = {0};    
-
 //help wanted bg
 POLY_FT4 *polyhelpwanted = {0};                           
 
@@ -385,12 +342,13 @@ POLY_FT4 *polyofficemiddle = {0};
 POLY_FT4 *polyofficeright = {0};                          
 POLY_FT4 *polyofficeleft = {0};                           
 POLY_FT4 *poly4 = {0};                        
-SVECTOR RotVectorofficemiddle = {0, 0, 0};                
+
+SVECTOR RotVectorofficeall = {0, 0, 0};
+VECTOR  ScaleVectorofficeall = {ONE, ONE, ONE};        
 VECTOR  MovVectorofficemiddle = {10, 2, CENTERX/2-10, 0}; 
-VECTOR  ScaleVectorofficemiddle = {ONE, ONE, ONE};        
 
 SVECTOR RotVectorofficeright = {0, 0, 0};                 
-VECTOR  MovVectorofficeright = {10, 2, CENTERX/2-10, 0};  
+VECTOR  MovVectorofficeright = {5, 2, CENTERX/2-10, 0};  
 VECTOR  ScaleVectorofficeright = {ONE, ONE, ONE};         
 
 SVECTOR RotVectorofficeleft = {0, 0, 0};                  
@@ -409,10 +367,10 @@ SVECTOR VertPosofficemiddle[4] = {
     };                                         
 
 SVECTOR VertPosofficeright[4] = {              
-        {65, -68, 1 },                         
-        {65,  68, 1 },                         
-        { 215, -68, 1 },                       
-        { 215,  68, 1  }                       
+        {50, -68, 1 },                         
+        {50,  68, 1 },                         
+        { 200, -68, 1 },                       
+        { 200,  68, 1  }                       
     };
 
 SVECTOR VertPosofficeleft[4] = {               
@@ -459,12 +417,11 @@ SVECTOR RotVectorrightdoor = {0, 0, 0};
 VECTOR  MovVectorrightdoor = {144, -180, CENTERX/2-10, 0};
 VECTOR  ScaleVectorrightdoor = {ONE, ONE, ONE};          
 
-
 SVECTOR VertPosrightdoor[4] = {              
-        {-0, -0, 1 },                        
-        {-0,  122, 1 },                      
-        { 44, -0, 1 },                       
-        { 44,  122, 1  }                     
+        {-10, -0, 1 },                        
+        {-10,  122, 1 },                      
+        { 34, -0, 1 },                       
+        { 34,  122, 1  }                     
     };                                          
 
 MATRIX PolyMatrixrightdoor = {0};                   
@@ -489,78 +446,36 @@ POLY_F4 *polyfreddy = {0};
 POLY_F4 *polybonnie = {0};                        
 POLY_F4 *polychica = {0};                         
 POLY_F4 *polyfoxy = {0};                          
-POLY_F4 *polygoldenf = {0};                           
+POLY_F4 *polygoldenf = {0};
+POLY_F4 *polysparky = {0};                            
 
-SVECTOR RotVectorfreddy = {0, 0, 0};                  
+SVECTOR RotVectoreveryone = {0, 0, 0};        
+VECTOR  ScaleVectoreveryone = {1024, 1024, 1024};     //everyone is for every animatronic's icon, since this is the same values.
+SVECTOR VertPoseveryone[4] = {               
+        {-10, -10, 1 },                    
+        {-10,  10, 1 },                    
+        {10, -10, 1 },                     
+        {10,  10, 1  }                     
+    };                   
+
 VECTOR  MovVectorfreddy = {5, -37, CENTERX/2-10, 0};  
-VECTOR  ScaleVectorfreddy = {1024, 1024, 1024};       
-
-SVECTOR RotVectorbonnie = {0, 0, 0};                  
+              
 VECTOR  MovVectorbonnie = {-10, -44, CENTERX/2-10, 0};
-VECTOR  ScaleVectorbonnie = {1024, 1024, 1024};       
-
-SVECTOR RotVectorchica = {0, 0, 0};                 
+     
 VECTOR  MovVectorchica = {10, -44, CENTERX/2-10, 0};  
-VECTOR  ScaleVectorchica = {1024, 1024, 1024};        
 
-SVECTOR RotVectorfoxy = {0, 0, 0};                  
 VECTOR  MovVectorfoxy = {-45, -6, CENTERX/2-10, 0};   
-VECTOR  ScaleVectorfoxy = {1024, 1024, 1024};         
 
-SVECTOR RotVectorgoldenf = {0, 0, 0};                 
 VECTOR  MovVectorgoldenf = {999, 999, CENTERX/2-10, 0};
-VECTOR  ScaleVectorgoldenf = {1024, 1024, 1024};      
 
-SVECTOR VertPosfreddy[4] = {               
-        {-10, -10, 1 },                    
-        {-10,  10, 1 },                    
-        {10, -10, 1 },                     
-        {10,  10, 1  }                     
-    };            
-SVECTOR VertPosbonnie[4] = {               
-        {-10, -10, 1 },                    
-        {-10,  10, 1 },                    
-        {10, -10, 1 },                     
-        {10,  10, 1  }                     
-    };            
-SVECTOR VertPoschica[4] = {                
-        {-10, -10, 1 },                    
-        {-10,  10, 1 },                    
-        {10, -10, 1 },                     
-        {10,  10, 1  }                     
-    };            
-SVECTOR VertPosfoxy[4] = {                 
-        {-10, -10, 1 },                    
-        {-10,  10, 1 },                    
-        {10, -10, 1 },                     
-        {10,  10, 1  }                     
-    };                
-SVECTOR VertPosgoldenf[4] = {              
-        {-10, -10, 1 },                    
-        {-10,  10, 1 },                    
-        {10, -10, 1 },                     
-        {10,  10, 1  }                     
-    };                                     
+VECTOR  MovVectorsparky = {999, 999, CENTERX/2-10, 0};
+                   
 MATRIX PolyMatrixfreddy = {0};    
 MATRIX PolyMatrixbonnie = {0};    
 MATRIX PolyMatrixchica = {0};    
 MATRIX PolyMatrixfoxy = {0};     
 MATRIX PolyMatrixgoldenf = {0};    
-
-POLY_F4 *polysparky = {0};                           
-
-SVECTOR RotVectorsparky = {0, 0, 0};                  
-VECTOR  MovVectorsparky = {999, 999, CENTERX/2-10, 0};
-VECTOR  ScaleVectorsparky = {1024, 1024, 1024};       
-
-
-SVECTOR VertPossparky[4] = {                          
-        {-10, -10, 1 },                        
-        {-10,  10, 1 },                        
-        {10, -10, 1 },                         
-        {10,  10, 1  }                         
-    };                                         
-
+                          
 MATRIX PolyMatrixsparky = {0};    
 
 //Cam layout
@@ -706,6 +621,21 @@ SVECTOR VertPospolycamgreyogreen[4] = {
     };                                          
 MATRIX PolyMatrixpolycamgreyogreen = {0};      
 
+POLY_FT4 *polymutecall = {0};   
+
+SVECTOR RotVectormutecall = {0, 0, 0};                
+VECTOR  MovVectormutecall = {-80, 45, CENTERX/2-10, 0}; 
+VECTOR  ScaleVectormutecall = {ONE, ONE, ONE};        
+
+SVECTOR VertPosmutecall[4] = {             
+        {0, 0, 1 },                     
+        {0,  8, 1 },                     
+        { 31,0, 1 },                      
+        { 31,  8, 1  }    
+    };                                        
+
+MATRIX PolyMatrixmutecall = {0};     
+
 //This function take in charge a specific polygon OR a set of polygon with related elements, depending on the var "num". (1 is for freddy on the menu for example)
 //Why ? It's Simple, because the game.c was LONG ASF. Longer than my lifetime I'd say. (11 euros)
 //(and also because it was harder to look for a specific thing and having to scroll like 100000 times to pass by the thing we want. Here, you know you have to look at num 10 for ex.)
@@ -718,20 +648,20 @@ void makepoly(int num) {
         if (RAN < 4) {
             if (RAN == 1) {
                 polyf->tpage = getTPage(freddy.mode&0x3, 0, 704, 256); 
-                setClut(polyf, 320, 505);
+                setClut(polyf, 0, 505);
             }
             if (RAN == 2) {
                 polyf->tpage = getTPage(freddy.mode&0x3, 0, 832, 256); 
-                setClut(polyf, 320, 505);
+                setClut(polyf, 0, 505);
             } 
             if (RAN == 3) {
                 polyf->tpage = getTPage(freddy.mode&0x3, 0, 832, 0);
-                setClut(polyf, 320, 504);
+                setClut(polyf, 0, 504);
             } 
             freddyfacechangedchances = 75; //For having more chance of freddy FREAKING out
         } else {
             polyf->tpage = getTPage(freddy.mode&0x3, 0, 704, 0); 
-            setClut(polyf, 320, 504);
+            setClut(polyf, 0, 504);
             freddyfacechangedchances = 400;
         }
         
@@ -853,7 +783,7 @@ void makepoly(int num) {
         
         SetRotMatrix(&PolyMatrixhelpwanted);                 
         SetTransMatrix(&PolyMatrixhelpwanted);   
-        setClut(polyhelpwanted, 320, 507);     
+        setClut(polyhelpwanted, 0, 507);     
         
         setPolyFT4(polyhelpwanted);                          
         
@@ -922,9 +852,9 @@ void makepoly(int num) {
                 setPolyFT4(polyofficegolden);                           
                 
                 if (goldenfreddiedframes < 350) {
-                        setClut(polyofficegolden, 320, 509);
+                        setClut(polyofficegolden, 0, 509);
                 } else {
-                        setClut(polyofficegolden, 320, 505);
+                        setClut(polyofficegolden, 0, 505);
                 }
          
                 polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
@@ -956,7 +886,7 @@ void makepoly(int num) {
         
         setPolyFT4(polyfreddylightsout);                            
         
-        setClut(polyfreddylightsout, 320, 504);
+        setClut(polyfreddylightsout, 0, 504);
 
         polyfreddylightsout->tpage = getTPage(freddysneak.mode&0x3, 0, 832, 256);
         
@@ -989,7 +919,7 @@ void makepoly(int num) {
 	    setRGB0(polyofficegolden, 128, 128, 128);
 	    setPolyFT4(polyofficegolden);                           
 	    
-	    setClut(polyofficegolden, 320, 509);
+	    setClut(polyofficegolden, 0, 509);
  
 	    polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
 	    
@@ -1067,41 +997,6 @@ void makepoly(int num) {
          
          nextpri += sizeof(POLY_FT4);          
 
-         //first
-         polyofficemiddle = (POLY_FT4 *)nextpri;                 
-                 
-         RotMatrix(&RotVectorofficemiddle, &PolyMatrixofficemiddle);    
-         TransMatrix(&PolyMatrixofficemiddle, &MovVectorofficemiddle);  
-         ScaleMatrix(&PolyMatrixofficemiddle, &ScaleVectorofficemiddle);
-         
-         SetRotMatrix(&PolyMatrixofficemiddle);                  
-         SetTransMatrix(&PolyMatrixofficemiddle);                
-         
-        if (charge > 0) {
-                setClut(polyofficemiddle, 320, 508);
-                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 832, 0);
-        } else {
-               setClut(polyofficemiddle, 320, 503);
-                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 704, 256);
-        }
-
-         setPolyFT4(polyofficemiddle);                           
-         
-         
-         RotTransPers4(
-                     &VertPosofficemiddle[0],      &VertPosofficemiddle[1],      &VertPosofficemiddle[2],      &VertPosofficemiddle[3],
-                     (long*)&polyofficemiddle->x0, (long*)&polyofficemiddle->x1, (long*)&polyofficemiddle->x2, (long*)&polyofficemiddle->x3,
-                     &polydepth,
-                     &polyflag
-                     );                               
-         
-         setUV4(polyofficemiddle, 0, 0, 0, 255, 255, 0, 255, 255);
-             
-
-         addPrim(ot[db], polyofficemiddle);                       
-         
-         nextpri += sizeof(POLY_FT4);       
-
          //second 
          polyofficeright = (POLY_FT4 *)nextpri;                   
         
@@ -1113,9 +1008,9 @@ void makepoly(int num) {
          SetTransMatrix(&PolyMatrixofficemiddle);              
          
         if (goldenfreddiedframes < 375) {
-                setClut(polyofficeright, 320, 506); 
+                setClut(polyofficeright, 0, 506); 
         } else {
-                setClut(polyofficeright, 320, 505); 
+                setClut(polyofficeright, 0, 505); 
         }
 
          setPolyFT4(polyofficeright);                          
@@ -1136,6 +1031,40 @@ void makepoly(int num) {
          
          nextpri += sizeof(POLY_FT4);                
 
+         //first
+         polyofficemiddle = (POLY_FT4 *)nextpri;                 
+                 
+         RotMatrix(&RotVectorofficeall, &PolyMatrixofficemiddle);    
+         TransMatrix(&PolyMatrixofficemiddle, &MovVectorofficemiddle);  
+         ScaleMatrix(&PolyMatrixofficemiddle, &ScaleVectorofficeall);
+         
+         SetRotMatrix(&PolyMatrixofficemiddle);                  
+         SetTransMatrix(&PolyMatrixofficemiddle);                
+         
+        if (charge > 0) {
+                setClut(polyofficemiddle, 0, 508);
+                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 832, 0);
+        } else {
+                setClut(polyofficemiddle, 0, 503);
+                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 704, 256);
+        }
+
+        setPolyFT4(polyofficemiddle);                           
+         
+        RotTransPers4(
+                     &VertPosofficemiddle[0],      &VertPosofficemiddle[1],      &VertPosofficemiddle[2],      &VertPosofficemiddle[3],
+                     (long*)&polyofficemiddle->x0, (long*)&polyofficemiddle->x1, (long*)&polyofficemiddle->x2, (long*)&polyofficemiddle->x3,
+                     &polydepth,
+                     &polyflag
+                     );                               
+         
+         setUV4(polyofficemiddle, 0, 0, 0, 255, 255, 0, 255, 255);
+             
+
+         addPrim(ot[db], polyofficemiddle);                       
+         
+         nextpri += sizeof(POLY_FT4);       
+
          //third 
          polyofficeleft = (POLY_FT4 *)nextpri;                 
                  
@@ -1147,9 +1076,9 @@ void makepoly(int num) {
          SetTransMatrix(&PolyMatrixofficemiddle);            
          
         if (goldenfreddiedframes < 375) {
-                setClut(polyofficeleft, 320, 507); 
+                setClut(polyofficeleft, 0, 507); 
         } else {
-                setClut(polyofficeleft, 320, 505); 
+                setClut(polyofficeleft, 0, 505); 
         }
 
          setPolyFT4(polyofficeleft);                         
@@ -1369,7 +1298,7 @@ void makepoly(int num) {
         SetRotMatrix(&PolyMatrixgameover);                 
         SetTransMatrix(&PolyMatrixgameover); 
 
-        setClut(polygameover, 320, 510);
+        setClut(polygameover, 0, 510);
 
         setPolyFT4(polygameover);                          
         
@@ -1466,7 +1395,7 @@ void makepoly(int num) {
         setPolyFT4(polystatic);                             
         setRGB0(polystatic, 128,128,128);
         
-        setClut(polystatic, statics.crect->x, statics.crect->y);       
+        setClut(polystatic, 960, 197);       
 
         polystatic->tpage = getTPage(statics.mode&0x3, 0, 576, 256);
         

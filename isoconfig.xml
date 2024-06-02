@@ -96,6 +96,7 @@
             <file name="DOORS.TIM"   type="data" source="tim/office/DOORS.TIM"/>
             <file name="GJFIV.TIM"   type="data" source="tim/GJFIV.TIM"/>
             <file name="FRSNEAK.TIM"   type="data" source="tim/office/FREDDYSNEAK.TIM"/>
+            <file name="STATIC.TIM"   type="data" source="tim/STATIC.TIM"/>
             <file name="OMID.TIM"   type="data" source="tim/office/officeMIDDLE.TIM"/>
             <file name="OMIDNO.TIM"   type="data" source="tim/office/officeMIDDLEnolight.TIM"/>
 
