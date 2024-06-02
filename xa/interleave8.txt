@@ -3,6 +3,6 @@
 1 xa channel7.xa 1 7
 1 xa channel8.xa 1 8
 1 xa channel9.xa 1 9
-1 null
+1 xa channel9.xa 1 10
 1 null
 1 null
