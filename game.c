@@ -11,6 +11,13 @@
     - Test the game on different hardware than PC and SCPH-9002 PS1
 
     OTHER (info) :
+
+    Coming back there after more than 5 months to do a little cleanup is kind of weird.
+    It's like going back in time, when you were still a beginner, struggling about errors and problems you now know how to deal with.
+    After all these projects, all of these ports, it's really weird to go back to see the prototype.
+    The one that started it all.
+
+    V1.2.6
 */
 
 int FrameCounter = 0;
@@ -31,6 +38,7 @@ int debug = 3; //1 is for debug without cam, 2 is animatronic debug, 3 is only l
 #include "objects/constant.h"
 #include "objects/objects.h"
 #include "objects/camera.h"
+#include "objects/PATH.h"
 
 //Made all of the var declarations that I won't change alot into constant.h
 
@@ -398,7 +406,7 @@ void starting(void) {
   FrameCounterlimit = convertion;
   FrameCounterlimit = FrameCounterlimit * 60; //60 seconds * 60 fps = 3600 frames, maybe it would cause issues with 30 fps ??
   CdControlF(CdlPause,0);
-  if (weirdnight == 0 && customnightactivated == 0) {
+  if (weirdnight == 0 && (customnightactivated == 0 || hellnight || impossiblenight)) {
     animatronicFunc(1);
   }
 }
@@ -589,6 +597,12 @@ int main(void) {
             if (loadingframe == 362) {
                 starting();
                 fadeoffice = 128;
+
+                if (customnightchanger != 0) {
+                    night = customnightchanger;
+                    customnightchanger = 0;
+                    nightcheated = true;
+                }
             }
             if (loadingframe == 500) {
                 Ran(10000);
@@ -754,7 +768,7 @@ int main(void) {
                 screamer();
             } else {
                 if (goldenfreddied == 0) {
-                    if (nightwon == 0) {
+                    if (AM != 6) {
                         animatronicFunc(0);
                         controllerinput();
                     }
@@ -960,8 +974,7 @@ int main(void) {
                     usage = 0;
                     lightsout();
                 }
-                Ran(1000); //It's only for the funny lOL 
-                if (RAN == 1 && hellnight == 0) { //It's basically 0.1%
+                if ((freddydifficulty == 20 && bonniedifficulty == 0 && chicadifficulty == 0 && foxydifficulty == 0) && hellnight == 0) {
                     phoneguytalking = 2880;
                     phoneguytalkingconst = 2880;
                     sample = 14; //Why do you tryna rizz freddy ??
@@ -969,8 +982,7 @@ int main(void) {
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
                     soundBank.samples[sample].cursor = 0;
-
-                    enablephoneguy = 2; //Look at ~ animatronic function when AI rises at mid 12AM
+                    enablephoneguy = 0;
                 }
             }
             if (enablephoneguy == 1 && charge > 0 && goldenfreddied == 0) {
@@ -1124,7 +1136,7 @@ int main(void) {
             }
             if (cooldowncamera > 0) {cooldowncamera--;}
 
-            if (phoneguytalkingconst - 1620 < phoneguytalking && mutedcall == 0) {
+            if (phoneguytalkingconst - 1620 < phoneguytalking && mutedcall == 0 && AM != 6) {
               polymutecall = (POLY_FT4 *)nextpri;                 
                       
               RotMatrix(&RotVectormutecall, &PolyMatrixmutecall);    
@@ -1213,6 +1225,9 @@ int main(void) {
             }
 
             if (fivetosixamframes < 820 && AM == 6) {
+
+                if (SpuGetKeyStatus(SPU_03CH) == SPU_ON) {SpuSetKey(SPU_OFF, SPU_03CH);}
+
                 if (fivetosixamframes == 1) {
                     if (night != 7) {Ran(250);}
                     else {Ran(50);} //For more fun 
@@ -1266,10 +1281,10 @@ int main(void) {
                 }
             }
 
-            if (fivetosixamframes > 500 && blinkicon > 30){
+            if (fivetosixamframes > 500 && blinkicon > 30 && fivetosixamframes < 819){
                 FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n             score : %d !", score);
             }
-            if (fivetosixamframes > 600 && blinkicon > 30) {
+            if (fivetosixamframes > 600 && blinkicon > 30 && fivetosixamframes < 819) {
                     if (score > highscore) {
 
                         highscore = score;
@@ -1330,12 +1345,13 @@ int main(void) {
                         if (customcharge == 99 && customAM == 5 && night == 6) {
                             night++;
                             hellnight = 1;
+                            convertion = 300;
                             activatedmenudebug = 0;
                             enablephoneguy = 1;
                             enablephoneguystr[1] = 'N';
                             cheating = 0;
                             fastnights = 0;
-                            printnumber = 3;
+                            //printnumber = 3;
                         } 
                         fivetosixamframes = 0;
                         nextnightframes = 0;
@@ -1391,7 +1407,6 @@ int main(void) {
             }
             if (returnframes == 210) {
                 isingame = 1;
-                menuscreeninit = 0;
                 SpuSetKey(SPU_OFF, SPU_ALLCH);
                 returnbasevolume = 0x1800;
                 SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
@@ -1752,430 +1767,7 @@ int main(void) {
                 }   
     
             }
-                //Don't know any other ways to store that piece of (shit) code
-                //PATH
-                if (freddylocation == 0) { //Stage
-                        MovVectorfreddy.vx = 0; 
-                        MovVectorfreddy.vy = -48;
-                    if (curcam[0] == '1' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[0] = 2;
-                        } else {
-                            animatronicscamera[0] = 1;
-                        }
-                    } else {
-                            animatronicscamera[0] = 0;
-                    }
-                    if (bonnielocation != 0 && chicalocation != 0) {
-                        if (curcam[0] == '1' && curcam[1] == 'A' && freddyliljumpscare == 0 && freddyliljumpscarecooldown == 0) {
-                            Ran(100);
-                            if (RAN == 1) {
-                                freddyliljumpscare = 1;
-                            } else {
-                                freddyliljumpscare = 0;
-                            }
-                            freddyliljumpscarecooldown = 1;
-                        }
-                        if (freddyliljumpscare == 1) {MovVectorfreddy.vx = -10;} else {MovVectorfreddy.vx = 0;}
-                    }
-                }
-                if (freddylocation == 1) { //Dining area
-                    MovVectorfreddy.vx = 10;
-                    MovVectorfreddy.vy = -13;
-                    if (curcam[0] == '1' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[0] = 2;
-                        } else {
-                            animatronicscamera[0] = 1;
-                        }
-                    } else {
-                            animatronicscamera[0] = 0;
-                    }
-                }
-                if (freddylocation == 2) { //Restrooms (girl)
-                    MovVectorfreddy.vx = 57;
-                    MovVectorfreddy.vy = -24;
-                    if (curcam[0] == '7' && curcam[1] == ' ') {
-                        if (blinkicon > 30 || radar == 1) {
-                            if (chicalocation != 2) {
-                                animatronicscamera[0] = 2;
-                            } else {
-                                animatronicscamera[0] = 1;
-                            }
-                        } else {
-                            animatronicscamera[0] = 1;
-                        } 
-                    }
-                    else {
-                        animatronicscamera[0] = 0;
-                    }
-                }
-                if (freddylocation == 3) { //Kitchen 
-                    MovVectorfreddy.vx = 44;
-                    MovVectorfreddy.vy = 9;
-                    if (curcam[0] == '6' && curcam[1] == ' ') {
-                        animatronicscamera[0] = 0;                // no
-                    } else {
-                        animatronicscamera[0] = 0;   
-                    }
-                }
-                if (freddylocation == 4) { //East Hall
-                    MovVectorfreddy.vx = 14;
-                    MovVectorfreddy.vy = 7;
-                    if (curcam[0] == '4' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            if (chicalocation != 5 && chicalocation != 6) {
-                                animatronicscamera[0] = 2;
-                            } else {
-                                animatronicscamera[0] = 1;
-                            }
-                        } else {
-                            animatronicscamera[0] = 0;      
-                        }
-                    }
-                }
-                if (freddylocation == 5) { //E. Hall corner
-                    MovVectorfreddy.vx = 14;
-                    MovVectorfreddy.vy = 40;
-                    if (curcam[0] == '4' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[0] = 2;
-                        } else {
-                            animatronicscamera[0] = 1;
-                        }
-                    } else {
-                        animatronicscamera[0] = 0;   
-                    }
-                }
-                if (freddylocation == 6) { //'Door'
-                    MovVectorfreddy.vx = 999;
-                    MovVectorfreddy.vy = 999;
-                    if (doorclosedR == 0) {
-                        if (camera == 1) {isalreadydeadlow = 1;}
-                        Ran(100);
-                        framedeadpossi--;
-                        if (RAN < 20 && framedeadpossi == 0) {
-                            dead = 1;
-                            deadfrom = 1;
-                        } else {framedeadpossi = 60;}
-                    } else {freddylocation = 4;}
-                }
-
-                if (bonnielocation == 0) { //Stage
-                        MovVectorbonnie.vx = -10;
-                        MovVectorbonnie.vy = -50;
-                    if (curcam[0] == '1' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[1] = 2;
-                        } else {
-                            animatronicscamera[1] = 1;
-                        }
-                    } else {
-                        animatronicscamera[1] = 0;   
-                    }
-                }
-                if (bonnielocation == 1) { //Dining area
-                    MovVectorbonnie.vx = -20;
-                    MovVectorbonnie.vy = -21;
-                    if (curcam[0] == '1' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[1] = 2;
-                        } else {
-                            animatronicscamera[1] = 1;
-                        }
-                    } else {
-                        animatronicscamera[1] = 0;   
-                    }
-                }
-                if (bonnielocation == 2) { //Backstage
-                    if (curcam[0] == '5' && curcam[1] == ' ') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[1] = 2;
-                        } else {
-                            animatronicscamera[1] = 1;
-                        }
-                    } else {
-                        animatronicscamera[1] = 0;   
-                    }
-                    if (camera == 1) {
-                        if (curcam[0] == '5' && bonnieliljumpscare == 0 && bonnieliljumpscarecooldown == 0) {
-                            Ran(100);
-                            if (RAN == 1) {
-                                bonnieliljumpscare = 1;
-                            } else {
-                                bonnieliljumpscare = 0;
-                            }
-                            bonnieliljumpscarecooldown = 1;
-                        }
-                    }
-                    if (bonnieliljumpscare == 1) {
-                        MovVectorbonnie.vx = -45;
-                        MovVectorbonnie.vy = -33;
-                    } else {
-                        MovVectorbonnie.vx = -45;
-                        MovVectorbonnie.vy = -39;
-                    }
-                }
-                if (bonnielocation == 3) { //Dining area (closer to cam)
-                    MovVectorbonnie.vx = -20;
-                    MovVectorbonnie.vy = -31;
-                    if (curcam[0] == '1' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[1] = 2;
-                        } else {
-                            animatronicscamera[1] = 1;
-                        }
-                    } else {
-                        animatronicscamera[1] = 0;   
-                    }
-                }
-                if (bonnielocation == 4) { //West Hall
-                    MovVectorbonnie.vx = -17;
-                    MovVectorbonnie.vy = 8;
-                    if (curcam[0] == '2' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[1] = 2;
-                        } else {
-                            animatronicscamera[1] = 1;
-                        }
-                    } else {
-                        animatronicscamera[1] = 0;   
-                    }
-                }
-                if (bonnielocation == 5) { //Supply closet
-                    MovVectorbonnie.vx = -35;
-                    MovVectorbonnie.vy = 24;
-                    if (curcam[0] == '3' && curcam[1] == ' ') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[1] = 2;
-                        } else {
-                            animatronicscamera[1] = 1;
-                        }
-                    } else {
-                        animatronicscamera[1] = 0;   
-                    }
-                }
-                if (bonnielocation == 6) { //W. Hall corner
-                    MovVectorbonnie.vx = -19;
-                    MovVectorbonnie.vy = 40;
-                    if (curcam[0] == '2' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[1] = 2;
-                        } else {
-                            animatronicscamera[1] = 1;
-                        }
-                    } else {
-                        animatronicscamera[1] = 0;   
-                    }
-                }
-                if (bonnielocation == 7) { //Door
-                    MovVectorbonnie.vx = 999;
-                    MovVectorbonnie.vy = 999;
-                    bonnieDoor = 1;
-                }
-
-                if (chicalocation == 0) { //Stage
-                        MovVectorchica.vx = 10;
-                        MovVectorchica.vy = -50;
-                    if (curcam[0] == '1' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[2] = 2;
-                        } else {
-                            animatronicscamera[2] = 1;
-                        }
-                    } else {
-                        animatronicscamera[2] = 0;   
-                    }
-                }
-                if (chicalocation == 1) { //Dining area
-                    MovVectorchica.vx = 8;
-                    MovVectorchica.vy = -28;
-                    if (curcam[0] == '1' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[2] = 2;
-                        } else {
-                            animatronicscamera[2] = 1;
-                        }
-                    } else {
-                        animatronicscamera[2] = 0;   
-                    }
-                }
-                if (chicalocation == 2) { //Restrooms
-                    MovVectorchica.vx = 45;
-                    MovVectorchica.vy = -20;
-                    if (curcam[0] == '7' && curcam[1] == ' ') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[2] = 2;
-                        } else {
-                            animatronicscamera[2] = 1;
-                        }
-                    } else {
-                        animatronicscamera[2] = 0;   
-                    }
-                }
-                if (chicalocation == 3) { //Dining area (closer to cam)
-                    MovVectorchica.vx = -15;
-                    MovVectorchica.vy = -31;
-                    if (curcam[0] == '1' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[2] = 2;
-                        } else {
-                            animatronicscamera[2] = 1;
-                        }
-                    } else {
-                        animatronicscamera[2] = 0;   
-                    }
-                }
-                if (chicalocation == 4) { //Kitchen
-                    MovVectorchica.vx = 35;
-                    MovVectorchica.vy = 10;
-                    if (curcam[0] == '6' && curcam[1] == ' ') {
-                        animatronicscamera[2] = 0;                  // You can't see her !
-                    } else {
-                        animatronicscamera[2] = 0;            
-                    }
-                }
-                if (chicalocation == 5){ //East Hall
-                    MovVectorchica.vx = 16;
-                    MovVectorchica.vy = 14;
-                    if (curcam[0] == '4' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[2] = 2;
-                        } else {
-                            animatronicscamera[2] = 1;
-                        }
-                    } else {
-                        animatronicscamera[2] = 0;   
-                    }
-                }
-                if (chicalocation == 6){ //East Hall (closer)
-                    MovVectorchica.vx = 16;
-                    MovVectorchica.vy = 20;
-                    if (curcam[0] == '4' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[2] = 2;
-                        } else {
-                            animatronicscamera[2] = 1;
-                        }
-                    } else {
-                        animatronicscamera[2] = 0;   
-                    }
-                }
-                if (chicalocation == 7) { //E. Hall corner
-                    MovVectorchica.vx = 19;
-                    MovVectorchica.vy = 40;
-                    if (curcam[0] == '4' && curcam[1] == 'B') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[2] = 2;
-                        } else {
-                            animatronicscamera[2] = 1;
-                        }
-                    } else {
-                        animatronicscamera[2] = 0;   
-                    }
-                }
-                if (chicalocation == 8) { //Door
-                    MovVectorchica.vx = 999; //So that we can't see her in cam
-                    MovVectorchica.vy = 999;
-                    chicaDoor = 1;
-                }
-
-                if (foxylocation == 0) { //Pirate Cove
-                    MovVectorfoxy.vx = -45;
-                    MovVectorfoxy.vy = -9;
-                    if (curcam[0] == '1' && curcam[1] == 'C') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[3] = 2;
-                        } else {
-                            animatronicscamera[3] = 1;
-                        }
-                    } else {
-                        animatronicscamera[3] = 0;   
-                    }
-                }
-                if (foxylocation == 1) { //Pirate Cove
-                    MovVectorfoxy.vx = -40;
-                    MovVectorfoxy.vy = -9;
-                    if (curcam[0] == '1' && curcam[1] == 'C') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[3] = 2;
-                        } else {
-                            animatronicscamera[3] = 1;
-                        }
-                    } else {
-                        animatronicscamera[3] = 0;   
-                    }
-                }
-                if (foxylocation == 2) { //Pirate Cove (out)
-                    MovVectorfoxy.vx = -30;
-                    MovVectorfoxy.vy = -6;
-                    if (curcam[0] == '1' && curcam[1] == 'C') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[3] = 2;
-                        } else {
-                            animatronicscamera[3] = 1;
-                        }
-                    } else {
-                        animatronicscamera[3] = 0;   
-                    }
-                }
-                if (foxylocation == 3) { //West Hall
-                    if (curcam[0] == '2' && curcam[1] == 'A') {
-                        if (blinkicon > 30 || radar == 1) {
-                            animatronicscamera[3] = 2;
-                        } else {
-                            animatronicscamera[3] = 1;
-                        }
-                    } else {
-                        animatronicscamera[3] = 0;   
-                    }
-                    if (charge > 0) {
-                        if (foxyrunningframes == 0) {
-                            MovVectorfoxy.vx = -17;
-                            MovVectorfoxy.vy = 11;
-                        }
-                        foxywaiting--;
-                        if (curcam[0] == '2' && curcam[1] == 'A' || foxywaiting == 0) {
-                            if (foxyrunningframes == 0) {
-                                foxyrunningframes++;
-                                SpuSetKey(SPU_ON, SPU_10CH);
-                            }
-                        }   
-                        if (foxyrunningframes != 0) { //For not having to put the cam on for foxy to move 
-                            if (MovVectorfoxy.vy < 36) {
-                                foxyrunningframes++;
-                                if (foxyrunningframes%2 == 0)
-                                MovVectorfoxy.vy++;
-                            } else {
-                                if (!(doorclosedL == 1 && MovVectorleftdoor.vy < -61))  {
-
-                                }
-                                if (doorclosedL == 1) {
-                                    if (!(MovVectorleftdoor.vy < -61)) {
-                                        foxylocation = 0;
-                                        blockedanimatronic++;
-                                        foxywaiting = 500;
-                                        foxyrunningframes = 0;
-                                        foxysknock = 1;
-                                        charge = charge - foxydrainpower;
-                                        foxydrainpower = foxydrainpower + 5;   
-                                    }
-                                } else {
-                                    dead = 1;
-                                    deadfrom = 4;
-                                }
-                            }
-                        }
-                    }
-                }
-            if (sparkylocation == 0) {
-                MovVectorsparky.vx = 999;
-                MovVectorsparky.vy = 999;
-            }
-            if (sparkylocation == 1) {
-                MovVectorsparky.vx = -42;
-                MovVectorsparky.vy = -39;
-            }
+            pathfunc();
         }//Gameplay Screen
         if (menu == 3) { //Game over screen. ALWAYS BEGIN WITH THE STATIC
             if (staticframes > 1) {
@@ -2193,7 +1785,7 @@ int main(void) {
             if (staticframes == 2) {
             }
             if (staticframes < 1) {
-                seedtitle++; //While testing Freddy, I realized that he took a very long time to CUM. So I put that to prevent having the same seed. Thank you, Freddy, for CUMING very lately (incrementing does not necessarily means taking longer to CUM)
+                seedtitle++;
 
                 gameoverprint();
 
@@ -2209,7 +1801,7 @@ int main(void) {
                     menu = 1;
                 }
             } else{staticframes--;}
-        }//Game over screen. ALWAYS BEGIN WITH THE STATIC
+        }
         FntFlush(-1); //Draw
         display(); //Always here        
     }
@@ -2567,15 +2159,15 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         if (menuselection == 1) {
             if (pad & PADLright) {
                 if (limiterpadright == 0) {
-                    night++;
-                    if (night > 6) {night = 1;}
+                    customnightchanger++;
+                    if (customnightchanger > 6) {customnightchanger = 1;}
                     limiterpadright = 1;
                 }
             }
             if (pad & PADLleft) {
                 if (limiterpadleft == 0) {
-                    night--;
-                    if (night < 1) {night = 6;}
+                    customnightchanger--;
+                    if (customnightchanger < 1) {customnightchanger = 6;}
                     limiterpadleft = 1;
                 }
             } //Change night's var
@@ -3183,8 +2775,8 @@ void menuPrint(void) {
 
         FntPrint("   Welcome! What do you want to modify?\n\n\n\n");
 
-        if (menuselection == 1) {FntPrint(">> Night : %d\n\n", night);}
-        else {FntPrint("   Night : %d\n\n", night);}
+        if (menuselection == 1) {FntPrint(">> Night Cheat : %d\n\n", customnightchanger);}
+        else {FntPrint("   Night Cheat : %d\n\n", customnightchanger);}
         if (menuselection == 2) {FntPrint(">> Set AI levels\n\n");}
         else {FntPrint("   Set AI levels\n\n");}
         if (menuselection == 3) {FntPrint(">> Set Charge, Timer, ect.\n\n");}
@@ -3280,7 +2872,7 @@ void menuPrint(void) {
 
         FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n            Thank you, Scott, \n For making our childhood a lot better.\n\n");
 
-        FntPrint(">> Back                       V1.2.5 \n"); //Don't even need to do condition, there's only one
+        FntPrint(">> Back                       V1.2.6 \n"); //Don't even need to do condition, there's only one
         /* It doesn't want :(
         FntPrint("                 What's New ?\n"); 
         FntPrint("V1.0.1 :\n   - added the help wanted screen\n   - changed a lot of images\n   - cleaned code\n   "); */
@@ -3397,6 +2989,13 @@ void animatronicFunc(int init) {
             chicadifficulty = 0;
             foxydifficulty = 0;
         }
+        if (hellnight) {
+            freddydifficulty = 20;
+            bonniedifficulty = 20;
+            chicadifficulty = 20;
+            foxydifficulty = 20;
+            FrameCounterlimit = 21600; //It basically do 6 minutes
+        }
     } else {
         if (activatedmenudebug == 0 && weirdnight == 0) {
             if (AM == 2 && FrameCounter == 0) { //Apparently, their AI level increases at these hours 
@@ -3412,18 +3011,6 @@ void animatronicFunc(int init) {
                 chicadifficulty++;
                 foxydifficulty++;
             }  
-            if (AM == 12 && FrameCounter == 2820 && enablephoneguy == 2) {
-                freddydifficulty = 20;
-
-                enablephoneguy = 0;
-            }
-    }
-    if (night == 7 && FrameCounter == 0) {
-        freddydifficulty = 20;
-        bonniedifficulty = 20;
-        chicadifficulty = 20;
-        foxydifficulty = 20;
-        FrameCounterlimit = 21600; //It basically do 6 minutes
     }
 
     if (charge > 0) {
@@ -3895,6 +3482,11 @@ void gamevictory(void) {
     if (camera == 1) {
         CameraFunc();
     }
+
+    if (light1 == 1) {door = 0; LightFunc();}
+
+    if (light2 == 1) {door = 1; LightFunc();}
+
     usage = 0;
 
     timeoncam = timeoncam / 60; //Divide the var on seconds
@@ -3908,4 +3500,4 @@ void gamevictory(void) {
     score = score + (50 * charge) + (200 * freddydifficulty) + (200 * bonniedifficulty) + (200 * chicadifficulty) + (200 * foxydifficulty) + (150 * blockedanimatronic) + timeoncam - powermanagementtotal;
 
     FrameCounter++;
-} //old 5205 new 3585 BAAHAHA
+}

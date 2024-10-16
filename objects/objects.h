@@ -414,7 +414,7 @@ MATRIX PolyMatrixleftdoor = {0};
 POLY_FT4 *rightdoor = {0};                           
 
 SVECTOR RotVectorrightdoor = {0, 0, 0};                  
-VECTOR  MovVectorrightdoor = {144, -180, CENTERX/2-10, 0};
+VECTOR  MovVectorrightdoor = {137, -180, CENTERX/2-10, 0};
 VECTOR  ScaleVectorrightdoor = {ONE, ONE, ONE};          
 
 SVECTOR VertPosrightdoor[4] = {              
@@ -1273,7 +1273,7 @@ void makepoly(int num) {
         
         setClut(polygoodjob, goodjob.crect->x, goodjob.crect->y);       
 
-        polygoodjob->tpage = getTPage(goodjob.mode&0x3, 0, 384, goodjob.prect->y);
+        polygoodjob->tpage = getTPage(goodjob.mode&0x3, 0, 384, 0);
         
         RotTransPers4(
                     &VertPosgoodjob[0],      &VertPosgoodjob[1],      &VertPosgoodjob[2],      &VertPosgoodjob[3],

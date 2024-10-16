@@ -1,12 +1,10 @@
 [TIM Files]
-File_0=D:\autre\(Code) Projects\FNaF PS1\assets\573.TIM
-File_1=D:\nolibgs_hello_worlds\game\tim\FREDDY.TIM
-File_2=D:\nolibgs_hello_worlds\game\tim\FREDDY2.TIM
-File_3=D:\nolibgs_hello_worlds\game\tim\GAMEOVER.TIM
-File_4=D:\nolibgs_hello_worlds\game\tim\GJFIV.TIM
-File_5=D:\nolibgs_hello_worlds\game\tim\HWANTED.TIM
-File_6=D:\nolibgs_hello_worlds\game\tim\itsme.tim
-File_7=D:\nolibgs_hello_worlds\game\tim\office\LAYOUT.TIM
+File_0=D:\nolibgs_hello_worlds\fnaf1ps1\tim\FREDDY.TIM
+File_1=D:\nolibgs_hello_worlds\fnaf1ps1\tim\FREDDY2.TIM
+File_2=D:\nolibgs_hello_worlds\fnaf1ps1\tim\GAMEOVER.TIM
+File_3=D:\nolibgs_hello_worlds\fnaf1ps1\tim\GJFIV.TIM
+File_4=D:\nolibgs_hello_worlds\fnaf1ps1\tim\HWANTED.TIM
+File_5=D:\nolibgs_hello_worlds\fnaf1ps1\tim\static1.tim
 [Graphics Mode]
 Width=320
 Height=256

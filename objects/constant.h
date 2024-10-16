@@ -1,8 +1,8 @@
 #include <sys/types.h>
 #include <sys/file.h>
 #include <stdio.h>
-
 #include <string.h>
+#include <stdbool.h> // How have I done without you
 
 #include <kernel.h>
 #include <libgte.h>
@@ -128,6 +128,9 @@ void clearVRAM(void)
     ClearImage2(&rectTL, 0, 0, 0);
     DrawSync(0);
 }
+
+int customnightchanger = 0; //If not set to zero, You cheated !! ;)
+bool nightcheated = false;
 
 int initstuff = 0;
 
