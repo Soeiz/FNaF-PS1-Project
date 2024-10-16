@@ -386,6 +386,7 @@ void starting(void) {
     foxylocationframe = 300;
     convertion = 60;
     customAM = 12;
+    charge = 100;
   }
   if (initstuff == 1) {clearVRAMMenu();} else {clearVRAMScreamer();}
 
@@ -595,11 +596,6 @@ int main(void) {
             if (loadingframe < 360) {loadingframe = 360;}
             if (loadingframe < 560 && loadingframe > 360) {printNightInfo();} else {makepoly(13);}
             if (loadingframe == 362) {
-                if (customnightchanger != 0) {
-                    night = customnightchanger;
-                    customnightchanger = 0;
-                    nightcheated = true;
-                }
 
                 starting();
                 fadeoffice = 128;
@@ -2160,15 +2156,15 @@ void menuselectionfunc(void) { //LONG asf lmaoo
         if (menuselection == 1) {
             if (pad & PADLright) {
                 if (limiterpadright == 0) {
-                    customnightchanger++;
-                    if (customnightchanger > 6) {customnightchanger = 1;}
+                    night++;
+                    if (night > 6) {night = 1;}
                     limiterpadright = 1;
                 }
             }
             if (pad & PADLleft) {
                 if (limiterpadleft == 0) {
-                    customnightchanger--;
-                    if (customnightchanger < 1) {customnightchanger = 6;}
+                    night--;
+                    if (night < 1) {night = 6;}
                     limiterpadleft = 1;
                 }
             } //Change night's var
@@ -2776,8 +2772,8 @@ void menuPrint(void) {
 
         FntPrint("   Welcome! What do you want to modify?\n\n\n\n");
 
-        if (menuselection == 1) {FntPrint(">> Night set : %d\n\n", customnightchanger);}
-        else {FntPrint("   Night set : %d\n\n", customnightchanger);}
+        if (menuselection == 1) {FntPrint(">> Night set : %d\n\n", night);}
+        else {FntPrint("   Night set : %d\n\n", night);}
         if (menuselection == 2) {FntPrint(">> Set AI levels\n\n");}
         else {FntPrint("   Set AI levels\n\n");}
         if (menuselection == 3) {FntPrint(">> Set Charge, Timer, ect.\n\n");}
