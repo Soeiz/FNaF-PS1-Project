@@ -595,14 +595,15 @@ int main(void) {
             if (loadingframe < 360) {loadingframe = 360;}
             if (loadingframe < 560 && loadingframe > 360) {printNightInfo();} else {makepoly(13);}
             if (loadingframe == 362) {
-                starting();
-                fadeoffice = 128;
-
                 if (customnightchanger != 0) {
                     night = customnightchanger;
                     customnightchanger = 0;
                     nightcheated = true;
                 }
+
+                starting();
+                fadeoffice = 128;
+
             }
             if (loadingframe == 500) {
                 Ran(10000);
@@ -2775,8 +2776,8 @@ void menuPrint(void) {
 
         FntPrint("   Welcome! What do you want to modify?\n\n\n\n");
 
-        if (menuselection == 1) {FntPrint(">> Night Cheat : %d\n\n", customnightchanger);}
-        else {FntPrint("   Night Cheat : %d\n\n", customnightchanger);}
+        if (menuselection == 1) {FntPrint(">> Night set : %d\n\n", customnightchanger);}
+        else {FntPrint("   Night set : %d\n\n", customnightchanger);}
         if (menuselection == 2) {FntPrint(">> Set AI levels\n\n");}
         else {FntPrint("   Set AI levels\n\n");}
         if (menuselection == 3) {FntPrint(">> Set Charge, Timer, ect.\n\n");}
