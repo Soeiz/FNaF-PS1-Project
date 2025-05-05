@@ -47,6 +47,18 @@ extern unsigned long _binary_tim_CAMERAMONITOR_tim_start[];
 extern unsigned long _binary_tim_CAMERAMONITOR_tim_end[];
 extern unsigned long _binary_tim_CAMERAMONITOR_tim_length;
 
+extern unsigned long _binary_tim_office_fan_1_tim_start[];
+extern unsigned long _binary_tim_office_fan_1_tim_end[];
+extern unsigned long _binary_tim_office_fan_1_tim_length;
+
+extern unsigned long _binary_tim_office_fan_2_tim_start[];
+extern unsigned long _binary_tim_office_fan_2_tim_end[];
+extern unsigned long _binary_tim_office_fan_2_tim_length;
+
+extern unsigned long _binary_tim_office_fan_3_tim_start[];
+extern unsigned long _binary_tim_office_fan_3_tim_end[];
+extern unsigned long _binary_tim_office_fan_3_tim_length;
+
 extern unsigned long _binary_tim_FAM_tim_start[];
 extern unsigned long _binary_tim_FAM_tim_end[];
 extern unsigned long _binary_tim_FAM_tim_length;
@@ -86,10 +98,6 @@ extern unsigned long _binary_tim_screamers_jumpC3_tim_length;
 extern unsigned long _binary_tim_screamers_jumpC4_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpC4_tim_end[];
 extern unsigned long _binary_tim_screamers_jumpC4_tim_length;
-
-extern unsigned long _binary_tim_screamers_jumpC5_tim_start[];
-extern unsigned long _binary_tim_screamers_jumpC5_tim_end[];
-extern unsigned long _binary_tim_screamers_jumpC5_tim_length;
 
 extern unsigned long _binary_tim_screamers_jumpB2_tim_start[];
 extern unsigned long _binary_tim_screamers_jumpB2_tim_end[];
@@ -203,6 +211,7 @@ extern unsigned long _binary_tim_fnt_tim_start[];
 extern unsigned long _binary_tim_fnt_tim_end[];
 extern unsigned long _binary_tim_fnt_tim_length;
 */
+TIM_IMAGE fan;
 TIM_IMAGE mutecall;
 TIM_IMAGE freddy;
 TIM_IMAGE freddy2;
@@ -636,6 +645,21 @@ SVECTOR VertPosmutecall[4] = {
 
 MATRIX PolyMatrixmutecall = {0};     
 
+POLY_FT4 *polyfan = {0};   
+
+SVECTOR RotVectorfan = {0, 0, 0};                
+VECTOR  MovVectorfan = {-48, 6, CENTERX/2-10, 0}; 
+VECTOR  ScaleVectorfan = {ONE, ONE, ONE};        
+
+SVECTOR VertPosfan[4] = {             
+        {-2, 4, 1 },                     
+        {-2,  42, 1 },                     
+        { 23,4, 1 },                      
+        { 23,  42, 1  }    
+    };                                        
+
+MATRIX PolyMatrixfan = {0};     
+
 //This function take in charge a specific polygon OR a set of polygon with related elements, depending on the var "num". (1 is for freddy on the menu for example)
 //Why ? It's Simple, because the game.c was LONG ASF. Longer than my lifetime I'd say. (11 euros)
 //(and also because it was harder to look for a specific thing and having to scroll like 100000 times to pass by the thing we want. Here, you know you have to look at num 10 for ex.)
@@ -803,107 +827,113 @@ void makepoly(int num) {
 	}//help wanted bg
 
 	if (num == 3) { 
-        if (goldenfreddiedframes > 90) {
-                polyitsme = (POLY_FT4 *)nextpri;                    
-                
-                RotMatrix(&RotVectoritsme, &PolyMatrixitsme);    
-                TransMatrix(&PolyMatrixitsme, &MovVectoritsme);  
-                ScaleMatrix(&PolyMatrixitsme, &ScaleVectoritsme);
-                
-                SetRotMatrix(&PolyMatrixitsme);                  
-                SetTransMatrix(&PolyMatrixitsme);    
-         
-                setRGB0(polyitsme, fadeoffice, fadeoffice, fadeoffice);
+                if (goldenfreddiedframes > 90 && goldenfreddiedframes < 1500) {
+                        polyitsme = (POLY_FT4 *)nextpri;                    
+                        
+                        RotMatrix(&RotVectoritsme, &PolyMatrixitsme);    
+                        TransMatrix(&PolyMatrixitsme, &MovVectoritsme);  
+                        ScaleMatrix(&PolyMatrixitsme, &ScaleVectoritsme);
+                        
+                        SetRotMatrix(&PolyMatrixitsme);                  
+                        SetTransMatrix(&PolyMatrixitsme);    
+                 
+                        setRGB0(polyitsme, fadeoffice, fadeoffice, fadeoffice);
 
-                setPolyFT4(polyitsme);                           
-                       
-                if (goldenfreddiedframes < 350) {
-                        setClut(polyitsme, 960, 192);
-                } else {
-                        setClut(polyitsme, 960, 196);
+                        setPolyFT4(polyitsme);                           
+                               
+                        if (goldenfreddiedframes < 350) {
+                                setClut(polyitsme, 960, 192);
+                        } else {
+                                setClut(polyitsme, 960, 196);
+                        }
+                 
+                        polyitsme->tpage = getTPage(itsme.mode&0x3, 0, 832, 256);
+                        
+                        RotTransPers4(
+                                    &VertPositsme[0],      &VertPositsme[1],      &VertPositsme[2],      &VertPositsme[3],
+                                    (long*)&polyitsme->x0, (long*)&polyitsme->x1, (long*)&polyitsme->x2, (long*)&polyitsme->x3,
+                                    &polydepth,
+                                    &polyflag
+                                    );                              
+
+                        setUV4(polyitsme, 0, 96, 0, 125, 156, 96, 156, 125);
+                           
+                        addPrim(ot[db], polyitsme);                        
+                        
+                        nextpri += sizeof(POLY_FT4); 
+
+                        VertPositsme[4].vx += goldenfreddypixelGarbagething;
+                        VertPositsme[4].vy -= goldenfreddypixelGarbagething;   
+                }          
+                if (goldenfreddiedframes < 1500) {
+                        polyofficegolden = (POLY_FT4 *)nextpri;                    
+                        
+                        RotMatrix(&RotVectorofficegolden, &PolyMatrixofficegolden);    
+                        TransMatrix(&PolyMatrixofficegolden, &MovVectorofficegolden);  
+                        ScaleMatrix(&PolyMatrixofficegolden, &ScaleVectorofficegolden);
+                        
+                        SetRotMatrix(&PolyMatrixofficegolden);                  
+                        SetTransMatrix(&PolyMatrixofficegolden);    
+                 
+                        setRGB0(polyofficegolden, 128, 128, 128);
+                        setPolyFT4(polyofficegolden);                           
+                        
+                        if (goldenfreddiedframes < 350) {
+                                setClut(polyofficegolden, 0, 509);
+                        } else {
+                                setClut(polyofficegolden, 0, 505);
+                        }
+                 
+                        polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
+                        
+                        RotTransPers4(
+                                    &VertPosofficegolden[0],      &VertPosofficegolden[1],      &VertPosofficegolden[2],      &VertPosofficegolden[3],
+                                    (long*)&polyofficegolden->x0, (long*)&polyofficegolden->x1, (long*)&polyofficegolden->x2, (long*)&polyofficegolden->x3,
+                                    &polydepth,
+                                    &polyflag
+                                    );                              
+
+                        setUV4(polyofficegolden, 0, 0, 0, 210, 218, 0, 218, 210);
+                           
+                        addPrim(ot[db], polyofficegolden);                        
+                        
+                        nextpri += sizeof(POLY_FT4);     
+
+                        VertPosofficegolden[2].vx += goldenfreddypixelGarbagething;
+                        VertPosofficegolden[2].vy -= goldenfreddypixelGarbagething;
                 }
-         
-                polyitsme->tpage = getTPage(itsme.mode&0x3, 0, 832, 256);
-                
-                RotTransPers4(
-                            &VertPositsme[0],      &VertPositsme[1],      &VertPositsme[2],      &VertPositsme[3],
-                            (long*)&polyitsme->x0, (long*)&polyitsme->x1, (long*)&polyitsme->x2, (long*)&polyitsme->x3,
-                            &polydepth,
-                            &polyflag
-                            );                              
-
-                setUV4(polyitsme, 0, 96, 0, 125, 156, 96, 156, 125);
-                   
-                addPrim(ot[db], polyitsme);                        
-                
-                nextpri += sizeof(POLY_FT4);     
-        }          
-        if (goldenfreddiedframes < 770) {
-                polyofficegolden = (POLY_FT4 *)nextpri;                    
-                
-                RotMatrix(&RotVectorofficegolden, &PolyMatrixofficegolden);    
-                TransMatrix(&PolyMatrixofficegolden, &MovVectorofficegolden);  
-                ScaleMatrix(&PolyMatrixofficegolden, &ScaleVectorofficegolden);
-                
-                SetRotMatrix(&PolyMatrixofficegolden);                  
-                SetTransMatrix(&PolyMatrixofficegolden);    
-         
-                setRGB0(polyofficegolden, 128, 128, 128);
-                setPolyFT4(polyofficegolden);                           
-                
-                if (goldenfreddiedframes < 350) {
-                        setClut(polyofficegolden, 0, 509);
-                } else {
-                        setClut(polyofficegolden, 0, 505);
-                }
-         
-                polyofficegolden->tpage = getTPage(officegoldenfreddy.mode&0x3, 0, 320, 256);
-                
-                RotTransPers4(
-                            &VertPosofficegolden[0],      &VertPosofficegolden[1],      &VertPosofficegolden[2],      &VertPosofficegolden[3],
-                            (long*)&polyofficegolden->x0, (long*)&polyofficegolden->x1, (long*)&polyofficegolden->x2, (long*)&polyofficegolden->x3,
-                            &polydepth,
-                            &polyflag
-                            );                              
-
-                setUV4(polyofficegolden, 0, 0, 0, 210, 218, 0, 218, 210);
-                   
-                addPrim(ot[db], polyofficegolden);                        
-                
-                nextpri += sizeof(POLY_FT4);     
-        }
 	}//golden freddy's face (screamer)
 
 	if (num == 4) { 
-        polyfreddylightsout = (POLY_FT4 *)nextpri;      
+                polyfreddylightsout = (POLY_FT4 *)nextpri;      
+                        
+                RotMatrix(&RotVectorfreddylightsout, &PolyMatrixfreddylightsout);    
+                TransMatrix(&PolyMatrixfreddylightsout, &MovVectorfreddylightsout);  
+                ScaleMatrix(&PolyMatrixfreddylightsout, &ScaleVectorfreddylightsout);
                 
-        RotMatrix(&RotVectorfreddylightsout, &PolyMatrixfreddylightsout);    
-        TransMatrix(&PolyMatrixfreddylightsout, &MovVectorfreddylightsout);  
-        ScaleMatrix(&PolyMatrixfreddylightsout, &ScaleVectorfreddylightsout);
-        
-        SetRotMatrix(&PolyMatrixfreddylightsout);                   
-        SetTransMatrix(&PolyMatrixfreddylightsout);                 
-        
-        setPolyFT4(polyfreddylightsout);                            
-        
-        setClut(polyfreddylightsout, 0, 504);
+                SetRotMatrix(&PolyMatrixfreddylightsout);                   
+                SetTransMatrix(&PolyMatrixfreddylightsout);                 
+                
+                setPolyFT4(polyfreddylightsout);                            
+                
+                setClut(polyfreddylightsout, 0, 504);
 
-        polyfreddylightsout->tpage = getTPage(freddysneak.mode&0x3, 0, 832, 256);
-        
-        setRGB0(polyfreddylightsout, glowvar, glowvar, glowvar);                 
-        
-        RotTransPers4(
-                    &VertPosfreddylightsout[0],      &VertPosfreddylightsout[1],      &VertPosfreddylightsout[2],      &VertPosfreddylightsout[3],
-                    (long*)&polyfreddylightsout->x0, (long*)&polyfreddylightsout->x1, (long*)&polyfreddylightsout->x2, (long*)&polyfreddylightsout->x3,
-                    &polydepth,
-                    &polyflag
-                    );                                 
-        
-        setUV4(polyfreddylightsout, 9, 125, 9, 181, 77, 125, 77, 181);
-            
-        addPrim(ot[db], polyfreddylightsout);                  
-        
-        nextpri += sizeof(POLY_FT4);                
+                polyfreddylightsout->tpage = getTPage(freddysneak.mode&0x3, 0, 832, 256);
+                
+                setRGB0(polyfreddylightsout, glowvar, glowvar, glowvar);                 
+                
+                RotTransPers4(
+                            &VertPosfreddylightsout[0],      &VertPosfreddylightsout[1],      &VertPosfreddylightsout[2],      &VertPosfreddylightsout[3],
+                            (long*)&polyfreddylightsout->x0, (long*)&polyfreddylightsout->x1, (long*)&polyfreddylightsout->x2, (long*)&polyfreddylightsout->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                 
+                
+                setUV4(polyfreddylightsout, 9, 125, 9, 181, 77, 125, 77, 181);
+                    
+                addPrim(ot[db], polyfreddylightsout);                  
+                
+                nextpri += sizeof(POLY_FT4);                
 	}//Freddy's face when lights out
 
 	if (num == 5) { 
@@ -938,478 +968,505 @@ void makepoly(int num) {
 	}//Golden freddy on the office
 
 	if (num == 6) {
-         //Door left
-         leftdoor = (POLY_FT4 *)nextpri;                  
+                if (charge > 0) {
+                        //Fan
+
+                        polyfan = (POLY_FT4 *)nextpri;                  
+                                
+                        RotMatrix(&RotVectorfan, &PolyMatrixfan);    
+                        TransMatrix(&PolyMatrixfan, &MovVectorfan);  
+                        ScaleMatrix(&PolyMatrixfan, &ScaleVectorfan);
+                        
+                        SetRotMatrix(&PolyMatrixofficemiddle);            
+                        SetTransMatrix(&PolyMatrixofficemiddle);          
+                        
+                        setPolyFT4(polyfan);                         
+                        
+                        setClut(polyfan, 0, 500);    
+                        polyfan->tpage = getTPage(fan.mode&0x3, 0, 640, 256);
+                        
+                        RotTransPers4(
+                                    &VertPosfan[0],      &VertPosfan[1],      &VertPosfan[2],      &VertPosfan[3],
+                                    (long*)&polyfan->x0, (long*)&polyfan->x1, (long*)&polyfan->x2, (long*)&polyfan->x3,
+                                    &polydepth,
+                                    &polyflag
+                                    );                                 
+                        
+                        setUV4(polyfan, 0, 126, 0, 196, 52, 126, 52, 196);
+                            
+                        addPrim(ot[db], polyfan);                     
+                        
+                        nextpri += sizeof(POLY_FT4);        
+                }
+                //Door left
+                leftdoor = (POLY_FT4 *)nextpri;                  
+                        
+                RotMatrix(&RotVectorleftdoor, &PolyMatrixleftdoor);    
+                TransMatrix(&PolyMatrixleftdoor, &MovVectorleftdoor);  
+                ScaleMatrix(&PolyMatrixleftdoor, &ScaleVectorleftdoor);
+                
+                SetRotMatrix(&PolyMatrixleftdoor);            
+                SetTransMatrix(&PolyMatrixleftdoor);          
+                
+                setPolyFT4(leftdoor);                         
+                
+                setClut(leftdoor, 960, 195);    
+                leftdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);
+                
+                if (doorclosedL == 1) {setRGB0(leftdoor, 76, 76, 76);} //For preventing things to blink fast asf
+                
+                RotTransPers4(
+                            &VertPosleftdoor[0],      &VertPosleftdoor[1],      &VertPosleftdoor[2],      &VertPosleftdoor[3],
+                            (long*)&leftdoor->x0, (long*)&leftdoor->x1, (long*)&leftdoor->x2, (long*)&leftdoor->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                 
+                
+                setUV4(leftdoor, 0, 0, 0, 255, 76, 0, 76, 255);
+                    
+                addPrim(ot[db], leftdoor);                     
+                
+                nextpri += sizeof(POLY_FT4);                   
+                //Door right
+                rightdoor = (POLY_FT4 *)nextpri;               
+                        
+                RotMatrix(&RotVectorrightdoor, &PolyMatrixrightdoor);      
+                TransMatrix(&PolyMatrixrightdoor, &MovVectorrightdoor);    
+                ScaleMatrix(&PolyMatrixrightdoor, &ScaleVectorrightdoor);  
+                
+                SetRotMatrix(&PolyMatrixrightdoor);                 
+                SetTransMatrix(&PolyMatrixrightdoor);               
+                
+                setPolyFT4(rightdoor);                             
+                
+                setClut(rightdoor, 960, 195); 
+                rightdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);   
+                
+                if (doorclosedR == 1) {setRGB0(rightdoor, 76, 76, 76);} //For preventing things to blink fast asf again
+                
+                RotTransPers4(
+                            &VertPosrightdoor[0],      &VertPosrightdoor[1],      &VertPosrightdoor[2],      &VertPosrightdoor[3],
+                            (long*)&rightdoor->x0, (long*)&rightdoor->x1, (long*)&rightdoor->x2, (long*)&rightdoor->x3,
+                            &polydepth,
+                            &polyflag
+                            );                           
+                
+                setUV4(rightdoor, 79, 0, 79, 255, 147, 0, 147, 255); //+55X bcs of where the door is on VRAM
+                    
+                addPrim(ot[db], rightdoor);                         
+                
+                nextpri += sizeof(POLY_FT4);          
+
+                //second 
+                polyofficeright = (POLY_FT4 *)nextpri;                   
+                
+                RotMatrix(&RotVectorofficeright, &PolyMatrixofficeright);
+                TransMatrix(&PolyMatrixofficeright, &MovVectorofficeright);  
+                ScaleMatrix(&PolyMatrixofficeright, &ScaleVectorofficeright);
+                
+                SetRotMatrix(&PolyMatrixofficemiddle);                
+                SetTransMatrix(&PolyMatrixofficemiddle);              
                  
-         RotMatrix(&RotVectorleftdoor, &PolyMatrixleftdoor);    
-         TransMatrix(&PolyMatrixleftdoor, &MovVectorleftdoor);  
-         ScaleMatrix(&PolyMatrixleftdoor, &ScaleVectorleftdoor);
+                if (goldenfreddiedframes < 375) {
+                        setClut(polyofficeright, 0, 506); 
+                } else {
+                        setClut(polyofficeright, 0, 505); 
+                }
+
+                setPolyFT4(polyofficeright);                          
+                
+                polyofficeright->tpage = getTPage(officeRIGHT.mode&0x3, 0, officeRIGHT.prect->x, officeRIGHT.prect->y);
+                
+                RotTransPers4(
+                            &VertPosofficeright[0],      &VertPosofficeright[1],      &VertPosofficeright[2],      &VertPosofficeright[3],
+                            (long*)&polyofficeright->x0, (long*)&polyofficeright->x1, (long*)&polyofficeright->x2, (long*)&polyofficeright->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                 
+                
+                setUV4(polyofficeright, 0, 0, 0, 252, 220, 0, 220, 252);
+                    
+
+                addPrim(ot[db], polyofficeright);                       
+                
+                nextpri += sizeof(POLY_FT4);                
+
+                //first
+                polyofficemiddle = (POLY_FT4 *)nextpri;                 
+                        
+                RotMatrix(&RotVectorofficeall, &PolyMatrixofficemiddle);    
+                TransMatrix(&PolyMatrixofficemiddle, &MovVectorofficemiddle);  
+                ScaleMatrix(&PolyMatrixofficemiddle, &ScaleVectorofficeall);
+                
+                SetRotMatrix(&PolyMatrixofficemiddle);                  
+                SetTransMatrix(&PolyMatrixofficemiddle);                
          
-         SetRotMatrix(&PolyMatrixleftdoor);            
-         SetTransMatrix(&PolyMatrixleftdoor);          
-         
-         setPolyFT4(leftdoor);                         
-         
-         setClut(leftdoor, 960, 195);    
-         leftdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);
-         
-         if (doorclosedL == 1) {setRGB0(leftdoor, 76, 76, 76);} //For preventing things to blink fast asf
-         
-         RotTransPers4(
-                     &VertPosleftdoor[0],      &VertPosleftdoor[1],      &VertPosleftdoor[2],      &VertPosleftdoor[3],
-                     (long*)&leftdoor->x0, (long*)&leftdoor->x1, (long*)&leftdoor->x2, (long*)&leftdoor->x3,
-                     &polydepth,
-                     &polyflag
-                     );                                 
-         
-         setUV4(leftdoor, 0, 0, 0, 255, 76, 0, 76, 255);
-             
-         addPrim(ot[db], leftdoor);                     
-         
-         nextpri += sizeof(POLY_FT4);                   
-         //Door right
-         rightdoor = (POLY_FT4 *)nextpri;               
+                if (charge > 0) {
+                        setClut(polyofficemiddle, 0, 508);
+                        polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 832, 0);
+                } else {
+                        setClut(polyofficemiddle, 0, 503);
+                        polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 704, 256);
+                }
+
+                setPolyFT4(polyofficemiddle);                           
                  
-         RotMatrix(&RotVectorrightdoor, &PolyMatrixrightdoor);      
-         TransMatrix(&PolyMatrixrightdoor, &MovVectorrightdoor);    
-         ScaleMatrix(&PolyMatrixrightdoor, &ScaleVectorrightdoor);  
-         
-         SetRotMatrix(&PolyMatrixrightdoor);                 
-         SetTransMatrix(&PolyMatrixrightdoor);               
-         
-         setPolyFT4(rightdoor);                             
-         
-         setClut(rightdoor, 960, 195); 
-         rightdoor->tpage = getTPage(doors.mode&0x3, 0, 320, 0);   
-         
-         if (doorclosedR == 1) {setRGB0(rightdoor, 76, 76, 76);} //For preventing things to blink fast asf again
-         
-         RotTransPers4(
-                     &VertPosrightdoor[0],      &VertPosrightdoor[1],      &VertPosrightdoor[2],      &VertPosrightdoor[3],
-                     (long*)&rightdoor->x0, (long*)&rightdoor->x1, (long*)&rightdoor->x2, (long*)&rightdoor->x3,
-                     &polydepth,
-                     &polyflag
-                     );                           
-         
-         setUV4(rightdoor, 79, 0, 79, 255, 147, 0, 147, 255); //+55X bcs of where the door is on VRAM
-             
-         addPrim(ot[db], rightdoor);                         
-         
-         nextpri += sizeof(POLY_FT4);          
+                RotTransPers4(
+                            &VertPosofficemiddle[0],      &VertPosofficemiddle[1],      &VertPosofficemiddle[2],      &VertPosofficemiddle[3],
+                            (long*)&polyofficemiddle->x0, (long*)&polyofficemiddle->x1, (long*)&polyofficemiddle->x2, (long*)&polyofficemiddle->x3,
+                            &polydepth,
+                            &polyflag
+                            );                               
+                
+                setUV4(polyofficemiddle, 0, 0, 0, 255, 255, 0, 255, 255);
+                    
 
-         //second 
-         polyofficeright = (POLY_FT4 *)nextpri;                   
-        
-         RotMatrix(&RotVectorofficeright, &PolyMatrixofficeright);
-         TransMatrix(&PolyMatrixofficeright, &MovVectorofficeright);  
-         ScaleMatrix(&PolyMatrixofficeright, &ScaleVectorofficeright);
-         
-         SetRotMatrix(&PolyMatrixofficemiddle);                
-         SetTransMatrix(&PolyMatrixofficemiddle);              
-         
-        if (goldenfreddiedframes < 375) {
-                setClut(polyofficeright, 0, 506); 
-        } else {
-                setClut(polyofficeright, 0, 505); 
-        }
+                addPrim(ot[db], polyofficemiddle);                       
+                
+                nextpri += sizeof(POLY_FT4);       
 
-         setPolyFT4(polyofficeright);                          
-         
-         polyofficeright->tpage = getTPage(officeRIGHT.mode&0x3, 0, officeRIGHT.prect->x, officeRIGHT.prect->y);
-         
-         RotTransPers4(
-                     &VertPosofficeright[0],      &VertPosofficeright[1],      &VertPosofficeright[2],      &VertPosofficeright[3],
-                     (long*)&polyofficeright->x0, (long*)&polyofficeright->x1, (long*)&polyofficeright->x2, (long*)&polyofficeright->x3,
-                     &polydepth,
-                     &polyflag
-                     );                                 
-         
-         setUV4(polyofficeright, 0, 0, 0, 252, 220, 0, 220, 252);
-             
-
-         addPrim(ot[db], polyofficeright);                       
-         
-         nextpri += sizeof(POLY_FT4);                
-
-         //first
-         polyofficemiddle = (POLY_FT4 *)nextpri;                 
+                 //third 
+                 polyofficeleft = (POLY_FT4 *)nextpri;                 
+                         
+                 RotMatrix(&RotVectorofficeleft, &PolyMatrixofficeleft); 
+                 TransMatrix(&PolyMatrixofficeleft, &MovVectorofficeleft);  
+                 ScaleMatrix(&PolyMatrixofficeleft, &ScaleVectorofficeleft);
                  
-         RotMatrix(&RotVectorofficeall, &PolyMatrixofficemiddle);    
-         TransMatrix(&PolyMatrixofficemiddle, &MovVectorofficemiddle);  
-         ScaleMatrix(&PolyMatrixofficemiddle, &ScaleVectorofficeall);
-         
-         SetRotMatrix(&PolyMatrixofficemiddle);                  
-         SetTransMatrix(&PolyMatrixofficemiddle);                
-         
-        if (charge > 0) {
-                setClut(polyofficemiddle, 0, 508);
-                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 832, 0);
-        } else {
-                setClut(polyofficemiddle, 0, 503);
-                polyofficemiddle->tpage = getTPage(officeMIDDLE.mode&0x3, 0, 704, 256);
-        }
-
-        setPolyFT4(polyofficemiddle);                           
-         
-        RotTransPers4(
-                     &VertPosofficemiddle[0],      &VertPosofficemiddle[1],      &VertPosofficemiddle[2],      &VertPosofficemiddle[3],
-                     (long*)&polyofficemiddle->x0, (long*)&polyofficemiddle->x1, (long*)&polyofficemiddle->x2, (long*)&polyofficemiddle->x3,
-                     &polydepth,
-                     &polyflag
-                     );                               
-         
-         setUV4(polyofficemiddle, 0, 0, 0, 255, 255, 0, 255, 255);
-             
-
-         addPrim(ot[db], polyofficemiddle);                       
-         
-         nextpri += sizeof(POLY_FT4);       
-
-         //third 
-         polyofficeleft = (POLY_FT4 *)nextpri;                 
+                 SetRotMatrix(&PolyMatrixofficemiddle);              
+                 SetTransMatrix(&PolyMatrixofficemiddle);            
                  
-         RotMatrix(&RotVectorofficeleft, &PolyMatrixofficeleft); 
-         TransMatrix(&PolyMatrixofficeleft, &MovVectorofficeleft);  
-         ScaleMatrix(&PolyMatrixofficeleft, &ScaleVectorofficeleft);
-         
-         SetRotMatrix(&PolyMatrixofficemiddle);              
-         SetTransMatrix(&PolyMatrixofficemiddle);            
-         
-        if (goldenfreddiedframes < 375) {
-                setClut(polyofficeleft, 0, 507); 
-        } else {
-                setClut(polyofficeleft, 0, 505); 
-        }
+                if (goldenfreddiedframes < 375) {
+                        setClut(polyofficeleft, 0, 507); 
+                } else {
+                        setClut(polyofficeleft, 0, 505); 
+                }
 
-         setPolyFT4(polyofficeleft);                         
-         
-         polyofficeleft->tpage = getTPage(officeLEFT.mode&0x3, 0, 704, 0);
-         
-         RotTransPers4(
-                     &VertPosofficeleft[0],      &VertPosofficeleft[1],      &VertPosofficeleft[2],      &VertPosofficeleft[3],
-                     (long*)&polyofficeleft->x0, (long*)&polyofficeleft->x1, (long*)&polyofficeleft->x2, (long*)&polyofficeleft->x3,
-                     &polydepth,
-                     &polyflag
-                     );                               
-         
-         setUV4(polyofficeleft, 0, 0, 0, 255, 220, 0, 220, 255); 
+                setPolyFT4(polyofficeleft);                         
+                
+                polyofficeleft->tpage = getTPage(officeLEFT.mode&0x3, 0, 704, 0);
+                
+                RotTransPers4(
+                            &VertPosofficeleft[0],      &VertPosofficeleft[1],      &VertPosofficeleft[2],      &VertPosofficeleft[3],
+                            (long*)&polyofficeleft->x0, (long*)&polyofficeleft->x1, (long*)&polyofficeleft->x2, (long*)&polyofficeleft->x3,
+                            &polydepth,
+                            &polyflag
+                            );                               
+                
+                setUV4(polyofficeleft, 0, 0, 0, 255, 220, 0, 220, 255); 
 
-         addPrim(ot[db], polyofficeleft);                     
-         
-         nextpri += sizeof(POLY_FT4);      
+                addPrim(ot[db], polyofficeleft);                     
+                
+                nextpri += sizeof(POLY_FT4);      
                      
 	}//Office with doors
 
 	if (num == 10) {
-        //five am OR six am tim (it's marked five am but sixam.tim go into the fiveam.tim emplacement)
-        if (fivetosixamframes > 120) {
-                polyrect = (POLY_FT4 *)nextpri;     
+                //five am OR six am tim (it's marked five am but sixam.tim go into the fiveam.tim emplacement)
+                if (fivetosixamframes > 120) {
+                        polyrect = (POLY_FT4 *)nextpri;     
+                                
+                        RotMatrix(&RotVectorrect, &PolyMatrixrect);    
+                        TransMatrix(&PolyMatrixrect, &MovVectorrect);  
+                        ScaleMatrix(&PolyMatrixrect, &ScaleVectorrect);
                         
-                RotMatrix(&RotVectorrect, &PolyMatrixrect);    
-                TransMatrix(&PolyMatrixrect, &MovVectorrect);  
-                ScaleMatrix(&PolyMatrixrect, &ScaleVectorrect);
-                
-                SetRotMatrix(&PolyMatrixrect);                   
-                SetTransMatrix(&PolyMatrixrect);                 
-                
-                setPolyFT4(polyrect);                            
-                
-                setRGB0(polyrect, 0,0,0);
-                
-                setClut(polyrect, 960, 192);     
+                        SetRotMatrix(&PolyMatrixrect);                   
+                        SetTransMatrix(&PolyMatrixrect);                 
+                        
+                        setPolyFT4(polyrect);                            
+                        
+                        setRGB0(polyrect, 0,0,0);
+                        
+                        setClut(polyrect, 960, 192);     
 
-                polyrect->tpage = getTPage(rect.mode&0x3, 0, 832, 256); 
+                        polyrect->tpage = getTPage(rect.mode&0x3, 0, 832, 256); 
+                        
+                        RotTransPers4(
+                                    &VertPosrect[0],      &VertPosrect[1],      &VertPosrect[2],      &VertPosrect[3],
+                                    (long*)&polyrect->x0, (long*)&polyrect->x1, (long*)&polyrect->x2, (long*)&polyrect->x3,
+                                    &polydepth,
+                                    &polyflag
+                                    );                               
+                        
+                        setUV4(polyrect, 0, 125, 0, 172, 36, 125, 36, 172);
+                            
+                        addPrim(ot[db], polyrect);                     
+                        nextpri += sizeof(POLY_FT4);     
+
+                        polyrect2 = (POLY_FT4 *)nextpri;     
+                                
+                        RotMatrix(&RotVectorrect, &PolyMatrixrect2);    
+                        TransMatrix(&PolyMatrixrect2, &MovVectorrect2);  
+                        ScaleMatrix(&PolyMatrixrect2, &ScaleVectorrect);
+                        
+                        SetRotMatrix(&PolyMatrixrect2);                   
+                        SetTransMatrix(&PolyMatrixrect2);                 
+                        
+                        setPolyFT4(polyrect2);                            
+                        
+                        setRGB0(polyrect2, 0,0,0);
+                        
+                        setClut(polyrect2, 960, 192);      
+                        polyrect2->tpage = getTPage(rect.mode&0x3, 0, 768, 256); 
+                        
+                        RotTransPers4(
+                                    &VertPosrect[0],      &VertPosrect[1],      &VertPosrect[2],      &VertPosrect[3],
+                                    (long*)&polyrect2->x0, (long*)&polyrect2->x1, (long*)&polyrect2->x2, (long*)&polyrect2->x3,
+                                    &polydepth,
+                                    &polyflag
+                                    );                               
+                        
+                        setUV4(polyrect2, 0, 0, 0, 47, 36, 0, 36, 47);
+                            
+                        addPrim(ot[db], polyrect2);                     
+                        nextpri += sizeof(POLY_FT4);      
+                }
+                //five am OR six am tim (it's marked five am but sixam.tim go into the fiveam.tim emplacement)
+                polyfiveam = (POLY_FT4 *)nextpri;     
+                        
+                RotMatrix(&RotVectorfiveam, &PolyMatrixfiveam);    
+                TransMatrix(&PolyMatrixfiveam, &MovVectorfiveam);  
+                ScaleMatrix(&PolyMatrixfiveam, &ScaleVectorfiveam);
+                
+                SetRotMatrix(&PolyMatrixfiveam);                   
+                SetTransMatrix(&PolyMatrixfiveam);                 
+                
+                setPolyFT4(polyfiveam);                            
+                
+                setRGB0(polyfiveam, 128,128,128);
+                
+                setClut(polyfiveam, 960, 193);      
+                polyfiveam->tpage = getTPage(fiveam.mode&0x3, 0, 832, 256); 
                 
                 RotTransPers4(
-                            &VertPosrect[0],      &VertPosrect[1],      &VertPosrect[2],      &VertPosrect[3],
-                            (long*)&polyrect->x0, (long*)&polyrect->x1, (long*)&polyrect->x2, (long*)&polyrect->x3,
+                            &VertPosfiveam[0],      &VertPosfiveam[1],      &VertPosfiveam[2],      &VertPosfiveam[3],
+                            (long*)&polyfiveam->x0, (long*)&polyfiveam->x1, (long*)&polyfiveam->x2, (long*)&polyfiveam->x3,
                             &polydepth,
                             &polyflag
                             );                               
                 
-                setUV4(polyrect, 0, 125, 0, 172, 36, 125, 36, 172);
+                setUV4(polyfiveam, 0, 0, 0, 48, 40, 0, 40, 48);
                     
-                addPrim(ot[db], polyrect);                     
+                addPrim(ot[db], polyfiveam);                     
                 nextpri += sizeof(POLY_FT4);     
 
-                polyrect2 = (POLY_FT4 *)nextpri;     
+                polyam = (POLY_FT4 *)nextpri;     
                         
-                RotMatrix(&RotVectorrect, &PolyMatrixrect2);    
-                TransMatrix(&PolyMatrixrect2, &MovVectorrect2);  
-                ScaleMatrix(&PolyMatrixrect2, &ScaleVectorrect);
+                RotMatrix(&RotVectoram, &PolyMatrixam);    
+                TransMatrix(&PolyMatrixam, &MovVectoram);  
+                ScaleMatrix(&PolyMatrixam, &ScaleVectoram);
                 
-                SetRotMatrix(&PolyMatrixrect2);                   
-                SetTransMatrix(&PolyMatrixrect2);                 
+                SetRotMatrix(&PolyMatrixam);                   
+                SetTransMatrix(&PolyMatrixam);                 
                 
-                setPolyFT4(polyrect2);                            
+                setPolyFT4(polyam);                            
                 
-                setRGB0(polyrect2, 0,0,0);
+                setRGB0(polyam, 128,128,128);
                 
-                setClut(polyrect2, 960, 192);      
-                polyrect2->tpage = getTPage(rect.mode&0x3, 0, 768, 256); 
+                setClut(polyam, 960, 193);      
+                polyam->tpage = getTPage(fiveam.mode&0x3, 0, 832, 256); 
                 
                 RotTransPers4(
-                            &VertPosrect[0],      &VertPosrect[1],      &VertPosrect[2],      &VertPosrect[3],
-                            (long*)&polyrect2->x0, (long*)&polyrect2->x1, (long*)&polyrect2->x2, (long*)&polyrect2->x3,
+                            &VertPosam[0],      &VertPosam[1],      &VertPosam[2],      &VertPosam[3],
+                            (long*)&polyam->x0, (long*)&polyam->x1, (long*)&polyam->x2, (long*)&polyam->x3,
                             &polydepth,
                             &polyflag
                             );                               
                 
-                setUV4(polyrect2, 0, 0, 0, 47, 36, 0, 36, 47);
+                setUV4(polyam, 40, 0, 40, 48, 121, 0, 121, 48);
                     
-                addPrim(ot[db], polyrect2);                     
-                nextpri += sizeof(POLY_FT4);     
-
-                
-        }
-        //five am OR six am tim (it's marked five am but sixam.tim go into the fiveam.tim emplacement)
-        polyfiveam = (POLY_FT4 *)nextpri;     
-                
-        RotMatrix(&RotVectorfiveam, &PolyMatrixfiveam);    
-        TransMatrix(&PolyMatrixfiveam, &MovVectorfiveam);  
-        ScaleMatrix(&PolyMatrixfiveam, &ScaleVectorfiveam);
-        
-        SetRotMatrix(&PolyMatrixfiveam);                   
-        SetTransMatrix(&PolyMatrixfiveam);                 
-        
-        setPolyFT4(polyfiveam);                            
-        
-        setRGB0(polyfiveam, 128,128,128);
-        
-        setClut(polyfiveam, 960, 193);      
-        polyfiveam->tpage = getTPage(fiveam.mode&0x3, 0, 832, 256); 
-        
-        RotTransPers4(
-                    &VertPosfiveam[0],      &VertPosfiveam[1],      &VertPosfiveam[2],      &VertPosfiveam[3],
-                    (long*)&polyfiveam->x0, (long*)&polyfiveam->x1, (long*)&polyfiveam->x2, (long*)&polyfiveam->x3,
-                    &polydepth,
-                    &polyflag
-                    );                               
-        
-        setUV4(polyfiveam, 0, 0, 0, 48, 40, 0, 40, 48);
-            
-        addPrim(ot[db], polyfiveam);                     
-        nextpri += sizeof(POLY_FT4);     
-
-        polyam = (POLY_FT4 *)nextpri;     
-                
-        RotMatrix(&RotVectoram, &PolyMatrixam);    
-        TransMatrix(&PolyMatrixam, &MovVectoram);  
-        ScaleMatrix(&PolyMatrixam, &ScaleVectoram);
-        
-        SetRotMatrix(&PolyMatrixam);                   
-        SetTransMatrix(&PolyMatrixam);                 
-        
-        setPolyFT4(polyam);                            
-        
-        setRGB0(polyam, 128,128,128);
-        
-        setClut(polyam, 960, 193);      
-        polyam->tpage = getTPage(fiveam.mode&0x3, 0, 832, 256); 
-        
-        RotTransPers4(
-                    &VertPosam[0],      &VertPosam[1],      &VertPosam[2],      &VertPosam[3],
-                    (long*)&polyam->x0, (long*)&polyam->x1, (long*)&polyam->x2, (long*)&polyam->x3,
-                    &polydepth,
-                    &polyflag
-                    );                               
-        
-        setUV4(polyam, 40, 0, 40, 48, 121, 0, 121, 48);
-            
-        addPrim(ot[db], polyam);                    
-        nextpri += sizeof(POLY_FT4);    
+                addPrim(ot[db], polyam);                    
+                nextpri += sizeof(POLY_FT4);    
 
 
-	}//5am or 6am image
+        }//5am or 6am image
 
 	if (num == 11) {
-        if (nextnightframes > 400 && nextnightframes < 5766 && customnextnightactivation == 1)
-        { //YIPEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-            FntPrint("        credits : Harvey Rothman"); //Gonna give credits to this person ! ;)
+                if (nextnightframes > 400 && nextnightframes < 5766 && customnextnightactivation == 1)
+                { //YIPEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+                    FntPrint("        credits : Harvey Rothman"); //Gonna give credits to this person ! ;)
 
 
-            if (rgbindicator == 0) {
-                rgbblue++; //
-                if (rgbblue == 135) {rgbindicator = 1;} //WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            }
-            if (rgbindicator == 1){
-                rgbred--;
-                if (rgbred == 79) {rgbindicator = 2;} //EEEEEEEEEEEEE
-            }
-            if (rgbindicator == 2) {
-                rgbgreen++;
-                if (rgbgreen == 135) {rgbindicator = 3;} //YAHOUU OUUUUUUUUUUUUUUUUUU
-            }
-            if (rgbindicator == 3) {
-                rgbblue--;
-                if (rgbblue == 79) {rgbindicator = 4;} //YHGTJKRFEDZSOAQPBNGFVCJDX
-            }
-            if (rgbindicator == 4){
-                rgbred++;
-                if (rgbred == 135) {rgbindicator = 5;} //WAAAAAAAAAAAAOOOOOOOOOOOOO
-            }
-            if (rgbindicator == 5) {//NOnoOooOO already done :'c
-                rgbgreen--;
-                if (rgbgreen == 79) {rgbindicator = 0;} //WE'RE SO BACK
-            }
-        }
-        if (nextnightframes == 5766) {
-            rgbred = 128;
-            rgbgreen = 128;
-            rgbblue = 128;
-        }
+                    if (rgbindicator == 0) {
+                        rgbblue++; //
+                        if (rgbblue == 135) {rgbindicator = 1;} //WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                    }
+                    if (rgbindicator == 1){
+                        rgbred--;
+                        if (rgbred == 79) {rgbindicator = 2;} //EEEEEEEEEEEEE
+                    }
+                    if (rgbindicator == 2) {
+                        rgbgreen++;
+                        if (rgbgreen == 135) {rgbindicator = 3;} //YAHOUU OUUUUUUUUUUUUUUUUUU
+                    }
+                    if (rgbindicator == 3) {
+                        rgbblue--;
+                        if (rgbblue == 79) {rgbindicator = 4;} //YHGTJKRFEDZSOAQPBNGFVCJDX
+                    }
+                    if (rgbindicator == 4){
+                        rgbred++;
+                        if (rgbred == 135) {rgbindicator = 5;} //WAAAAAAAAAAAAOOOOOOOOOOOOO
+                    }
+                    if (rgbindicator == 5) {//NOnoOooOO already done :'c
+                        rgbgreen--;
+                        if (rgbgreen == 79) {rgbindicator = 0;} //WE'RE SO BACK
+                    }
+                }
+                if (nextnightframes == 5766) {
+                    rgbred = 128;
+                    rgbgreen = 128;
+                    rgbblue = 128;
+                }
 
-        polygoodjob = (POLY_FT4 *)nextpri;             
+                polygoodjob = (POLY_FT4 *)nextpri;             
+                        
+                RotMatrix(&RotVectorgoodjob, &PolyMatrixgoodjob);    
+                TransMatrix(&PolyMatrixgoodjob, &MovVectorgoodjob);  
+                ScaleMatrix(&PolyMatrixgoodjob, &ScaleVectorgoodjob);
                 
-        RotMatrix(&RotVectorgoodjob, &PolyMatrixgoodjob);    
-        TransMatrix(&PolyMatrixgoodjob, &MovVectorgoodjob);  
-        ScaleMatrix(&PolyMatrixgoodjob, &ScaleVectorgoodjob);
-        
-        SetRotMatrix(&PolyMatrixgoodjob);                    
-        SetTransMatrix(&PolyMatrixgoodjob);                  
-        
-        setPolyFT4(polygoodjob);                             
-        setRGB0(polygoodjob, rgbred,rgbgreen,rgbblue);
-        
-        setClut(polygoodjob, goodjob.crect->x, goodjob.crect->y);       
+                SetRotMatrix(&PolyMatrixgoodjob);                    
+                SetTransMatrix(&PolyMatrixgoodjob);                  
+                
+                setPolyFT4(polygoodjob);                             
+                setRGB0(polygoodjob, rgbred,rgbgreen,rgbblue);
+                
+                setClut(polygoodjob, goodjob.crect->x, goodjob.crect->y);       
 
-        polygoodjob->tpage = getTPage(goodjob.mode&0x3, 0, 384, 0);
-        
-        RotTransPers4(
-                    &VertPosgoodjob[0],      &VertPosgoodjob[1],      &VertPosgoodjob[2],      &VertPosgoodjob[3],
-                    (long*)&polygoodjob->x0, (long*)&polygoodjob->x1, (long*)&polygoodjob->x2, (long*)&polygoodjob->x3,
-                    &polydepth,
-                    &polyflag
-                    );                                
-        
-        setUV4(polygoodjob, 0, 0, 0, 231, 254, 0, 254, 231);
-            
-        addPrim(ot[db], polygoodjob);                       
-        nextpri += sizeof(POLY_FT4);                 
+                polygoodjob->tpage = getTPage(goodjob.mode&0x3, 0, 384, 0);
+                
+                RotTransPers4(
+                            &VertPosgoodjob[0],      &VertPosgoodjob[1],      &VertPosgoodjob[2],      &VertPosgoodjob[3],
+                            (long*)&polygoodjob->x0, (long*)&polygoodjob->x1, (long*)&polygoodjob->x2, (long*)&polygoodjob->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                
+                
+                setUV4(polygoodjob, 0, 0, 0, 231, 254, 0, 254, 231);
+                    
+                addPrim(ot[db], polygoodjob);                       
+                nextpri += sizeof(POLY_FT4);                 
 	}//good job BG
 
 	if (num == 12) {
-        polygameover = (POLY_FT4 *)nextpri;               
+                polygameover = (POLY_FT4 *)nextpri;               
+                        
+                RotMatrix(&RotVectorgameover, &PolyMatrixgameover);    
+                TransMatrix(&PolyMatrixgameover, &MovVectorgameover);  
+                ScaleMatrix(&PolyMatrixgameover, &ScaleVectorgameover);
                 
-        RotMatrix(&RotVectorgameover, &PolyMatrixgameover);    
-        TransMatrix(&PolyMatrixgameover, &MovVectorgameover);  
-        ScaleMatrix(&PolyMatrixgameover, &ScaleVectorgameover);
-        
-        SetRotMatrix(&PolyMatrixgameover);                 
-        SetTransMatrix(&PolyMatrixgameover); 
+                SetRotMatrix(&PolyMatrixgameover);                 
+                SetTransMatrix(&PolyMatrixgameover); 
 
-        setClut(polygameover, 0, 510);
+                setClut(polygameover, 0, 510);
 
-        setPolyFT4(polygameover);                          
-        
-        setRGB0(polygameover, 128, 128, 128);              
+                setPolyFT4(polygameover);                          
+                
+                setRGB0(polygameover, 128, 128, 128);              
 
-        polygameover->tpage = getTPage(gameover.mode&0x3, 0, 448, 256); 
-        
-        RotTransPers4(
-                    &VertPosgameover[0],      &VertPosgameover[1],      &VertPosgameover[2],      &VertPosgameover[3],
-                    (long*)&polygameover->x0, (long*)&polygameover->x1, (long*)&polygameover->x2, (long*)&polygameover->x3,
-                    &polydepth,
-                    &polyflag
-                    );                                
-        
-        setUV4(polygameover, 13, 0, 13, 222, 244, 0, 244, 222);
-            
-        addPrim(ot[db], polygameover);                       
-        nextpri += sizeof(POLY_FT4);                 
+                polygameover->tpage = getTPage(gameover.mode&0x3, 0, 448, 256); 
+                
+                RotTransPers4(
+                            &VertPosgameover[0],      &VertPosgameover[1],      &VertPosgameover[2],      &VertPosgameover[3],
+                            (long*)&polygameover->x0, (long*)&polygameover->x1, (long*)&polygameover->x2, (long*)&polygameover->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                
+                
+                setUV4(polygameover, 13, 0, 13, 222, 244, 0, 244, 222);
+                    
+                addPrim(ot[db], polygameover);                       
+                nextpri += sizeof(POLY_FT4);                 
 	}//Game over BG
 
 	if (num == 13) {
-        polyicon = (POLY_FT4 *)nextpri;               
+                polyicon = (POLY_FT4 *)nextpri;               
+                        
+                RotMatrix(&RotVectoricon, &PolyMatrixicon);    
+                TransMatrix(&PolyMatrixicon, &MovVectoricon);  
+                ScaleMatrix(&PolyMatrixicon, &ScaleVectoricon);
                 
-        RotMatrix(&RotVectoricon, &PolyMatrixicon);    
-        TransMatrix(&PolyMatrixicon, &MovVectoricon);  
-        ScaleMatrix(&PolyMatrixicon, &ScaleVectoricon);
-        
-        SetRotMatrix(&PolyMatrixicon);                 
-        SetTransMatrix(&PolyMatrixicon); 
+                SetRotMatrix(&PolyMatrixicon);                 
+                SetTransMatrix(&PolyMatrixicon); 
 
-        setPolyFT4(polyicon);                          
-        
-        if (goldenfreddiedframes < 370) {
-                setRGB0(polyicon, 128, 128, 128); 
-        } else {
-                setRGB0(polyicon, 57, 68, 12); 
-        }           
+                setPolyFT4(polyicon);                          
+                
+                if (goldenfreddiedframes < 370) {
+                        setRGB0(polyicon, 128, 128, 128); 
+                } else {
+                        setRGB0(polyicon, 57, 68, 12); 
+                }           
 
-        polyicon->tpage = getTPage(load.mode&0x3, 0, 832, 256); 
-        
-        RotTransPers4(
-                    &VertPosicon[0],      &VertPosicon[1],      &VertPosicon[2],      &VertPosicon[3],
-                    (long*)&polyicon->x0, (long*)&polyicon->x1, (long*)&polyicon->x2, (long*)&polyicon->x3,
-                    &polydepth,
-                    &polyflag
-                    );                                
-        
-        setUV4(polyicon, 0, 56, 0, 126, 50, 56, 50, 126);
-            
-        addPrim(ot[db], polyicon);                       
-        nextpri += sizeof(POLY_FT4);         
+                polyicon->tpage = getTPage(load.mode&0x3, 0, 832, 256); 
+                
+                RotTransPers4(
+                            &VertPosicon[0],      &VertPosicon[1],      &VertPosicon[2],      &VertPosicon[3],
+                            (long*)&polyicon->x0, (long*)&polyicon->x1, (long*)&polyicon->x2, (long*)&polyicon->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                
+                
+                setUV4(polyicon, 0, 56, 0, 126, 50, 56, 50, 126);
+                    
+                addPrim(ot[db], polyicon);                       
+                nextpri += sizeof(POLY_FT4);         
 	} //Loading icon
 
 	if (num == 14) {
-        polyjump = (POLY_FT4 *)nextpri;             
+                polyjump = (POLY_FT4 *)nextpri;             
+                        
+                RotMatrix(&RotVectorjump, &PolyMatrixjump);    
+                TransMatrix(&PolyMatrixjump, &MovVectorjump);  
+                ScaleMatrix(&PolyMatrixjump, &ScaleVectorjump);
                 
-        RotMatrix(&RotVectorjump, &PolyMatrixjump);    
-        TransMatrix(&PolyMatrixjump, &MovVectorjump);  
-        ScaleMatrix(&PolyMatrixjump, &ScaleVectorjump);
-        
-        SetRotMatrix(&PolyMatrixjump);                    
-        SetTransMatrix(&PolyMatrixjump);                  
-        
-        setPolyFT4(polyjump);                             
-        setRGB0(polyjump, rgbred,rgbgreen,rgbblue);
-        
-        setClut(polyjump, jumpscare.crect->x, jumpscare.crect->y);       
+                SetRotMatrix(&PolyMatrixjump);                    
+                SetTransMatrix(&PolyMatrixjump);                  
+                
+                setPolyFT4(polyjump);                             
+                setRGB0(polyjump, rgbred,rgbgreen,rgbblue);
+                
+                setClut(polyjump, jumpscare.crect->x, jumpscare.crect->y);       
 
-        polyjump->tpage = getTPage(jumpscare.mode&0x3, 0, 576, 256);
-        
-        RotTransPers4(
-                    &VertPosjump[0],      &VertPosjump[1],      &VertPosjump[2],      &VertPosjump[3],
-                    (long*)&polyjump->x0, (long*)&polyjump->x1, (long*)&polyjump->x2, (long*)&polyjump->x3,
-                    &polydepth,
-                    &polyflag
-                    );                                
-        
-        setUV4(polyjump, 40, 0, 40, 125, 146, 0, 145, 126);
-            
-        addPrim(ot[db], polyjump);                       
-        nextpri += sizeof(POLY_FT4);                 
+                polyjump->tpage = getTPage(jumpscare.mode&0x3, 0, 576, 256);
+                
+                RotTransPers4(
+                            &VertPosjump[0],      &VertPosjump[1],      &VertPosjump[2],      &VertPosjump[3],
+                            (long*)&polyjump->x0, (long*)&polyjump->x1, (long*)&polyjump->x2, (long*)&polyjump->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                
+                
+                setUV4(polyjump, 40, 0, 40, 125, 146, 0, 145, 126);
+                    
+                addPrim(ot[db], polyjump);                       
+                nextpri += sizeof(POLY_FT4);                 
 	}//jumpscare
         if (num == 15) {
-
-        polystatic = (POLY_FT4 *)nextpri;             
+                polystatic = (POLY_FT4 *)nextpri;             
+                        
+                RotMatrix(&RotVectorstatic, &PolyMatrixstatic);    
+                TransMatrix(&PolyMatrixstatic, &MovVectorstatic);  
+                ScaleMatrix(&PolyMatrixstatic, &ScaleVectorstatic);
                 
-        RotMatrix(&RotVectorstatic, &PolyMatrixstatic);    
-        TransMatrix(&PolyMatrixstatic, &MovVectorstatic);  
-        ScaleMatrix(&PolyMatrixstatic, &ScaleVectorstatic);
-        
-        SetRotMatrix(&PolyMatrixstatic);                    
-        SetTransMatrix(&PolyMatrixstatic);                  
-        
-        setPolyFT4(polystatic);                             
-        setRGB0(polystatic, 128,128,128);
-        
-        setClut(polystatic, 960, 197);       
+                SetRotMatrix(&PolyMatrixstatic);                    
+                SetTransMatrix(&PolyMatrixstatic);                  
+                
+                setPolyFT4(polystatic);                             
+                setRGB0(polystatic, 128,128,128);
+                
+                setClut(polystatic, 960, 197);       
 
-        polystatic->tpage = getTPage(statics.mode&0x3, 0, 576, 256);
-        
-        RotTransPers4(
-                    &VertPosstatic[0],      &VertPosstatic[1],      &VertPosstatic[2],      &VertPosstatic[3],
-                    (long*)&polystatic->x0, (long*)&polystatic->x1, (long*)&polystatic->x2, (long*)&polystatic->x3,
-                    &polydepth,
-                    &polyflag
-                    );                                
-        
-        setUV4(polystatic, 0, 130, 53, 130, 0, 255, 53, 255);
-            
-        addPrim(ot[db], polystatic);                       
-        nextpri += sizeof(POLY_FT4);                 
+                polystatic->tpage = getTPage(statics.mode&0x3, 0, 576, 256);
+                
+                RotTransPers4(
+                            &VertPosstatic[0],      &VertPosstatic[1],      &VertPosstatic[2],      &VertPosstatic[3],
+                            (long*)&polystatic->x0, (long*)&polystatic->x1, (long*)&polystatic->x2, (long*)&polystatic->x3,
+                            &polydepth,
+                            &polyflag
+                            );                                
+                
+                setUV4(polystatic, 0, 130, 53, 130, 0, 255, 53, 255);
+                    
+                addPrim(ot[db], polystatic);                       
+                nextpri += sizeof(POLY_FT4);                 
 
         }//Static
 }

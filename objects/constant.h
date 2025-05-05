@@ -2,7 +2,6 @@
 #include <sys/file.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h> // How have I done without you
 
 #include <kernel.h>
 #include <libgte.h>
@@ -16,6 +15,59 @@
 
 #include <libcd.h>
 #include <malloc.h>
+
+//SAVE SYSTEM
+
+#define SAVENAME    "FRFZBP-93FNAF"
+
+#define SAVETITLE   "Five Night at Freddy's"
+
+// Test save icon's CLUT (or color palette) data
+u_short saveIcon_clut[16] = {
+    0x0000,0x0842,0x7FFF,0x0000,
+    0x0000,0x0000,0x0000,0x0000,
+    0x0000,0x0000,0x0000,0x0000,
+    0x0000,0x0000,0x0000,0x0000
+};
+
+// Test save icon's image data (16x16 4-bit)
+u_short saveIcon_image[1][16][4] = {
+    // First icon frame
+    {{0x0000,0x0000,0x0000,0x0000 },
+    { 0x0000,0x1110,0x0001,0x0000 },
+    { 0x0000,0x2210,0x0001,0x0000 },
+    { 0x0111,0x2210,0x1001,0x0011 },
+    { 0x0121,0x1121,0x1012,0x0012 },
+    { 0x1011,0x2222,0x0122,0x0011 },
+    { 0x2100,0x2222,0x1222,0x0000 },
+    { 0x2100,0x2222,0x1222,0x0000 },
+    { 0x2100,0x2222,0x1222,0x0000 },
+    { 0x2100,0x2222,0x1222,0x0000 },
+    { 0x2210,0x2222,0x2222,0x0001 },
+    { 0x2210,0x2222,0x2222,0x0001 },
+    { 0x2210,0x2222,0x2222,0x0001 },
+    { 0x2100,0x2222,0x1222,0x0000 },
+    { 0x1000,0x1111,0x0111,0x0000 },
+    { 0x0000,0x0000,0x0000,0x0000 }}
+};
+
+// Save block header structure
+typedef struct {
+    char    id[2];      // Always 'SC'
+    char    type;       // Number of icon frames (0x11 - one frame, 0x12 - two frames, 0x13 - three frames)
+    char    size;       // Size of save file in blocks
+    u_short title[32];  // Title of save file (encoded in Shift-JIS format)
+    char    pad[28];    // Unused
+    char    clut[32];   // Color palette of icon frames (16 RGB5X1 16-bit color entries)
+} SAVEHDR;
+
+short currentCard=0;    // Current card number
+long  cardCmd;          // Card command return value
+long  slotResult[2];    // Slot result value
+
+void asc2sjis(char *asctext, u_short *sjistext);
+
+//END OF SAVE SYSTEM
 
 #define BtoS(len) ( ( len + CD_SECTOR_SIZE - 1 ) / CD_SECTOR_SIZE ) 
 // Name of file to load
@@ -129,8 +181,7 @@ void clearVRAM(void)
     DrawSync(0);
 }
 
-int customnightchanger = 0; //If not set to zero, You cheated !! ;)
-bool nightcheated = false;
+int nightcheated = 0;
 
 int initstuff = 0;
 
@@ -366,17 +417,15 @@ int staticframes = 600;
 
 int nightwon = 0;
 
-int score = 0;
-int highscore = 0;
-int highscorehit = 0;
-int blockedanimatronic = 0;
-int timeoncam = 0;
-int powermanagementhour = 0;
-int powermanagementtotal = 0;
-
 int fadeoffice = 128;
 
 int customnightactivated = 0;
+
+int fanframe = 1;
+
+int createsave = 1;
+
+int goldenfreddypixelGarbagething = 0;
 
 #define OTLEN 8                    // Ordering Table Length 
 

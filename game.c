@@ -12,10 +12,7 @@
 
     OTHER (info) :
 
-    Coming back there after more than 5 months to do a little cleanup is kind of weird.
-    It's like going back in time, when you were still a beginner, struggling about errors and problems you now know how to deal with.
-    After all these projects, all of these ports, it's really weird to go back to see the prototype.
-    The one that started it all.
+    
 
     V1.2.6
 */
@@ -39,6 +36,7 @@ int debug = 3; //1 is for debug without cam, 2 is animatronic debug, 3 is only l
 #include "objects/objects.h"
 #include "objects/camera.h"
 #include "objects/PATH.h"
+#include "objects/asc2sjis.h"
 
 //Made all of the var declarations that I won't change alot into constant.h
 
@@ -117,38 +115,39 @@ typedef struct XAbank {
 } XAbank;
 
 XAbank soundBank = {
-        22,
+        23,
         0,
-        {   //Static.xa = 3,216
+        {   //Static.xa = 1,496
             // channel 5
             // id   size   file  channel start end cursor
             {   0,  2747136,   1,     5,     0,   9400,  -1 }, //Intro.xa
             {   1,  2490176,   1,     5,     10896,   19432,  -1 }, //ambiance1.xa
+            {   2,  971776,   1,     5,     20928,   24248,  -1 }, //CircusCursed.xa 
             // channel 6                 
-            {   2,  488224,   1,     6 ,   0,   1664, -1  }, //6am.xa
-            {   3,  932064,   1,     6 ,   3168, 6344, -1  }, //Poweroutage.xa
-            {   4,  971776,   1,     6 ,   7840, 11160, -1  }, //Mascottune.xa
-            {   5,  2856928,   1,     6 ,   12656, 22432, -1  }, //ambiance2.xa
+            {   3,  488224,   1,     6 ,   0,   1664, -1  }, //6am.xa
+            {   4,  932064,   1,     6 ,   3168, 6344, -1  }, //Poweroutage.xa
+            {   5,  971776,   1,     6 ,   7840, 11160, -1  }, //Mascottune.xa / Circus.xa
+            {   6,  2856928,   1,     6 ,   12656, 22432, -1  }, //ambiance2.xa
             // Channel 7
-            {   6,  941408,   1,     7 ,   0, 3216, -1  }, //static.xa NOUBLIE PAS D'INCLURE LE SILENCE (à retirer ? -3192) +1,496
-            {   7,  2476160,   1,     7 ,   4712, 13184, -1  }, //Ambiance3.xa 
-            {   8,  8834752,   1,     7 ,   14680, 45028, -1  }, //Phone Guy Night 1.xa 
+            {   7,  941408,   1,     7 ,   0, 3216, -1  }, //static.xa NOUBLIE PAS D'INCLURE LE SILENCE (à retirer ? -3192) +1,496
+            {   8,  2476160,   1,     7 ,   4712, 13184, -1  }, //Ambiance3.xa 
+            {   9,  8834752,   1,     7 ,   14680, 45028, -1  }, //Phone Guy Night 1.xa 
             //Channel 8
-            {   9,  4307584,   1,     8 ,   0, 14752, -1  }, //Phone Guy Night 2.xa 
-            {   10, 3041472,   1,     8 ,   16248, 26657, -1  }, //Phone Guy Night 3.xa  10408
-            {   11, 2590624,   1,     8 ,   28152, 37016, -1  }, //Phone Guy Night 4.xa 
-            {   12, 1702944,   1,     8 ,   38512, 44346, -1  }, //Phone Guy Night 5.xa 
+            {   10,  4307584,   1,     8 ,   0, 14752, -1  }, //Phone Guy Night 2.xa 
+            {   11, 3041472,   1,     8 ,   16248, 26657, -1  }, //Phone Guy Night 3.xa  10408
+            {   12, 2590624,   1,     8 ,   28152, 37016, -1  }, //Phone Guy Night 4.xa 
+            {   13, 1702944,   1,     8 ,   38512, 44346, -1  }, //Phone Guy Night 5.xa 
             //Channel 9
-            {   13, 2721440,   1,     9 ,   0, 9312, -1  }, //Music Box.xa 
-            {   14, 2207520,   1,     9 ,   10808, 18360, -1  }, //phone guy lol (rizz freddy).xa 
-            {   15, 696128,   1,     9 ,   19856, 22232, -1  }, //golden freddy screamer.xa 
-            {   16, 677440,   1,     9 ,   23728, 26040, -1  }, //puppet music.xa 
-            {   17, 425152,   1,     9 ,   27536, 28984, -1  }, //piratesong.xa 
-            {   18, 4606592,   1,     9 ,   30480, 46248, -1  }, //funny music box.xa 
+            {   14, 2721440,   1,     9 ,   0, 9312, -1  }, //Music Box.xa 
+            {   15, 2207520,   1,     9 ,   10808, 18360, -1  }, //phone guy lol (rizz freddy).xa 
+            {   16, 696128,   1,     9 ,   19856, 22232, -1  }, //golden freddy screamer.xa 
+            {   17, 677440,   1,     9 ,   23728, 26040, -1  }, //puppet music.xa 
+            {   18, 425152,   1,     9 ,   27536, 28984, -1  }, //piratesong.xa 
+            {   19, 4606592,   1,     9 ,   30480, 46248, -1  }, //funny music box.xa 
             //Channel 10
-            {   19, 3237696,   1,     10 ,   0, 11080, -1  }, //Mixed ambiance 1
-            {   20, 3078848,   1,     10 ,   14296, 24832, -1  }, //Mixed ambiance 2
-            {   21, 3602112,   1,     10 ,   28048, 40376, -1  } //Mixed ambiance 3
+            {   20, 3237696,   1,     10 ,   0, 11080, -1  }, //Mixed ambiance 1
+            {   21, 3078848,   1,     10 ,   14296, 24832, -1  }, //Mixed ambiance 2
+            {   22, 3602112,   1,     10 ,   28048, 40376, -1  } //Mixed ambiance 3
         }
 };
 // XA file to load
@@ -167,26 +166,6 @@ u_long sendVAGtoSPU(unsigned int VAG_data_size, u_char *VAG_data);
 void setVoiceAttr(unsigned int pitch, long channel, unsigned long soundAddr );
 u_long setSPUtransfer(VAGsound * sound);
 
-void resetgame(int hardreset);
-void print(int number);
-int Ran(int max);
-void debugPrintVanilla(void);
-void animatronicdebugPrint(void);
-void screamer(void);
-void gameoverprint(void);
-void printNightInfo(void);
-void menuselectionfunc(void);
-void debugPrint(void);
-void doorFunc(int number);
-void chargeNtimeFunc(void);
-void controllerinput(void);
-void LightFunc(void);
-void doorFuncX(void);
-void CameraFunc(void);
-void lightsout(void);
-void gamevictory(void);
-void menuPrint(void);
-void animatronicFunc(int init);
 /*
 void FntColor(CVECTOR fgcol, CVECTOR bgcol )
 {
@@ -215,6 +194,10 @@ void LoadTexture(u_long * tim, TIM_IMAGE * tparam){     // This part is from Lam
             DrawSync(0);                                // Wait for drawing to end
         }
 }
+
+#include "objects/FunCtions/funcsInGame.h"
+#include "objects/FunCtions/otherFuncs.h"
+#include "objects/FunCtions/funcsprint&menu.h"
 
 void init(void)
 {   
@@ -375,42 +358,32 @@ u_long setSPUtransfer(VAGsound * sound){
     return spu_address;
 }
 
-void starting(void) {
-  resetgame(0);
-  SpuSetKey(SPU_ON, SPU_04CH);
-
-  if (customnightactivated == 0) {
-    freddylocationframe = 300;
-    bonnielocationframe = 300;
-    chicalocationframe = 300;
-    foxylocationframe = 300;
-    convertion = 60;
-    customAM = 12;
-    charge = 100;
-  }
-  if (initstuff == 1) {clearVRAMMenu();} else {clearVRAMScreamer();}
-
-  LoadTexture(_binary_tim_load_tim_start, &load);
-  
-    if (night == 7) {
-        if (hellnight == 1) {foxylockeduration = 6;}
-        if (impossiblenight == 1) {foxylockeduration = 3;}
+// Converts strings from 8-bit ASCII characters to 16-bit Shift-JIS character encoding
+void asc2sjis(char *asctext, u_short *sjistext) {
+    
+    // A small function to simplify the use of the ascii2sjis() function in asc2sjis.c
+    
+    int  i;
+    char *ptr;
+    
+    union {
+        u_short code;
+        struct {
+            char low;
+            char high;
+        } k_word;
+    } kanji;
+    
+    for (i=0, ptr=(u_char*)sjistext; asctext[i] != 0x00; i++) {
+        kanji.code  = ascii2sjis(asctext[i]);
+        *ptr++ = kanji.k_word.high;
+        *ptr++ = kanji.k_word.low;
     }
-
-  musicframes = 0;
-  if (enablephoneguystr[1] == 'N') {enablephoneguy = 1;} else {enablephoneguy = 0;}//I dunno why but it keep resetting it 
-
-  if (fastnights) {FrameCounterlimit = FrameCounterlimit / 2;}
-
-  AM = customAM;
-  charge = customcharge;
-  FrameCounterlimit = convertion;
-  FrameCounterlimit = FrameCounterlimit * 60; //60 seconds * 60 fps = 3600 frames, maybe it would cause issues with 30 fps ??
-  CdControlF(CdlPause,0);
-  if (weirdnight == 0 && (customnightactivated == 0 || hellnight || impossiblenight)) {
-    animatronicFunc(1);
-  }
+    
+    sjistext[i] = 0x00;
+    
 }
+
 int main(void) {
     //controller
     TILE * PADL;                    // Tile primitives
@@ -421,15 +394,19 @@ int main(void) {
 
     init();
 
+    MemCardInit(0);
+    MemCardStart();
+
     //SPU
     u_long spu_address;
     spuSetup(&spuSettings);
     // Init sound settings
     initSnd();
 
+    //Controlling CD Volume 
+    CdlATV cd_vol;
+
     PadInit(0);                     // Initialize pad.  Mode is always 0
-
-
 
     for (u_short vag = 0; vag < VAG_NBR; vag++ ){
         vagsoundBank[vag].spu_address = setSPUtransfer(&vagsoundBank[vag]);
@@ -446,8 +423,11 @@ int main(void) {
 
     clearVRAM();
 
-    while (1)
-    {   
+    //LoadGame();
+
+    while (1) {   
+
+        //if (createsave) {}
         ClearOTagR(ot[db], OTLEN);
         
         pad = PadRead(0);
@@ -599,6 +579,7 @@ int main(void) {
 
                 starting();
                 fadeoffice = 128;
+                //SaveGame();
 
             }
             if (loadingframe == 500) {
@@ -622,6 +603,8 @@ int main(void) {
                     LoadTexture(_binary_tim_FAM_tim_start, &fiveam); 
                     LoadTexture(_binary_tim_AM_tim_start, &fiveam); 
                     LoadTexture(_binary_tim_office_mutecall_tim_start, &mutecall);
+
+                    LoadTexture(_binary_tim_office_fan_1_tim_start, &fan);
                 }
                 usage = defaultusage;
             }
@@ -732,8 +715,10 @@ int main(void) {
                 LoadTexture(_binary_tim_itsme_tim_start, &itsme);
                 if (fadeoffice != 128) {fadeoffice++;}
             }
-            if (goldenfreddiedframes == 220) {
-                sample = 15;
+            if (goldenfreddiedframes == 280) {
+                enablephoneguy = 0;
+                sample = 2;
+                fivesecondframe = 12900000; //Circus CURSED 
                 filter.chan = soundBank.samples[sample].channel;
                 filter.file = soundBank.samples[sample].file;
                 CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -745,17 +730,31 @@ int main(void) {
                 LoadTexture(_binary_tim_office_officeMIDDLE_tim_start, &officeMIDDLE);
                 LoadTexture(_binary_tim_FAM_tim_start, &fiveam); 
                 LoadTexture(_binary_tim_AM_tim_start, &fiveam); 
+                SpuSetKey(SPU_ON, SPU_10CH);
             }
-            if (goldenfreddiedframes > 370) {
-                makepoly(13);
+            if (goldenfreddiedframes > 370 && goldenfreddiedframes < 1560) {
+                goldenfreddypixelGarbagething += 2;
+                FntPrint("%s %s %s %s\n",goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething);
+                FntPrint("%s %s %s %s\n",goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething);
+                FntPrint("%s %s %s %s\n",goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething);
+                FntPrint("%s %s %s %s\n",goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething);
+                FntPrint("%s %s %s %s\n",goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething);
+                FntPrint("%s %s %s %s\n",goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething,goldenfreddypixelGarbagething);
+                if (goldenfreddiedframes % 64 == 0) {
+                    SpuSetKey(SPU_ON, SPU_10CH);
+                    SpuSetKey(SPU_ON, SPU_09CH);
+                }
+            } else {
+                if (SpuGetKeyStatus(SPU_10CH) == SPU_ON) {SpuSetKey(SPU_OFF, SPU_10CH);}
+                if (SpuGetKeyStatus(SPU_09CH) == SPU_ON) {SpuSetKey(SPU_OFF, SPU_09CH);}
             }
-            if (goldenfreddiedframes == 375) {
-                makepoly(6);
+            if (goldenfreddiedframes > 1560) {
+                Corrupt();
             }
 
             if (dead == 1) {
                 if (screamersetsound == 0) {
-                    sample = 6;
+                    sample = 7;
                     filter.chan = soundBank.samples[sample].channel;
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -776,7 +775,7 @@ int main(void) {
                 FrameCounter = FrameCounterlimit - 80;
             }
 
-            if (light1) {
+            if (light1 && charge > 0) {
                 Ran(100);
                 if (RAN <= 20) {
                     LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
@@ -786,7 +785,7 @@ int main(void) {
                     if (!(bonnieDoor)) {LoadTexture(_binary_tim_office_officeLEFTlight_tim_start, &officeLEFTlight);} else {LoadTexture(_binary_tim_office_officeLEFTlightbonnie_tim_start, &officeLEFTlight);}
                 }
             }
-            if (light2) {
+            if (light2 && charge > 0) {
                 Ran(100);
                 if (RAN <= 20) {
                     LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
@@ -810,16 +809,16 @@ int main(void) {
                                     fivesecondframe = 3402; //Ambiance 1
                                 break;
                                 case 2:
-                                    sample = 5;
+                                    sample = 6;
                                     fivesecondframe = 3912; //Ambiance 2
                                 break;
                                 case 3:
-                                    sample = 7;
-                                    fivesecondframe = 3390; //Ambiance 3
+                                    sample = 8;
+                                    fivesecondframe = 3250; //Ambiance 3
                                 break;
                                 case 4:
                                     if (foxylocation < 2) {
-                                        sample = 17;
+                                        sample = 18;
                                         fivesecondframe = 510; //Foxy 
 
                                     } else {
@@ -827,19 +826,19 @@ int main(void) {
                                     }
                                 break;
                                 case 5:
-                                    sample = 4;
+                                    sample = 5;
                                     fivesecondframe = 1290; //Circus 
                                 break;
                                 case 6:
-                                    sample = 19;
+                                    sample = 20;
                                     fivesecondframe = 4440; //Mixed ambiance 1
                                 break;
                                 case 7:
-                                    sample = 20;
+                                    sample = 21;
                                     fivesecondframe = 4200; //Mixed ambiance 2
                                 break;
                                 case 8:
-                                    sample = 21;
+                                    sample = 22;
                                     fivesecondframe = 4920; //Mixed ambiance 2
                                 break;
                             }
@@ -917,6 +916,13 @@ int main(void) {
 
             if (dead == 0 && nightwon == 0) {
 
+                if (MovVectorofficemiddle.vx > 10) {
+                    if (door == 1) {door = 0;}
+                }
+                if (MovVectorofficemiddle.vx < -10) {
+                    if (door == 0) {door = 1;}
+                }
+
                 if (doorclosedL == 1 && MovVectorleftdoor.vy < -61) {
                     leftdoorgoodbye++;
                     MovVectorleftdoor.vy = MovVectorleftdoor.vy + leftdoorgoodbye;
@@ -961,7 +967,7 @@ int main(void) {
                 //Check if a stupidass mf put charge at 0%
                 //me
                 if (charge == 0) {
-                    sample = 3;
+                    sample = 4;
                     filter.chan = soundBank.samples[sample].channel;
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -974,7 +980,7 @@ int main(void) {
                 if ((freddydifficulty == 20 && bonniedifficulty == 0 && chicadifficulty == 0 && foxydifficulty == 0) && hellnight == 0) {
                     phoneguytalking = 2880;
                     phoneguytalkingconst = 2880;
-                    sample = 14; //Why do you tryna rizz freddy ??
+                    sample = 15; //Why do you tryna rizz freddy ??
                     filter.chan = soundBank.samples[sample].channel;
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -986,27 +992,27 @@ int main(void) {
                 if (night == 1) {
                     phoneguytalking = 12060;
                     phoneguytalkingconst = 12060;
-                    sample = 8;
+                    sample = 9;
                 }
                 if (night == 2) {
                     phoneguytalking = 5880;
                     phoneguytalkingconst = 5880;
-                    sample = 9;
+                    sample = 10;
                 }
                 if (night == 3) {
                     phoneguytalking = 4080;
                     phoneguytalkingconst = 4080;
-                    sample = 10;
+                    sample = 11;
                 }
                 if (night == 4) {
                     phoneguytalking = 3540;
                     phoneguytalkingconst = 3540;
-                    sample = 11;
+                    sample = 12;
                 }
                 if (night == 5) {
                     phoneguytalking = 2160;
                     phoneguytalkingconst = 2160;
-                    sample = 12;
+                    sample = 13;
                 }
                 if (night != 6) {
                     filter.chan = soundBank.samples[sample].channel;
@@ -1021,7 +1027,7 @@ int main(void) {
             if (hellnight == 1) {
                 if (FrameCounter == 10 || FrameCounter == 3600 || FrameCounter == 7200 || FrameCounter == 10800 || FrameCounter == 14400) {
                     phoneguytalking = 2160;
-                    sample = 12;
+                    sample = 13;
                     filter.chan = soundBank.samples[sample].channel;
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -1075,8 +1081,6 @@ int main(void) {
             }
             if (camera == 1) { //Cam things
 
-                timeoncam++; //For score system
-
                 cameraloc();
 
                 if (curcam[0] == '6' && curcam[1] == ' ') {
@@ -1085,7 +1089,7 @@ int main(void) {
                         if (RAN == 1) {
                             if (camera == 1 && phoneguytalking == 0 && ambiancesound == 0) {
                                 // Set sample ID for playback
-                                sample = 16;
+                                sample = 17;
                                 // Change file/channel in the filter struct
                                 filter.chan = soundBank.samples[sample].channel;
                                 filter.file = soundBank.samples[sample].file;
@@ -1204,7 +1208,7 @@ int main(void) {
 
             if (charge < 1 && usage > 0) {
                 defaultusage = 0;
-                sample = 3;
+                sample = 4;
                 filter.chan = soundBank.samples[sample].channel;
                 filter.file = soundBank.samples[sample].file;
                 CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -1213,7 +1217,7 @@ int main(void) {
                 lightsout();
             }
             if (AM == 6 && FrameCounter == 0) {
-                sample = 2;
+                sample = 3;
                 filter.chan = soundBank.samples[sample].channel;
                 filter.file = soundBank.samples[sample].file;
                 CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -1238,7 +1242,8 @@ int main(void) {
 
                     if (camera == 0) { 
                       setRGB0(polyofficeright, fadeoffice, fadeoffice, fadeoffice); 
-                      setRGB0(polyofficemiddle, fadeoffice, fadeoffice, fadeoffice);               
+                      setRGB0(polyofficemiddle, fadeoffice, fadeoffice, fadeoffice);  
+                      setRGB0(polyfan, fadeoffice, fadeoffice, fadeoffice);                
                       setRGB0(polyofficeleft, fadeoffice, fadeoffice, fadeoffice);        
                     }
 
@@ -1251,6 +1256,7 @@ int main(void) {
                       setRGB0(polyofficeright, 0, 0, 0); 
                       setRGB0(polyofficemiddle, 0, 0, 0);               
                       setRGB0(polyofficeleft, 0, 0, 0); 
+                      setRGB0(polyfan, 0, 0, 0);           
                     }
 
                     if (camera == 1) {
@@ -1278,42 +1284,15 @@ int main(void) {
                 }
             }
 
-            if (fivetosixamframes > 500 && blinkicon > 30 && fivetosixamframes < 819){
-                FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n             score : %d !", score);
-            }
-            if (fivetosixamframes > 600 && blinkicon > 30 && fivetosixamframes < 819) {
-                    if (score > highscore) {
-
-                        highscore = score;
-
-                        highscorehit = 1;
-                        SpuSetKey(SPU_ON, SPU_05CH);
-                    } 
-                    if (highscorehit == 1) {
-                        FntPrint("\n              NEW HIGHSCORE");
-                    } else {
-                        if (score == 0) {FntPrint("\n                   ...");}
-                        if (score > 0 && score <= 10000) {FntPrint("\n                 Ew...");}
-                        if (score >= 15000 && score <= 18000) {FntPrint("\n               Good !");}
-                        if (score > 18000 && score < 22000) {FntPrint("\n                Great !!");}
-                        if (score >= 22000) {FntPrint("\n               AWESOME !!!");}
-                    }
-
-                if (freddydifficulty > 10 && bonniedifficulty > 10 && chicadifficulty > 10 && foxydifficulty > 10) {
-                    FntPrint("\n            %d / %d / %d / %d", freddydifficulty, bonniedifficulty, chicadifficulty, foxydifficulty);
-                } else {
-                    FntPrint("\n             %d / %d / %d / %d", freddydifficulty, bonniedifficulty, chicadifficulty, foxydifficulty);
-                }
-            }
             if (fivetosixamframes > 819) {
                 if (night == 5 || night == 6 || night == 7) {
                     nextnightframes++;
                     if (nextnightframes == 1) {
                         if (customnextnightactivation == 0) {
-                            sample = 13; //Sample is for the music playing, 13 normal, 18 funky
+                            sample = 14; //Sample is for the music playing, 14 normal, 19 funky
                         }
                         else {
-                            sample = 18;
+                            sample = 19;
                             rgbred = 135;
                             rgbgreen = 79;
                             rgbblue = 79;
@@ -1466,7 +1445,7 @@ int main(void) {
             if (musicboxactivated == 1) {
                 if (musicboxinit == 0) {//Init phase 2 
                     //blablabla
-                    sample = 13;
+                    sample = 14;
                     filter.chan = soundBank.samples[sample].channel;
                     filter.file = soundBank.samples[sample].file;
                     CdControlF(CdlSetfilter, (u_char *)&filter);
@@ -1546,7 +1525,8 @@ int main(void) {
                         makepoly(6);
                         setRGB0(polyofficeright, fadeoffice, fadeoffice, fadeoffice); 
                         setRGB0(polyofficemiddle, fadeoffice, fadeoffice, fadeoffice);               
-                        setRGB0(polyofficeleft, fadeoffice, fadeoffice, fadeoffice);       
+                        setRGB0(polyofficeleft, fadeoffice, fadeoffice, fadeoffice);   
+                        setRGB0(polyfan, fadeoffice, fadeoffice, fadeoffice);                  
                     }
                 }
             }
@@ -1779,8 +1759,7 @@ int main(void) {
                 if (staticframessheet == 0) {
                 }
             }
-            if (staticframes == 2) {
-            }
+            if (staticframes == 2) {Ran(6);} //For random death message
             if (staticframes < 1) {
                 seedtitle++;
 
@@ -1803,1698 +1782,4 @@ int main(void) {
         display(); //Always here        
     }
     return 0;
-}
-void chargeNtimeFunc(void) {
-    FrameCounter++;
-
-    Glitch++;
-    Glitch = Glitch + 3 * 8;
-    if (Glitch > 1987) {Glitch = Glitch - 987;}
-
-    if (FrameCounter == FrameCounterlimit) {
-        AM++;
-        if (powermanagementhour > 13) { // U should use ~10% per hour 
-            powermanagementtotal = powermanagementhour;
-        }
-        powermanagementhour = 0;
-        if (AM == 13) {
-            AM = 1;
-        }
-        FrameCounter = 0;
-    }
-
-    ChargeCounter = ChargeCounter - usage;
-    usage = defaultusage;
-
-        if (ChargeCounter <= 0 && unlimitedpower == 0) {
-            charge = charge - 1;
-            ChargeCounter = 596;
-            powermanagementhour++;
-        }
-    if (weirdnight == 1 && AM == 3) {
-        surusage = 1;
-    }
-    if (weirdnight == 1 && AM == 4) {
-        cantlight = 1;
-        cantdoor = 1;
-        surusage = 2;
-    }
-    if (weirdnight == 1 && AM == 5) {
-        FrameCounterlimit = 36000;
-        surusage = 3;
-    } 
-}
-void resetgame(int hardreset) {
-    if (hardreset == 1) {
-        freddydifficulty = 0;
-        bonniedifficulty = 0;
-        chicadifficulty = 0;
-        foxydifficulty = 0;
-    }
-    freddylocation = 0;
-    freddylocationframe = 181;
-    bonnielocation = 0;
-    bonnielocationframe = 298;
-    bonnieliljumpscare = 0;
-    freddyliljumpscare = 0;
-    chicalocation = 0;
-    chicalocationframe = 299;
-    foxylocation = 0;
-    foxylocationframe = 301;
-    foxywaiting = 500;
-    foxyrunningframes = 0;
-    foxylocked = 0;
-    ranfoxy = 0;
-    foxysknock = 0;
-    foxyknockframe = 0;
-    foxydrainpower = 1;
-    bonnieDoor = 0;
-    chicaDoor = 0;
-    noisedoorbonnie = 0;
-    noisedoorchica = 0;
-
-    cantlight = 0;
-    cantdoor = 0;
-    cantlightR = 0;
-    cantdoorR = 0;
-    cantlightL = 0;
-    cantdoorL = 0;
-
-    door = 0; //0 is left, 1 is right
-    doorclosedL = 0; //0 is no, 1 is yes
-    doorclosedR = 0; //0 is no, 1 is yes
-
-    light1 = 0;
-    light2 = 0;
-    lightframe = 0;
-
-    camera = 0;
-    curcam[0] = '1';
-    curcam[1] = 'A';
-    puppetmusic = 0;
-
-    noisefootstep = 0;
-    framenoisefootstep = 0;
-
-    fivesecondframe = 300;
-
-    islightsout = 0;
-    lightsoutinit = 0;
-    musicboxactivated = 0;
-    musicboxappearanceframe = 0;
-    musicboxappearancechance = 20;
-    musicboxinit = 0;
-    freddyglowing = 0;
-    glowvar = 128;
-    blackoutactivated = 0;
-    blackoutappearanceframe = 0;
-    blackoutappearancechance = 20;
-    blackoutinit = 0;
-    blackoutscreamerappearanceframe = 0;
-    blackoutscreamerappearancechance = 20;
-    surusage = 0;
-
-    goldenfreddylocation = 0;
-    goldenfreddyframes = 0;
-    goldenfreddychances = 5000;
-
-    isalreadydead = 0;
-    isalreadydeadlow = 0;
-    framedeadpossi = 60;
-    lastsecondsframes = 1800;
-
-    screamersetsound = 0;
-    screamerframes = 47;
-    spriteframes = 2;
-    spritesheet = 0;
-
-    dead = 0;
-    deadfrom = 0;
-
-    nightwon = 0;
-
-    fadeoffice = 128;
-
-    nextnightframes = 0;
-    customnextnightactivation = 0;
-    staticframessheet = 0;
-    MovVectorstatic.vx = -40;
-
-    staticframes = 600;
-
-    score = 0;
-    highscorehit = 0;
-    blockedanimatronic = 0;
-    powermanagementtotal = 0;
-
-    isingame = 0;
-
-    #define OTLEN 8                    // Ordering Table Length 
-
-    u_long ot[2][OTLEN];               // double ordering table of length 8 * 32 = 256 bits / 32 bytes
-
-    char primbuff[2][32768];     // double primitive buffer of length 32768 * 8 =  262.144 bits / 32,768 Kbytes
-
-    char *nextpri = primbuff[0];       // pointer to the next primitive in primbuff. Initially, points to the first bit of primbuff[0]
-
-    #define COUNT_OF(x) (sizeof(x) / sizeof(0[x]))
-
-    AM = 12;
-    FrameCounter = 0;
-    ChargeCounter = 596;
-    usage = 1;
-    charge = 100;
-    defaultusage = 1;
-
-    mutedcall = 0;
-}
-void print(int number) {
-    if (charge > 0) {
-        if (camera == 0) {
-            if (number == 1) { //Basic debug (without access to camera)
-                FntPrint("AM : %d, current RAN : %d", AM, RAN);  // print time
-                FntPrint("\nCurrent Usage: %d Current Charge : %d", usage, charge); //print battery
-                FntPrint("\nCurrent battery frame: %d", ChargeCounter);
-                if (door == 0) { //print doors
-                    FntPrint("\nleft Door: %d left Light: %d", doorclosedL, light1);
-                }
-                if (door == 1) {
-                    FntPrint("\nRight Door: %d Right Light: %d", doorclosedR, light2);
-                }
-                FntPrint("\n\nphoneguytalking %d, ambiancechance %d, fivesecondframe %d, ambiancenum %d", phoneguytalking, ambiancechance, fivesecondframe, ambiancenum); //print cam     
-
-            }
-        }
-        if (number == 3) { //Vanilla debug (with access to camera)
-            if (camera == 0) {
-                FntPrint("\n");
-            }
-            FntPrint("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n%d AM, ", AM);  // print time
-            FntPrint("Night %d", night);
-            if (night != 7) {
-                FntPrint("\nCharge : %d \nUsage: %d\n", charge, usage);
-            } else {
-                FntPrint("\nCharge : %d \nUsage: %d \n", Glitch, usage);
-            }
-        }
-        if (camera == 1 && number != 2) {
-            FntPrint("Current Camera :          %s,%s", curcam, curcamname);  // print time
-        }
-        if (number == 2) { //Animatronic debug (with access to camera)
-            FntPrint("%d AM, %d/100, %d usage, IAD %d, IADL %d\n",AM, charge, usage, isalreadydead, isalreadydeadlow);
-            FntPrint("freddylocationframe %d, location %d,\n",freddylocationframe, freddylocation);
-            FntPrint("\nbonnielocationframe %d & location %d,\n", bonnielocationframe, bonnielocation);
-            FntPrint("  chicalocationframe %d & location %d,\nfoxylocationframe %d & location %d. waiting %d & running %d\n",chicalocationframe, chicalocation, foxylocationframe, foxylocation, foxywaiting, foxyrunningframes);
-            FntPrint("F AI %d, B AI %d, C AI %d,\nFo AI %d",freddydifficulty, bonniedifficulty, chicadifficulty, foxydifficulty);
-        }
-    }
-}
-void printNightInfo(void) { //print night information (1st, 2nd, 3rd, etc)
-    if (night == 1) {
-        FntPrint("\n\n\n\n\n\n\n\n\n               %d:00 AM\n\n              1st  night", AM); 
-    }
-    if (night == 2) {
-        FntPrint("\n\n\n\n\n\n\n\n\n               %d:00 AM\n\n              2nd  night", AM); 
-    }
-    if (night == 3) {
-        FntPrint("\n\n\n\n\n\n\n\n\n               %d:00 AM\n\n              3rd  night", AM); 
-    }
-    if (night == 4) {
-        FntPrint("\n\n\n\n\n\n\n\n\n               %d:00 AM\n\n              4th  night", AM);
-    }
-    if (night == 5) {
-        FntPrint("\n\n\n\n\n\n\n\n\n               %d:00 AM\n\n              5th  night", AM);
-    }
-    if (night == 6) {
-        FntPrint("\n\n\n\n\n\n\n\n\n               %d:00 AM\n\n              6th  night", AM);
-    }
-    if (night == 7) {
-        if (hellnight == 1) {
-            FntPrint("\n\n\n\n\n\n\n\n\n               %d:00 AM\n\n           You're not ready\n\n     for what is going to happen.", AM); 
-        }
-        if (impossiblenight == 1) {
-            FntPrint("\n\n\n\n\n\n\n\n\n               %dLCPZOW\n\n           IUYeJZZD pOD APMCV\n\n     PPP OWM SA KJMEF KL VCNBWQD", AM);
-        }
-    }
-    if (customnightactivated == 1) {FntPrint("\n\n             Custom night");} 
-    if (activatedmenudebug == 1) {FntPrint("\n\n              Debug Mode");}  // debug time
-    if (cheating == 1) {FntPrint("\n\n            Cheat Activate");}  // cheat time
-}
-void menuselectionfunc(void) { //LONG asf lmaoo
-    if (pad & PADLup) {
-        if (limiterpadup == 0) {
-            if (menuselection > 1) {
-                menuselection--;
-            }
-            else {
-                menuselection = menuselectionmax;
-            }
-            SpuSetKey(SPU_ON, SPU_04CH);
-            limiterpadup = 1;
-        }
-    }
-    if (pad & PADLdown) {
-        if (limiterpaddown == 0) {
-            if (menuselection < menuselectionmax) {
-                menuselection++;
-            }
-            else {
-                menuselection = 1;
-            }
-            SpuSetKey(SPU_ON, SPU_04CH);
-            limiterpaddown = 1;
-        }
-    }
-    if (!(pad & PADLright)) {limiterpadright = 0;}
-    if (!(pad & PADLleft)) {limiterpadleft = 0;}
-    if (!(pad & PADLdown)) {limiterpaddown = 0;}
-    if (!(pad & PADLup)) {limiterpadup = 0;}
-    if (!(pad & PADstart)) {limiterstart = 0;}
-    if (!(pad & PADRdown)) {limiterbuttondown = 0;}
-
-    if (maincustomnightmenu == 0 && extramenu == 0 && infoscreen == 0 && unlockssubmenu == 0 && AISetmenu == 0 && chargemenu == 0 && advancedmenu == 0) { 
-        if (isingame) {
-            if (menuselection == 1) {//Continue night
-                if (pad & PADstart) {
-                    menu = 2;
-                    returnedingame = 1;
-                } 
-            }
-
-            if (menuselection == 2) {//Abandon night
-                if (pad & PADstart && limiterstart == 0) {
-                    resetgame(0);
-                    limiterstart++;
-                    menuselection = 3;
-                    if (activatedmenudebug == 0) {menuselectionmax = 4;} else {menuselectionmax = 5;}
-                    
-                } 
-            }
-        } else {
-            if (menuselection == 1) {//"Starting" night
-                if (pad & PADstart) {
-                    night = 1;
-                    helpwantedposter = 1;
-                } 
-            }
-
-            if (menuselection == 2) { //Continue nights
-                if (pad & PADstart) {
-                    loadingframe = 360;
-                    menu = 1;
-                }//Or...
-                if (pad & PADRup && pad & PADRright && pad & PADR1 && pad & PADL2 && activatedmenudebug == 0) //Activate debug !
-                {
-                    activatedmenudebug = 1;
-                    menuselectionmax = menuselectionmax + 1;
-                }
-            }
-
-            if (menuselection == 3) { //EXTRA MENU
-                if (pad & PADstart) {
-                    if (limiterstart == 0) {
-                        extramenu = 1;
-                        menuselection = 1;
-                        limiterstart++;
-                        if (activatedmenudebug == 0) {
-                            menuselectionmax = 5;
-                        }
-                        if (activatedmenudebug == 1) {
-                            menuselectionmax = 6;
-                        }
-                    }
-                }
-            }
-            if (menuselection == 4) { //CUSTOM NIGHT MENU
-                if (pad & PADstart) {
-                    if (limiterstart == 0) {
-                        maincustomnightmenu = 1;
-                        menuselection = 1;
-                        menuselectionmax = 6;
-                        limiterstart++;
-                    }
-                }
-            }
-
-            if (activatedmenudebug == 1) {
-                if (menuselection == 5) {
-                    if (pad & PADLright) {
-                        if (limiterpadright == 0) {
-                            printnumber++;
-                            if (printnumber > 3) {printnumber = 1;}
-                            limiterpadright = 1;
-                        }
-                    }
-                }
-                if (!(pad & PADLright)) {limiterpadright = 0;}
-            }
-            if (!(pad & PADstart)) {limiterstart = 0;}
-        }
-    }
-
-    if (maincustomnightmenu == 1) {
-        if (menuselection == 1) {
-            if (pad & PADLright) {
-                if (limiterpadright == 0) {
-                    night++;
-                    if (night > 6) {night = 1;}
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) {
-                if (limiterpadleft == 0) {
-                    night--;
-                    if (night < 1) {night = 6;}
-                    limiterpadleft = 1;
-                }
-            } //Change night's var
-        }
-
-        if (menuselection == 2) { // AI SET MENU
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    maincustomnightmenu = 0;
-                    AISetmenu = 1;
-                    menuselection = 6;
-                    menuselectionmax = 6;
-                    limiterstart = 1;
-                }
-            }
-        }
-        if (menuselection == 3) { // CHARGE MENU
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    maincustomnightmenu = 0;
-                    chargemenu = 1;
-                    menuselection = 4;
-                    menuselectionmax = 4;
-                    limiterstart = 1;
-                }
-            }
-        }
-        if (menuselection == 4) { // ADV MENU
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    maincustomnightmenu = 0;
-                    advancedmenu = 1;
-                    menuselection = 4;
-                    menuselectionmax = 4;
-                    limiterstart = 1;
-                }
-            }
-        }
-        if (menuselection == 5) { // LAUNCH NIGHT
-            if (pad & PADstart) {
-              if (limiterstart == 0) {
-                menu = 1;
-                customnightactivated = 1;
-              }
-            }
-        }
-        if (menuselection == 6) { // RETURN TO MAIN MENU
-            if (pad & PADstart) {
-                if (limiterstart == 0)  {
-                    maincustomnightmenu = 0;
-                    menuselection = 4;
-                    limiterstart++;
-                    if (activatedmenudebug == 0) {menuselectionmax = 4;}
-                    else {menuselectionmax = 5;}
-                }
-            }
-        }
-    }
-    if (AISetmenu == 1) {
-        if (menuselection == 1) {
-            if (pad & PADLright) { //Freddy
-                if (limiterpadright == 0) {
-                    freddydifficulty++;
-                    if (freddydifficulty > 20) {freddydifficulty = 0;}
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) { //Freddy
-                if (limiterpadleft == 0) {
-                    freddydifficulty--;
-                    if (freddydifficulty < 0) {freddydifficulty = 20;}
-                    limiterpadleft = 1;
-                }
-            }
-        }
-        if (menuselection == 2) {
-            if (pad & PADLright) { //Bonnie
-                if (limiterpadright == 0) {
-                    bonniedifficulty++;
-                    if (bonniedifficulty > 20) {bonniedifficulty = 0;}
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) { //Bonnie
-                if (limiterpadleft == 0) {
-                    bonniedifficulty--;
-                    if (bonniedifficulty < 0) {bonniedifficulty = 20;}
-                    limiterpadleft = 1;
-                }
-            }
-        }
-        if (menuselection == 3) {
-            if (pad & PADLright) { //Chica
-                if (limiterpadright == 0) {
-                    chicadifficulty++;
-                    if (chicadifficulty > 20) {chicadifficulty = 0;}
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) { //Chica
-                if (limiterpadleft == 0) {
-                    chicadifficulty--;
-                    if (chicadifficulty < 0) {chicadifficulty = 20;}
-                    limiterpadleft = 1;
-                }
-            }
-        }
-        if (menuselection == 4) {
-            if (pad & PADLright) { //Foxy
-                if (limiterpadright == 0) {
-                    foxydifficulty++;
-                    if (foxydifficulty > 20) {foxydifficulty = 0;}
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) { //Foxy
-                if (limiterpadleft == 0) {
-                    foxydifficulty--;
-                    if (foxydifficulty < 0) {foxydifficulty = 20;}
-                    limiterpadleft = 1;
-                }
-            }
-        }
-        if (menuselection == 5) {
-            if (pad & PADLleft) {
-                if (limiterpadleft == 0) {
-                    presetselector--;
-                    if (presetselector < 1) {presetselector = 1;}
-                    limiterpadleft = 1;
-                }
-            }
-            if (pad & PADLright) {
-                if (limiterpadright == 0) {
-                    presetselector++;
-                    if (presetselector > 7) {presetselector = 7;}
-                    limiterpadright = 1;
-                }
-            }
-        }
-        if (menuselection == 6) {
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    maincustomnightmenu = 1;
-                    AISetmenu = 0;
-                    menuselection = 2;
-                    menuselectionmax = 6;
-                    limiterstart++;
-                }
-            }
-        }
-        if (presetselector == 1) {
-            presetselectorstr[0] = 'C';
-            presetselectorstr[1] = 'u';
-            presetselectorstr[2] = 's';
-            presetselectorstr[3] = 't';
-            presetselectorstr[4] = 'o';
-            presetselectorstr[5] = 'm';
-            presetselectorstr[6] = ' ';
-        }
-        if (presetselector > 1 && presetselector < 7) {
-            presetselectorstr[0] = 'N';
-            presetselectorstr[1] = 'i';
-            presetselectorstr[2] = 'g';
-            presetselectorstr[3] = 'h';
-            presetselectorstr[4] = 't';
-            presetselectorstr[5] = ' ';
-            if (presetselector == 2) {
-                presetselectorstr[6] = '2';
-                freddydifficulty = 0;
-                bonniedifficulty = 3;
-                chicadifficulty = 1;
-                foxydifficulty = 1;
-            }
-            if (presetselector == 3) {
-                presetselectorstr[6] = '3';
-                freddydifficulty = 1;
-                bonniedifficulty = 0;
-                chicadifficulty = 5;
-                foxydifficulty = 2;
-            }
-            if (presetselector == 4) {
-                presetselectorstr[6] = '4';
-                freddydifficulty = 2;
-                bonniedifficulty = 2;
-                chicadifficulty = 4;
-                foxydifficulty = 6;
-            }
-            if (presetselector == 5) {
-                presetselectorstr[6] = '5';
-                freddydifficulty = 3;
-                bonniedifficulty = 5;
-                chicadifficulty = 7;
-                foxydifficulty = 5;
-            }
-            if (presetselector == 6) {
-                presetselectorstr[6] = '6';
-                freddydifficulty = 4;
-                bonniedifficulty = 10;
-                chicadifficulty = 12;
-                foxydifficulty = 16;
-            }
-        }
-        if (presetselector == 7) {
-            presetselectorstr[0] = '4';
-            presetselectorstr[1] = '/';
-            presetselectorstr[2] = '2';
-            presetselectorstr[3] = '0';
-            presetselectorstr[4] = ' ';
-            presetselectorstr[5] = ' ';
-            presetselectorstr[6] = ' ';
-            freddydifficulty = 20;
-            bonniedifficulty = 20;
-            chicadifficulty = 20;
-            foxydifficulty = 20;
-        }
-    }
-    if (chargemenu == 1) {
-        advancedmenu = 0;
-        if (menuselection == 1) {
-            //Charge
-            //For more slowed down ones
-            if (pad & PADLright) {
-                if (limiterpadright == 0) {
-                    customcharge++;
-                    if (customcharge > 100) {customcharge = 0;}
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) {
-                if (limiterpadleft == 0) {
-                    customcharge--;
-                    if (customcharge < 0) {customcharge = 100;}
-                    limiterpadleft = 1;
-                }
-            }
-            //For quick changes
-            if (pad & PADL1) {
-                customcharge++;
-                if (customcharge > 100) {customcharge = 0;}
-            }
-            if (pad & PADR1) {
-                customcharge--;
-                if (customcharge < 0) {customcharge = 100;}
-            }
-        }
-        if (menuselection == 2) {
-            //AM
-            if (pad & PADLright) {
-                if (limiterpadright == 0) {
-                    customAM++;
-                    if (customAM < 12 && customAM > 6) {customAM = 12;}
-                    if (customAM > 12) {customAM = 0;}
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) {
-                if (limiterpadleft == 0) {
-                    customAM--;
-                    if (customAM < 12 && customAM > 6) {customAM = 6;}
-                    if (customAM < 0) {customAM = 12;}
-                    limiterpadleft = 1;
-                }
-            }
-        }
-        if (menuselection == 3) {
-            //FrameCounterlimit (via the convertion var)
-            if (pad & PADLright) {
-                if (limiterpadright == 0) {
-                    convertion++;
-                    limiterpadright = 1;
-                }
-            }
-            if (pad & PADLleft) {
-                if (limiterpadleft == 0) {
-                    convertion--;
-                    if (convertion < 0) {convertion = 0;}
-                    limiterpadleft = 1;
-                }
-            }
-            //For quick change
-            if (pad & PADR1) {
-                convertion++;
-            }
-            if (pad & PADL1) {
-                convertion--;
-                if (convertion < 0) {convertion = 0;}
-            }
-            //For reset
-            if (pad & PADstart) {
-                convertion = 60;
-            }
-            //For 0
-            if (pad & PADselect) {
-                convertion = 0;
-            }
-            //For 120
-            if (pad & PADstart && pad & PADselect) {
-                convertion = 120;
-            }
-        }
-        if (menuselection == 4) {
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    maincustomnightmenu = 1;
-                    chargemenu = 0;
-                    menuselection = 3;
-                    menuselectionmax = 6;
-                    limiterstart++;
-                }
-            }
-        }
-    }
-    if (advancedmenu == 1) {
-        if (menuselection == 1) {
-            if (pad & PADRright) { //Foxy 
-                foxylocationframelock++;
-            }
-            if (pad & PADRleft) { //Foxy 
-                foxylocationframelock--;
-                if (foxylocationframelock < 1) {foxylocationframelock = 1;}
-            }
-            if (pad & PADLright) { //Freddy 
-                freddylocationframelock++;
-            }
-            if (pad & PADLleft) { //Freddy 
-                freddylocationframelock--;
-                if (freddylocationframelock < 1) {freddylocationframelock = 1;}
-            }
-            if (pad & PADL1) { //Bonnie 
-                bonnielocationframelock--;
-                if (bonnielocationframelock < 1) {bonnielocationframelock = 1;}
-            }
-            if (pad & PADL2) { //Bonnie 
-                bonnielocationframelock++;
-            }
-            if (pad & PADR1) { //Chica 
-                chicalocationframelock--;
-                if (chicalocationframelock < 1) {chicalocationframelock = 1;}
-            }
-            if (pad & PADR2) { //Chica 
-                chicalocationframelock++;
-            }
-            if (pad & PADstart) {
-                freddylocationframe = 181;
-                bonnielocationframe = 298;
-                chicalocationframe = 299;
-                foxylocationframe = 301;
-                freddylocationframelock = 181;
-                bonnielocationframelock = 298;
-                chicalocationframelock = 299;
-                foxylocationframelock = 301;
-            }
-        }
-        if (menuselection == 2) {
-            if (pad & PADLleft) {
-                if (limiterpadleft == 0) {
-                    defaultusage--;
-                    limiterpadleft++;
-                    if (defaultusage < 0) {defaultusage = 0;}
-                }
-            }
-            if (pad & PADLright) {
-                if (limiterpadright == 0) {
-                    defaultusage++;
-                    limiterpadright++;
-                }
-            }
-            if (pad & PADstart) {
-                defaultusage = 1;
-            }
-        }
-        if (menuselection == 3) { 
-            if (pad & PADLleft) {
-                if (limiterpadleft == 0) {
-                    foxylockeduration--;
-                    limiterpadleft++;
-                    if (foxylockeduration < 1) {foxylockeduration = 1;}
-                }
-            }
-            if (pad & PADLright) {
-                if (limiterpadright == 0) {
-                    foxylockeduration++;
-                    limiterpadright++;
-                }
-            }
-            if (pad & PADstart) {
-                foxylockeduration = 16;
-            }
-        }
-        if (menuselection == 4) {
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    maincustomnightmenu = 1;
-                    advancedmenu = 0;
-                    menuselection = 4;
-                    menuselectionmax = 6;
-                    limiterstart++; 
-                }
-            }
-        }
-    }
-    if (extramenu == 1) {
-        if (menuselection == 1) { //Phone guy
-            if (pad & PADRdown) {
-                if (limiterbuttondown == 0) {
-                    enablephoneguy++;
-                    enablephoneguystr[0] = 'O';
-                    enablephoneguystr[1] = 'N';
-                    enablephoneguystr[2] = ' ';
-                    if (enablephoneguy > 1) {
-                        enablephoneguy = 0;
-                        enablephoneguystr[0] = 'O';
-                        enablephoneguystr[1] = 'F';
-                        enablephoneguystr[2] = 'F';
-                    }
-                    limiterbuttondown = 1;
-                }
-            }
-        }
-        if (menuselection == 2) { //Unlocks menu
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    extramenu = 0;
-                    unlockssubmenu = 1;
-                    menuselection = 1;
-                    menuselectionmax = 4;
-                    limiterstart = 1;
-                }
-            }
-        }
-        if (menuselection == 3) { //Informations on the game
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    extramenu = 0;
-                    infoscreen = 1;
-                    menuselection = 1;
-                    menuselectionmax = 1;
-                    limiterstart = 1;
-                }
-            }
-        }
-        if (menuselection == 4) {//Two players mode
-            if (pad & PADRdown) {
-                if (limiterbuttondown == 0) {
-                    twoplayermode++;
-                    if (twoplayermode > 1) {twoplayermode = 0;}
-                    
-                    if (twoplayermode == 0) {
-                        twoplayermodestr[1] = 'F';
-                        twoplayermodestr[2] = 'F';
-                    } else {
-                        twoplayermodestr[1] = 'N';
-                        twoplayermodestr[2] = ' ';
-                    }
-                    limiterbuttondown = 1;
-                }
-            }
-        }
-        if (menuselection == 5) { //Return
-            if (pad & PADstart) {
-                if (limiterstart == 0)  {
-                    extramenu = 0;
-                    menuselection = 3;
-                    limiterstart++;
-                    if (activatedmenudebug == 0) {menuselectionmax = 4;}
-                    else {menuselectionmax = 5;}
-                }
-            }
-        }
-        if (menuselection == 6) { //Weird night
-            if (pad & PADstart) {
-                weirdnight = 1;
-                enablephoneguy = 1;
-                enablephoneguystr[1] = 'N';
-                enablephoneguystr[2] = ' ';
-                SpuSetKey(SPU_ON, SPU_04CH);
-            }
-        }
-    }
-    if (infoscreen == 1) {
-        if (menuselection == 1) {
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    extramenu = 1;
-                    infoscreen = 0;
-                    menuselection = 1;
-                    if (activatedmenudebug == 0) {
-                        menuselectionmax = 5;
-                    }
-                    if (activatedmenudebug == 1) {
-                        menuselectionmax = 6;
-                    }
-                    limiterstart = 1;
-                }
-            }
-        }
-    }
-    if (unlockssubmenu == 1) {
-        if (menuselection == 1) {
-            if (pad & PADRdown) {
-                if (limiterbuttondown == 0) {
-                    unlimitedpower++;
-                    unlimitedpowerstr[0] = 'O';
-                    unlimitedpowerstr[1] = 'N';
-                    unlimitedpowerstr[2] = ' ';
-                    if (unlimitedpower > 1) {
-                        unlimitedpower = 0;
-                        unlimitedpowerstr[0] = 'O';
-                        unlimitedpowerstr[1] = 'F';
-                        unlimitedpowerstr[2] = 'F';
-                    }
-                    cheating = 1;
-                    limiterbuttondown = 1;
-                }
-            }
-        }
-        if (menuselection == 2) {
-            if (pad & PADRdown) {
-                if (limiterbuttondown == 0) {
-                    fastnights++;
-                    fastnightsstr[0] = 'O';
-                    fastnightsstr[1] = 'N';
-                    fastnightsstr[2] = ' ';
-                    if (fastnights > 1) {
-                        fastnights = 0;
-                        fastnightsstr[0] = 'O';
-                        fastnightsstr[1] = 'F';
-                        fastnightsstr[2] = 'F';
-                    }
-                    cheating = 1;
-                    limiterbuttondown = 1;
-                }
-            }
-        }
-        if (menuselection == 3) {
-            if (pad & PADRdown) {
-                if (limiterbuttondown == 0) {
-                    radar++;
-                    radarstr[0] = 'O';
-                    radarstr[1] = 'N';
-                    radarstr[2] = ' ';
-                    if (radar > 1) {
-                        radar = 0;
-                        radarstr[0] = 'O';
-                        radarstr[1] = 'F';
-                        radarstr[2] = 'F';
-                    }
-                    cheating = 1;
-                    limiterbuttondown = 1;
-                }
-            }
-        }
-        if (menuselection == 4) {
-            if (pad & PADstart) {
-                if (limiterstart == 0) {
-                    extramenu = 1;
-                    unlockssubmenu = 0;
-                    menuselection = 1;
-                    if (activatedmenudebug == 0) {
-                        menuselectionmax = 5;
-                    }
-                    if (activatedmenudebug == 1) {
-                        menuselectionmax = 6;
-                    }
-                    limiterstart = 1;
-                }
-            }
-        }
-    }
-}
-void menuPrint(void) {
-    if (maincustomnightmenu == 0 && extramenu == 0 && infoscreen == 0 && unlockssubmenu == 0 && AISetmenu == 0 && chargemenu == 0 && advancedmenu == 0) {
-        if (isingame) {
-            FntPrint("   Five\n\n   Nights\n\n   at\n\n   Freddy's\n\n   Pause Menu\n\n\n");  // print time
-
-            if (menuselection == 1) {FntPrint(">> Continue Night %d\n\n", night);}
-            else {FntPrint("   Continue Night %d\n\n", night);}
-
-            if (menuselection == 2) {FntPrint(">> Abandon The Night \n\n");}
-            else {FntPrint("   Abandon The Night \n\n");}
-        } else {
-
-            FntPrint("   Five\n\n   Nights\n\n   at\n\n   Freddy's\n\n\n");  // print time
-
-            if (menuselection == 1) {FntPrint(">> New Game\n\n");}
-            else {FntPrint("   New Game\n\n");}
-
-            if (menuselection == 2) {FntPrint(">> Continue Night %d\n\n", night);}
-            else {FntPrint("   Continue Night %d\n\n", night);}
-
-            if (menuselection == 3) {FntPrint(">> Extra menu \n\n");}
-            else {FntPrint("   Extra menu \n\n");}
-
-            if (menuselection == 4) {FntPrint(">> Custom Night \n\n");}
-            else {FntPrint("   Custom Night \n\n");}
-
-            if (activatedmenudebug == 1) {
-                if (menuselection == 5) {FntPrint(">> Debugprint %d\n\n", printnumber);}
-                else {FntPrint("   Debugprint \n\n");}
-            }
-        }
-    }
-    if (maincustomnightmenu == 1) {
-        FntPrint("   Custom\n\n   Night\n\n\n");  // print time
-
-        FntPrint("   Welcome! What do you want to modify?\n\n\n\n");
-
-        if (menuselection == 1) {FntPrint(">> Night set : %d\n\n", night);}
-        else {FntPrint("   Night set : %d\n\n", night);}
-        if (menuselection == 2) {FntPrint(">> Set AI levels\n\n");}
-        else {FntPrint("   Set AI levels\n\n");}
-        if (menuselection == 3) {FntPrint(">> Set Charge, Timer, ect.\n\n");}
-        else {FntPrint("   Set Charge, Timer, ect.\n\n");}
-        if (menuselection == 4) {FntPrint(">> Advanced settings\n\n");}
-        else {FntPrint("   Advanced settings\n\n");}
-        if (menuselection == 5) {FntPrint(">> Launch custom night\n\n");}
-        else {FntPrint("   Launch custom night\n\n");}
-        if (menuselection == 6) {FntPrint(">> Return to main menu\n\n");}
-        else {FntPrint("   Return to main menu\n\n");}
-    }
-    if (AISetmenu == 1) {
-        FntPrint("   Custom\n\n   Night\n\n\n");  // print time
-        FntPrint("   Set Ai Level Menu\n\n\n");
-        if (menuselection == 1) {FntPrint(">> Freddy : %d\n\n", freddydifficulty );}
-        else {FntPrint("   Freddy : %d\n\n", freddydifficulty );}
-        if (menuselection == 2) {FntPrint(">> Bonnie : %d\n\n", bonniedifficulty );}
-        else {FntPrint("   Bonnie : %d\n\n", bonniedifficulty );}
-        if (menuselection == 3) {FntPrint(">> Chica : %d\n\n", chicadifficulty );}
-        else {FntPrint("   Chica : %d\n\n", chicadifficulty );}
-        if (menuselection == 4) {FntPrint(">> Foxy : %d\n\n", foxydifficulty );}
-        else {FntPrint("   Foxy : %d\n\n", foxydifficulty );}
-        if (menuselection == 5) {FntPrint(">> Preset : %s\n\n", presetselectorstr);}
-        else {FntPrint("   Preset : %s\n\n",presetselectorstr);}
-        if (menuselection == 6) {FntPrint(">> Return to Custom night menu\n\n");}
-        else {FntPrint("   Return to Custom night menu\n\n");}
-        if (freddydifficulty == 1 && bonniedifficulty == 9 && chicadifficulty == 8 && foxydifficulty == 7) {
-            Ran(4004);
-            if (RAN == 1) {FntPrint("   no\n\n");}
-            if (RAN == 2) {FntPrint("   dont\n\n");}
-            if (RAN == 3) {FntPrint("   never\n\n");}
-            if (RAN == 4) {FntPrint("   its me\n\n");}
-            if (RAN == 5) {FntPrint("   regrets\n\n");}
-            if (RAN == 6) {FntPrint("   \n\n       no\n\n");}
-            if (RAN == 7) {FntPrint("   \n\n       dont\n\n");}
-            if (RAN == 8) {FntPrint("   \n\n       never\n\n");}
-            if (RAN == 9) {FntPrint("   \n\n       its me\n\n");}
-            if (RAN == 10) {FntPrint("   \n\n       regrets\n\n");}
-        }
-    }
-    if (chargemenu == 1) {
-        FntPrint("   Custom\n\n   Night\n\n\n");  // print time
-        FntPrint("   Set Charge, timer, ect Menu\n\n\n");
-
-        if (menuselection == 1) {FntPrint(">> Set charge (not infinite) %d\n\n", customcharge );}
-        else {FntPrint("   Set charge (not infinite) %d\n\n", customcharge );}
-        if (menuselection == 2) {FntPrint(">> Set beginning AM %d\n\n", customAM );}
-        else {FntPrint("   Set beginning AM %d\n\n", customAM );}
-        if (menuselection == 3) {FntPrint(">> 1 Hour = %d seconds in game\n\n", convertion );}
-        else {FntPrint("   1 Hour = %d seconds in game\n\n", convertion );}
-        if (menuselection == 4) {FntPrint(">> Return to Custom night menu\n\n");}
-        else {FntPrint("   Return to Custom night menu\n\n");}
-        //Maybe put end AM
-    }
-    if (advancedmenu == 1) {
-        FntPrint("   Custom\n\n   Night\n\n\n");  // print time
-        FntPrint("   Advanced Settings Menu\n\n\n");
-
-        if (menuselection == 1) {FntPrint(">> Cooldown FBCFo : %d %d %d %d\n\n", freddylocationframelock, bonnielocationframelock, chicalocationframelock, foxylocationframelock );}
-        else {FntPrint("   Cooldown of animatronics : ...\n\n" );}
-        if (menuselection == 2) {FntPrint(">> Set default usage %d\n\n", defaultusage );}
-        else {FntPrint("   Set default usage %d\n\n", defaultusage );}
-        if (menuselection == 3) {FntPrint(">> Foxy Locked duration %d seconds\n\n", foxylockeduration);}
-        else {FntPrint("   Foxy Locked duration %d seconds\n\n", foxylockeduration);}
-        if (menuselection == 4) {FntPrint(">> Return to Custom night menu\n\n");}
-        else {FntPrint("   Return to Custom night menu\n\n");}
-    }
-    if (extramenu == 1) {
-        FntPrint("   Extra\n\n   Menu\n\n\n");  // print time
-
-        if (menuselection == 1) {FntPrint(">> Enable phone guy ? %s\n\n", enablephoneguystr);}
-        else {FntPrint("   Enable phone guy ? %s\n\n", enablephoneguystr);}
-
-        if (menuselection == 2) {FntPrint(">> Unlocks menu\n\n");}
-        else {FntPrint("   Unlocks menu\n\n");}
-
-        if (menuselection == 3) {FntPrint(">> Info screen\n\n");}
-        else {FntPrint("   Info screen\n\n");}
-
-        if (menuselection == 4) {FntPrint(">> Two Player Mode : %s\n\n", twoplayermodestr);}
-        else {FntPrint("   Two Player Mode : %s\n\n", twoplayermodestr);}
-
-        if (menuselection == 5) {FntPrint(">> Return to main menu\n\n");}
-        else {FntPrint("   Return to main menu\n\n");}
-
-        if (activatedmenudebug == 1) {
-            if (menuselection == 6) {FntPrint(">> Toggle weird night\n\n");}
-            else {FntPrint("   Toggle weird night\n\n");}
-        }
-    }
-    if (infoscreen == 1) {
-        FntPrint("            Information Screen\n\n");
-
-        FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n            Thank you, Scott, \n For making our childhood a lot better.\n\n");
-
-        FntPrint(">> Back                       V1.2.6 \n"); //Don't even need to do condition, there's only one
-        /* It doesn't want :(
-        FntPrint("                 What's New ?\n"); 
-        FntPrint("V1.0.1 :\n   - added the help wanted screen\n   - changed a lot of images\n   - cleaned code\n   "); */
-    }
-    if (unlockssubmenu == 1) {
-        FntPrint("   Unlocks\n\n   Menu\n\n\n");  // print time
-
-        if (menuselection == 1) {FntPrint(">> Unlimited Power : %s\n\n", unlimitedpowerstr);}
-        else {FntPrint("   Unlimited Power : %s\n\n", unlimitedpowerstr);}
-
-        if (menuselection == 2) {FntPrint(">> Fast Nights : %s\n\n", fastnightsstr);}
-        else {FntPrint("   Fast Nights : %s\n\n", fastnightsstr);}
-
-        if (menuselection == 3) {FntPrint(">> Radar Map : %s\n\n", radarstr);}
-        else {FntPrint("   Radar Map : %s\n\n", radarstr);}
-
-        if (menuselection == 4) {FntPrint(">> Back \n\n");}
-        else {FntPrint("   Back \n\n");}
-    }
-}
-void gameoverprint(void) {
-    FntPrint("\n\n      Congrats! You just... Died.\nGo on and press start to try your luck                 again !\n");
-    if (activatedmenudebug == 1) {
-        FntPrint("             Killer : %d",deadfrom);
-    }
-}
-void controllerinput(void) {
-    if (charge > 0) {
-        if (camera == 0) {
-            if(pad & PADLup || pad >> 16 & PADLup && twoplayermode == 1) { //Up
-                if (limiterbop == 1) {return;}
-                if (MovVectorofficemiddle.vx > -65) {
-                    SpuSetKey(SPU_ON, SPU_07CH);
-                    limiterbop = 1; 
-                }
-            }
-            if(!(pad & PADLup || pad >> 16 & PADLup && twoplayermode == 1)) {limiterbop = 0;}
-
-            if(pad & PADRdown || pad >> 16 & PADRdown && twoplayermode == 1) { //Cross
-                if (limiter3 == 1) {return;}
-                doorFuncX();
-            }
-            if(!(pad & PADRdown || pad >> 16 & PADRdown && twoplayermode == 1)) {limiter3 = 0;}
-
-            if(pad & PADRright || pad >> 16 & PADRright && twoplayermode == 1) { //Circle
-                if (limiter2 == 1) {return;}
-                LightFunc();
-            }
-            if(!(pad & PADRright || pad >> 16 & PADRright && twoplayermode == 1)) {limiter2 = 0;}
-
-            if (pad & PADstart || pad >> 16 & PADstart && twoplayermode == 1) {returnframes++;}
-            if (!(pad & PADstart || pad >> 16 & PADstart && twoplayermode == 1)) {
-                if (returnframes != 0) {
-                    returnframes = 0;
-                    returnbasevolume = 0x1800;
-                    SpuSetVoiceVolume(4, returnbasevolume, returnbasevolume);
-                }
-            }
-        }
-
-        if(pad & PADR1 || pad >> 16 & PADR1 && twoplayermode == 1) { //R1
-            if (camlimiter == 1) {return;}
-            CameraFunc();
-        }
-        if(!(pad & PADR1 || pad >> 16 & PADR1 && twoplayermode == 1)) {camlimiter = 0;}
-    }
-
-    //Left
-    if(pad & PADLleft || pad >> 16 & PADLleft && twoplayermode == 1) {doorFunc(0);}
-    //Right
-    if(pad & PADLright || pad >> 16 & PADLright && twoplayermode == 1) {doorFunc(1);}        
-}
-void animatronicFunc(int init) {
-    if (init == 1) {
-        if (night == 1 && FrameCounter == 0) { //Setting difficulties
-            freddydifficulty = 0;
-            bonniedifficulty = 0;
-            chicadifficulty = 0;
-            foxydifficulty = 0;
-        }
-        if (night == 2 && FrameCounter == 0) { 
-            freddydifficulty = 0;
-            bonniedifficulty = 3;
-            chicadifficulty = 1;
-            foxydifficulty = 1;
-        }
-        if (night == 3 && FrameCounter == 0) { 
-            freddydifficulty = 1;
-            bonniedifficulty = 0;
-            chicadifficulty = 5;
-            foxydifficulty = 2;
-        }
-        if (night == 4 && FrameCounter == 0) { 
-            freddydifficulty = 1 + (Ran(3) - 1); //Meaning that we can get from 0~2 with 1~3 - 1
-            bonniedifficulty = 2;
-            chicadifficulty = 4;
-            foxydifficulty = 6;
-        }
-        if (night == 5 && FrameCounter == 0) { 
-            freddydifficulty = 3;
-            bonniedifficulty = 5;
-            chicadifficulty = 7;
-            foxydifficulty = 5;
-        }
-        if (night == 6 && FrameCounter == 0) { 
-            freddydifficulty = 4;
-            bonniedifficulty = 10;
-            chicadifficulty = 12;
-            foxydifficulty = 16;
-        }
-        if (weirdnight == 1) {
-            freddydifficulty = 0;
-            bonniedifficulty = 0;
-            chicadifficulty = 0;
-            foxydifficulty = 0;
-        }
-        if (hellnight) {
-            freddydifficulty = 20;
-            bonniedifficulty = 20;
-            chicadifficulty = 20;
-            foxydifficulty = 20;
-            FrameCounterlimit = 21600; //It basically do 6 minutes
-        }
-    } else {
-        if (activatedmenudebug == 0 && weirdnight == 0) {
-            if (AM == 2 && FrameCounter == 0) { //Apparently, their AI level increases at these hours 
-                bonniedifficulty++;
-                chicadifficulty++;
-                foxydifficulty++;
-            }
-            if (AM == 3 && FrameCounter == 0 || AM == 4 && FrameCounter == 0) {
-                bonniedifficulty++;
-                if (night != 5) {
-                    bonniedifficulty++;
-                }
-                chicadifficulty++;
-                foxydifficulty++;
-            }  
-    }
-
-    if (charge > 0) {
-        if (bonnieDoor == 1) {
-                if (bonnieDoorinit == 0) {
-                    if (light1 == 1) {LightFunc();}
-                    bonnieDoorinit++;
-                }
-                if (light1 == 1 && noisedoorbonnie == 0) {
-                    noisedoorbonnie = 1;
-                    SpuSetKey(SPU_ON,SPU_05CH);
-                }
-                if (bonnielocation == 8) {
-                    if (doorclosedL == 1) {
-                        if (light1 == 1) {LightFunc();}
-                        bonnieDoor = 0;
-                        bonnielocation = 1;
-                        blockedanimatronic++;
-                        noisedoorbonnie = 0;
-                    } else {
-                        if (light1 == 1) {LightFunc();}
-                        cantdoorL = 1;
-                        cantlightL = 1;
-                        deadfrom = 2;
-                    }
-                }
-        } 
-        if (chicaDoor == 1) {
-                if (chicaDoorinit == 0) {
-                    if (light2 == 1) {LightFunc();}
-                    chicaDoorinit++;
-                }
-                if (light2 == 1 && noisedoorchica == 0) {
-                    noisedoorchica = 1;
-                    SpuSetKey(SPU_ON,SPU_05CH);
-                }
-                if (chicalocation == 9) {
-                    if (doorclosedR == 1 ) {
-                        if (light2 == 1) {LightFunc();}
-                        chicaDoor = 0;
-                        chicalocation = 1;
-                        blockedanimatronic++;
-                        noisedoorchica = 0;
-                    } else {
-                        if (light2 == 1) {LightFunc();}
-                        cantdoorR = 1;
-                        cantlightR = 1;
-                        deadfrom = 3;
-                    }
-                }
-        } 
-
-        if (isalreadydead == 1) {
-                lastsecondsframes--;
-                if (camera == 0) {lastsecondsframes = 0;}
-                if (lastsecondsframes == 1001) {
-                    //Sound moaning ? 
-                }
-                if (lastsecondsframes == 480) {
-                    //Second moaning ?
-                }
-                if (lastsecondsframes == 0) {
-                    dead = 1;
-                }
-        }
-        if (isalreadydeadlow == 1) { //Usually for freddy only
-                if (camera == 0) {
-                    dead = 1;
-                    deadfrom = 1;
-                }
-        }
-
-        freddylocationframe--; 
-        bonnielocationframe--;
-        chicalocationframe--;
-        if (ranfoxy == 0) {
-            foxylocationframe--;
-        }
-
-        if (freddylocationframe < 0 && freddydifficulty != 0) {
-            Ran(20); //Roll time !!!!!!!
-            if (freddydifficulty > RAN && isalreadydeadlow == 0) { //If freddy's AI level is superior to the current RAN, ...
-                if (freddylocation == 5) {
-                    freddyanticipation = 1;
-                } else {
-                    if (camera == 0) {
-                        freddylocation++;
-                        noisefootstepF = 1;
-                    }
-                }
-            }
-            if (night == 7) {if(hellnight == 1) {freddylocationframe = 92;} else {freddylocationframe = 46;}} else {freddylocationframe = freddylocationframelock;}
-            if (freddylocation > 7) { //7 (final animatronic's pos) is when he's supposed to either kill you, or...
-                freddylocation = 4; //Return
-                blockedanimatronic++;
-                noisefootstepF = 1;
-            }
-        }
-        if (bonnielocationframe < 0 && bonniedifficulty != 0) {
-            Ran(20);
-            if (bonniedifficulty > RAN) {
-                if (bonnielocation < 8) {
-                    bonnieonetimeskip = 0;
-                    bonnielocation++;  
-                    if (bonnieonetimeskip == 0) {
-                        Ran(bonnielocation);
-                        if (bonnielocation == 1 && RAN%2 == 0) {bonnielocation++;}
-                        if (bonnielocation == 2 && RAN%2 != 0) {bonnielocation++;}
-                        if (bonnielocation == 3 && RAN%2 != 0) {bonnielocation++;}
-                        if (bonnielocation == 4 && RAN%2 == 0) {bonnielocation++;}
-                        if (bonnielocation == 5 && RAN%2 == 0) {bonnielocation++;}   
-                        bonnieonetimeskip = 1; //It's for making them skip certain locations, like in the OG Game. 
-                    } 
-                    noisefootstep = 1;
-                    noisefootstepanimatronic = 1;
-                }else {
-                    if (deadfrom != 2) {bonnielocation = 1;}
-                }
-            }   
-            if (night == 7) {if(hellnight == 1) {bonnielocationframe = 149;} else {bonnielocationframe = 74;}} else {bonnielocationframe = bonnielocationframelock;}
-        }
-        if (chicalocationframe < 0 && chicadifficulty != 0) {
-            Ran(20);
-            if (chicadifficulty > RAN) {
-                if (chicalocation < 9) {
-                    chicaonetimeskip = 0;
-                    chicalocation++;  
-                    if (chicaonetimeskip == 0) {
-                        Ran(chicalocation);
-                        if (chicalocation == 1 && RAN%2 != 0) {chicalocation++;}
-                        if (chicalocation == 2 && RAN%2 == 0) {chicalocation++;}
-                        if (chicalocation == 3 && RAN%2 != 0) {chicalocation++;}
-                        if (chicalocation == 4 && RAN%2 == 0) {chicalocation++;}
-                        if (chicalocation == 5 && RAN%2 == 0) {chicalocation++;} 
-                        chicaonetimeskip = 1; 
-                    }
-                    noisefootstep = 1;
-                    noisefootstepanimatronic = 2;
-                } else {
-                    if (deadfrom != 2) {chicalocation = 1;}
-                }
-            }   
-            if (night == 7) {if(hellnight == 1) {chicalocationframe = 150;} else {chicalocationframe = 75;}} else {chicalocationframe = chicalocationframelock;}
-            
-            if (chicalocation > 9) {
-                chicalocation = 1;
-            }
-        }
-
-        if (camera == 1 && foxylocation < 3) { //"C" only and not "1C" bcs there's only one cam where the letter C is
-            foxylocked = 1;
-            if (night == 7) {if(hellnight == 1) {Ran(8);} else {Ran(4);}} else {Ran(foxylockeduration);} //Normally, this would be 16. Welp, now it is ! Old value : 8 (taken for the HELL NIGHT)
-            ranfoxy = RAN * 60; //FPS
-        }
-        if (foxylocked == 1) {
-            ranfoxy--;
-        }
-        if (ranfoxy == 0) {foxylocked = 0;}
-        if (foxylocationframe < 0 && foxydifficulty != 0) {
-            Ran(20);
-            if (foxydifficulty > RAN && foxylocation != 3) {foxylocation++;}   
-            if (night == 7) {if(hellnight == 1) {foxylocationframe = 151;} else {foxylocationframe = 76;}} else {foxylocationframe = foxylocationframelock;}
-            
-            if (foxylocation > 4) {return;}
-        }
-        }
-    }
-}
-void screamer(void) {
-    if (camera == 1) {
-        CameraFunc();
-    }  
-    screamerframes--;
-    
-    if (spriteframes == 0) {
-        spritesheet++;
-        if (deadfrom == 3) {
-            switch(spritesheet) {
-                case 1:
-                        LoadTexture(_binary_tim_screamers_jumpC_tim_start, &jumpscare);
-                break;
-                case 2:
-                        LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
-                break;
-                case 3:
-                        LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
-                break;
-                case 4:
-                        LoadTexture(_binary_tim_screamers_jumpC4_tim_start, &jumpscare);
-                break;
-                case 5:
-                        LoadTexture(_binary_tim_screamers_jumpC5_tim_start, &jumpscare);
-                break;
-                case 6:
-                        LoadTexture(_binary_tim_screamers_jumpC4_tim_start, &jumpscare);
-                break;
-                case 7:
-                        LoadTexture(_binary_tim_screamers_jumpC3_tim_start, &jumpscare);
-                break;
-                case 8:
-                        LoadTexture(_binary_tim_screamers_jumpC2_tim_start, &jumpscare);
-                break;
-                case 9:
-                        LoadTexture(_binary_tim_screamers_jumpC_tim_start, &jumpscare);
-                break;
-                case 10:
-                    SpuSetKey(SPU_OFF, SPU_06CH);
-                    menu = 3;
-                break;
-            }
-        }
-        if (deadfrom == 2) {
-            switch(spritesheet) {
-                case 1:
-                        LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
-                break;
-                case 2:
-                        LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
-                break;
-                case 3:
-                        LoadTexture(_binary_tim_screamers_jumpB4_tim_start, &jumpscare);
-                break;
-                case 4:
-                        LoadTexture(_binary_tim_screamers_jumpB5_tim_start, &jumpscare);
-                break;
-                case 5:
-                        LoadTexture(_binary_tim_screamers_jumpB6_tim_start, &jumpscare);
-                break;
-                case 6:
-                        LoadTexture(_binary_tim_screamers_jumpB7_tim_start, &jumpscare);
-                break;
-                case 7:
-                        LoadTexture(_binary_tim_screamers_jumpB4_tim_start, &jumpscare);
-                break;
-                case 8:
-                        LoadTexture(_binary_tim_screamers_jumpB3_tim_start, &jumpscare);
-                break;
-                case 9:
-                        LoadTexture(_binary_tim_screamers_jumpB2_tim_start, &jumpscare);
-                break;
-                case 10:
-                    SpuSetKey(SPU_OFF, SPU_06CH);
-                    menu = 3;
-                break;
-            }
-        }
-        if (deadfrom == 1) {
-            if (blackoutinit == 0) { //Special, knock you out pretty quickly
-                switch(spritesheet) {
-                    case 1:
-                            LoadTexture(_binary_tim_screamers_jumpF_tim_start, &jumpscare);
-                    break;
-                    case 2:
-                            LoadTexture(_binary_tim_screamers_jumpF2_tim_start, &jumpscare);
-                    break;
-                    case 3:
-                            LoadTexture(_binary_tim_screamers_jumpF3_tim_start, &jumpscare);
-                    break;
-                    case 4:
-                            LoadTexture(_binary_tim_screamers_jumpF4_tim_start, &jumpscare);
-                    break;
-                    case 5:
-                            LoadTexture(_binary_tim_screamers_jumpF5_tim_start, &jumpscare);
-                    break;
-                    case 6:
-                            LoadTexture(_binary_tim_screamers_jumpF6_tim_start, &jumpscare);
-                    break;
-                    case 7:
-                        SpuSetKey(SPU_OFF, SPU_06CH);
-                        menu = 3;
-                    break;
-                }
-            } else {
-                if (spritesheet == 1) {
-                    LoadTexture(_binary_tim_screamers_jumpF20_tim_start, &jumpscare);
-                }
-                if (spritesheet == 2) {
-                    LoadTexture(_binary_tim_screamers_jumpF21_tim_start, &jumpscare);
-                }
-                if (spritesheet == 3) {
-                    LoadTexture(_binary_tim_screamers_jumpF22_tim_start, &jumpscare);
-                }
-                if (spritesheet == 4) {
-                    LoadTexture(_binary_tim_screamers_jumpF24_tim_start, &jumpscare);
-                }
-                if (spritesheet == 5) {
-                    LoadTexture(_binary_tim_screamers_jumpF25_tim_start, &jumpscare);
-                }
-                if (spritesheet == 6) {
-                    LoadTexture(_binary_tim_screamers_jumpF26_tim_start, &jumpscare);
-                }
-                if (spritesheet == 7) {
-                    SpuSetKey(SPU_OFF, SPU_06CH);
-                    menu = 3;
-                }
-            }
-        }
-        if (deadfrom == 4) {
-            if (spritesheet == 1) {
-                LoadTexture(_binary_tim_screamers_jumpFO_tim_start, &jumpscare);
-            }
-            if (spritesheet == 2) {
-                LoadTexture(_binary_tim_screamers_jumpFO2_tim_start, &jumpscare);
-            }
-            if (spritesheet == 3) {
-                LoadTexture(_binary_tim_screamers_jumpFO3_tim_start, &jumpscare);
-            }
-            if (spritesheet == 4) {
-                LoadTexture(_binary_tim_screamers_jumpFO4_tim_start, &jumpscare);
-            }
-            if (spritesheet == 5) {
-                LoadTexture(_binary_tim_screamers_jumpFO5_tim_start, &jumpscare);
-            }
-            if (spritesheet == 6) {
-                SpuSetKey(SPU_OFF, SPU_06CH);
-                menu = 3;
-            }
-        }
-        if (deadfrom == 2 || deadfrom == 3) {spriteframes = 3;} else {spriteframes = 4;}
-        
-    } else {spriteframes--;}
-    makepoly(14);
-    if (screamerframes == 46) {
-        SpuSetKey(SPU_OFF, SPU_ALLCH);
-        SpuSetKey(SPU_ON, SPU_06CH);
-    }
-    if (screamerframes == 0) {
-        menu = 3;
-    }
-}
-void doorFunc(int number) {door = number;}
-
-void LightFunc(void) {
-    if (limiter2 == 0) {
-        if (cantlight == 0) {
-            if (door == 0) {
-                if (cantlightL == 0) {
-                    light1++;
-                    if (light1 == 1) {
-                        light2 = 0;
-                        LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
-                        SpuSetKey(SPU_ON, SPU_01CH);
-                        if (bonnieDoor == 0) {
-                            LoadTexture(_binary_tim_office_officeLEFTlight_tim_start, &officeLEFTlight);
-                        } else {
-                            LoadTexture(_binary_tim_office_officeLEFTlightbonnie_tim_start, &officeLEFTlightbonnie);
-                        }
-                    }
-                    if (light1 >= 2) {
-                        light1 = 0;
-                        SpuSetKey(SPU_OFF, SPU_01CH);
-                        LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
-                    }   
-                } else {jamlight = 1;}
-            }
-            if (door == 1) {
-                if (cantlightR == 0) {
-                    light2++;
-                    if (light2 == 1) {
-                        light1 = 0;
-                        LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
-                        SpuSetKey(SPU_ON, SPU_01CH);
-                        if (chicaDoor == 0) {
-                            LoadTexture(_binary_tim_office_officeRIGHTlight_tim_start, &officeRIGHTlight);
-                        } else {
-                            LoadTexture(_binary_tim_office_officeRIGHTlightchica_tim_start, &officeRIGHTlightchica);
-                        }
-                    }
-                    if (light2 >= 2) {
-                        light2 = 0;
-                        SpuSetKey(SPU_OFF, SPU_01CH); 
-                        LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
-                    } 
-                } else {jamlight = 1;}
-            }
-        } else {jamlight = 1;}
-        limiter2 = 1;
-    }
-}
-void doorFuncX(void) {
-    if (limiter3 == 0) {
-        if (cantdoor == 0) {
-            if (door == 0) {
-                if (cantdoorL == 0) {  
-                    SpuSetKey(SPU_ON, SPU_00CH);
-                    doorclosedL++;
-                    if (doorclosedL == 1) {
-                    }
-                    if (doorclosedL >= 2) {
-                        doorclosedL = 0;
-                    }
-                } else {jamlight = 1;}
-            }
-            if (door == 1) {
-                if (cantdoorR == 0) {
-                    SpuSetKey(SPU_ON, SPU_00CH);
-                    doorclosedR++;
-                    if (doorclosedR == 1) {
-                    }
-                    if (doorclosedR >= 2) {
-                        doorclosedR = 0;
-                    }  
-                } else {jamlight = 1;}
-            }
-        } else {jamlight = 1;}
-        limiter3 = 1; 
-    }
-}
-void CameraFunc(void) {
-    if (camlimiter == 0) {
-        if (cooldowncamera == 0) {
-            camera++;
-            if (camera == 1) {
-                SpuSetKey(SPU_OFF, SPU_02CH);
-                SpuSetKey(SPU_ON, SPU_02CH);
-
-                light1 = 0; //Disable lights
-                light2 = 0;
-                LoadTexture(_binary_tim_office_officeRIGHT_tim_start, &officeRIGHT);
-                LoadTexture(_binary_tim_office_officeLEFT_tim_start, &officeLEFT);
-                SpuSetKey(SPU_OFF, SPU_01CH);
-
-                if (cantdoorL == 1 || cantdoorR == 1) {isalreadydead = 1;}
-
-                SpuSetVoiceVolume(3, 0x900, 0x900); //Lower down volume of officesound
-            }
-            if (camera >= 2) {
-                camera = 0;
-                SpuSetKey(SPU_ON, SPU_02CH);
-
-                SpuSetVoiceVolume(3, 0x1400, 0x1400); //Higher up volume of officesound
-            }
-            cooldowncamera = 15;
-        }
-    }
-    camlimiter = 1;
-}
-void lightsout(void) {
-    doorFunc(0);
-    if (doorclosedL == 1)
-    {
-        SpuSetKey(SPU_ON, SPU_00CH);
-        doorclosedL = 0;
-    }
-    doorFunc(1);
-    if (doorclosedR == 1)
-    {
-        SpuSetKey(SPU_ON, SPU_00CH);
-        doorclosedR = 0;
-    }
-    SpuSetKey(SPU_OFF, SPU_ALLCH);
-    if (camera == 1) {
-        CameraFunc();
-    }
-    islightsout = 1;
-}
-void gamevictory(void) {
-    SpuSetKey(SPU_OFF, SPU_ALLCH);
-    if (doorclosedL == 1)
-    {
-        doorFunc(0);
-        doorFuncX();
-    }
-    if (doorclosedR == 1)
-    {
-        doorFunc(1);
-        doorFuncX();
-    }
-    if (camera == 1) {
-        CameraFunc();
-    }
-
-    if (light1 == 1) {door = 0; LightFunc();}
-
-    if (light2 == 1) {door = 1; LightFunc();}
-
-    usage = 0;
-
-    timeoncam = timeoncam / 60; //Divide the var on seconds
-    if (timeoncam >= 0 && timeoncam < 60) {timeoncam == 1000;}
-    if (timeoncam >= 60 && timeoncam < 120) {timeoncam == 750;}
-    if (timeoncam >= 120 && timeoncam < 180) {timeoncam == 500;}
-    if (timeoncam >= 180) {timeoncam == 250;}
-
-    powermanagementtotal = powermanagementtotal * 30;
-
-    score = score + (50 * charge) + (200 * freddydifficulty) + (200 * bonniedifficulty) + (200 * chicadifficulty) + (200 * foxydifficulty) + (150 * blockedanimatronic) + timeoncam - powermanagementtotal;
-
-    FrameCounter++;
 }

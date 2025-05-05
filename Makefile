@@ -19,6 +19,9 @@ tim/office/officeRIGHTlight.tim \
 tim/office/officeRIGHTlightchica.tim \
 tim/office/officeRIGHTnolight.tim \
 tim/office/mutecall.tim \
+tim/office/fan/1.tim \
+tim/office/fan/2.tim \
+tim/office/fan/3.tim \
 tim/FAM.tim \
 tim/load.tim \
 tim/SAM.tim \
@@ -30,7 +33,6 @@ tim/screamers/jumpC.tim \
 tim/screamers/jumpC2.tim \
 tim/screamers/jumpC3.tim \
 tim/screamers/jumpC4.tim \
-tim/screamers/jumpC5.tim \
 tim/screamers/jumpB.tim \
 tim/screamers/jumpB2.tim \
 tim/screamers/jumpB3.tim \

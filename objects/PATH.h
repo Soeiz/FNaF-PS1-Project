@@ -400,7 +400,6 @@ void pathfunc(void) {
                     if (doorclosedL == 1) {
                         if (!(MovVectorleftdoor.vy < -61)) {
                             foxylocation = 0;
-                            blockedanimatronic++;
                             foxywaiting = 500;
                             foxyrunningframes = 0;
                             foxysknock = 1;
