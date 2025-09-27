@@ -105,7 +105,7 @@ void pathfunc(void) {
                 dead = 1;
                 deadfrom = 1;
             } else {framedeadpossi = 60;}
-        } else {freddylocation = 4;}
+        } else {freddylocation = 4; animatronicscamera[0] = 0;}
     }
 
     if (bonnielocation == 0) { //Stage

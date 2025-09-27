@@ -381,6 +381,8 @@ void starting(void) {
 
   if (fastnights) {FrameCounterlimit = FrameCounterlimit / 2;}
 
+  if (customnightactivated) {enablephoneguy = 0; mutedcall = 1;} //Better off without him 
+
   AM = customAM;
   charge = customcharge;
   FrameCounterlimit = convertion;

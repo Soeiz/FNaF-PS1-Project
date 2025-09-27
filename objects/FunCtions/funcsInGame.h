@@ -340,11 +340,14 @@ void chargeNtimeFunc(void) {
     }
 
     ChargeCounter = ChargeCounter - usage;
+
     usage = defaultusage;
 
         if (ChargeCounter <= 0 && unlimitedpower == 0) {
             charge = charge - 1;
             ChargeCounter = 596;
+            Ran(6);
+            if (RAN == 1) {ChargeCounter = ChargeCounter / 2;} //Because apparently FNAF Ps1 doesn't have power issues. IT HAS NOW HAHAHAHAHAHAH
         }
     if (weirdnight == 1 && AM == 3) {
         surusage = 1;
