@@ -898,7 +898,8 @@ void menuPrint(void) {
         FntPrint("            Information Screen\n\n");
 
         FntPrint("    Five Night at Freddy's has been \n   released by Scott Cawton on 2014,\nand has been ported on the PS1 by Soeiz.\n            Thank you, Scott, \n For making our childhood a lot better.\n\n");
-
+        FntPrint("Achievements unlocked:\n\nBronze: %d\n\nGold: %d\n\nSilver: %d\n\n\n", Achievements.bronze, Achievements.gold, Achievements.silver);
+        
         FntPrint(">> Back                       V1.3.0 \n"); //Don't even need to do condition, there's only one
         /* It doesn't want :(
         FntPrint("                 What's New ?\n"); 
