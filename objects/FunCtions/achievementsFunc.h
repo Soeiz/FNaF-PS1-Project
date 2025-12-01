@@ -4,10 +4,12 @@ int gold;
 int silver;
 } Achievements;
 
+
+void Achievementsthing(){
 Achievements.bronze = 0;
 Achievements.gold = 0;
 Achievements.silver = 0;
-
+}
 // Achievement system - START
 // Night achievements:
 void NightAchievements(int event){
