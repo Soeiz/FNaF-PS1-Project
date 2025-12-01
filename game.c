@@ -37,6 +37,7 @@ int debug = 3; //1 is for debug without cam, 2 is animatronic debug, 3 is only l
 #include "objects/camera.h"
 #include "objects/PATH.h"
 #include "objects/asc2sjis.h"
+#include "objects/FunCtions/achievementsFunc.h"
 
 //Made all of the var declarations that I won't change alot into constant.h
 
