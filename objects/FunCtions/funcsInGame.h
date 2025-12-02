@@ -283,6 +283,30 @@ void lightsout(void) {
     islightsout = 1;
 }
 void gamevictory(void) {
+    //Achievent sys - START:
+    switch (night){
+        case 1:
+        NightAchievements(1);
+        break;
+        case 2:
+        NightAchievements(2);
+        break;
+        case 3:
+        NightAchievements(3);
+        break;
+        case 4:
+        NightAchievements(4);
+        break;
+        case 5:
+        NightAchievements(5);
+        break;
+        case 6:
+        NightAchievements(6);
+        break;
+        default:
+        break;
+    }
+    
     SpuSetKey(SPU_OFF, SPU_ALLCH);
     if (doorclosedL == 1)
     {
