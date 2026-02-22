@@ -1,0 +1,19 @@
+New :
+Achievements
+Saves
+New and Polished custom night system
+Stars !!!
+Night 5 , 6,7 separated
+More sounds for Freddy
+
+Changes :
+Big Overhaul of the HUD in-game
+Some changes of Animatronic's AI
+1987
+Golden Freddy is less likely to spawn
+Office itself
+Optimising the RAM, leaving me with room to work on later
+Freddy more sneaky now
+
+Fixes :
+Fixed a lot of old bugs and things (Now you won't be able to "cheese" the achievements!!)

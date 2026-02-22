@@ -1,0 +1,3 @@
+Can't manage to make this work flawlessly. Either it won't boot, or it will play only a part of the video before freezing.
+
+I suspect that this is because there too little RAM for the video.

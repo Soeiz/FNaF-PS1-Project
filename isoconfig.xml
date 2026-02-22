@@ -13,7 +13,7 @@
         cue_sheet   - Optional, file name of the cue sheet for the image file
                       (required if more than one track is specified).
 -->
-<iso_project image_name="game.bin" cue_sheet="game.cue">
+<iso_project image_name="FNAF1.bin" cue_sheet="FNAF1.cue">
 
     <!-- <track>
             Specifies a track to the ISO project. This example element creates a data
@@ -46,8 +46,8 @@
         <identifiers
             system          ="PLAYSTATION"
             application     ="PLAYSTATION"
-            volume          ="game"
-            volume_set      ="game"
+            volume          ="Five Night at Freddy's 1"
+            volume_set      ="Five Night at Freddy's"
             publisher       ="Soeiz"
             data_preparer       ="MKPSXISO"
         />
@@ -86,9 +86,9 @@
             <file name="SCES_313.37"   type="data" source="game.ps-exe"/>
             <file name="INTER8.XA" type="xa" source="xa/inter8.xa"/>
             <!--Put all of the tim shit we need -->
-            <file name="FREDDY.TIM"   type="data" source="tim/FREDDY.TIM"/>
-            <file name="FREDDY2.TIM"   type="data" source="tim/FREDDY2.TIM"/>
-            <file name="HWANTED.TIM"   type="data" source="tim/HWANTED.TIM"/>
+            <file name="FREDDY.TIM"   type="data" source="tim/menus/FREDDY.TIM"/>
+            <file name="FREDDY2.TIM"   type="data" source="tim/menus/FREDDY2.TIM"/>
+            <file name="HWANTED.TIM"   type="data" source="tim/menus/HWANTED.TIM"/>
             <file name="GAMEOVER.TIM"   type="data" source="tim/GAMEOVER.TIM"/>
             <file name="LAYOUT.TIM"   type="data" source="tim/office/LAYOUT.TIM"/>
             <file name="GOL.TIM"   type="data" source="tim/GOL.TIM"/>
@@ -99,6 +99,7 @@
             <file name="STATIC.TIM"   type="data" source="tim/STATIC.TIM"/>
             <file name="OMID.TIM"   type="data" source="tim/office/officeMIDDLE.TIM"/>
             <file name="OMIDNO.TIM"   type="data" source="tim/office/officeMIDDLEnolight.TIM"/>
+            <!-- <file name="COPY.STR" type="str" source="str/FNAF.str"/> -->
 
             <dummy sectors="1024"/>
             
